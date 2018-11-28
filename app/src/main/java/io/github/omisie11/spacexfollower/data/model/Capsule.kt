@@ -1,7 +1,5 @@
 package io.github.omisie11.spacexfollower.data.model
 
-import androidx.room.Entity
-
 // Single capsule
 data class Capsule(
     val capsuleSerial: String,
