@@ -13,9 +13,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-       // val model = ViewModelProviders.of(this).get(CapsulesViewModel::class.java)
-        //model.getCapsules().observe(this, Observer<List<Capsule>>{capsule ->
-         //   capsuleTextView?.text = capsule.get(0).capsuleSerial
-        //})
+        val model = ViewModelProviders.of(this).get(CapsulesViewModel::class.java)
+        model.getCapsules().observe(this, Observer<List<Capsule>>{capsule ->
+            capsuleTextView?.text = capsule[5].toString()
+        })
     }
 }

@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class RetrofitClientInstance() {
+class RetrofitClientInstance {
 
     companion object {
         // Base URL for SpaceX API
