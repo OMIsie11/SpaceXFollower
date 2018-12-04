@@ -6,6 +6,8 @@ import com.google.gson.reflect.TypeToken
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import java.util.*
 
+
+// Used to convert List of missions to json and back to be able to save it in Room
 class MissionsConverter {
 
     private val gson = Gson()

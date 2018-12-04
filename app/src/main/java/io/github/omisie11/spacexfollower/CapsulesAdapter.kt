@@ -21,6 +21,7 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.capsuleIdTextView.text = mCapsulesData!![position].capsuleId
         holder.capsuleSerialTextView.text = mCapsulesData!![position].capsuleSerial
+        holder.capsuleMissionsTextView.text = mCapsulesData!![position].missions.toString()
     }
 
     override fun getItemCount(): Int {
@@ -30,6 +31,7 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val capsuleIdTextView: TextView = itemView.findViewById(R.id.capsuleIdTV)
         val capsuleSerialTextView: TextView = itemView.findViewById(R.id.capsuleSerialTV)
+        val capsuleMissionsTextView: TextView = itemView.findViewById(R.id.missionsTV)
     }
 
     fun setData(data: List<Capsule>?) {
