@@ -8,7 +8,6 @@ import io.github.omisie11.spacexfollower.data.model.Capsule
 
 class CapsulesViewModel(private val repository: SpaceRepository) : ViewModel() {
 
-    //private val mRepository: SpaceRepository = SpaceRepository(application)
     private val allCapsules: LiveData<List<Capsule>> by lazy {
         repository.getCapsules()
     }

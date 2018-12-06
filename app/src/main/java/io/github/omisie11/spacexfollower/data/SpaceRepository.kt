@@ -3,28 +3,20 @@ package io.github.omisie11.spacexfollower.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import io.github.omisie11.spacexfollower.data.model.Capsule
-import io.github.omisie11.spacexfollower.network.RetrofitClientInstance
 import io.github.omisie11.spacexfollower.network.SpaceService
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Retrofit
 import retrofit2.Response
 import java.util.concurrent.Executors
 import android.os.AsyncTask
 
 
-class SpaceRepository(private val capsulesDao: CapsulesDao) {
+class SpaceRepository(
+    private val capsulesDao: CapsulesDao,
+    private val spaceService: SpaceService
+) {
 
-   // private var mCapsulesDao: CapsulesDao
     private val mAllCapsules: LiveData<List<Capsule>> by lazy { capsulesDao.getAllCapsules() }
-    private val mRetrofit: Retrofit? by lazy { RetrofitClientInstance.getRetrofitInstance() }
-    private val mSpaceService: SpaceService? by lazy { mRetrofit?.create(SpaceService::class.java) }
-
-    init {
-        //val database = SpaceDatabase.getDatabase(application)!!
-        //mCapsulesDao = database.capsulesDao()
-        //mAllCapsules = capsulesDao.getAllCapsules()
-    }
 
     //fun getCapsules(): LiveData<List<Capsule>> {
     //  val data = MutableLiveData<List<Capsule>>()
@@ -44,7 +36,7 @@ class SpaceRepository(private val capsulesDao: CapsulesDao) {
 
 
     fun fetchCapsulesAndSaveToDb() {
-        mSpaceService!!.getAllCapsules().enqueue(object : Callback<List<Capsule>> {
+        spaceService.getAllCapsules().enqueue(object : Callback<List<Capsule>> {
             override fun onResponse(call: Call<List<Capsule>>, response: Response<List<Capsule>>) {
                 saveCapsulesToDb(response.body()!!)
             }

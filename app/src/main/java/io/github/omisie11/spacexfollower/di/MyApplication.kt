@@ -9,6 +9,6 @@ class MyApplication : Application() {
         super.onCreate()
 
         // Start Koin context
-        startKoin(this, listOf(appModule))
+        startKoin(this, listOf(appModule, remoteDataSourceModule))
     }
 }
