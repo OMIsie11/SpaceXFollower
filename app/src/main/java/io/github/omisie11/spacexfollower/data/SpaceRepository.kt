@@ -1,6 +1,5 @@
 package io.github.omisie11.spacexfollower.data
 
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import io.github.omisie11.spacexfollower.data.model.Capsule
@@ -14,19 +13,17 @@ import java.util.concurrent.Executors
 import android.os.AsyncTask
 
 
+class SpaceRepository(private val capsulesDao: CapsulesDao) {
 
-
-class SpaceRepository(application: Application) {
-
-    private var mCapsulesDao: CapsulesDao
-    private var mAllCapsules: LiveData<List<Capsule>>
+   // private var mCapsulesDao: CapsulesDao
+    private val mAllCapsules: LiveData<List<Capsule>> by lazy { capsulesDao.getAllCapsules() }
     private val mRetrofit: Retrofit? by lazy { RetrofitClientInstance.getRetrofitInstance() }
     private val mSpaceService: SpaceService? by lazy { mRetrofit?.create(SpaceService::class.java) }
 
     init {
-        val database = SpaceDatabase.getDatabase(application)!!
-        mCapsulesDao = database.capsulesDao()
-        mAllCapsules = mCapsulesDao.getAllCapsules()
+        //val database = SpaceDatabase.getDatabase(application)!!
+        //mCapsulesDao = database.capsulesDao()
+        //mAllCapsules = capsulesDao.getAllCapsules()
     }
 
     //fun getCapsules(): LiveData<List<Capsule>> {
@@ -63,7 +60,7 @@ class SpaceRepository(application: Application) {
 
         val myExecutor = Executors.newSingleThreadExecutor();
         myExecutor.execute {
-            mCapsulesDao.insertCapsules(data)
+            capsulesDao.insertCapsules(data)
         }
     }
 
@@ -73,11 +70,12 @@ class SpaceRepository(application: Application) {
     }
 
     fun deleteAllCapsules() {
-        DeleteAllCapsulesAsyncTask(mCapsulesDao).execute()
+        DeleteAllCapsulesAsyncTask(capsulesDao).execute()
     }
 
     private class DeleteAllCapsulesAsyncTask internal constructor(
-        private val mAsyncTaskDao: CapsulesDao) :
+        private val mAsyncTaskDao: CapsulesDao
+    ) :
         AsyncTask<Void, Void, Void>() {
 
         override fun doInBackground(vararg voids: Void): Void? {

@@ -44,6 +44,10 @@ dependencies {
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    // Koin Android
+    implementation 'org.koin:koin-android:1.0.2'
+    // Koin AndroidX ViewModel feature
+    implementation "org.koin:koin-androidx-viewmodel:1.0.2"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'

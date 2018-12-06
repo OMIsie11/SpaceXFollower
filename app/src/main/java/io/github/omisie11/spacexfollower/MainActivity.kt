@@ -3,18 +3,20 @@ package io.github.omisie11.spacexfollower
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.omisie11.spacexfollower.data.SpaceRepository
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewAdapter: CapsulesAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var repository: SpaceRepository
+    private val repository: SpaceRepository by inject()
+    val model: CapsulesViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
         viewManager = LinearLayoutManager(this)
         viewAdapter = CapsulesAdapter()
-        repository = SpaceRepository(application)
 
         capsulesRecyclerView.apply {
             setHasFixedSize(true)
@@ -30,7 +31,8 @@ class MainActivity : AppCompatActivity() {
             adapter = viewAdapter
         }
 
-        val model = ViewModelProviders.of(this).get(CapsulesViewModel::class.java)
+
+        //val model = ViewModelProviders.of(this).get(CapsulesViewModel::class.java)
         model.getCapsules().observe(this, Observer<List<Capsule>>{capsules ->
             viewAdapter.setData(capsules)
         })

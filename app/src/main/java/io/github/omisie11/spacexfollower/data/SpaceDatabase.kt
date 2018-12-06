@@ -1,8 +1,6 @@
 package io.github.omisie11.spacexfollower.data
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import io.github.omisie11.spacexfollower.data.model.Capsule
@@ -13,8 +11,8 @@ abstract class SpaceDatabase : RoomDatabase() {
 
     abstract fun capsulesDao(): CapsulesDao
 
+    /*
     companion object {
-
         private var dbInstance: SpaceDatabase? = null
 
         fun getDatabase(context: Context): SpaceDatabase? {
@@ -29,4 +27,5 @@ abstract class SpaceDatabase : RoomDatabase() {
             return dbInstance
         }
     }
+    */
 }
