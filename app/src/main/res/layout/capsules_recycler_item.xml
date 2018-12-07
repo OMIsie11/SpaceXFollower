@@ -48,6 +48,24 @@
                     app:layout_constraintTop_toBottomOf="@+id/text_capsule_id" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"/>
 
+            <!-- Horizontal divider -->
+            <View
+                    android:id="@+id/horizontal_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintTop_toBottomOf="@+id/text_capsule_type" android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
+
+            <TextView
+                    android:id="@+id/text_landings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Landings: 1"
+                    app:layout_constraintTop_toBottomOf="@+id/horizontal_line"
+                    android:layout_marginTop="8dp" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"/>
 
             <TextView
                     android:id="@+id/text_missions"
@@ -55,9 +73,17 @@
                     android:layout_height="wrap_content"
                     tools:text="Missions: 1"
                     android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/text_capsule_type"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/text_landings"/>
+
+            <!-- Group contains views that are visible when card is expanded -->
+            <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group_expand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="text_missions,horizontal_line,text_landings"
+                    android:visibility="invisible"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
