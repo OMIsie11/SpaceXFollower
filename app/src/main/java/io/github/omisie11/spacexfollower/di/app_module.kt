@@ -12,6 +12,7 @@ import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+// Main module for Koin DI
 val appModule = module {
 
     // Space database instance
@@ -35,6 +36,7 @@ val appModule = module {
     viewModel { CapsulesViewModel(get()) }
 }
 
+// Module for networking elements
 val remoteDataSourceModule = module {
 
     // Create Retrofit instance

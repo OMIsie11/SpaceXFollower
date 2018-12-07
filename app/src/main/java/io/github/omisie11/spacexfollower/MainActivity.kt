@@ -37,10 +37,12 @@ class MainActivity : AppCompatActivity() {
             viewAdapter.setData(capsules)
         })
 
+        // Force fetching data
         fetchButton.setOnClickListener {
             repository.fetchCapsulesAndSaveToDb()
         }
 
+        // Delete data from capsules table
         deleteEntriesButton.setOnClickListener {
             repository.deleteAllCapsules()
         }
