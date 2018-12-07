@@ -28,11 +28,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Capsule ID"/>
+            <!-- Views below are visible when item is in expanded position -->
             <TextView
                     android:id="@+id/missionsTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLines="3" />
+                    android:maxLines="3"
+                    android:visibility="invisible"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

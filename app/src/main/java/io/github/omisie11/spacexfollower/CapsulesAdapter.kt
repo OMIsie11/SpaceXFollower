@@ -10,6 +10,8 @@ import io.github.omisie11.spacexfollower.data.model.Capsule
 
 class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
 
+    private var mExpandedPosition : Int = -1
+
     private var mCapsulesData: List<Capsule>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -19,9 +21,22 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        // Bind data to views from ViewHolder
+        // Views visible all the time
         holder.capsuleIdTextView.text = mCapsulesData!![position].capsuleId
         holder.capsuleSerialTextView.text = mCapsulesData!![position].capsuleSerial
+        // Views below are visible when view is expanded on click
         holder.capsuleMissionsTextView.text = mCapsulesData!![position].missions.toString()
+
+        // Variable for storing info if view is expanded
+        val isExpanded = position == mExpandedPosition
+        holder.capsuleMissionsTextView.visibility = if (isExpanded) View.VISIBLE else View.GONE
+        holder.itemView.isActivated = isExpanded
+        holder.itemView.setOnClickListener {
+            // Expand view on click
+            mExpandedPosition = if (isExpanded) -1 else position
+            notifyItemChanged(position)
+        }
     }
 
     override fun getItemCount(): Int {
