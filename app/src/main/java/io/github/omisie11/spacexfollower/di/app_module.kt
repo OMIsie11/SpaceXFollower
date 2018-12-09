@@ -1,6 +1,7 @@
 package io.github.omisie11.spacexfollower.di
 
 import androidx.room.Room
+import io.github.omisie11.spacexfollower.CapsulesAdapter
 import io.github.omisie11.spacexfollower.CapsulesViewModel
 import io.github.omisie11.spacexfollower.data.SpaceDatabase
 import io.github.omisie11.spacexfollower.data.SpaceRepository
@@ -34,6 +35,9 @@ val appModule = module {
     // ViewModel instance of CapsulesViewModel
     // get() will resolve Repository instance
     viewModel { CapsulesViewModel(get()) }
+
+    // Adapter for capsules recyclerview
+    factory { CapsulesAdapter() }
 }
 
 // Module for networking elements

@@ -13,7 +13,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewAdapter: CapsulesAdapter
+    private val viewAdapter: CapsulesAdapter by inject()
     private lateinit var viewManager: RecyclerView.LayoutManager
     private val repository: SpaceRepository by inject()
     val model: CapsulesViewModel by viewModel()
@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         viewManager = LinearLayoutManager(this)
-        viewAdapter = CapsulesAdapter()
-
         capsulesRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
