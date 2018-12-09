@@ -4,12 +4,14 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import io.github.omisie11.spacexfollower.data.model.Capsule
+import io.github.omisie11.spacexfollower.data.model.Core
 
-@Database(entities = [Capsule::class], version = 1)
+@Database(entities = [Capsule::class, Core::class], version = 1)
 @TypeConverters(value = [MissionsConverter::class])
 abstract class SpaceDatabase : RoomDatabase() {
 
     abstract fun capsulesDao(): CapsulesDao
+    abstract fun coresDao(): CoresDao
 
     /*
     companion object {

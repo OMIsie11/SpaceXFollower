@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.omisie11.spacexfollower.data.SpaceRepository
 import io.github.omisie11.spacexfollower.data.model.Capsule
+import io.github.omisie11.spacexfollower.viewmodel.CapsulesViewModel
 import kotlinx.android.synthetic.main.fragment_capsules.*
 import kotlinx.android.synthetic.main.fragment_capsules.view.*
 import org.koin.android.ext.android.inject
