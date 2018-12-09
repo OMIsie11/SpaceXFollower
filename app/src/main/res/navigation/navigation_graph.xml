@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/navigation_graph">
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_graph" app:startDestination="@id/capsulesFragment">
 
+    <fragment android:id="@+id/capsulesFragment" android:name="io.github.omisie11.spacexfollower.CapsulesFragment"
+              android:label="CapsulesFragment"/>
 </navigation>
