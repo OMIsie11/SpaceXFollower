@@ -28,6 +28,7 @@ dependencies {
     def room_version = "2.0.0"
     def lifecycle_version = "2.0.0"
     def retrofit_version = "2.5.0"
+    def nav_version = "1.0.0-alpha08"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -48,6 +49,10 @@ dependencies {
     implementation 'org.koin:koin-android:1.0.2'
     // Koin AndroidX ViewModel feature
     implementation "org.koin:koin-androidx-viewmodel:1.0.2"
+    // Navigation component
+    implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version" // use -ktx for Kotlin
+    implementation "android.arch.navigation:navigation-ui-ktx:$nav_version" // use -ktx for Kotlin
+    androidTestImplementation "android.arch.navigation:navigation-testing:$nav_version"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
