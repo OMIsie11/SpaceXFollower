@@ -2,15 +2,35 @@ package io.github.omisie11.spacexfollower
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Get NavHostFragment and NavController
+        val host: NavHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment ?: return
+        val navController = host.navController
+        // Setup NavigationView menu
+        navigation_view?.setupWithNavController(navController)
+        // Setup ActionBar
+        setupActionBarWithNavController(navController, drawer_layout)
 
+    }
+
+    // Override to let NavigationUI handle back pressed
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(
+            findNavController(R.id.nav_host_fragment), drawer_layout
+        )
     }
 }

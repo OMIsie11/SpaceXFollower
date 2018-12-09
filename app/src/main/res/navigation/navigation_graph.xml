@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_graph" app:startDestination="@id/capsulesFragment">
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_graph" app:startDestination="@id/capsules_dest">
 
-    <fragment android:id="@+id/capsulesFragment" android:name="io.github.omisie11.spacexfollower.CapsulesFragment"
+    <fragment android:id="@+id/capsules_dest" android:name="io.github.omisie11.spacexfollower.CapsulesFragment"
               android:label="CapsulesFragment"/>
+    <fragment android:id="@+id/cores_dest" android:name="io.github.omisie11.spacexfollower.CoresFragment"
+              android:label="fragment_cores" tools:layout="@layout/fragment_cores"/>
 </navigation>

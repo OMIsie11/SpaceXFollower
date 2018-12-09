@@ -2,10 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_item_capsules"
+        android:id="@id/capsules_dest"
+        android:icon="@drawable/ic_settings_black_24dp"
         android:title="Capsules" />
 
     <item
-        android:id="@+id/nav_item_cores"
+        android:id="@id/cores_dest"
+        android:icon="@drawable/ic_settings_black_24dp"
         android:title="Cores" />
 </menu>
