@@ -3,6 +3,8 @@ package io.github.omisie11.spacexfollower.data
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import io.github.omisie11.spacexfollower.data.dao.CapsulesDao
+import io.github.omisie11.spacexfollower.data.dao.CoresDao
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import io.github.omisie11.spacexfollower.data.model.Core
 

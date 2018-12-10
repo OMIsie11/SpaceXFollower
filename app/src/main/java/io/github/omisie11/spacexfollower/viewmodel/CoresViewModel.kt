@@ -11,7 +11,7 @@ class CoresViewModel(private val repository: SpaceRepository) : ViewModel() {
         repository.getCores()
     }
 
-    fun getAllCores(): LiveData<List<Core>> {
+    fun getCores(): LiveData<List<Core>> {
         return mAllCores
     }
 }

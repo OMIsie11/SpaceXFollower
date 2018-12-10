@@ -12,6 +12,6 @@ interface SpaceService {
     fun getAllCapsules(): Call<List<Capsule>>
 
     // Get all cores
-    @GET("v3/coress")
+    @GET("v3/cores")
     fun getAllCores(): Call<List<Core>>
 }

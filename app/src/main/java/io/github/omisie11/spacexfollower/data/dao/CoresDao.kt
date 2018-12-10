@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.data
+package io.github.omisie11.spacexfollower.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

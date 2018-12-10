@@ -9,6 +9,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.concurrent.Executors
 import android.os.AsyncTask
+import io.github.omisie11.spacexfollower.data.dao.CapsulesDao
+import io.github.omisie11.spacexfollower.data.dao.CoresDao
 import io.github.omisie11.spacexfollower.data.model.Core
 
 
@@ -55,7 +57,7 @@ class SpaceRepository(
 
     private fun saveCapsulesToDb(data: List<Capsule>) {
 
-        val myExecutor = Executors.newSingleThreadExecutor();
+        val myExecutor = Executors.newSingleThreadExecutor()
         myExecutor.execute {
             capsulesDao.insertCapsules(data)
         }
@@ -86,7 +88,7 @@ class SpaceRepository(
     fun fetchCoresAndSaveToDb() {
         spaceService.getAllCores().enqueue(object : Callback<List<Core>> {
             override fun onResponse(call: Call<List<Core>>, response: Response<List<Core>>) {
-                saveCoresToDb(response.body()!!)
+                response.body()?.let { saveCoresToDb(it) }
             }
 
             override fun onFailure(call: Call<List<Core>>, t: Throwable) {
@@ -98,7 +100,7 @@ class SpaceRepository(
 
     private fun saveCoresToDb(data: List<Core>) {
 
-        val myExecutor = Executors.newSingleThreadExecutor();
+        val myExecutor = Executors.newSingleThreadExecutor()
         myExecutor.execute {
             coresDao.insertCores(data)
         }
