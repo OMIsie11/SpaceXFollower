@@ -1,5 +1,6 @@
 package io.github.omisie11.spacexfollower.data
 
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import io.github.omisie11.spacexfollower.data.model.Capsule
@@ -12,32 +13,43 @@ import android.os.AsyncTask
 import io.github.omisie11.spacexfollower.data.dao.CapsulesDao
 import io.github.omisie11.spacexfollower.data.dao.CoresDao
 import io.github.omisie11.spacexfollower.data.model.Core
+import org.jetbrains.anko.doAsync
 
 
 class SpaceRepository(
     private val capsulesDao: CapsulesDao,
     private val spaceService: SpaceService,
-    private val coresDao: CoresDao
+    private val coresDao: CoresDao,
+    private val sharedPrefs: SharedPreferences
 ) {
 
     private val mAllCapsules: LiveData<List<Capsule>> by lazy { capsulesDao.getAllCapsules() }
     private val mAllCores: LiveData<List<Core>> by lazy { coresDao.getAllCores() }
 
-    //fun getCapsules(): LiveData<List<Capsule>> {
-    //  val data = MutableLiveData<List<Capsule>>()
-    //mSpaceService!!.getAllCapsules().enqueue(object : Callback<List<Capsule>> {
-    //  override fun onResponse(call: Call<List<Capsule>>, response: Response<List<Capsule>>) {
-    //    data.value = response.body()
-    //   Log.d("SSS", "${data.value}")
-    //}
-//
-    //          override fun onFailure(call: Call<List<Capsule>>, t: Throwable) {
-    //            Log.d("Repo", "FAILURE")
-    //      }
-//
-    //      })
-    //    return data
-    //}
+    companion object {
+        // Data refresh interval in milliseconds
+        private const val REFRESH_INTERVAL: Long = 10800000
+    }
+
+    // Wrapper for getting all capsules from Db
+    fun getCapsules(): LiveData<List<Capsule>> {
+
+        return mAllCapsules
+    }
+
+    // Wrapper for getting all cores from Db
+    fun getCores(): LiveData<List<Core>> {
+
+        return mAllCores
+    }
+
+    fun deleteAllCores() {
+        DeleteAllCoresAsyncTask(coresDao).execute()
+    }
+
+    fun deleteAllCapsules() {
+        DeleteAllCapsulesAsyncTask(capsulesDao).execute()
+    }
 
     // ToDO: Proper implementation of refreshing
     // Use shared prefs for saving time of last fetch
@@ -45,7 +57,9 @@ class SpaceRepository(
     fun fetchCapsulesAndSaveToDb() {
         spaceService.getAllCapsules().enqueue(object : Callback<List<Capsule>> {
             override fun onResponse(call: Call<List<Capsule>>, response: Response<List<Capsule>>) {
-                saveCapsulesToDb(response.body()!!)
+                response.body()?.let {
+                    doAsync { capsulesDao.insertCapsules(it) }
+                }
             }
 
             override fun onFailure(call: Call<List<Capsule>>, t: Throwable) {
@@ -55,22 +69,37 @@ class SpaceRepository(
         })
     }
 
-    private fun saveCapsulesToDb(data: List<Capsule>) {
+    // Cores
+    fun fetchCoresAndSaveToDb() {
+        spaceService.getAllCores().enqueue(object : Callback<List<Core>> {
+            override fun onResponse(call: Call<List<Core>>, response: Response<List<Core>>) {
+                response.body()?.let {
+                    doAsync { coresDao.insertCores(it) }
+                }
+            }
 
+            override fun onFailure(call: Call<List<Core>>, t: Throwable) {
+                Log.d("Repo", "FAILURE")
+            }
+
+        })
+    }
+
+    private fun saveCoresToDb(data: List<Core>) {
         val myExecutor = Executors.newSingleThreadExecutor()
         myExecutor.execute {
-            capsulesDao.insertCapsules(data)
+            coresDao.insertCores(data)
         }
     }
 
-    // Wrapper for getting all capsules from DB
-    fun getCapsules(): LiveData<List<Capsule>> {
-
-        return mAllCapsules
-    }
-
-    fun deleteAllCapsules() {
-        DeleteAllCapsulesAsyncTask(capsulesDao).execute()
+    // Check if data refresh is needed
+    private fun checkIfRefreshIsNeeded(sharedPrefsKey: String): Boolean {
+        // Get current time in milliseconds
+        val currentTimeMillis: Long = System.currentTimeMillis()
+        val lastRefreshTime = sharedPrefs.getLong(sharedPrefsKey, currentTimeMillis)
+        Log.d("Repository", "Current time in millis $currentTimeMillis")
+        // If last refresh was made longer than interval, return true
+        return currentTimeMillis - lastRefreshTime > REFRESH_INTERVAL
     }
 
     private class DeleteAllCapsulesAsyncTask internal constructor(
@@ -82,37 +111,6 @@ class SpaceRepository(
             mAsyncTaskDao.deleteAllCapsules()
             return null
         }
-    }
-
-    // Cores
-    fun fetchCoresAndSaveToDb() {
-        spaceService.getAllCores().enqueue(object : Callback<List<Core>> {
-            override fun onResponse(call: Call<List<Core>>, response: Response<List<Core>>) {
-                response.body()?.let { saveCoresToDb(it) }
-            }
-
-            override fun onFailure(call: Call<List<Core>>, t: Throwable) {
-                Log.d("Repo", "FAILURE")
-            }
-
-        })
-    }
-
-    private fun saveCoresToDb(data: List<Core>) {
-
-        val myExecutor = Executors.newSingleThreadExecutor()
-        myExecutor.execute {
-            coresDao.insertCores(data)
-        }
-    }
-
-    fun getCores(): LiveData<List<Core>> {
-
-        return mAllCores
-    }
-
-    fun deleteAllCores() {
-        DeleteAllCoresAsyncTask(coresDao).execute()
     }
 
     private class DeleteAllCoresAsyncTask internal constructor(

@@ -1,5 +1,7 @@
 package io.github.omisie11.spacexfollower.di
 
+import android.content.Context
+import android.preference.PreferenceManager.getDefaultSharedPreferences
 import androidx.room.Room
 import io.github.omisie11.spacexfollower.CapsulesAdapter
 import io.github.omisie11.spacexfollower.CoresAdapter
@@ -28,6 +30,9 @@ val appModule = module {
             .build()
     }
 
+    // SharedPrefs
+    single { androidApplication().getSharedPreferences("d", Context.MODE_PRIVATE) }
+
     // Capsules DAO instance
     single { get<SpaceDatabase>().capsulesDao() }
 
@@ -35,7 +40,7 @@ val appModule = module {
     single { get<SpaceDatabase>().coresDao() }
 
     // Single instance of SpaceRepository
-    single { SpaceRepository(get(), get(), get()) }
+    single { SpaceRepository(get(), get(), get(), get()) }
 
     // ViewModel instance of CapsulesViewModel
     // get() will resolve Repository instance
