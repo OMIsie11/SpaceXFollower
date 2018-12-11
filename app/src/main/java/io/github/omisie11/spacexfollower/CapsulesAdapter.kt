@@ -7,13 +7,13 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.RecyclerView
 import io.github.omisie11.spacexfollower.data.model.Capsule
+import kotlinx.android.synthetic.main.capsules_recycler_item.view.*
 
 
 class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
 
     private var mExpandedPosition: Int = -1
-
-    private var mCapsulesData: List<Capsule>? = null
+    private var mCapsulesData: List<Capsule> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -24,15 +24,17 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Bind data to views from ViewHolder
         // Views visible all the time
-        holder.capsuleIdTextView.text = mCapsulesData!![position].capsuleId
-        holder.capsuleSerialTextView.text = mCapsulesData!![position].capsuleSerial
-        holder.capsuleType.text = mCapsulesData!![position].type
-        holder.capsuleStatus.text = mCapsulesData!![position].status
-        // Views below are visible when view is expanded on click
-        holder.capsuleLandings.text = "Landings: " + mCapsulesData!![position].landings.toString()
-        holder.capsuleMissionsTextView.text =
-                if (mCapsulesData!![position].missions!!.isEmpty()) "No missions yet"
-                else mCapsulesData!![position].missions.toString()
+        mCapsulesData.let {
+            holder.capsuleIdTextView.text = mCapsulesData[position].capsuleId
+            holder.capsuleSerialTextView.text = mCapsulesData[position].capsuleSerial
+            holder.capsuleType.text = mCapsulesData[position].type
+            holder.capsuleStatus.text = mCapsulesData[position].status
+            // Views below are visible when view is expanded on click
+            holder.capsuleLandings.text = "Landings: " + mCapsulesData[position].landings.toString()
+            holder.capsuleMissionsTextView.text =
+                    if (mCapsulesData[position].missions!!.isEmpty()) "No missions yet"
+                    else mCapsulesData[position].missions.toString()
+        }
 
         // Variable for storing info if view is expanded
         val isExpanded = position == mExpandedPosition
@@ -45,23 +47,21 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
         }
     }
 
-    override fun getItemCount(): Int {
-        return mCapsulesData?.size ?: 0
-    }
+    override fun getItemCount(): Int = mCapsulesData.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val capsuleIdTextView: TextView = itemView.findViewById(R.id.text_capsule_id)
-        val capsuleSerialTextView: TextView = itemView.findViewById(R.id.text_capsule_serial)
-        val capsuleType: TextView = itemView.findViewById(R.id.text_capsule_type)
-        val capsuleStatus: TextView = itemView.findViewById(R.id.text_capsule_status)
-        val capsuleLandings: TextView = itemView.findViewById(R.id.text_landings)
-        val capsuleMissionsTextView: TextView = itemView.findViewById(R.id.text_missions)
-        val groupExpanded: Group = itemView.findViewById(R.id.group_expand)
+        val capsuleIdTextView: TextView = itemView.text_capsule_id
+        val capsuleSerialTextView: TextView = itemView.text_capsule_serial
+        val capsuleType: TextView = itemView.text_capsule_type
+        val capsuleStatus: TextView = itemView.text_capsule_status
+        val capsuleLandings: TextView = itemView.text_landings
+        val capsuleMissionsTextView: TextView = itemView.text_missions
+        val groupExpanded: Group = itemView.group_expand
     }
 
-    fun setData(data: List<Capsule>?) {
+    fun setData(data: List<Capsule>) {
         // Reverse list, so by default it is sorted by NEWEST DATE
-        mCapsulesData = data?.toMutableList()?.asReversed()
+        mCapsulesData = data
         notifyDataSetChanged()
     }
 }
