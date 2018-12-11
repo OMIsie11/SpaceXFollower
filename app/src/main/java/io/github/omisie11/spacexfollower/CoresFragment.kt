@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.omisie11.spacexfollower.data.SpaceRepository
 import io.github.omisie11.spacexfollower.data.model.Core
 import io.github.omisie11.spacexfollower.viewmodel.CoresViewModel
-import kotlinx.android.synthetic.main.fragment_cores.*
-import kotlinx.android.synthetic.main.fragment_cores.view.*
+import kotlinx.android.synthetic.main.fragment_recycler.*
+import kotlinx.android.synthetic.main.fragment_recycler.view.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,11 +29,11 @@ class CoresFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_cores, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_recycler, container, false)
 
         // Setup recyclerView
         viewManager = LinearLayoutManager(activity)
-        rootView.coresRecyclerView.apply {
+        rootView.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
@@ -51,7 +51,7 @@ class CoresFragment : Fragment() {
         })
 
         // Force fetching capsules
-        fetchCores.setOnClickListener {
+        fetchButton.setOnClickListener {
             repository.fetchCoresAndSaveToDb()
         }
         // Delete data from capsules table

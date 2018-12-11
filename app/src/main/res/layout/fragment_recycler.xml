@@ -8,7 +8,7 @@
         tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/coresRecyclerView"
+            android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
@@ -18,10 +18,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/fetchCores"/>
+            app:layout_constraintBottom_toTopOf="@+id/fetchButton"/>
 
     <Button
-            android:id="@+id/fetchCores"
+            android:id="@+id/fetchButton"
             android:text="Fetch data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,11 +33,11 @@
             android:layout_marginEnd="8dp"/>
     <Button
             android:id="@+id/deleteEntriesButton"
-            android:text="DeleteCores"
+            android:text="Delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/fetchCores"
-            app:layout_constraintTop_toTopOf="@+id/fetchCores"
+            app:layout_constraintBottom_toBottomOf="@+id/fetchButton"
+            app:layout_constraintTop_toTopOf="@+id/fetchButton"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="64dp"
             app:layout_constraintVertical_bias="0.0"/>

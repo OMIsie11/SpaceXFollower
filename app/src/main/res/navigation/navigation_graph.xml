@@ -6,5 +6,5 @@
     <fragment android:id="@+id/capsules_dest" android:name="io.github.omisie11.spacexfollower.CapsulesFragment"
               android:label="CapsulesFragment"/>
     <fragment android:id="@+id/cores_dest" android:name="io.github.omisie11.spacexfollower.CoresFragment"
-              android:label="fragment_cores" tools:layout="@layout/fragment_cores"/>
+              android:label="fragment_cores" tools:layout="@layout/fragment_recycler"/>
 </navigation>
