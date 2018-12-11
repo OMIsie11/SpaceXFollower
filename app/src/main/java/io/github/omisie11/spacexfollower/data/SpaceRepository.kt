@@ -8,11 +8,12 @@ import io.github.omisie11.spacexfollower.network.SpaceService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.concurrent.Executors
 import android.os.AsyncTask
 import io.github.omisie11.spacexfollower.data.dao.CapsulesDao
 import io.github.omisie11.spacexfollower.data.dao.CoresDao
 import io.github.omisie11.spacexfollower.data.model.Core
+import io.github.omisie11.spacexfollower.util.KEY_CAPSULES_LAST_REFRESH
+import io.github.omisie11.spacexfollower.util.KEY_CORES_LAST_REFRESH
 import org.jetbrains.anko.doAsync
 
 
@@ -51,8 +52,34 @@ class SpaceRepository(
         DeleteAllCapsulesAsyncTask(capsulesDao).execute()
     }
 
-    // ToDO: Proper implementation of refreshing
-    // Use shared prefs for saving time of last fetch
+    // ToDo make one function for refreshing
+    fun refreshCapsules() {
+        Log.d("Repository", "refreshCapsules called")
+        // Check if refresh is needed
+        if (checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH)) {
+            Log.d("refreshCapsules", "Refreshing capsules")
+            fetchCapsulesAndSaveToDb()
+            // Save new refresh time
+            with(sharedPrefs.edit()) {
+                putLong(KEY_CAPSULES_LAST_REFRESH, System.currentTimeMillis())
+                apply()
+            }
+        }
+    }
+
+    fun refreshCores() {
+        Log.d("Repository", "refreshCores called")
+        // Check if refresh is needed
+        if (checkIfRefreshIsNeeded(KEY_CORES_LAST_REFRESH)) {
+            Log.d("refreshCores", "Refreshing cores")
+            fetchCapsulesAndSaveToDb()
+            // Save new refresh time
+            with(sharedPrefs.edit()) {
+                putLong(KEY_CORES_LAST_REFRESH, System.currentTimeMillis())
+                apply()
+            }
+        }
+    }
 
     fun fetchCapsulesAndSaveToDb() {
         spaceService.getAllCapsules().enqueue(object : Callback<List<Capsule>> {
@@ -85,18 +112,11 @@ class SpaceRepository(
         })
     }
 
-    private fun saveCoresToDb(data: List<Core>) {
-        val myExecutor = Executors.newSingleThreadExecutor()
-        myExecutor.execute {
-            coresDao.insertCores(data)
-        }
-    }
-
     // Check if data refresh is needed
     private fun checkIfRefreshIsNeeded(sharedPrefsKey: String): Boolean {
         // Get current time in milliseconds
         val currentTimeMillis: Long = System.currentTimeMillis()
-        val lastRefreshTime = sharedPrefs.getLong(sharedPrefsKey, currentTimeMillis)
+        val lastRefreshTime = sharedPrefs.getLong(sharedPrefsKey, 0)
         Log.d("Repository", "Current time in millis $currentTimeMillis")
         // If last refresh was made longer than interval, return true
         return currentTimeMillis - lastRefreshTime > REFRESH_INTERVAL

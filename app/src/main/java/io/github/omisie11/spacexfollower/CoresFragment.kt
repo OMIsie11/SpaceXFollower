@@ -59,4 +59,9 @@ class CoresFragment : Fragment() {
             repository.deleteAllCores()
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        repository.refreshCores()
+    }
 }

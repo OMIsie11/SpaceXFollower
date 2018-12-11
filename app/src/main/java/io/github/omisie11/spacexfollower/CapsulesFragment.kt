@@ -59,4 +59,9 @@ class CapsulesFragment : Fragment() {
             repository.deleteAllCapsules()
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        repository.refreshCapsules()
+    }
 }
