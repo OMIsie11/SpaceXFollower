@@ -62,6 +62,7 @@ class CoresFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        repository.refreshCores()
+        // Fetch new data if last fetch was long ago
+        model.refreshCores()
     }
 }

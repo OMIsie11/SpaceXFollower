@@ -28,19 +28,19 @@ class SpaceRepository(
     private val mAllCores: LiveData<List<Core>> by lazy { coresDao.getAllCores() }
 
     companion object {
-        // Data refresh interval in milliseconds
+        // Data refresh interval in milliseconds (default: 3h = 10800000 ms)
         private const val REFRESH_INTERVAL: Long = 10800000
     }
 
     // Wrapper for getting all capsules from Db
     fun getCapsules(): LiveData<List<Capsule>> {
-
+        refreshCapsules()
         return mAllCapsules
     }
 
     // Wrapper for getting all cores from Db
     fun getCores(): LiveData<List<Core>> {
-
+        refreshCores()
         return mAllCores
     }
 
@@ -72,7 +72,7 @@ class SpaceRepository(
         // Check if refresh is needed
         if (checkIfRefreshIsNeeded(KEY_CORES_LAST_REFRESH)) {
             Log.d("refreshCores", "Refreshing cores")
-            fetchCapsulesAndSaveToDb()
+            fetchCoresAndSaveToDb()
             // Save new refresh time
             with(sharedPrefs.edit()) {
                 putLong(KEY_CORES_LAST_REFRESH, System.currentTimeMillis())

@@ -14,4 +14,9 @@ class CoresViewModel(private val repository: SpaceRepository) : ViewModel() {
     fun getCores(): LiveData<List<Core>> {
         return mAllCores
     }
+
+    // Wrapper for refreshing cores data
+    fun refreshCores() {
+        repository.refreshCores()
+    }
 }

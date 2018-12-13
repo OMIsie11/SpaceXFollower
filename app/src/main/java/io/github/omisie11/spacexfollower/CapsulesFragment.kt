@@ -62,6 +62,7 @@ class CapsulesFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        repository.refreshCapsules()
+        // Fetch new data if last fetch was long ago
+        model.refreshCapsules()
     }
 }

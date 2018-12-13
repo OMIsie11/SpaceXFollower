@@ -15,4 +15,9 @@ class CapsulesViewModel(private val repository: SpaceRepository) : ViewModel() {
     fun getCapsules(): LiveData<List<Capsule>> {
         return mAllCapsules
     }
+
+    // Wrapper for refreshing capsules data
+    fun refreshCapsules() {
+        repository.refreshCapsules()
+    }
 }
