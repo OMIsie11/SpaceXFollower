@@ -45,11 +45,11 @@ class SpaceRepository(
     }
 
     fun deleteAllCores() {
-        DeleteAllCoresAsyncTask(coresDao).execute()
+        doAsync { coresDao.deleteAllCores() }
     }
 
     fun deleteAllCapsules() {
-        DeleteAllCapsulesAsyncTask(capsulesDao).execute()
+        doAsync { capsulesDao.deleteAllCapsules() }
     }
 
     // ToDo make one function for refreshing
@@ -84,9 +84,11 @@ class SpaceRepository(
     fun fetchCapsulesAndSaveToDb() {
         spaceService.getAllCapsules().enqueue(object : Callback<List<Capsule>> {
             override fun onResponse(call: Call<List<Capsule>>, response: Response<List<Capsule>>) {
-                response.body()?.let {
-                    doAsync { capsulesDao.insertCapsules(it) }
-                }
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        doAsync { capsulesDao.insertCapsules(it) }
+                    }
+                } else Log.d("Repository", "Error: ${response.errorBody()}")
             }
 
             override fun onFailure(call: Call<List<Capsule>>, t: Throwable) {
@@ -100,9 +102,11 @@ class SpaceRepository(
     fun fetchCoresAndSaveToDb() {
         spaceService.getAllCores().enqueue(object : Callback<List<Core>> {
             override fun onResponse(call: Call<List<Core>>, response: Response<List<Core>>) {
-                response.body()?.let {
-                    doAsync { coresDao.insertCores(it) }
-                }
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        doAsync { coresDao.insertCores(it) }
+                    }
+                } else Log.d("Repository", "Error: ${response.errorBody()}")
             }
 
             override fun onFailure(call: Call<List<Core>>, t: Throwable) {
@@ -120,27 +124,5 @@ class SpaceRepository(
         Log.d("Repository", "Current time in millis $currentTimeMillis")
         // If last refresh was made longer than interval, return true
         return currentTimeMillis - lastRefreshTime > REFRESH_INTERVAL
-    }
-
-    private class DeleteAllCapsulesAsyncTask internal constructor(
-        private val mAsyncTaskDao: CapsulesDao
-    ) :
-        AsyncTask<Void, Void, Void>() {
-
-        override fun doInBackground(vararg voids: Void): Void? {
-            mAsyncTaskDao.deleteAllCapsules()
-            return null
-        }
-    }
-
-    private class DeleteAllCoresAsyncTask internal constructor(
-        private val mAsyncTaskDao: CoresDao
-    ) :
-        AsyncTask<Void, Void, Void>() {
-
-        override fun doInBackground(vararg voids: Void): Void? {
-            mAsyncTaskDao.deleteAllCores()
-            return null
-        }
     }
 }
