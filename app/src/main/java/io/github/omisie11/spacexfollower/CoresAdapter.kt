@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.RecyclerView
 import io.github.omisie11.spacexfollower.data.model.Core
 import kotlinx.android.synthetic.main.capsules_recycler_item.view.*
+import org.jetbrains.anko.doAsync
 
 class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
 
@@ -60,7 +61,7 @@ class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
 
     fun setData(data: List<Core>) {
         // Reverse list, so by default it is sorted by NEWEST DATE
-        mCoresData = data
+        doAsync { mCoresData = data }
         notifyDataSetChanged()
     }
 }
