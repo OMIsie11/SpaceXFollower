@@ -1,16 +1,15 @@
 package io.github.omisie11.spacexfollower.di
 
-import android.content.Context
-import android.preference.PreferenceManager.getDefaultSharedPreferences
 import androidx.room.Room
 import io.github.omisie11.spacexfollower.CapsulesAdapter
 import io.github.omisie11.spacexfollower.CoresAdapter
-import io.github.omisie11.spacexfollower.viewmodel.CapsulesViewModel
 import io.github.omisie11.spacexfollower.data.SpaceDatabase
 import io.github.omisie11.spacexfollower.data.SpaceRepository
 import io.github.omisie11.spacexfollower.network.SpaceService
 import io.github.omisie11.spacexfollower.util.SPACE_X_BASE_URL
+import io.github.omisie11.spacexfollower.viewmodel.CapsulesViewModel
 import io.github.omisie11.spacexfollower.viewmodel.CoresViewModel
+import org.jetbrains.anko.defaultSharedPreferences
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
@@ -31,7 +30,7 @@ val appModule = module {
     }
 
     // SharedPrefs
-    single { androidApplication().getSharedPreferences("d", Context.MODE_PRIVATE) }
+    single { androidApplication().defaultSharedPreferences }
 
     // Capsules DAO instance
     single { get<SpaceDatabase>().capsulesDao() }
