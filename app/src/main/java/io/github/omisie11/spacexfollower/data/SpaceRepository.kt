@@ -8,7 +8,6 @@ import io.github.omisie11.spacexfollower.network.SpaceService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.os.AsyncTask
 import io.github.omisie11.spacexfollower.data.dao.CapsulesDao
 import io.github.omisie11.spacexfollower.data.dao.CoresDao
 import io.github.omisie11.spacexfollower.data.model.Core
@@ -24,9 +23,6 @@ class SpaceRepository(
     private val sharedPrefs: SharedPreferences
 ) {
 
-    private val mAllCapsules: LiveData<List<Capsule>> by lazy { capsulesDao.getAllCapsules() }
-    private val mAllCores: LiveData<List<Core>> by lazy { coresDao.getAllCores() }
-
     companion object {
         // Data refresh interval in milliseconds (default: 3h = 10800000 ms)
         private const val REFRESH_INTERVAL: Long = 10800000
@@ -35,13 +31,13 @@ class SpaceRepository(
     // Wrapper for getting all capsules from Db
     fun getCapsules(): LiveData<List<Capsule>> {
         refreshCapsules()
-        return mAllCapsules
+        return capsulesDao.getAllCapsules()
     }
 
     // Wrapper for getting all cores from Db
     fun getCores(): LiveData<List<Core>> {
         refreshCores()
-        return mAllCores
+        return coresDao.getAllCores()
     }
 
     fun deleteAllCores() {

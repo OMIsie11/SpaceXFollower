@@ -32,7 +32,7 @@ class CapsulesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_recycler, container, false)
-        
+
         return rootView
     }
 
