@@ -13,6 +13,7 @@ import io.github.omisie11.spacexfollower.data.model.Core
 import io.github.omisie11.spacexfollower.viewmodel.CoresViewModel
 import kotlinx.android.synthetic.main.fragment_recycler.*
 import kotlinx.android.synthetic.main.fragment_recycler.view.*
+
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -46,7 +47,7 @@ class CoresFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // // ViewModel setup
-        model.getCores().observe(this, Observer<List<Core>> { cores ->
+        model.getCores().observe(viewLifecycleOwner, Observer<List<Core>> { cores ->
             viewAdapter.setData(cores)
         })
 
