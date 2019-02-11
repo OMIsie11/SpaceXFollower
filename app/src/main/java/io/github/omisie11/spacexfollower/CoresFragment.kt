@@ -1,6 +1,7 @@
 package io.github.omisie11.spacexfollower
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import io.github.omisie11.spacexfollower.data.model.Core
 import io.github.omisie11.spacexfollower.viewmodel.CoresViewModel
 import kotlinx.android.synthetic.main.fragment_recycler.*
 import kotlinx.android.synthetic.main.fragment_recycler.view.*
+import org.jetbrains.anko.doAsync
 
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -46,14 +48,25 @@ class CoresFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // // ViewModel setup
+        // ViewModel setup
         model.getCores().observe(viewLifecycleOwner, Observer<List<Core>> { cores ->
             viewAdapter.setData(cores)
         })
 
+        // ToDo: Implement proper data refresh state indicator
+        // Swipe to refresh
+        swipeRefreshLayout.setOnRefreshListener {
+            Log.i("CapsulesFragment", "onRefresh called from SwipeRefreshLayout")
+            repository.refreshCores()
+            // Wait 2 seconds and disable refreshing animation
+            doAsync { Thread.sleep(2000)
+                swipeRefreshLayout.isRefreshing = false
+            }
+        }
+
         // Force fetching capsules
         fetchButton.setOnClickListener {
-            repository.fetchCoresAndSaveToDb()
+            repository.refreshCores()
         }
         // Delete data from capsules table
         deleteEntriesButton.setOnClickListener {

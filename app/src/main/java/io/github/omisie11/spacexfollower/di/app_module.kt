@@ -1,6 +1,7 @@
 package io.github.omisie11.spacexfollower.di
 
 import androidx.room.Room
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import io.github.omisie11.spacexfollower.CapsulesAdapter
 import io.github.omisie11.spacexfollower.CoresAdapter
 import io.github.omisie11.spacexfollower.data.SpaceDatabase
@@ -69,5 +70,6 @@ internal fun buildRetrofit(baseUrl: String): Retrofit {
     return Retrofit.Builder()
         .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 }

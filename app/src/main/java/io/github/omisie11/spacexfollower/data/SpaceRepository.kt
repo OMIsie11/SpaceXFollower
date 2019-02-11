@@ -5,15 +5,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import io.github.omisie11.spacexfollower.network.SpaceService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import io.github.omisie11.spacexfollower.data.dao.CapsulesDao
 import io.github.omisie11.spacexfollower.data.dao.CoresDao
 import io.github.omisie11.spacexfollower.data.model.Core
 import io.github.omisie11.spacexfollower.util.KEY_CAPSULES_LAST_REFRESH
 import io.github.omisie11.spacexfollower.util.KEY_CORES_LAST_REFRESH
-import org.jetbrains.anko.doAsync
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 
 class SpaceRepository(
@@ -28,88 +29,82 @@ class SpaceRepository(
         private const val REFRESH_INTERVAL: Long = 10800000
     }
 
+    private val repositoryJob = Job()
+    private val repositoryScope = CoroutineScope(Dispatchers.IO + repositoryJob)
+
     // Wrapper for getting all capsules from Db
     fun getCapsules(): LiveData<List<Capsule>> {
-        refreshCapsules()
+        if (checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH)) {
+            refreshCapsules()
+            Log.d("refreshCapsules", "Refreshing capsules")
+        }
         return capsulesDao.getAllCapsules()
     }
 
     // Wrapper for getting all cores from Db
     fun getCores(): LiveData<List<Core>> {
-        refreshCores()
+        // Check if refresh is needed
+        if (checkIfRefreshIsNeeded(KEY_CORES_LAST_REFRESH)) {
+            refreshCores()
+            Log.d("refreshCores", "Refreshing cores")
+        }
         return coresDao.getAllCores()
     }
 
-    fun deleteAllCores() {
-        doAsync { coresDao.deleteAllCores() }
+    fun deleteAllCapsules() {
+        repositoryScope.launch { capsulesDao.deleteAllCapsules() }
     }
 
-    fun deleteAllCapsules() {
-        doAsync { capsulesDao.deleteAllCapsules() }
+    fun deleteAllCores() {
+        repositoryScope.launch { coresDao.deleteAllCores() }
     }
 
     // ToDo make one function for refreshing
     fun refreshCapsules() {
         Log.d("Repository", "refreshCapsules called")
-        // Check if refresh is needed
-        if (checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH)) {
-            Log.d("refreshCapsules", "Refreshing capsules")
-            fetchCapsulesAndSaveToDb()
-            // Save new refresh time
-            with(sharedPrefs.edit()) {
-                putLong(KEY_CAPSULES_LAST_REFRESH, System.currentTimeMillis())
-                apply()
+        repositoryScope.launch {
+            try {
+                fetchCapsulesAndSaveToDb()
+            } catch (exception: Exception) {
+                // ToDo: Handle exceptions and no network exception
             }
         }
     }
 
     fun refreshCores() {
         Log.d("Repository", "refreshCores called")
-        // Check if refresh is needed
-        if (checkIfRefreshIsNeeded(KEY_CORES_LAST_REFRESH)) {
-            Log.d("refreshCores", "Refreshing cores")
-            fetchCoresAndSaveToDb()
-            // Save new refresh time
-            with(sharedPrefs.edit()) {
-                putLong(KEY_CORES_LAST_REFRESH, System.currentTimeMillis())
-                apply()
+        repositoryScope.launch {
+            try {
+                fetchCoresAndSaveToDb()
+            } catch (exception: Exception) {
+                // ToDo: Handle exceptions and no network exception
             }
         }
     }
 
-    fun fetchCapsulesAndSaveToDb() {
-        spaceService.getAllCapsules().enqueue(object : Callback<List<Capsule>> {
-            override fun onResponse(call: Call<List<Capsule>>, response: Response<List<Capsule>>) {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        doAsync { capsulesDao.insertCapsules(it) }
-                    }
-                } else Log.d("Repository", "Error: ${response.errorBody()}")
+    private suspend fun fetchCapsulesAndSaveToDb() {
+        val result = spaceService.getAllCapsules().await()
+        if (result.isSuccessful) {
+            result.body()?.let { capsulesDao.insertCapsules(it) }
+            // Save new capsules last refresh time
+            with(sharedPrefs.edit()) {
+                putLong(KEY_CAPSULES_LAST_REFRESH, System.currentTimeMillis())
+                apply()
             }
-
-            override fun onFailure(call: Call<List<Capsule>>, t: Throwable) {
-                Log.d("Repo", "FAILURE")
-            }
-
-        })
+        } else Log.d("Repository", "Error: ${result.errorBody()}")
     }
 
     // Cores
-    fun fetchCoresAndSaveToDb() {
-        spaceService.getAllCores().enqueue(object : Callback<List<Core>> {
-            override fun onResponse(call: Call<List<Core>>, response: Response<List<Core>>) {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        doAsync { coresDao.insertCores(it) }
-                    }
-                } else Log.d("Repository", "Error: ${response.errorBody()}")
+    private suspend fun fetchCoresAndSaveToDb() {
+        val result = spaceService.getAllCores().await()
+        if (result.isSuccessful) {
+            result.body()?.let { coresDao.insertCores(it) }
+            // Save new cores last refresh time
+            with(sharedPrefs.edit()) {
+                putLong(KEY_CORES_LAST_REFRESH, System.currentTimeMillis())
+                apply()
             }
-
-            override fun onFailure(call: Call<List<Core>>, t: Throwable) {
-                Log.d("Repo", "FAILURE")
-            }
-
-        })
+        } else Log.d("Repository", "Error: ${result.errorBody()}")
     }
 
     // Check if data refresh is needed

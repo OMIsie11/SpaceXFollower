@@ -53,10 +53,11 @@ class CapsulesFragment : Fragment() {
             viewAdapter.setData(capsules)
         })
 
+        // ToDo: Implement proper data refresh state indicator
         // Swipe to refresh
         swipeRefreshLayout.setOnRefreshListener {
             Log.i("CapsulesFragment", "onRefresh called from SwipeRefreshLayout")
-            repository.fetchCapsulesAndSaveToDb()
+            repository.refreshCapsules()
             // Wait 2 seconds and disable refreshing animation
             doAsync { Thread.sleep(2000)
                 swipeRefreshLayout.isRefreshing = false
@@ -65,7 +66,7 @@ class CapsulesFragment : Fragment() {
 
         // Force fetching capsules
         fetchButton.setOnClickListener {
-            repository.fetchCapsulesAndSaveToDb()
+            repository.refreshCapsules()
         }
         // Delete data from capsules table
         deleteEntriesButton.setOnClickListener {
