@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.data.SpaceRepository
 import io.github.omisie11.spacexfollower.data.model.Core
 import io.github.omisie11.spacexfollower.viewmodel.CoresViewModel
@@ -22,7 +23,7 @@ class CoresFragment : Fragment() {
     private val viewAdapter: CoresAdapter by inject()
     private lateinit var viewManager: RecyclerView.LayoutManager
     private val repository: SpaceRepository by inject()
-    private val model: CoresViewModel by viewModel()
+    private val viewModel: CoresViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,19 +45,27 @@ class CoresFragment : Fragment() {
         }
 
         // ViewModel setup
-        model.getCores().observe(viewLifecycleOwner, Observer<List<Core>> { cores ->
+        viewModel.getCores().observe(viewLifecycleOwner, Observer<List<Core>> { cores ->
             viewAdapter.setData(cores)
         })
 
         // Swipe to refresh
         swipeRefreshLayout.setOnRefreshListener {
             Log.i("CapsulesFragment", "onRefresh called from SwipeRefreshLayout")
-            model.refreshCores()
+            viewModel.refreshCores()
         }
 
         // Observe if data is refreshing and show/hide loading indicator
-        model.getCoresLoadingStatus().observe(viewLifecycleOwner, Observer<Boolean> { areCoresRefreshing ->
+        viewModel.getCoresLoadingStatus().observe(viewLifecycleOwner, Observer<Boolean> { areCoresRefreshing ->
             swipeRefreshLayout.isRefreshing = areCoresRefreshing
+        })
+
+        // Show a snackbar whenever the [ViewModel.snackbar] is updated a non-null value
+        viewModel.snackbar.observe(this, Observer { text ->
+            text?.let {
+                Snackbar.make(swipeRefreshLayout, text, Snackbar.LENGTH_LONG).show()
+                viewModel.onSnackbarShown()
+            }
         })
 
         // Force fetching capsules
@@ -73,6 +82,6 @@ class CoresFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         // Fetch new data if last fetch was long ago
-        model.refreshIfCoresDataOld()
+        viewModel.refreshIfCoresDataOld()
     }
 }

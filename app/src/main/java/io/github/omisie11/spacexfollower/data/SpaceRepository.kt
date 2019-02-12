@@ -33,6 +33,9 @@ class SpaceRepository(
     // Variables for showing/hiding loading indicators
     private var areCapsulesLoading: MutableLiveData<Boolean> = MutableLiveData()
     private var areCoresLoading: MutableLiveData<Boolean> = MutableLiveData()
+    // Set value to message to be shown in snackbar
+    private val capsulesSnackBar = MutableLiveData<String>()
+    private val coresSnackBar = MutableLiveData<String>()
 
     init {
         areCapsulesLoading.value = false
@@ -66,6 +69,10 @@ class SpaceRepository(
 
     fun getCoresLoadingStatus(): LiveData<Boolean> = areCoresLoading
 
+    fun getCapsulesSnackbar(): MutableLiveData<String> = capsulesSnackBar
+
+    fun getCoresSnackbar(): MutableLiveData<String> = coresSnackBar
+
     fun refreshIfCapsulesDataOld() {
         if (checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH)) {
             refreshCapsules()
@@ -91,8 +98,9 @@ class SpaceRepository(
                 // ToDo: Handle exceptions and no network exception
                 areCapsulesLoading.postValue(false)
                 when (exception) {
-                    is IOException -> Log.d("Repo", "Network problem")
-                    else -> Log.d("Repo", "Exception: $exception")
+                    is IOException -> capsulesSnackBar.postValue("Network problem occurred")
+                    else -> { capsulesSnackBar.postValue("Unexpected problem occurred")
+                        Log.d("Repo", "Exception: $exception") }
                 }
             }
         }
@@ -109,8 +117,10 @@ class SpaceRepository(
                 // ToDo: Handle exceptions and no network exception
                 areCoresLoading.postValue(false)
                 when (exception) {
-                    is IOException -> Log.d("Repo", "Network problem")
-                    else -> Log.d("Repo", "Exception: $exception")
+                    is IOException -> coresSnackBar.postValue("Network problem occurred")
+                    else -> { coresSnackBar.postValue("Unexpected problem occurred")
+                        Log.d("Repo", "Exception: $exception")
+                    }
                 }
             }
         }
