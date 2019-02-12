@@ -11,13 +11,17 @@ class CapsulesViewModel(private val repository: SpaceRepository) : ViewModel() {
     private val mAllCapsules: LiveData<List<Capsule>> by lazy {
         repository.getCapsules()
     }
-
-    fun getCapsules(): LiveData<List<Capsule>> {
-        return mAllCapsules
+    private val mAreCapsulesLoading: LiveData<Boolean> by lazy {
+        repository.getCapsulesLoadingStatus()
     }
+
+    fun getCapsules(): LiveData<List<Capsule>> = mAllCapsules
+
+    fun getCapsulesLoadingStatus(): LiveData<Boolean> = mAreCapsulesLoading
 
     // Wrapper for refreshing capsules data
-    fun refreshCapsules() {
-        repository.refreshCapsules()
-    }
+    fun refreshCapsules() = repository.refreshCapsules()
+
+    // Wrapper for refreshing old data in onResume
+    fun refreshIfCapsulesDataOld() = repository.refreshIfCapsulesDataOld()
 }

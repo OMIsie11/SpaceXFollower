@@ -10,13 +10,17 @@ class CoresViewModel(private val repository: SpaceRepository) : ViewModel() {
     private val mAllCores: LiveData<List<Core>> by lazy {
         repository.getCores()
     }
-
-    fun getCores(): LiveData<List<Core>> {
-        return mAllCores
+    private val mAreCoresLoading: LiveData<Boolean> by lazy {
+        repository.getCoresLoadingStatus()
     }
+
+    fun getCores(): LiveData<List<Core>> = mAllCores
+
+    fun getCoresLoadingStatus(): LiveData<Boolean> = mAreCoresLoading
 
     // Wrapper for refreshing cores data
-    fun refreshCores() {
-        repository.refreshCores()
-    }
+    fun refreshCores() = repository.refreshCores()
+
+    // Wrapper for refreshing old data in onResume
+    fun refreshIfCoresDataOld() = repository.refreshIfCoresDataOld()
 }

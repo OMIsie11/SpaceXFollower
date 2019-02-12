@@ -14,8 +14,6 @@ import io.github.omisie11.spacexfollower.data.model.Capsule
 import io.github.omisie11.spacexfollower.viewmodel.CapsulesViewModel
 import kotlinx.android.synthetic.main.fragment_recycler.*
 import kotlinx.android.synthetic.main.fragment_recycler.view.*
-
-import org.jetbrains.anko.doAsync
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -53,16 +51,16 @@ class CapsulesFragment : Fragment() {
             viewAdapter.setData(capsules)
         })
 
-        // ToDo: Implement proper data refresh state indicator
         // Swipe to refresh
         swipeRefreshLayout.setOnRefreshListener {
             Log.i("CapsulesFragment", "onRefresh called from SwipeRefreshLayout")
-            repository.refreshCapsules()
-            // Wait 2 seconds and disable refreshing animation
-            doAsync { Thread.sleep(2000)
-                swipeRefreshLayout.isRefreshing = false
-            }
+            model.refreshCapsules()
         }
+
+        // Observe if data is refreshing and show/hide loading indicator
+        model.getCapsulesLoadingStatus().observe(viewLifecycleOwner, Observer<Boolean> { areCapsulesRefreshing ->
+            swipeRefreshLayout.isRefreshing = areCapsulesRefreshing
+        })
 
         // Force fetching capsules
         fetchButton.setOnClickListener {
@@ -77,6 +75,6 @@ class CapsulesFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         // Fetch new data if last fetch was long ago
-        model.refreshCapsules()
+        model.refreshIfCapsulesDataOld()
     }
 }
