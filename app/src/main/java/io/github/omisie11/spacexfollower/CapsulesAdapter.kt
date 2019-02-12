@@ -8,13 +8,15 @@ import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.RecyclerView
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import kotlinx.android.synthetic.main.capsules_recycler_item.view.*
-import org.jetbrains.anko.doAsync
+import kotlinx.coroutines.*
 
 
 class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
 
     private var mExpandedPosition: Int = -1
     private var mCapsulesData: List<Capsule> = emptyList()
+    private val capsulesAdapterJob = Job()
+    private val capsulesAdapterScope = CoroutineScope(Dispatchers.IO + capsulesAdapterJob)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -62,7 +64,7 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
 
     fun setData(data: List<Capsule>) {
         // Reverse list, so by default it is sorted by NEWEST DATE
-        doAsync {  mCapsulesData = data }
+        capsulesAdapterScope.launch {  mCapsulesData = data }
         notifyDataSetChanged()
     }
 }

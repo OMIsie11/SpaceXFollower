@@ -54,7 +54,7 @@ class CoresFragment : Fragment() {
         // Swipe to refresh
         swipeRefreshLayout.setOnRefreshListener {
             Log.i("CapsulesFragment", "onRefresh called from SwipeRefreshLayout")
-            repository.refreshCores()
+            model.refreshCores()
         }
 
         // Observe if data is refreshing and show/hide loading indicator

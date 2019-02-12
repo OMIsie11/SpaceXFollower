@@ -11,10 +11,7 @@ import io.github.omisie11.spacexfollower.data.dao.CoresDao
 import io.github.omisie11.spacexfollower.data.model.Core
 import io.github.omisie11.spacexfollower.util.KEY_CAPSULES_LAST_REFRESH
 import io.github.omisie11.spacexfollower.util.KEY_CORES_LAST_REFRESH
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.io.IOException
 import java.lang.Exception
 

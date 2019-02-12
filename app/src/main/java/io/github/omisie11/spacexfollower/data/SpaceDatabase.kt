@@ -15,7 +15,7 @@ abstract class SpaceDatabase : RoomDatabase() {
     abstract fun capsulesDao(): CapsulesDao
     abstract fun coresDao(): CoresDao
 
-    /*
+    /* Not needed, Koin is doing that now
     companion object {
         private var dbInstance: SpaceDatabase? = null
 
