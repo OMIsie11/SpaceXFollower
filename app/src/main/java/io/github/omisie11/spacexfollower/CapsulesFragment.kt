@@ -13,7 +13,6 @@ import io.github.omisie11.spacexfollower.data.SpaceRepository
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import io.github.omisie11.spacexfollower.viewmodel.CapsulesViewModel
 import kotlinx.android.synthetic.main.fragment_recycler.*
-import kotlinx.android.synthetic.main.fragment_recycler.view.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,21 +29,19 @@ class CapsulesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_recycler, container, false)
-
-        // Setup recyclerView
-        viewManager = LinearLayoutManager(activity)
-        rootView.recyclerView.apply {
-            setHasFixedSize(true)
-            layoutManager = viewManager
-            adapter = viewAdapter
-        }
-
-        return rootView
+        return inflater.inflate(R.layout.fragment_recycler, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Setup recyclerView
+        viewManager = LinearLayoutManager(activity)
+        recyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = viewAdapter
+        }
 
         // ViewModel setup
         model.getCapsules().observe(viewLifecycleOwner, Observer<List<Capsule>> { capsules ->
@@ -69,6 +66,7 @@ class CapsulesFragment : Fragment() {
         // Delete data from capsules table
         deleteEntriesButton.setOnClickListener {
             repository.deleteAllCapsules()
+            viewAdapter.notifyDataSetChanged()
         }
     }
 
