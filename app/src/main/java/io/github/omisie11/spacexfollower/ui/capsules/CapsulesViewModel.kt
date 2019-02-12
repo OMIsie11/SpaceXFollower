@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.viewmodel
+package io.github.omisie11.spacexfollower.ui.capsules
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower
+package io.github.omisie11.spacexfollower.ui.capsules
 
 import android.os.Bundle
 import android.util.Log
@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.SpaceRepository
 import io.github.omisie11.spacexfollower.data.model.Capsule
-import io.github.omisie11.spacexfollower.viewmodel.CapsulesViewModel
 import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel

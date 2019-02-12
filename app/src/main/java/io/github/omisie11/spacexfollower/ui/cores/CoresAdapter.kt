@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower
+package io.github.omisie11.spacexfollower.ui.cores
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.RecyclerView
+import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Core
 import kotlinx.android.synthetic.main.capsules_recycler_item.view.*
 import kotlinx.coroutines.*

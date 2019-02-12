@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower
+package io.github.omisie11.spacexfollower.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import io.github.omisie11.spacexfollower.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 
