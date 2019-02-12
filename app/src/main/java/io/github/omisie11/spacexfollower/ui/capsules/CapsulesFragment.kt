@@ -63,7 +63,10 @@ class CapsulesFragment : Fragment() {
         // Show a snackbar whenever the [ViewModel.snackbar] is updated a non-null value
         viewModel.snackbar.observe(this, Observer { text ->
             text?.let {
-                Snackbar.make(swipeRefreshLayout, text, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(swipeRefreshLayout, text, Snackbar.LENGTH_LONG).setAction(
+                    getString(R.string.snackbar_action_retry), View.OnClickListener {
+                        viewModel.refreshCapsules()
+                }).show()
                 viewModel.onSnackbarShown()
             }
         })
