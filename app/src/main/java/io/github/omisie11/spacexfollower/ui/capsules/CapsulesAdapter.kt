@@ -10,6 +10,7 @@ import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import kotlinx.android.synthetic.main.capsules_recycler_item.view.*
 import kotlinx.coroutines.*
+import androidx.recyclerview.widget.DiffUtil
 
 
 class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
@@ -34,12 +35,12 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
             holder.capsuleType.text = mCapsulesData[position].type
             holder.capsuleStatus.text = mCapsulesData[position].status
             // Views below are visible when view is expanded on click
-            holder.capsuleLandings.text = "Landings: " + mCapsulesData[position].landings.toString()
-            holder.capsuleMissionsTextView.text =
-                    if (mCapsulesData[position].missions!!.isEmpty()) "No missions yet"
-                    else mCapsulesData[position].missions.toString()
+            //holder.capsuleLandings.text = "Landings: " + mCapsulesData[position].landings.toString()
+            //holder.capsuleMissionsTextView.text =
+            //    if (mCapsulesData[position].missions!!.isEmpty()) "No missions yet"
+            //    else mCapsulesData[position].missions.toString()
         }
-
+/*
         // Variable for storing info if view is expanded
         val isExpanded = position == mExpandedPosition
         holder.groupExpanded.visibility = if (isExpanded) View.VISIBLE else View.GONE
@@ -49,6 +50,7 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
             mExpandedPosition = if (isExpanded) -1 else position
             notifyItemChanged(position)
         }
+        */
     }
 
     override fun getItemCount(): Int = mCapsulesData.size
@@ -58,14 +60,33 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
         val capsuleSerialTextView: TextView = itemView.text_capsule_serial
         val capsuleType: TextView = itemView.text_capsule_type
         val capsuleStatus: TextView = itemView.text_capsule_status
-        val capsuleLandings: TextView = itemView.text_landings
-        val capsuleMissionsTextView: TextView = itemView.text_missions
-        val groupExpanded: Group = itemView.group_expand
+        //val capsuleLandings: TextView = itemView.text_landings
+        //val capsuleMissionsTextView: TextView = itemView.text_missions
+        //val groupExpanded: Group = itemView.group_expand
     }
 
     fun setData(data: List<Capsule>) {
-        // Reverse list, so by default it is sorted by NEWEST DATE
+        //val diffResult = DiffUtil.calculateDiff(CapsulesDiffCallback(mCapsulesData, data))
+        // mCapsulesData.clear()
+        // mCapsulesData.addAll(data)
+        //diffResult.dispatchUpdatesTo(this)
         mCapsulesData = data
         notifyDataSetChanged()
+    }
+
+    internal inner class CapsulesDiffCallback(
+        private val oldCapsules: List<Capsule>,
+        private val newCapsules: List<Capsule>
+    ) : DiffUtil.Callback() {
+
+        override fun getOldListSize(): Int = oldCapsules.size
+
+        override fun getNewListSize(): Int = newCapsules.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+            oldCapsules[oldItemPosition] === newCapsules[newItemPosition]
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+            oldCapsules[oldItemPosition] == newCapsules[newItemPosition]
     }
 }

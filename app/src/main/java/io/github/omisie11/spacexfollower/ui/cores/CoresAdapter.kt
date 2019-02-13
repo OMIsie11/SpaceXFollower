@@ -33,7 +33,7 @@ class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
             holder.coreBlock.text = mCoresData[position].block.toString()
             holder.coreStatus.text = mCoresData[position].status
             // Views below are visible when view is expanded on click
-            holder.coreLandings.text = "Water landings: " + mCoresData[position].waterLandings.toString()
+         /*   holder.coreLandings.text = "Water landings: " + mCoresData[position].waterLandings.toString()
             holder.coreMissionsTextView.text =
                     if (mCoresData[position].missions!!.isEmpty()) "No missions yet"
                     else mCoresData[position].missions.toString()
@@ -46,7 +46,7 @@ class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
         holder.itemView.setOnClickListener {
             // Expand view on click
             mExpandedPosition = if (isExpanded) -1 else position
-            notifyItemChanged(position)
+            notifyItemChanged(position) */
         }
     }
 
@@ -57,9 +57,9 @@ class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
         val coreSerialTextView: TextView = itemView.text_capsule_serial
         val coreBlock: TextView = itemView.text_capsule_type
         val coreStatus: TextView = itemView.text_capsule_status
-        val coreLandings: TextView = itemView.text_landings
-        val coreMissionsTextView: TextView = itemView.text_missions
-        val groupExpanded: Group = itemView.group_expand
+        //val coreLandings: TextView = itemView.text_landings
+        //val coreMissionsTextView: TextView = itemView.text_missions
+        //val groupExpanded: Group = itemView.group_expand
     }
 
     fun setData(data: List<Core>) {

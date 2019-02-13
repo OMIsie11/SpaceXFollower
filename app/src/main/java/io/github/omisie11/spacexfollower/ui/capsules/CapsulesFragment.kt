@@ -23,37 +23,34 @@ class CapsulesFragment : Fragment() {
     private val viewAdapter: CapsulesAdapter by inject()
     private lateinit var viewManager: RecyclerView.LayoutManager
     private val repository: SpaceRepository by inject()
-    val viewModel: CapsulesViewModel by viewModel()
+    private val viewModel: CapsulesViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recycler, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val rootView = inflater.inflate(R.layout.fragment_recycler, container, false)
 
         // Setup recyclerView
         viewManager = LinearLayoutManager(activity)
+        val recyclerView = rootView.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
         }
 
+        return rootView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         // ViewModel setup
         viewModel.getCapsules().observe(viewLifecycleOwner, Observer<List<Capsule>> { capsules ->
             viewAdapter.setData(capsules)
         })
-
-        // Swipe to refresh
-        swipeRefreshLayout.setOnRefreshListener {
-            Log.i("CapsulesFragment", "onRefresh called from SwipeRefreshLayout")
-            viewModel.refreshCapsules()
-        }
 
         // Observe if data is refreshing and show/hide loading indicator
         viewModel.getCapsulesLoadingStatus().observe(viewLifecycleOwner, Observer<Boolean> { areCapsulesRefreshing ->
@@ -70,6 +67,12 @@ class CapsulesFragment : Fragment() {
                 viewModel.onSnackbarShown()
             }
         })
+
+        // Swipe to refresh
+        swipeRefreshLayout.setOnRefreshListener {
+            Log.i("CapsulesFragment", "onRefresh called from SwipeRefreshLayout")
+            viewModel.refreshCapsules()
+        }
 
         // Force fetching capsules
         fetchButton.setOnClickListener {

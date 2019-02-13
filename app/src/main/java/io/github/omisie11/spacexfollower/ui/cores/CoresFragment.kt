@@ -14,6 +14,8 @@ import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.SpaceRepository
 import io.github.omisie11.spacexfollower.data.model.Core
 import kotlinx.android.synthetic.main.fragment_recycler.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,30 +32,27 @@ class CoresFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recycler, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val rootView = inflater.inflate(R.layout.fragment_recycler, container, false)
 
         // Setup recyclerView
         viewManager = LinearLayoutManager(activity)
+        val recyclerView = rootView.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
         }
 
+        return rootView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         // ViewModel setup
         viewModel.getCores().observe(viewLifecycleOwner, Observer<List<Core>> { cores ->
             viewAdapter.setData(cores)
         })
-
-        // Swipe to refresh
-        swipeRefreshLayout.setOnRefreshListener {
-            Log.i("CapsulesFragment", "onRefresh called from SwipeRefreshLayout")
-            viewModel.refreshCores()
-        }
 
         // Observe if data is refreshing and show/hide loading indicator
         viewModel.getCoresLoadingStatus().observe(viewLifecycleOwner, Observer<Boolean> { areCoresRefreshing ->
@@ -70,6 +69,12 @@ class CoresFragment : Fragment() {
                 viewModel.onSnackbarShown()
             }
         })
+
+        // Swipe to refresh
+        swipeRefreshLayout.setOnRefreshListener {
+            Log.i("CapsulesFragment", "onRefresh called from SwipeRefreshLayout")
+            viewModel.refreshCores()
+        }
 
         // Force fetching capsules
         fetchButton.setOnClickListener {
