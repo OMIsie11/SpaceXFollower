@@ -64,7 +64,7 @@ class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
 
     fun setData(data: List<Core>) {
         // Reverse list, so by default it is sorted by NEWEST DATE
-        coresAdapterScope.launch { mCoresData = data }
+        mCoresData = data
         notifyDataSetChanged()
     }
 }

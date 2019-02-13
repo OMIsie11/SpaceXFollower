@@ -65,7 +65,7 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
 
     fun setData(data: List<Capsule>) {
         // Reverse list, so by default it is sorted by NEWEST DATE
-        capsulesAdapterScope.launch {  mCapsulesData = data }
+        mCapsulesData = data
         notifyDataSetChanged()
     }
 }

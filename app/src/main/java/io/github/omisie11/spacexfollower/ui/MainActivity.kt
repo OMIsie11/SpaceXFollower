@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.navigation.NavigationView
 import io.github.omisie11.spacexfollower.R
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment ?: return
         val navController = host.navController
         // Setup NavigationView menu
-        navigation_view?.setupWithNavController(navController)
+        findViewById<NavigationView>(R.id.navigation_view).setupWithNavController(navController)
         // Setup ActionBar
         setupActionBarWithNavController(navController, drawer_layout)
 
