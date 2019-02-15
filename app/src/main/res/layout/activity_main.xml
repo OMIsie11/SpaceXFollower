@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
@@ -27,5 +27,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:headerLayout="@layout/nav_view_header"
-            app:menu="@menu/menu_nav_view" />
+            app:menu="@menu/menu_nav_view"
+            app:itemIconTint="@drawable/nav_view_colors"
+            app:itemTextColor="@drawable/nav_view_colors"/>
 </androidx.drawerlayout.widget.DrawerLayout>

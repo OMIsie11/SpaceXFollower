@@ -29,7 +29,7 @@ dependencies {
     def lifecycle_version = "2.0.0"
     def retrofit_version = "2.5.0"
     def nav_version = "1.0.0-beta01"
-    def material_version = "1.0.0"
+    def material_version = "1.1.0-alpha03"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

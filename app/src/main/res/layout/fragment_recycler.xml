@@ -28,7 +28,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/fetchButton"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
             android:id="@+id/fetchButton"
             android:text="Fetch data"
             android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
             app:layout_constraintEnd_toStartOf="@+id/deleteEntriesButton"
             android:layout_marginEnd="8dp"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
             android:id="@+id/deleteEntriesButton"
             android:text="Delete"
             android:layout_width="wrap_content"
