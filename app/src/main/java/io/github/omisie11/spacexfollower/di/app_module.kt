@@ -1,6 +1,6 @@
 package io.github.omisie11.spacexfollower.di
 
-import android.content.Context
+import androidx.preference.PreferenceManager
 import androidx.room.Room
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesAdapter
@@ -31,7 +31,7 @@ val appModule = module {
     }
 
     // SharedPrefs
-    single { androidApplication().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE) }
+    single { PreferenceManager.getDefaultSharedPreferences(get())}
 
     // Capsules DAO instance
     single { get<SpaceDatabase>().capsulesDao() }

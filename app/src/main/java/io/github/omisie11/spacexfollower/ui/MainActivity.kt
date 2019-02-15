@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
 import io.github.omisie11.spacexfollower.R
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,6 +18,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Set default values of preferences for first app launch (third argument set
+        // to false ensures that this is won't set user settings to defaults with every call)
+        PreferenceManager.setDefaultValues(this, R.xml.app_preferences, false)
 
         // Get NavHostFragment and NavController
         val host: NavHostFragment = supportFragmentManager

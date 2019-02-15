@@ -25,7 +25,7 @@ class SpaceRepository(
 
     companion object {
         // Data refresh interval in milliseconds (default: 3h = 10800000 ms)
-        private const val REFRESH_INTERVAL: Long = 10800000
+        //private const val REFRESH_INTERVAL: Long = 10800000
     }
 
     private val repositoryJob = Job()
@@ -160,7 +160,11 @@ class SpaceRepository(
         val currentTimeMillis: Long = System.currentTimeMillis()
         val lastRefreshTime = sharedPrefs.getLong(sharedPrefsKey, 0)
         Log.d("Repository", "Current time in millis $currentTimeMillis")
+        // Get refresh interval set in app settings (in hours) and multiply to get value in ms
+        val refreshIntervalHours = sharedPrefs.getString("prefs_refresh_interval", "3")?.toInt() ?: 3
+        val refreshInterval = refreshIntervalHours * 3600000
+        Log.d("Repository", "Refresh Interval from settings: $refreshInterval")
         // If last refresh was made longer than interval, return true
-        return currentTimeMillis - lastRefreshTime > REFRESH_INTERVAL
+        return currentTimeMillis - lastRefreshTime > refreshInterval
     }
 }
