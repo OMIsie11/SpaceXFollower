@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Possible values in refresh interval in Settings -->
+    <string-array name="settings_refresh_interval_entries">
+        <item name="3_hours">3 hours</item>
+        <item name="4_hours">4 hours</item>
+        <item name="6_hours">5 hours</item>
+        <item name="8_hours">6 hours</item>
+    </string-array>
+    <string-array name="settings_refresh_interval_values">
+        <item name="3_hours">3</item>
+        <item name="4_hours">4</item>
+        <item name="6_hours">6</item>
+        <item name="8_hours">8</item>
+    </string-array>
+</resources>

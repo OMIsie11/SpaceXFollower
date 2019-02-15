@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+            android:title="General Preferences">
+
+        <ListPreference
+                android:key="prefs_refresh_interval"
+                android:title="Data refresh interval"
+                android:summary="%s"
+                android:dialogTitle="Set data auto refresh interval"
+                android:entries="@array/settings_refresh_interval_entries"
+                android:entryValues="@array/settings_refresh_interval_values"
+                android:defaultValue="3"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

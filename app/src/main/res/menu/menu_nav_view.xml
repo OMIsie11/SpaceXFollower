@@ -10,4 +10,9 @@
         android:id="@id/cores_dest"
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="Cores" />
+
+    <item
+        android:id="@id/settings_dest"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="Settings" />
 </menu>
