@@ -32,6 +32,10 @@
 
     </style>
 
+    <style name="AppTheme.SplashScreen">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
     <style name="AppShapeAppearance.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
