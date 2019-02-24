@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.data
+package io.github.omisie11.spacexfollower.data.type_converters
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

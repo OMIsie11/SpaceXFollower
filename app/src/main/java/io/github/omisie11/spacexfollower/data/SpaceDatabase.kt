@@ -7,6 +7,7 @@ import io.github.omisie11.spacexfollower.data.dao.CapsulesDao
 import io.github.omisie11.spacexfollower.data.dao.CoresDao
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import io.github.omisie11.spacexfollower.data.model.Core
+import io.github.omisie11.spacexfollower.data.type_converters.MissionsConverter
 
 @Database(entities = [Capsule::class, Core::class], version = 1)
 @TypeConverters(value = [MissionsConverter::class])
