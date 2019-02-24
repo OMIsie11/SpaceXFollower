@@ -39,6 +39,9 @@ val appModule = module {
     // Cores DAO instance
     single { get<SpaceDatabase>().coresDao() }
 
+    // Company DAO instance
+    single { get<SpaceDatabase>().companyDao() }
+
     // Single instance of SpaceRepository
     single { SpaceRepository(get(), get(), get(), get()) }
 
