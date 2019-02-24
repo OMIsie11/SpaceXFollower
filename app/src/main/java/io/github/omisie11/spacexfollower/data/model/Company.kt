@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
-import io.github.omisie11.spacexfollower.data.type_converters.HeadquarterConverter
+import io.github.omisie11.spacexfollower.data.converters.HeadquarterConverter
 
 @Entity(tableName = "company_table")
 data class Company(
@@ -42,12 +42,12 @@ data class Company(
     @SerializedName("coo")
     @ColumnInfo(name = "coo")
     val coo: String,
-    @SerializedName("coo_propulsion")
-    @ColumnInfo(name = "coo_propulsion")
+    @SerializedName("cto_propulsion")
+    @ColumnInfo(name = "cto_propulsion")
     val ctoPropulsion: String,
     @SerializedName("valuation")
     @ColumnInfo(name = "valuation")
-    val valuation: Int,
+    val valuation: Long,
     @SerializedName("headquarters")
     @TypeConverters(HeadquarterConverter::class)
     @ColumnInfo(name = "headquarters")

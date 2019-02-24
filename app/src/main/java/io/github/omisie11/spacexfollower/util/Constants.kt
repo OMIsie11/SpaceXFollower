@@ -7,3 +7,4 @@ const val SPACE_X_BASE_URL = "https://api.spacexdata.com/"
 // Keys for getting time of last data refresh
 const val KEY_CAPSULES_LAST_REFRESH = "key_capsules_last_refresh"
 const val KEY_CORES_LAST_REFRESH = "key_cores_last_refresh"
+const val KEY_COMPANY_LAST_REFRESH = "key_company_last_refresh"

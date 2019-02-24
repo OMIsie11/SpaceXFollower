@@ -2,20 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@id/capsules_dest"
-        android:icon="@drawable/ic_settings_black_24dp"
-        android:title="Capsules"
-        android:checkable="true"/>
+            android:id="@id/capsules_dest"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Capsules"
+            android:checkable="true"/>
 
     <item
-        android:id="@id/cores_dest"
-        android:icon="@drawable/ic_settings_black_24dp"
-        android:title="Cores"
-        android:checkable="true"/>
+            android:id="@id/cores_dest"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Cores"
+            android:checkable="true"/>
 
     <item
-        android:id="@id/settings_dest"
-        android:icon="@drawable/ic_settings_black_24dp"
-        android:title="Settings"
-        android:checkable="true"/>
+            android:id="@id/company_dest"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Company"
+            android:checkable="true"/>
+
+    <item
+            android:id="@id/settings_dest"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Settings"
+            android:checkable="true"/>
 </menu>

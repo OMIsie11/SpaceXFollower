@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
-import io.github.omisie11.spacexfollower.data.type_converters.MissionsConverter
+import io.github.omisie11.spacexfollower.data.converters.MissionsConverter
 
 
 // Single capsule

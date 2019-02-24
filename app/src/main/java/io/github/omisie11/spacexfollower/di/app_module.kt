@@ -8,6 +8,7 @@ import io.github.omisie11.spacexfollower.ui.cores.CoresAdapter
 import io.github.omisie11.spacexfollower.data.SpaceDatabase
 import io.github.omisie11.spacexfollower.data.SpaceRepository
 import io.github.omisie11.spacexfollower.network.SpaceService
+import io.github.omisie11.spacexfollower.ui.company.CompanyViewModel
 import io.github.omisie11.spacexfollower.util.SPACE_X_BASE_URL
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesViewModel
 import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel
@@ -43,7 +44,7 @@ val appModule = module {
     single { get<SpaceDatabase>().companyDao() }
 
     // Single instance of SpaceRepository
-    single { SpaceRepository(get(), get(), get(), get()) }
+    single { SpaceRepository(get(), get(), get(), get(), get()) }
 
     // ViewModel instance of CapsulesViewModel
     // get() will resolve Repository instance
@@ -51,6 +52,9 @@ val appModule = module {
 
     // ViewModel instance of CoresViewModel
     viewModel { CoresViewModel(get()) }
+
+    // ViewModel instance for CompanyInfo
+    viewModel { CompanyViewModel(get()) }
 
     // Adapter for capsules recyclerView
     factory { CapsulesAdapter() }

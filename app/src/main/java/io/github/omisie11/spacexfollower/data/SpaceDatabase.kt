@@ -9,8 +9,8 @@ import io.github.omisie11.spacexfollower.data.dao.CoresDao
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import io.github.omisie11.spacexfollower.data.model.Company
 import io.github.omisie11.spacexfollower.data.model.Core
-import io.github.omisie11.spacexfollower.data.type_converters.HeadquarterConverter
-import io.github.omisie11.spacexfollower.data.type_converters.MissionsConverter
+import io.github.omisie11.spacexfollower.data.converters.HeadquarterConverter
+import io.github.omisie11.spacexfollower.data.converters.MissionsConverter
 
 @Database(entities = [Capsule::class, Core::class, Company::class], version = 1)
 @TypeConverters(value = [MissionsConverter::class, HeadquarterConverter::class])

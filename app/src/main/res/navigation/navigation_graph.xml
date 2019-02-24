@@ -9,4 +9,7 @@
               android:label="fragment_cores" tools:layout="@layout/fragment_recycler"/>
     <fragment android:id="@+id/settings_dest" android:name="io.github.omisie11.spacexfollower.ui.SettingsFragment"
               android:label="SettingsFragment"/>
+    <fragment android:id="@+id/company_dest"
+              android:name="io.github.omisie11.spacexfollower.ui.company.CompanyFragment"
+              android:label="fragment_company" tools:layout="@layout/fragment_company"/>
 </navigation>

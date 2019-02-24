@@ -7,9 +7,12 @@ import androidx.lifecycle.MutableLiveData
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import io.github.omisie11.spacexfollower.network.SpaceService
 import io.github.omisie11.spacexfollower.data.dao.CapsulesDao
+import io.github.omisie11.spacexfollower.data.dao.CompanyDao
 import io.github.omisie11.spacexfollower.data.dao.CoresDao
+import io.github.omisie11.spacexfollower.data.model.Company
 import io.github.omisie11.spacexfollower.data.model.Core
 import io.github.omisie11.spacexfollower.util.KEY_CAPSULES_LAST_REFRESH
+import io.github.omisie11.spacexfollower.util.KEY_COMPANY_LAST_REFRESH
 import io.github.omisie11.spacexfollower.util.KEY_CORES_LAST_REFRESH
 import kotlinx.coroutines.*
 import java.io.IOException
@@ -20,6 +23,7 @@ class SpaceRepository(
     private val capsulesDao: CapsulesDao,
     private val spaceService: SpaceService,
     private val coresDao: CoresDao,
+    private val companyDao: CompanyDao,
     private val sharedPrefs: SharedPreferences
 ) {
 
@@ -61,6 +65,15 @@ class SpaceRepository(
         return coresDao.getAllCores()
     }
 
+    fun getCompanyInfo(): LiveData<Company> {
+        // Check if refresh is needed
+        //if (checkIfRefreshIsNeeded(KEY_COMPANY_LAST_REFRESH)) {
+            refreshCompanyInfo()
+            Log.d("refreshCompanyInfo", "Refreshing cores")
+       // }
+        return companyDao.getCompanyInfo()
+    }
+
     fun deleteAllCapsules() = repositoryScope.launch { capsulesDao.deleteAllCapsules() }
 
     fun deleteAllCores() = repositoryScope.launch { coresDao.deleteAllCores() }
@@ -99,8 +112,10 @@ class SpaceRepository(
                 areCapsulesLoading.postValue(false)
                 when (exception) {
                     is IOException -> capsulesSnackBar.postValue("Network problem occurred")
-                    else -> { capsulesSnackBar.postValue("Unexpected problem occurred")
-                        Log.d("Repo", "Exception: $exception") }
+                    else -> {
+                        capsulesSnackBar.postValue("Unexpected problem occurred")
+                        Log.d("Repo", "Exception: $exception")
+                    }
                 }
             }
         }
@@ -118,10 +133,23 @@ class SpaceRepository(
                 areCoresLoading.postValue(false)
                 when (exception) {
                     is IOException -> coresSnackBar.postValue("Network problem occurred")
-                    else -> { coresSnackBar.postValue("Unexpected problem occurred")
+                    else -> {
+                        coresSnackBar.postValue("Unexpected problem occurred")
                         Log.d("Repo", "Exception: $exception")
                     }
                 }
+            }
+        }
+    }
+
+    fun refreshCompanyInfo() {
+        Log.d("Repository", "refreshCompanyInfo called")
+        repositoryScope.launch {
+            try {
+                fetchCompanyInfoAndSaveToDb()
+            } catch (exception: Exception) {
+                // ToDO: handle exceptions
+                Log.d("Repo", "Exception: $exception")
             }
         }
     }
@@ -152,6 +180,21 @@ class SpaceRepository(
         } else Log.d("Repository", "Error: ${response.errorBody()}")
         // Cores no longer fetching, hide loading indicator
         areCoresLoading.postValue(false)
+    }
+
+    private suspend fun fetchCompanyInfoAndSaveToDb() {
+        val response = spaceService.getCompanyInfo().await()
+        if (response.isSuccessful) {
+            response.body()?.let { companyDao.insertCompanyInfo(it) }
+            // Save company info last refresh time
+            with(sharedPrefs.edit()) {
+                putLong(KEY_COMPANY_LAST_REFRESH, System.currentTimeMillis())
+                apply()
+            }
+        } else Log.d("Repository", "Error: ${response.errorBody()}")
+        // Cores no longer fetching, hide loading indicator
+        // ToDo: implement loading indicator
+        // areCoresLoading.postValue(false)
     }
 
     // Check if data refresh is needed
