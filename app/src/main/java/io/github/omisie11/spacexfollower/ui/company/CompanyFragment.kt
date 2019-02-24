@@ -2,11 +2,13 @@ package io.github.omisie11.spacexfollower.ui.company
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.SpaceRepository
@@ -35,10 +37,39 @@ class CompanyFragment : Fragment() {
         viewModel.getCompanyInfo().observe(viewLifecycleOwner, Observer<Company>{companyInfo ->
             text_company.text = companyInfo?.headquarters?.address
         })
+
+        // Observe if data is refreshing and show/hide loading indicator
+        viewModel.getCompanyInfoLoadingStatus().observe(viewLifecycleOwner, Observer<Boolean> { isCompanyInfoRefreshing ->
+            swipeRefreshLayout.isRefreshing = isCompanyInfoRefreshing
+        })
+
+        // Show a snackbar whenever the [ViewModel.snackbar] is updated a non-null value
+        viewModel.snackbar.observe(this, Observer { text ->
+            text?.let {
+                Snackbar.make(swipeRefreshLayout, text, Snackbar.LENGTH_LONG).setAction(
+                    getString(R.string.snackbar_action_retry), View.OnClickListener {
+                        viewModel.refreshCompanyInfo()
+                    }).show()
+                viewModel.onSnackbarShown()
+            }
+        })
+
+        swipeRefreshLayout.setOnRefreshListener {
+            Log.i("CompanyInfoFragment", "onRefresh called from SwipeRefreshLayout")
+            viewModel.refreshCompanyInfo()
+        }
+
+        refresh_button.setOnClickListener {
+            viewModel.refreshCompanyInfo()
+        }
+
+        delete_button.setOnClickListener {
+            repository.deleteCompanyInfo()
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        repository.refreshCompanyInfo()
+        viewModel.refreshIfCompanyDataOld()
     }
 }

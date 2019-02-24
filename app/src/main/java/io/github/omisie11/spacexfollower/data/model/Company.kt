@@ -7,7 +7,7 @@ import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 import io.github.omisie11.spacexfollower.data.converters.HeadquarterConverter
 
-@Entity(tableName = "company_table")
+@Entity(tableName = "company_table") // ToDo: Default values
 data class Company(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

@@ -37,13 +37,16 @@ class SpaceRepository(
     // Variables for showing/hiding loading indicators
     private var areCapsulesLoading: MutableLiveData<Boolean> = MutableLiveData()
     private var areCoresLoading: MutableLiveData<Boolean> = MutableLiveData()
+    private var isCompanyInfoLoading: MutableLiveData<Boolean> = MutableLiveData()
     // Set value to message to be shown in snackbar
     private val capsulesSnackBar = MutableLiveData<String>()
     private val coresSnackBar = MutableLiveData<String>()
+    private val companyInfoSnackBar = MutableLiveData<String>()
 
     init {
         areCapsulesLoading.value = false
         areCoresLoading.value = false
+        isCompanyInfoLoading.value = false
     }
 
     // Wrapper for getting all capsules from Db
@@ -67,10 +70,10 @@ class SpaceRepository(
 
     fun getCompanyInfo(): LiveData<Company> {
         // Check if refresh is needed
-        //if (checkIfRefreshIsNeeded(KEY_COMPANY_LAST_REFRESH)) {
+        if (checkIfRefreshIsNeeded(KEY_COMPANY_LAST_REFRESH)) {
             refreshCompanyInfo()
             Log.d("refreshCompanyInfo", "Refreshing cores")
-       // }
+        }
         return companyDao.getCompanyInfo()
     }
 
@@ -78,13 +81,21 @@ class SpaceRepository(
 
     fun deleteAllCores() = repositoryScope.launch { coresDao.deleteAllCores() }
 
+    fun deleteCompanyInfo() = repositoryScope.launch { companyDao.deleteCompanyInfo() }
+
+    // Loading info values
     fun getCapsulesLoadingStatus(): LiveData<Boolean> = areCapsulesLoading
 
     fun getCoresLoadingStatus(): LiveData<Boolean> = areCoresLoading
 
+    fun getCompanyInfoLoadingStatus(): LiveData<Boolean> = isCompanyInfoLoading
+
+    // Snackbars values
     fun getCapsulesSnackbar(): MutableLiveData<String> = capsulesSnackBar
 
     fun getCoresSnackbar(): MutableLiveData<String> = coresSnackBar
+
+    fun getCompanyInfoSnackbar(): MutableLiveData<String> = companyInfoSnackBar
 
     fun refreshIfCapsulesDataOld() {
         if (checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH)) {
@@ -97,6 +108,13 @@ class SpaceRepository(
         if (checkIfRefreshIsNeeded(KEY_CORES_LAST_REFRESH)) {
             refreshCores()
             Log.d("refreshCores", "Refreshing cores")
+        }
+    }
+
+    fun refreshIfCompanyDataOld() {
+        if (checkIfRefreshIsNeeded(KEY_COMPANY_LAST_REFRESH)) {
+            refreshCompanyInfo()
+            Log.d("refreshCompanyInfo", "Refreshing company info")
         }
     }
 
@@ -143,13 +161,22 @@ class SpaceRepository(
     }
 
     fun refreshCompanyInfo() {
+        // Start loading process
+        isCompanyInfoLoading.value = true
         Log.d("Repository", "refreshCompanyInfo called")
         repositoryScope.launch {
             try {
                 fetchCompanyInfoAndSaveToDb()
             } catch (exception: Exception) {
                 // ToDO: handle exceptions
-                Log.d("Repo", "Exception: $exception")
+                isCompanyInfoLoading.postValue(false)
+                when (exception) {
+                    is IOException -> companyInfoSnackBar.postValue("Network problem occurred")
+                    else -> {
+                        companyInfoSnackBar.postValue("Unexpected problem occurred")
+                        Log.d("Repo", "Exception: $exception")
+                    }
+                }
             }
         }
     }
@@ -193,8 +220,7 @@ class SpaceRepository(
             }
         } else Log.d("Repository", "Error: ${response.errorBody()}")
         // Cores no longer fetching, hide loading indicator
-        // ToDo: implement loading indicator
-        // areCoresLoading.postValue(false)
+        isCompanyInfoLoading.postValue(false)
     }
 
     // Check if data refresh is needed
