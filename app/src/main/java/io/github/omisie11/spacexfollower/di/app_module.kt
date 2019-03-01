@@ -6,7 +6,9 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesAdapter
 import io.github.omisie11.spacexfollower.ui.cores.CoresAdapter
 import io.github.omisie11.spacexfollower.data.SpaceDatabase
-import io.github.omisie11.spacexfollower.data.SpaceRepository
+import io.github.omisie11.spacexfollower.data.CapsulesRepository
+import io.github.omisie11.spacexfollower.data.CompanyRepository
+import io.github.omisie11.spacexfollower.data.CoresRepository
 import io.github.omisie11.spacexfollower.network.SpaceService
 import io.github.omisie11.spacexfollower.ui.company.CompanyViewModel
 import io.github.omisie11.spacexfollower.util.SPACE_X_BASE_URL
@@ -34,49 +36,64 @@ val appModule = module {
     // SharedPrefs
     single { PreferenceManager.getDefaultSharedPreferences(get())}
 
-    // Capsules DAO instance
-    single { get<SpaceDatabase>().capsulesDao() }
-
-    // Cores DAO instance
-    single { get<SpaceDatabase>().coresDao() }
-
-    // Company DAO instance
-    single { get<SpaceDatabase>().companyDao() }
-
-    // Single instance of SpaceRepository
-    single { SpaceRepository(get(), get(), get(), get(), get()) }
-
-    // ViewModel instance of CapsulesViewModel
-    // get() will resolve Repository instance
-    viewModel { CapsulesViewModel(get()) }
-
-    // ViewModel instance of CoresViewModel
-    viewModel { CoresViewModel(get()) }
-
-    // ViewModel instance for CompanyInfo
-    viewModel { CompanyViewModel(get()) }
-
-    // Adapter for capsules recyclerView
-    factory { CapsulesAdapter() }
-
-    // Adapter for cores recyclerView
-    factory { CoresAdapter() }
 }
 
 // Module for networking elements
 val remoteDataSourceModule = module {
 
     // Create Retrofit instance
-    single { buildRetrofit(SPACE_X_BASE_URL) }
+    single { Retrofit.Builder()
+        .baseUrl(SPACE_X_BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .build() }
 
     // Create retrofit Service
     single { get<Retrofit>().create(SpaceService::class.java) }
 }
 
-internal fun buildRetrofit(baseUrl: String): Retrofit {
-    return Retrofit.Builder()
-        .baseUrl(baseUrl)
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .build()
+// Capsules module
+val capsulesModule = module {
+
+    // Capsules DAO instance
+    single { get<SpaceDatabase>().capsulesDao() }
+
+    // Single instance of CapsulesRepository
+    single { CapsulesRepository(get(), get(), get()) }
+
+    // ViewModel instance of CapsulesViewModel
+    viewModel { CapsulesViewModel(get()) }
+
+    // Adapter for capsules recyclerView
+    factory { CapsulesAdapter() }
+
+}
+
+val coresModule = module {
+
+    // Cores DAO instance
+    single { get<SpaceDatabase>().coresDao() }
+
+    // Single instance of CoresRepository
+    single { CoresRepository(get(), get(), get()) }
+
+    // ViewModel instance of CoresViewModel
+    viewModel { CoresViewModel(get()) }
+
+    // Adapter for cores recyclerView
+    factory { CoresAdapter() }
+
+}
+
+val companyModule = module {
+
+    // Company DAO instance
+    single { get<SpaceDatabase>().companyDao() }
+
+    // Single instance of CompanyRepository
+    single { CompanyRepository(get(), get(), get()) }
+
+    // ViewModel instance for CompanyInfo
+    viewModel { CompanyViewModel(get()) }
+
 }

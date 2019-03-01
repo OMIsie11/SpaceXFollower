@@ -3,18 +3,18 @@ package io.github.omisie11.spacexfollower.ui.cores
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.github.omisie11.spacexfollower.data.SpaceRepository
+import io.github.omisie11.spacexfollower.data.CoresRepository
 import io.github.omisie11.spacexfollower.data.model.Core
 
-class CoresViewModel(private val repository: SpaceRepository) : ViewModel() {
+class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
 
     private val mAllCores: LiveData<List<Core>> by lazy { repository.getCores() }
-    private val mAreCoresLoading: LiveData<Boolean> by lazy { repository.getCoresLoadingStatus() }
+    private val _areCoresLoading: LiveData<Boolean> by lazy { repository.getCoresLoadingStatus() }
     private val _snackBar: MutableLiveData<String> = repository.getCoresSnackbar()
 
     fun getCores(): LiveData<List<Core>> = mAllCores
 
-    fun getCoresLoadingStatus(): LiveData<Boolean> = mAreCoresLoading
+    fun getCoresLoadingStatus(): LiveData<Boolean> = _areCoresLoading
 
     // Wrapper for refreshing cores data
     fun refreshCores() = repository.refreshCores()

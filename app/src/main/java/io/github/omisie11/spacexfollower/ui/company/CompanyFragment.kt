@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.SpaceRepository
+import io.github.omisie11.spacexfollower.data.CompanyRepository
 import io.github.omisie11.spacexfollower.data.model.Company
 import kotlinx.android.synthetic.main.fragment_company.*
 import org.koin.android.ext.android.inject
@@ -20,7 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CompanyFragment : Fragment() {
 
-    private val repository: SpaceRepository by inject()
+    private val repository: CompanyRepository by inject()
     private val viewModel: CompanyViewModel by viewModel()
 
     override fun onCreateView(

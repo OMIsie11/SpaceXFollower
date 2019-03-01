@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.SpaceRepository
+import io.github.omisie11.spacexfollower.data.CapsulesRepository
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.android.ext.android.inject
@@ -22,7 +22,7 @@ class CapsulesFragment : Fragment() {
 
     private val viewAdapter: CapsulesAdapter by inject()
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private val repository: SpaceRepository by inject()
+    private val repository: CapsulesRepository by inject()
     private val viewModel: CapsulesViewModel by viewModel()
 
     override fun onCreateView(

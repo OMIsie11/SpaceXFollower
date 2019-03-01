@@ -11,11 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.SpaceRepository
+import io.github.omisie11.spacexfollower.data.CoresRepository
 import io.github.omisie11.spacexfollower.data.model.Core
 import kotlinx.android.synthetic.main.fragment_recycler.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,7 +22,7 @@ class CoresFragment : Fragment() {
 
     private val viewAdapter: CoresAdapter by inject()
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private val repository: SpaceRepository by inject()
+    private val repository: CoresRepository by inject()
     private val viewModel: CoresViewModel by viewModel()
 
     override fun onCreateView(

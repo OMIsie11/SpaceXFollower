@@ -3,19 +3,19 @@ package io.github.omisie11.spacexfollower.ui.capsules
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.github.omisie11.spacexfollower.data.SpaceRepository
+import io.github.omisie11.spacexfollower.data.CapsulesRepository
 import io.github.omisie11.spacexfollower.data.model.Capsule
 
 
-class CapsulesViewModel(private val repository: SpaceRepository) : ViewModel() {
+class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel() {
 
     private val mAllCapsules: LiveData<List<Capsule>> by lazy { repository.getCapsules() }
-    private val mAreCapsulesLoading: LiveData<Boolean> by lazy { repository.getCapsulesLoadingStatus() }
+    private val _areCapsulesLoading: LiveData<Boolean> by lazy { repository.getCapsulesLoadingStatus() }
     private val _snackBar: MutableLiveData<String> = repository.getCapsulesSnackbar()
 
     fun getCapsules(): LiveData<List<Capsule>> = mAllCapsules
 
-    fun getCapsulesLoadingStatus(): LiveData<Boolean> = mAreCapsulesLoading
+    fun getCapsulesLoadingStatus(): LiveData<Boolean> = _areCapsulesLoading
 
     // Wrapper for refreshing capsules data
     fun refreshCapsules() = repository.refreshCapsules()
