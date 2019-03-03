@@ -34,14 +34,23 @@ class CompanyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getCompanyInfo().observe(viewLifecycleOwner, Observer<Company>{companyInfo ->
-            text_company.text = companyInfo?.headquarters?.address
+        viewModel.getCompanyInfo().observe(viewLifecycleOwner, Observer<Company> { companyInfo ->
+            text_summary.text = companyInfo.summary
+            text_employees.text = companyInfo.employees.toString()
+            text_vehicles.text = companyInfo.vehicles.toString()
+            text_launch_sites.text = companyInfo.launchSites.toString()
+            text_test_sites.text = companyInfo.testSites.toString()
+            text_valuation.text = companyInfo.valuation.toString()
+            text_address.text = companyInfo.headquarters.address
+            text_city.text = companyInfo.headquarters.city
+            text_state.text = companyInfo.headquarters.state
         })
 
         // Observe if data is refreshing and show/hide loading indicator
-        viewModel.getCompanyInfoLoadingStatus().observe(viewLifecycleOwner, Observer<Boolean> { isCompanyInfoRefreshing ->
-            swipeRefreshLayout.isRefreshing = isCompanyInfoRefreshing
-        })
+        viewModel.getCompanyInfoLoadingStatus()
+            .observe(viewLifecycleOwner, Observer<Boolean> { isCompanyInfoRefreshing ->
+                swipeRefreshLayout.isRefreshing = isCompanyInfoRefreshing
+            })
 
         // Show a snackbar whenever the [ViewModel.snackbar] is updated a non-null value
         viewModel.snackbar.observe(this, Observer { text ->
@@ -57,14 +66,6 @@ class CompanyFragment : Fragment() {
         swipeRefreshLayout.setOnRefreshListener {
             Log.i("CompanyInfoFragment", "onRefresh called from SwipeRefreshLayout")
             viewModel.refreshCompanyInfo()
-        }
-
-        refresh_button.setOnClickListener {
-            viewModel.refreshCompanyInfo()
-        }
-
-        delete_button.setOnClickListener {
-            repository.deleteCompanyInfo()
         }
     }
 
