@@ -2,9 +2,7 @@ package io.github.omisie11.spacexfollower.ui.capsules
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +22,11 @@ class CapsulesFragment : Fragment() {
     private lateinit var viewManager: RecyclerView.LayoutManager
     private val repository: CapsulesRepository by inject()
     private val viewModel: CapsulesViewModel by viewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,5 +92,17 @@ class CapsulesFragment : Fragment() {
         super.onResume()
         // Fetch new data if last fetch was long ago
         viewModel.refreshIfCapsulesDataOld()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_action_bar, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+        R.id.action_refresh -> {
+            viewModel.refreshCapsules()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 }

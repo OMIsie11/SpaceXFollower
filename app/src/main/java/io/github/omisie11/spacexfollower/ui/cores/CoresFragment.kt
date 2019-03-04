@@ -2,10 +2,8 @@ package io.github.omisie11.spacexfollower.ui.cores
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +22,11 @@ class CoresFragment : Fragment() {
     private lateinit var viewManager: RecyclerView.LayoutManager
     private val repository: CoresRepository by inject()
     private val viewModel: CoresViewModel by viewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,5 +92,17 @@ class CoresFragment : Fragment() {
         super.onResume()
         // Fetch new data if last fetch was long ago
         viewModel.refreshIfCoresDataOld()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_action_bar, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+        R.id.action_refresh -> {
+            viewModel.refreshCores()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 }
