@@ -20,8 +20,8 @@ class CoresRepository(
     private var areCoresLoading: MutableLiveData<Boolean> = MutableLiveData()
     private val coresSnackBar = MutableLiveData<String>()
 
-    private val coresRepositoryJob = Job()
-    private val coresRepositoryScope = CoroutineScope(Dispatchers.IO + coresRepositoryJob)
+    //private val coresRepositoryJob = Job()
+    //private val coresRepositoryScope = CoroutineScope(Dispatchers.IO + coresRepositoryJob)
 
     init {
         areCoresLoading.value = false
@@ -37,7 +37,7 @@ class CoresRepository(
         return coresDao.getAllCores()
     }
 
-    fun deleteAllCores() = coresRepositoryScope.launch { coresDao.deleteAllCores() }
+    fun deleteAllCores() = GlobalScope.launch(Dispatchers.IO) { coresDao.deleteAllCores() }
 
     fun getCoresLoadingStatus(): LiveData<Boolean> = areCoresLoading
 
@@ -54,7 +54,7 @@ class CoresRepository(
         // Start loading process
         areCoresLoading.value = true
         Log.d("Repository", "refreshCores called")
-        coresRepositoryScope.launch {
+        GlobalScope.launch(Dispatchers.IO) {
             try {
                 fetchCoresAndSaveToDb()
             } catch (exception: Exception) {

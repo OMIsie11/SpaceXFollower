@@ -20,8 +20,8 @@ class CompanyRepository(
     private var isCompanyInfoLoading: MutableLiveData<Boolean> = MutableLiveData()
     private val companyInfoSnackBar = MutableLiveData<String>()
 
-    private val companyRepositoryJob = Job()
-    private val companyRepositoryScope = CoroutineScope(Dispatchers.IO + companyRepositoryJob)
+    //private val companyRepositoryJob = Job()
+    //private val companyRepositoryScope = CoroutineScope(Dispatchers.IO + companyRepositoryJob)
 
     init {
         isCompanyInfoLoading.value = false
@@ -36,7 +36,7 @@ class CompanyRepository(
         return companyDao.getCompanyInfo()
     }
 
-    fun deleteCompanyInfo() = companyRepositoryScope.launch { companyDao.deleteCompanyInfo() }
+    fun deleteCompanyInfo() = GlobalScope.launch(Dispatchers.IO) { companyDao.deleteCompanyInfo() }
 
     fun getCompanyInfoLoadingStatus(): LiveData<Boolean> = isCompanyInfoLoading
 
@@ -53,7 +53,7 @@ class CompanyRepository(
         // Start loading process
         isCompanyInfoLoading.value = true
         Log.d("Repository", "refreshCompanyInfo called")
-        companyRepositoryScope.launch {
+        GlobalScope.launch(Dispatchers.IO) {
             try {
                 fetchCompanyInfoAndSaveToDb()
             } catch (exception: Exception) {

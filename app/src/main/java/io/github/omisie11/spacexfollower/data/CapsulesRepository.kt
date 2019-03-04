@@ -18,8 +18,8 @@ class CapsulesRepository(
     private val sharedPrefs: SharedPreferences
 ) {
 
-    private val capsulesRepositoryJob = Job()
-    private val capsulesRepositoryScope = CoroutineScope(Dispatchers.IO + capsulesRepositoryJob)
+    //private val capsulesRepositoryJob = Job()
+    //private val capsulesRepositoryScope = CoroutineScope(Dispatchers.IO + capsulesRepositoryJob)
     // Variables for showing/hiding loading indicators
     private var areCapsulesLoading: MutableLiveData<Boolean> = MutableLiveData()
     // Set value to message to be shown in snackbar
@@ -38,7 +38,7 @@ class CapsulesRepository(
         return capsulesDao.getAllCapsules()
     }
 
-    fun deleteAllCapsules() = capsulesRepositoryScope.launch { capsulesDao.deleteAllCapsules() }
+    fun deleteAllCapsules() = GlobalScope.launch(Dispatchers.IO) { capsulesDao.deleteAllCapsules() }
 
     fun getCapsulesLoadingStatus(): LiveData<Boolean> = areCapsulesLoading
 
@@ -55,7 +55,7 @@ class CapsulesRepository(
         // Start loading process
         areCapsulesLoading.value = true
         Log.d("Repository", "refreshCapsules called")
-        capsulesRepositoryScope.launch {
+        GlobalScope.launch(Dispatchers.IO) {
             try {
                 fetchCapsulesAndSaveToDb()
             } catch (exception: Exception) {
