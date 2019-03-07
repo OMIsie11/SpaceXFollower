@@ -14,6 +14,7 @@ import io.github.omisie11.spacexfollower.ui.company.CompanyViewModel
 import io.github.omisie11.spacexfollower.util.SPACE_X_BASE_URL
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesViewModel
 import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel
+import io.github.omisie11.spacexfollower.util.NumbersUtils
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
@@ -35,6 +36,8 @@ val appModule = module {
 
     // SharedPrefs
     single { PreferenceManager.getDefaultSharedPreferences(get())}
+
+    single { NumbersUtils() }
 
 }
 
