@@ -17,6 +17,8 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
 
     fun getCapsulesLoadingStatus(): LiveData<Boolean> = _areCapsulesLoading
 
+    fun getCapsuleById(capsuleId: Int): Capsule? = mAllCapsules.value?.get(capsuleId)
+
     // Wrapper for refreshing capsules data
     fun refreshCapsules() = repository.refreshCapsules()
 

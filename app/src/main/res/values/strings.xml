@@ -4,7 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="snackbar_action_retry">Retry</string>
-    
+
     <!-- Company fragment -->
     <string name="company_valuation">$ %1$s</string>
 </resources>

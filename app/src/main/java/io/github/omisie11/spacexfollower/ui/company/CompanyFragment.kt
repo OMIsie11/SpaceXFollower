@@ -3,9 +3,7 @@ package io.github.omisie11.spacexfollower.ui.company
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
@@ -86,7 +84,7 @@ class CompanyFragment : Fragment() {
         inflater.inflate(R.menu.menu_action_bar, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_refresh -> {
             viewModel.refreshCompanyInfo()
             true

@@ -3,6 +3,7 @@ package io.github.omisie11.spacexfollower.ui.capsules
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +12,8 @@ import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.CapsulesRepository
 import io.github.omisie11.spacexfollower.data.model.Capsule
+import io.github.omisie11.spacexfollower.util.OnItemClickListener
+import io.github.omisie11.spacexfollower.util.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -76,6 +79,12 @@ class CapsulesFragment : Fragment() {
             Log.i("CapsulesFragment", "onRefresh called from SwipeRefreshLayout")
             viewModel.refreshCapsules()
         }
+
+        recyclerView.addOnItemClickListener(object: OnItemClickListener {
+            override fun onItemClicked(position: Int, view: View) {
+                Toast.makeText(activity, "Item clicked, ID: ${viewModel.getCapsuleById(position)}", Toast.LENGTH_LONG).show()
+            }
+        })
 
         // Force fetching capsules
         fetchButton.setOnClickListener {
