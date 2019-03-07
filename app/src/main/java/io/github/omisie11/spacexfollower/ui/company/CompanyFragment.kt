@@ -40,7 +40,10 @@ class CompanyFragment : Fragment() {
             text_vehicles.text = companyInfo.vehicles.toString()
             text_launch_sites.text = companyInfo.launchSites.toString()
             text_test_sites.text = companyInfo.testSites.toString()
-            text_valuation.text = numbersUtils.shortenNumberAddPrefix(companyInfo.valuation)
+            text_valuation.text = resources.getString(
+                R.string.company_valuation,
+                numbersUtils.shortenNumberAddPrefix(companyInfo.valuation)
+            )
             text_address.text = companyInfo.headquarters.address
             text_city.text = companyInfo.headquarters.city
             text_state.text = companyInfo.headquarters.state
