@@ -1,6 +1,5 @@
 package io.github.omisie11.spacexfollower.ui.capsules
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,15 +15,11 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
     private var mExpandedPosition: Int = -1
     private var mCapsulesData: List<Capsule> = emptyList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
+        LayoutInflater.from(parent.context)
             .inflate(R.layout.capsules_recycler_item, parent, false)
-        return ViewHolder(view).listen { position, type ->
-            val item = mCapsulesData[position]
-            Log.d("CapsulesAdapter", "Item clicked id: ${item.capsuleId}")
-            // ToDo: handle item clicks
-        }
-    }
+    )
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Bind data to views from ViewHolder
@@ -52,12 +47,4 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
         mCapsulesData = data
         notifyDataSetChanged()
     }
-}
-
-// ViewHolder extension for item click listener
-fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {
-    itemView.setOnClickListener {
-        event.invoke(adapterPosition, itemViewType)
-    }
-    return this
 }

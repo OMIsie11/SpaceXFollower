@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -82,7 +83,9 @@ class CapsulesFragment : Fragment() {
 
         recyclerView.addOnItemClickListener(object: OnItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
-                Toast.makeText(activity, "Item clicked, ID: ${viewModel.getCapsuleById(position)}", Toast.LENGTH_LONG).show()
+                //Toast.makeText(activity, "Item clicked, ID: ${viewModel.getCapsuleById(position)}", Toast.LENGTH_LONG).show()
+                // ToDo: open details, pass id
+                view.findNavController().navigate(CapsulesFragmentDirections.actionCapsulesDestToCapsuleDetailDest(position))
             }
         })
 

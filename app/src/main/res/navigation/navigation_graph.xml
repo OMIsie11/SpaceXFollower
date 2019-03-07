@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_graph" app:startDestination="@id/capsules_dest">
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_graph"
+            app:startDestination="@id/capsules_dest">
 
     <fragment android:id="@+id/capsules_dest"
               android:name="io.github.omisie11.spacexfollower.ui.capsules.CapsulesFragment"
-              android:label="Capsules"/>
-    <fragment android:id="@+id/cores_dest" android:name="io.github.omisie11.spacexfollower.ui.cores.CoresFragment"
-              android:label="Cores" tools:layout="@layout/fragment_recycler"/>
-    <fragment android:id="@+id/settings_dest" android:name="io.github.omisie11.spacexfollower.ui.SettingsFragment"
+              android:label="Capsules">
+        <action android:id="@+id/action_capsules_dest_to_capsule_detail_dest"
+                app:destination="@id/capsule_detail_dest"/>
+    </fragment>
+
+    <fragment android:id="@+id/cores_dest"
+              android:name="io.github.omisie11.spacexfollower.ui.cores.CoresFragment"
+              android:label="Cores"
+              tools:layout="@layout/fragment_recycler"/>
+
+    <fragment android:id="@+id/settings_dest"
+              android:name="io.github.omisie11.spacexfollower.ui.SettingsFragment"
               android:label="Settings"/>
+
     <fragment android:id="@+id/company_dest"
               android:name="io.github.omisie11.spacexfollower.ui.company.CompanyFragment"
-              android:label="Company" tools:layout="@layout/fragment_company"/>
+              android:label="Company"
+              tools:layout="@layout/fragment_company"/>
+
+    <fragment android:id="@+id/capsule_detail_dest"
+              android:name="io.github.omisie11.spacexfollower.ui.capsules.CapsuleDetailFragment"
+              android:label="Capsule Detail"
+              tools:layout="@layout/fragment_capsule_detail">
+        <argument android:name="itemPosition" app:argType="integer"/>
+    </fragment>
 </navigation>
