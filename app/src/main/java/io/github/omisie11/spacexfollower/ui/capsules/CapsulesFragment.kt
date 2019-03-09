@@ -83,8 +83,6 @@ class CapsulesFragment : Fragment() {
 
         recyclerView.addOnItemClickListener(object: OnItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
-                //Toast.makeText(activity, "Item clicked, ID: ${viewModel.getCapsuleById(position)}", Toast.LENGTH_LONG).show()
-                // ToDo: open details, pass id
                 view.findNavController().navigate(CapsulesFragmentDirections.actionCapsulesDestToCapsuleDetailDest(position))
             }
         })

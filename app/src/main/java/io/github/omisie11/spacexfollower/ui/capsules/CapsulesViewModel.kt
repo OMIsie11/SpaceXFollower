@@ -9,15 +9,13 @@ import io.github.omisie11.spacexfollower.data.model.Capsule
 
 class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel() {
 
-    private val mAllCapsules: LiveData<List<Capsule>> by lazy { repository.getCapsules() }
+    private val allCapsules: LiveData<List<Capsule>> by lazy { repository.getCapsules() }
     private val _areCapsulesLoading: LiveData<Boolean> by lazy { repository.getCapsulesLoadingStatus() }
     private val _snackBar: MutableLiveData<String> = repository.getCapsulesSnackbar()
 
-    fun getCapsules(): LiveData<List<Capsule>> = mAllCapsules
+    fun getCapsules(): LiveData<List<Capsule>> = allCapsules
 
     fun getCapsulesLoadingStatus(): LiveData<Boolean> = _areCapsulesLoading
-
-    fun getCapsuleById(capsuleId: Int): Capsule? = mAllCapsules.value?.get(capsuleId)
 
     // Wrapper for refreshing capsules data
     fun refreshCapsules() = repository.refreshCapsules()

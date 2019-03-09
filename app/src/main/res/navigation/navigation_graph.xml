@@ -29,6 +29,9 @@
               android:name="io.github.omisie11.spacexfollower.ui.capsules.CapsuleDetailFragment"
               android:label="Capsule Detail"
               tools:layout="@layout/fragment_capsule_detail">
-        <argument android:name="itemPosition" app:argType="integer"/>
+        <argument android:name="itemPosition"
+                  app:argType="integer"
+                  android:defaultValue="0"
+                  app:nullable="false"/>
     </fragment>
 </navigation>
