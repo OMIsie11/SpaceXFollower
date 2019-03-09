@@ -31,7 +31,13 @@ class CapsuleDetailFragment : Fragment() {
         val selectedCapsuleId: Int = safeArgs?.itemPosition ?: 0
 
         viewModel.getCapsules().observe(viewLifecycleOwner, Observer { capsules ->
-            text_capsule_id.text = capsules[selectedCapsuleId].capsuleSerial
+            text_capsule_serial.text = capsules[selectedCapsuleId].capsuleSerial
+            text_capsule_type.text = capsules[selectedCapsuleId].type
+            text_capsule_status.text = capsules[selectedCapsuleId].status
+            text_capsule_launch.text = capsules[selectedCapsuleId].originalLaunch
+            text_capsule_details.text = capsules[selectedCapsuleId].details
+            text_capsule_landings.text = capsules[selectedCapsuleId].landings.toString()
+            text_capsule_reused.text = capsules[selectedCapsuleId].reuseCount.toString()
         })
     }
 }

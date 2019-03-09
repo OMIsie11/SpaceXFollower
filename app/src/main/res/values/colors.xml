@@ -11,7 +11,7 @@
     <color name="colorPrimaryDark">#cccccc</color>
     <color name="colorOnPrimary">#212121</color>
     <color name="colorSecondary">#ffab91</color>
-    <color name="colorSecondaryLight">#ffddc1</color>
+    <color name="colorSecondaryLight">#FFDDC1</color>
     <color name="colorSecondaryDark">#c97b63</color>
     <color name="colorOnSecondary">#212121</color>
 
