@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 
 import io.github.omisie11.spacexfollower.R
+import kotlinx.android.synthetic.main.fragment_core_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -26,5 +28,12 @@ class CoreDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val safeArgs = arguments?.let { CoreDetailFragmentArgs.fromBundle(it) }
+        val selectedCoreId: Int = safeArgs?.itemId ?: 0
+
+        viewModel.getCores().observe(viewLifecycleOwner, Observer { cores ->
+            text_core_serial.text = cores[selectedCoreId].coreSerial
+        })
     }
 }
+√
