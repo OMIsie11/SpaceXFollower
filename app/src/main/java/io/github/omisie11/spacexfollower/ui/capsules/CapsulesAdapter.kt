@@ -12,14 +12,12 @@ import kotlinx.android.synthetic.main.capsules_recycler_item.view.*
 
 class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
 
-    private var mExpandedPosition: Int = -1
     private var mCapsulesData: List<Capsule> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
         LayoutInflater.from(parent.context)
             .inflate(R.layout.capsules_recycler_item, parent, false)
     )
-
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Bind data to views from ViewHolder

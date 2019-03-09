@@ -5,12 +5,15 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.CoresRepository
 import io.github.omisie11.spacexfollower.data.model.Core
+import io.github.omisie11.spacexfollower.util.OnItemClickListener
+import io.github.omisie11.spacexfollower.util.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -76,6 +79,13 @@ class CoresFragment : Fragment() {
             Log.i("CapsulesFragment", "onRefresh called from SwipeRefreshLayout")
             viewModel.refreshCores()
         }
+
+        recyclerView.addOnItemClickListener(object: OnItemClickListener {
+            override fun onItemClicked(position: Int, view: View) {
+                findNavController().navigate(CoresFragmentDirections
+                    .actionCoresDestToCoresDetailFragment(position))
+            }
+        })
 
         // Force fetching capsules
         fetchButton.setOnClickListener {

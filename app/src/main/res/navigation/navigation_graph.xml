@@ -14,7 +14,10 @@
     <fragment android:id="@+id/cores_dest"
               android:name="io.github.omisie11.spacexfollower.ui.cores.CoresFragment"
               android:label="Cores"
-              tools:layout="@layout/fragment_recycler"/>
+              tools:layout="@layout/fragment_recycler">
+        <action android:id="@+id/action_cores_dest_to_coresDetailFragment"
+                app:destination="@id/core_detail_dest"/>
+    </fragment>
 
     <fragment android:id="@+id/settings_dest"
               android:name="io.github.omisie11.spacexfollower.ui.SettingsFragment"
@@ -29,9 +32,16 @@
               android:name="io.github.omisie11.spacexfollower.ui.capsules.CapsuleDetailFragment"
               android:label="Capsule Detail"
               tools:layout="@layout/fragment_capsule_detail">
-        <argument android:name="itemPosition"
+        <argument android:name="itemId"
                   app:argType="integer"
-                  android:defaultValue="0"
-                  app:nullable="false"/>
+                  android:defaultValue="0"/>
+    </fragment>
+    <fragment android:id="@+id/core_detail_dest"
+              android:name="io.github.omisie11.spacexfollower.ui.cores.CoreDetailFragment"
+              android:label="Core Detail"
+              tools:layout="@layout/fragment_core_detail">
+        <argument android:name="itemId"
+                  app:argType="integer"
+                  android:defaultValue="0"/>
     </fragment>
 </navigation>

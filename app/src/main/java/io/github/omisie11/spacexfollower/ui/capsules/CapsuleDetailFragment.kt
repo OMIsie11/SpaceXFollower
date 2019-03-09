@@ -28,7 +28,7 @@ class CapsuleDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val safeArgs = arguments?.let { CapsuleDetailFragmentArgs.fromBundle(it) }
-        val selectedCapsuleId: Int = safeArgs?.itemPosition ?: 0
+        val selectedCapsuleId: Int = safeArgs?.itemId ?: 0
 
         viewModel.getCapsules().observe(viewLifecycleOwner, Observer { capsules ->
             text_capsule_serial.text = capsules[selectedCapsuleId].capsuleSerial
