@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import io.github.omisie11.spacexfollower.R
+import io.github.omisie11.spacexfollower.data.model.Capsule
 import kotlinx.android.synthetic.main.fragment_capsule_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,7 +31,7 @@ class CapsuleDetailFragment : Fragment() {
         val safeArgs = arguments?.let { CapsuleDetailFragmentArgs.fromBundle(it) }
         val selectedCapsuleId: Int = safeArgs?.itemId ?: 0
 
-        viewModel.getCapsules().observe(viewLifecycleOwner, Observer { capsules ->
+        viewModel.getCapsules().observe(viewLifecycleOwner, Observer<List<Capsule>> { capsules ->
             text_capsule_serial.text = capsules[selectedCapsuleId].capsuleSerial
             text_capsule_type.text = capsules[selectedCapsuleId].type
             text_capsule_status.text = capsules[selectedCapsuleId].status

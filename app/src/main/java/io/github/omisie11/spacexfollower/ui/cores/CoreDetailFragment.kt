@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 
 import io.github.omisie11.spacexfollower.R
+import io.github.omisie11.spacexfollower.data.model.Core
 import kotlinx.android.synthetic.main.fragment_core_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,8 +32,14 @@ class CoreDetailFragment : Fragment() {
         val safeArgs = arguments?.let { CoreDetailFragmentArgs.fromBundle(it) }
         val selectedCoreId: Int = safeArgs?.itemId ?: 0
 
-        viewModel.getCores().observe(viewLifecycleOwner, Observer { cores ->
+        viewModel.getCores().observe(viewLifecycleOwner, Observer<List<Core>> { cores ->
             text_core_serial.text = cores[selectedCoreId].coreSerial
+            text_core_block.text = cores[selectedCoreId].block.toString()
+            text_core_status.text = cores[selectedCoreId].status
+            text_core_launch.text = cores[selectedCoreId].originalLaunch
+            text_core_details.text = cores[selectedCoreId].details
+            text_core_landings_asds.text = cores[selectedCoreId].asdsLandings.toString()
+            text_core_reused.text = cores[selectedCoreId].reuseCount.toString()
         })
     }
 }
