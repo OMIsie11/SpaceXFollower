@@ -8,7 +8,9 @@
               android:name="io.github.omisie11.spacexfollower.ui.capsules.CapsulesFragment"
               android:label="Capsules">
         <action android:id="@+id/action_capsules_dest_to_capsule_detail_dest"
-                app:destination="@id/capsule_detail_dest"/>
+                app:destination="@id/capsule_detail_dest" app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+        />
     </fragment>
 
     <fragment android:id="@+id/cores_dest"
@@ -16,7 +18,8 @@
               android:label="Cores"
               tools:layout="@layout/fragment_recycler">
         <action android:id="@+id/action_cores_dest_to_coresDetailFragment"
-                app:destination="@id/core_detail_dest"/>
+                app:destination="@id/core_detail_dest" app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"/>
     </fragment>
 
     <fragment android:id="@+id/settings_dest"
