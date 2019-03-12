@@ -38,7 +38,11 @@ class CoreDetailFragment : Fragment() {
             text_core_status.text = cores[selectedCoreId].status
             text_core_launch.text = cores[selectedCoreId].originalLaunch
             text_core_details.text = cores[selectedCoreId].details
-            text_core_landings_asds.text = cores[selectedCoreId].asdsLandings.toString()
+            text_core_rtls_attempts.text = cores[selectedCoreId].rtlsAttempts.toString()
+            text_core_rtls_landings.text = cores[selectedCoreId].rtlsLandings.toString()
+            text_core_asds_attempts.text = cores[selectedCoreId].asdsAttempts.toString()
+            text_core_asds_landings.text = cores[selectedCoreId].asdsLandings.toString()
+            text_core_water_landing.text = cores[selectedCoreId].waterLandings.toString()
             text_core_reused.text = cores[selectedCoreId].reuseCount.toString()
         })
     }
