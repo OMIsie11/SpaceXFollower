@@ -24,7 +24,7 @@ class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
         mCoresData.let {
             holder.coreSerialTextView.text = mCoresData[position].coreSerial
             holder.coreLaunchTextView.text = if (mCoresData[position].originalLaunch.isNullOrEmpty())
-                "No launch date" else mCoresData[position].originalLaunch
+                "No launch date info" else mCoresData[position].originalLaunch
             holder.coreStatusTextView.text = mCoresData[position].status
         }
     }

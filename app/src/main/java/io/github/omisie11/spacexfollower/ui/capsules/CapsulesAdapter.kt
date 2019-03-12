@@ -22,23 +22,21 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Bind data to views from ViewHolder
         mCapsulesData.let {
-            holder.capsuleIdTextView.text = mCapsulesData[position].capsuleId
             holder.capsuleSerialTextView.text = mCapsulesData[position].capsuleSerial
-            holder.capsuleType.text = mCapsulesData[position].type
-            holder.capsuleStatus.text = mCapsulesData[position].status
+            holder.capsuleLaunchTextView.text = if (mCapsulesData[position].originalLaunch.isNullOrEmpty())
+                "No launch date info" else mCapsulesData[position].originalLaunch
+            holder.capsuleStatusTextView.text = mCapsulesData[position].status
+            holder.capsuleTypeTextView.text = mCapsulesData[position].type
         }
     }
 
     override fun getItemCount(): Int = mCapsulesData.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val capsuleIdTextView: TextView = itemView.text_capsule_id
         val capsuleSerialTextView: TextView = itemView.text_capsule_serial
-        val capsuleType: TextView = itemView.text_capsule_type
-        val capsuleStatus: TextView = itemView.text_capsule_status
-        //val capsuleLandings: TextView = itemView.text_landings
-        //val capsuleMissionsTextView: TextView = itemView.text_missions
-        //val groupExpanded: Group = itemView.group_expand
+        val capsuleLaunchTextView: TextView = itemView.text_capsule_launch
+        val capsuleStatusTextView: TextView = itemView.text_capsule_status
+        val capsuleTypeTextView: TextView = itemView.text_capsule_type
     }
 
     fun setData(data: List<Capsule>) {

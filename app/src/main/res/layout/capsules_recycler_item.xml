@@ -1,58 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="6dp"
-android:layout_margin="4dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <RelativeLayout
-            android:id="@+id/root_relative"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <TextView
+            android:id="@+id/text_capsule_serial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            tools:text="C101"/>
 
-        <TextView
-                android:id="@+id/text_capsule_serial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="C102"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"/>
+    <TextView
+            android:id="@+id/text_capsule_launch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/text_capsule_serial"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            tools:text="2007-03-21T01:10:00.000Z"/>
 
-        <TextView
-                android:id="@+id/text_capsule_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="dragon1"
-                android:layout_below="@id/text_capsule_serial"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp"/>
+    <TextView
+            android:id="@+id/text_capsule_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            tools:text="active"/>
 
-        <TextView
-                android:id="@+id/text_capsule_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Dragon 1.1"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"/>
+    <TextView
+            android:id="@+id/text_capsule_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_capsule_status"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            tools:text="Dragon 1.0"/>
 
-        <TextView
-                android:id="@+id/text_capsule_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="active"
-                android:layout_below="@id/text_capsule_type"
-                android:layout_alignStart="@id/text_capsule_type"
-                android:layout_marginTop="8dp"/>
-
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+</RelativeLayout>

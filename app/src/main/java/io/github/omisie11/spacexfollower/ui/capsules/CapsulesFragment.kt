@@ -5,8 +5,8 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -43,6 +43,7 @@ class CapsulesFragment : Fragment() {
         viewManager = LinearLayoutManager(activity)
         val recyclerView = rootView.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.apply {
+            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
@@ -70,7 +71,7 @@ class CapsulesFragment : Fragment() {
                 Snackbar.make(swipeRefreshLayout, text, Snackbar.LENGTH_LONG).setAction(
                     getString(R.string.snackbar_action_retry), View.OnClickListener {
                         viewModel.refreshCapsules()
-                }).show()
+                    }).show()
                 viewModel.onSnackbarShown()
             }
         })
@@ -82,10 +83,12 @@ class CapsulesFragment : Fragment() {
         }
 
         // Respond to user clicks on recyclerView items
-        recyclerView.addOnItemClickListener(object: OnItemClickListener {
+        recyclerView.addOnItemClickListener(object : OnItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
-                findNavController().navigate(CapsulesFragmentDirections
-                    .actionCapsulesDestToCapsuleDetailDest(position))
+                findNavController().navigate(
+                    CapsulesFragmentDirections
+                        .actionCapsulesDestToCapsuleDetailDest(position)
+                )
             }
         })
 
@@ -110,7 +113,7 @@ class CapsulesFragment : Fragment() {
         inflater.inflate(R.menu.menu_action_bar, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_refresh -> {
             viewModel.refreshCapsules()
             true
