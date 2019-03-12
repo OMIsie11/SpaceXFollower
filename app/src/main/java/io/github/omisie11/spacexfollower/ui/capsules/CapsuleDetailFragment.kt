@@ -35,8 +35,10 @@ class CapsuleDetailFragment : Fragment() {
             text_capsule_serial.text = capsules[selectedCapsuleId].capsuleSerial
             text_capsule_type.text = capsules[selectedCapsuleId].type
             text_capsule_status.text = capsules[selectedCapsuleId].status
-            text_capsule_launch.text = capsules[selectedCapsuleId].originalLaunch
-            text_capsule_details.text = capsules[selectedCapsuleId].details
+            text_capsule_launch.text = if (capsules[selectedCapsuleId].originalLaunch.isNullOrEmpty())
+                "No launch time provided" else capsules[selectedCapsuleId].originalLaunch
+            text_capsule_details.text = if (capsules[selectedCapsuleId].details.isNullOrEmpty())
+                "No details provided" else capsules[selectedCapsuleId].details
             text_capsule_landings.text = capsules[selectedCapsuleId].landings.toString()
             text_capsule_reused.text = capsules[selectedCapsuleId].reuseCount.toString()
         })

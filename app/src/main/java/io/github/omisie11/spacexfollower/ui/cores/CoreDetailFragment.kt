@@ -36,8 +36,10 @@ class CoreDetailFragment : Fragment() {
             text_core_serial.text = cores[selectedCoreId].coreSerial
             text_core_block.text = cores[selectedCoreId].block.toString()
             text_core_status.text = cores[selectedCoreId].status
-            text_core_launch.text = cores[selectedCoreId].originalLaunch
-            text_core_details.text = cores[selectedCoreId].details
+            text_core_launch.text = if (cores[selectedCoreId].originalLaunch.isNullOrEmpty())
+                "No launch time provided" else cores[selectedCoreId].originalLaunch
+            text_core_details.text = if (cores[selectedCoreId].details.isNullOrEmpty())
+                "No details provided" else cores[selectedCoreId].details
             text_core_rtls_attempts.text = cores[selectedCoreId].rtlsAttempts.toString()
             text_core_rtls_landings.text = cores[selectedCoreId].rtlsLandings.toString()
             text_core_asds_attempts.text = cores[selectedCoreId].asdsAttempts.toString()
