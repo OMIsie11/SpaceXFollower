@@ -7,16 +7,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Core
-import kotlinx.android.synthetic.main.capsules_recycler_item.view.*
+import kotlinx.android.synthetic.main.cores_recycler_item.view.*
 
 class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
 
     private var mCoresData: List<Core> = emptyList()
 
-    // ToDo change item layout
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.capsules_recycler_item, parent, false)
+            .inflate(R.layout.cores_recycler_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -24,21 +23,18 @@ class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
         // Bind data to views from ViewHolder
         mCoresData.let {
             holder.coreSerialTextView.text = mCoresData[position].coreSerial
-            holder.coreBlock.text = mCoresData[position].block.toString()
-            holder.coreStatus.text = mCoresData[position].status
+            holder.coreLaunchTextView.text = if (mCoresData[position].originalLaunch.isNullOrEmpty())
+                "No launch date" else mCoresData[position].originalLaunch
+            holder.coreStatusTextView.text = mCoresData[position].status
         }
     }
 
     override fun getItemCount(): Int = mCoresData.size
 
-    // Todo after item layout change, refactor finding views
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val coreSerialTextView: TextView = itemView.text_capsule_serial
-        val coreBlock: TextView = itemView.text_capsule_type
-        val coreStatus: TextView = itemView.text_capsule_status
-        //val coreLandings: TextView = itemView.text_landings
-        //val coreMissionsTextView: TextView = itemView.text_missions
-        //val groupExpanded: Group = itemView.group_expand
+        val coreSerialTextView: TextView = itemView.text_core_serial
+        val coreLaunchTextView: TextView = itemView.text_core_launch
+        val coreStatusTextView: TextView = itemView.text_core_status
     }
 
     fun setData(data: List<Core>) {
