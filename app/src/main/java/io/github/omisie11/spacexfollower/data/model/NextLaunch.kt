@@ -9,8 +9,8 @@ import io.github.omisie11.spacexfollower.data.converters.NextLaunchLaunchSiteCon
 import io.github.omisie11.spacexfollower.data.converters.NextLaunchRocketConverter
 
 // Used for Next launch screen
-@Entity(tableName = "next_launch")
-data class Launch(
+@Entity(tableName = "next_launch_table")
+data class NextLaunch(
     @SerializedName("flight_number")
     @PrimaryKey
     @ColumnInfo(name = "flight_number")
@@ -34,25 +34,19 @@ data class Launch(
     // ToDo: Implement rocket stages
     data class Rocket(
         @SerializedName("rocket_id")
-        @ColumnInfo(name = "rocket_id")
         val rocketId: String,
         @SerializedName("rocket_name")
-        @ColumnInfo(name = "rocket_name")
         val rocketName: String,
         @SerializedName("rocket_type")
-        @ColumnInfo(name = "rocket_type")
         val rocketType: String
         )
 
     data class LaunchSite(
         @SerializedName("site_id")
-        @ColumnInfo(name = "site_id")
         val siteId: String,
         @SerializedName("site_name")
-        @ColumnInfo(name = "site_name")
         val siteName: String,
         @SerializedName("site_name_long")
-        @ColumnInfo(name = "site_name_long")
         val siteNameLong: String
     )
 }

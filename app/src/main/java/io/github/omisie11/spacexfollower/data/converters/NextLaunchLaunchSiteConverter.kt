@@ -3,17 +3,17 @@ package io.github.omisie11.spacexfollower.data.converters
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import io.github.omisie11.spacexfollower.data.model.Launch
+import io.github.omisie11.spacexfollower.data.model.NextLaunch
 
-// Used for Next Launch
+// Used for Next NextLaunch
 class NextLaunchLaunchSiteConverter{
 
     private val gson = Gson()
-    private val type = object: TypeToken<Launch.LaunchSite>() {}.type
+    private val type = object: TypeToken<NextLaunch.LaunchSite>() {}.type
 
     @TypeConverter
-    fun launchSiteToString(launchSite: Launch.LaunchSite): String? = gson.toJson(launchSite, type)
+    fun launchSiteToString(nextLaunchSite: NextLaunch.LaunchSite): String? = gson.toJson(nextLaunchSite, type)
 
     @TypeConverter
-    fun stringToLaunchSite(launchSiteString: String): Launch.LaunchSite? = gson.fromJson(launchSiteString, type)
+    fun stringToLaunchSite(nextLaunchSiteString: String): NextLaunch.LaunchSite? = gson.fromJson(nextLaunchSiteString, type)
 }

@@ -11,30 +11,21 @@ import io.github.omisie11.spacexfollower.data.model.Company
 import io.github.omisie11.spacexfollower.data.model.Core
 import io.github.omisie11.spacexfollower.data.converters.HeadquarterConverter
 import io.github.omisie11.spacexfollower.data.converters.MissionsConverter
+import io.github.omisie11.spacexfollower.data.converters.NextLaunchLaunchSiteConverter
+import io.github.omisie11.spacexfollower.data.converters.NextLaunchRocketConverter
+import io.github.omisie11.spacexfollower.data.dao.NextLaunchDao
+import io.github.omisie11.spacexfollower.data.model.NextLaunch
 
-@Database(entities = [Capsule::class, Core::class, Company::class], version = 1)
-@TypeConverters(value = [MissionsConverter::class, HeadquarterConverter::class])
+@Database(entities = [Capsule::class, Core::class, Company::class, NextLaunch::class], version = 1)
+@TypeConverters(
+    value = [MissionsConverter::class, HeadquarterConverter::class,
+        NextLaunchRocketConverter::class, NextLaunchLaunchSiteConverter::class]
+)
 abstract class SpaceDatabase : RoomDatabase() {
 
     abstract fun capsulesDao(): CapsulesDao
     abstract fun coresDao(): CoresDao
     abstract fun companyDao(): CompanyDao
+    abstract fun nextLaunchDao(): NextLaunchDao
 
-    /* Not needed, Koin is doing that now
-    companion object {
-        private var dbInstance: SpaceDatabase? = null
-
-        fun getDatabase(context: Context): SpaceDatabase? {
-            if (dbInstance == null) {
-
-                dbInstance = Room.databaseBuilder<SpaceDatabase>(
-                    context.applicationContext,
-                    SpaceDatabase::class.java, "space_data.db"
-                )
-                    .build()
-            }
-            return dbInstance
-        }
-    }
-    */
 }
