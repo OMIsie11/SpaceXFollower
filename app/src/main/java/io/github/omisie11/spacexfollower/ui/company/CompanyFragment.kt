@@ -38,18 +38,20 @@ class CompanyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getCompanyInfo().observe(viewLifecycleOwner, Observer<Company> { companyInfo ->
-            text_summary.text = companyInfo.summary
-            text_employees.text = companyInfo.employees.toString()
-            text_vehicles.text = companyInfo.vehicles.toString()
-            text_launch_sites.text = companyInfo.launchSites.toString()
-            text_test_sites.text = companyInfo.testSites.toString()
-            text_valuation.text = resources.getString(
-                R.string.company_valuation,
-                numbersUtils.shortenNumberAddPrefix(companyInfo.valuation)
-            )
-            text_address.text = companyInfo.headquarters.address
-            text_city.text = companyInfo.headquarters.city
-            text_state.text = companyInfo.headquarters.state
+            if (companyInfo != null) {
+                text_summary.text = companyInfo.summary
+                text_employees.text = companyInfo.employees.toString()
+                text_vehicles.text = companyInfo.vehicles.toString()
+                text_launch_sites.text = companyInfo.launchSites.toString()
+                text_test_sites.text = companyInfo.testSites.toString()
+                text_valuation.text = resources.getString(
+                    R.string.company_valuation,
+                    numbersUtils.shortenNumberAddPrefix(companyInfo.valuation)
+                )
+                text_address.text = companyInfo.headquarters.address
+                text_city.text = companyInfo.headquarters.city
+                text_state.text = companyInfo.headquarters.state
+            }
         })
 
         // Observe if data is refreshing and show/hide loading indicator
