@@ -30,8 +30,8 @@ dependencies {
     def room_version = "2.0.0"
     def lifecycle_version = "2.0.0"
     def retrofit_version = "2.5.0"
-    def nav_version = "1.0.0-beta01"
-    def material_version = "1.1.0-alpha03"
+    def nav_version = "1.0.0"
+    def material_version = "1.1.0-alpha04"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -61,6 +61,6 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version" // use -ktx for Kotlin
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }

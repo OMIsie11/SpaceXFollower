@@ -18,8 +18,6 @@ class CapsulesRepository(
     private val sharedPrefs: SharedPreferences
 ) {
 
-    //private val capsulesRepositoryJob = Job()
-    //private val capsulesRepositoryScope = CoroutineScope(Dispatchers.IO + capsulesRepositoryJob)
     // Variables for showing/hiding loading indicators
     private var areCapsulesLoading: MutableLiveData<Boolean> = MutableLiveData()
     // Set value to message to be shown in snackbar
