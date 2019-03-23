@@ -12,7 +12,7 @@ class MyApplication : Application() {
         startKoin(
             this, listOf(
                 appModule, remoteDataSourceModule, capsulesModule,
-                coresModule, companyModule
+                coresModule, companyModule, nextLaunchModule
             )
         )
     }

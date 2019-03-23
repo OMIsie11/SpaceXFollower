@@ -14,6 +14,8 @@ import io.github.omisie11.spacexfollower.ui.company.CompanyViewModel
 import io.github.omisie11.spacexfollower.util.SPACE_X_BASE_URL
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesViewModel
 import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel
+import io.github.omisie11.spacexfollower.data.NextLaunchRepository
+import io.github.omisie11.spacexfollower.ui.next_launch.NextLaunchViewModel
 import io.github.omisie11.spacexfollower.util.NumbersUtils
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.ext.koin.viewModel
@@ -35,7 +37,7 @@ val appModule = module {
     }
 
     // SharedPrefs
-    single { PreferenceManager.getDefaultSharedPreferences(get())}
+    single { PreferenceManager.getDefaultSharedPreferences(get()) }
 
     single { NumbersUtils() }
 
@@ -45,11 +47,13 @@ val appModule = module {
 val remoteDataSourceModule = module {
 
     // Create Retrofit instance
-    single { Retrofit.Builder()
-        .baseUrl(SPACE_X_BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .build() }
+    single {
+        Retrofit.Builder()
+            .baseUrl(SPACE_X_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .build()
+    }
 
     // Create retrofit Service
     single { get<Retrofit>().create(SpaceService::class.java) }
@@ -99,4 +103,15 @@ val companyModule = module {
     // ViewModel instance for CompanyInfo
     viewModel { CompanyViewModel(get()) }
 
+}
+
+val nextLaunchModule = module {
+
+    // NextLaunch DAO instance
+    single { get<SpaceDatabase>().nextLaunchDao() }
+
+    // Single instance of NextLaunchRepository
+    single { NextLaunchRepository(get(), get(), get()) }
+
+    viewModel { NextLaunchViewModel(get()) }
 }

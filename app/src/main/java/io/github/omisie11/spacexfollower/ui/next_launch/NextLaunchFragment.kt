@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.ui.company
+package io.github.omisie11.spacexfollower.ui.next_launch
 
 
 import android.os.Bundle
@@ -9,17 +9,17 @@ import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.model.Company
+import io.github.omisie11.spacexfollower.data.model.NextLaunch
 import io.github.omisie11.spacexfollower.util.NumbersUtils
-import kotlinx.android.synthetic.main.fragment_company.*
+import kotlinx.android.synthetic.main.fragment_next_launch.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class CompanyFragment : Fragment() {
+class NextLaunchFragment : Fragment() {
 
-    private val viewModel: CompanyViewModel by viewModel()
-    private val numbersUtils: NumbersUtils by inject()
+    private val viewModel: NextLaunchViewModel by viewModel()
+    private val numberUtils: NumbersUtils by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,33 +31,24 @@ class CompanyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_company, container, false)
+        return inflater.inflate(R.layout.fragment_next_launch, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getCompanyInfo().observe(viewLifecycleOwner, Observer<Company> { companyInfo ->
-            if (companyInfo != null) {
-                text_summary.text = companyInfo.summary
-                text_employees.text = companyInfo.employees.toString()
-                text_vehicles.text = companyInfo.vehicles.toString()
-                text_launch_sites.text = companyInfo.launchSites.toString()
-                text_test_sites.text = companyInfo.testSites.toString()
-                text_valuation.text = resources.getString(
-                    R.string.company_valuation,
-                    numbersUtils.shortenNumberAddPrefix(companyInfo.valuation)
-                )
-                text_address.text = companyInfo.headquarters.address
-                text_city.text = companyInfo.headquarters.city
-                text_state.text = companyInfo.headquarters.state
+        viewModel.getNextLaunchInfo().observe(viewLifecycleOwner, Observer<NextLaunch> { nextLaunch ->
+            if (nextLaunch != null) {
+                text_flight_number.text = nextLaunch.flightNumber.toString()
+                text_mission_name.text = nextLaunch.missionName
+                text_launch_date.text = numberUtils.getLocalTimeFromUnix(nextLaunch.launchDateUnix)
             }
         })
 
         // Observe if data is refreshing and show/hide loading indicator
-        viewModel.getCompanyInfoLoadingStatus().observe(viewLifecycleOwner,
-            Observer<Boolean> { isCompanyInfoRefreshing ->
-                swipeRefreshLayout.isRefreshing = isCompanyInfoRefreshing
+        viewModel.getNextLaunchLoadingStatus().observe(viewLifecycleOwner,
+            Observer<Boolean> { isNextLaunchInfoRefreshing ->
+                swipeRefreshLayout.isRefreshing = isNextLaunchInfoRefreshing
             })
 
         // Show a snackbar whenever the [ViewModel.snackbar] is updated a non-null value
@@ -65,21 +56,21 @@ class CompanyFragment : Fragment() {
             text?.let {
                 Snackbar.make(swipeRefreshLayout, text, Snackbar.LENGTH_LONG).setAction(
                     getString(R.string.snackbar_action_retry), View.OnClickListener {
-                        viewModel.refreshCompanyInfo()
+                        viewModel.refreshNextLaunch()
                     }).show()
                 viewModel.onSnackbarShown()
             }
         })
 
         swipeRefreshLayout.setOnRefreshListener {
-            Log.i("CompanyInfoFragment", "onRefresh called from SwipeRefreshLayout")
-            viewModel.refreshCompanyInfo()
+            Log.i("NextLaunchFragment", "onRefresh called from SwipeRefreshLayout")
+            viewModel.refreshNextLaunch()
         }
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.refreshIfCompanyDataOld()
+        viewModel.refreshIfNextLaunchDataOld()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -88,7 +79,7 @@ class CompanyFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_refresh -> {
-            viewModel.refreshCompanyInfo()
+            viewModel.refreshNextLaunch()
             true
         }
         else -> super.onOptionsItemSelected(item)
