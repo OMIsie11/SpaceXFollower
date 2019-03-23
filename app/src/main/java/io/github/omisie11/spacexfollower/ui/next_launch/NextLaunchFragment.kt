@@ -3,9 +3,7 @@ package io.github.omisie11.spacexfollower.ui.next_launch
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
@@ -19,6 +17,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class NextLaunchFragment : Fragment() {
 
     private val viewModel: NextLaunchViewModel by viewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,5 +66,17 @@ class NextLaunchFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.refreshIfNextLaunchDataOld()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_action_bar, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.action_refresh -> {
+            viewModel.refreshNextLaunch()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 }
