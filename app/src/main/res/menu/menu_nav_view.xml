@@ -20,6 +20,12 @@
             android:checkable="true"/>
 
     <item
+            android:id="@id/next_launch_dest"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Next Launch"
+            android:checkable="true"/>
+
+    <item
             android:id="@id/settings_dest"
             android:icon="@drawable/ic_settings_black_24dp"
             android:title="Settings"

@@ -47,4 +47,7 @@
                   app:argType="integer"
                   android:defaultValue="0"/>
     </fragment>
+    <fragment android:id="@+id/next_launch_dest"
+              android:name="io.github.omisie11.spacexfollower.ui.next_launch.NextLaunchFragment"
+              android:label="Next Launch" tools:layout="@layout/fragment_next_launch"/>
 </navigation>
