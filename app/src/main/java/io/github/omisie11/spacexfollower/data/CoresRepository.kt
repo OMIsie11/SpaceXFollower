@@ -20,9 +20,6 @@ class CoresRepository(
     private var areCoresLoading: MutableLiveData<Boolean> = MutableLiveData()
     private val coresSnackBar = MutableLiveData<String>()
 
-    //private val coresRepositoryJob = Job()
-    //private val coresRepositoryScope = CoroutineScope(Dispatchers.IO + coresRepositoryJob)
-
     init {
         areCoresLoading.value = false
     }
