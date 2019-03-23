@@ -20,6 +20,8 @@ class CompanyViewModel(private val repository: CompanyRepository) : ViewModel() 
 
     fun refreshIfCompanyDataOld() = repository.refreshIfCompanyDataOld()
 
+    fun deleteCompanyInfo() = repository.deleteCompanyInfo()
+
     /**
      * Request a snackbar to display a string.
      */

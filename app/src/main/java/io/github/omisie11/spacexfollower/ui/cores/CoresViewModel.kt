@@ -22,6 +22,8 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
     // Wrapper for refreshing old data in onResume
     fun refreshIfCoresDataOld() = repository.refreshIfCoresDataOld()
 
+    fun deleteCoresData() = repository.deleteAllCores()
+
     /**
      * Request a snackbar to display a string.
      */

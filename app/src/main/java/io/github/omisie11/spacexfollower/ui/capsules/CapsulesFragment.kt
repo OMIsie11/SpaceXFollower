@@ -24,7 +24,6 @@ class CapsulesFragment : Fragment() {
 
     private val viewAdapter: CapsulesAdapter by inject()
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private val repository: CapsulesRepository by inject()
     private val viewModel: CapsulesViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,16 +90,6 @@ class CapsulesFragment : Fragment() {
                 )
             }
         })
-
-        // Force fetching capsules
-        fetchButton.setOnClickListener {
-            repository.refreshCapsules()
-        }
-        // Delete data from capsules table
-        deleteEntriesButton.setOnClickListener {
-            repository.deleteAllCapsules()
-            viewAdapter.notifyDataSetChanged()
-        }
     }
 
     override fun onResume() {
@@ -116,6 +105,11 @@ class CapsulesFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_refresh -> {
             viewModel.refreshCapsules()
+            true
+        }
+        R.id.action_delete -> {
+            viewModel.deleteCapsulesData()
+            viewAdapter.notifyDataSetChanged()
             true
         }
         else -> super.onOptionsItemSelected(item)

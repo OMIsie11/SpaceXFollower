@@ -20,9 +20,6 @@ class CompanyRepository(
     private var isCompanyInfoLoading: MutableLiveData<Boolean> = MutableLiveData()
     private val companyInfoSnackBar = MutableLiveData<String>()
 
-    //private val companyRepositoryJob = Job()
-    //private val companyRepositoryScope = CoroutineScope(Dispatchers.IO + companyRepositoryJob)
-
     init {
         isCompanyInfoLoading.value = false
     }

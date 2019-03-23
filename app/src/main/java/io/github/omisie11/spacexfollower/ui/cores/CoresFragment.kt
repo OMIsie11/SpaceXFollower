@@ -24,7 +24,6 @@ class CoresFragment : Fragment() {
 
     private val viewAdapter: CoresAdapter by inject()
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private val repository: CoresRepository by inject()
     private val viewModel: CoresViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,16 +87,6 @@ class CoresFragment : Fragment() {
                     .actionCoresDestToCoresDetailFragment(position))
             }
         })
-
-        // Force fetching capsules
-        fetchButton.setOnClickListener {
-            repository.refreshCores()
-        }
-        // Delete data from capsules table
-        deleteEntriesButton.setOnClickListener {
-            repository.deleteAllCores()
-            viewAdapter.notifyDataSetChanged()
-        }
     }
 
     override fun onResume() {
@@ -113,6 +102,11 @@ class CoresFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
         R.id.action_refresh -> {
             viewModel.refreshCores()
+            true
+        }
+        R.id.action_delete -> {
+            viewModel.deleteCoresData()
+            viewAdapter.notifyDataSetChanged()
             true
         }
         else -> super.onOptionsItemSelected(item)

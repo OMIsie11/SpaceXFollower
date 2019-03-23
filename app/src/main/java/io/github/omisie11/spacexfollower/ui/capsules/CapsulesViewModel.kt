@@ -23,6 +23,8 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
     // Wrapper for refreshing old data in onResume
     fun refreshIfCapsulesDataOld() = repository.refreshIfCapsulesDataOld()
 
+    fun deleteCapsulesData() = repository.deleteAllCapsules()
+
     /**
      * Request a snackbar to display a string.
      */

@@ -91,6 +91,10 @@ class CompanyFragment : Fragment() {
             viewModel.refreshCompanyInfo()
             true
         }
+        R.id.action_delete -> {
+            viewModel.deleteCompanyInfo()
+            true
+        }
         else -> super.onOptionsItemSelected(item)
     }
 }

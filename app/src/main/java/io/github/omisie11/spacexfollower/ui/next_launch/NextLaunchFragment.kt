@@ -82,6 +82,10 @@ class NextLaunchFragment : Fragment() {
             viewModel.refreshNextLaunch()
             true
         }
+        R.id.action_delete -> {
+            viewModel.deleteNextLaunchData()
+            true
+        }
         else -> super.onOptionsItemSelected(item)
     }
 }

@@ -22,6 +22,8 @@ class NextLaunchViewModel(private val repository: NextLaunchRepository) : ViewMo
     // Wrapper for refreshing old data in onResume
     fun refreshIfNextLaunchDataOld() = repository.refreshIfCapsulesDataOld()
 
+    fun deleteNextLaunchData() = repository.deleteNextLaunchData()
+
     /**
      * Request a snackbar to display a string.
      */
