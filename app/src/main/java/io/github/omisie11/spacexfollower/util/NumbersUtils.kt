@@ -1,7 +1,10 @@
 package io.github.omisie11.spacexfollower.util
 
+import android.util.Log
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NumbersUtils {
     // ToDo: Add tests
@@ -14,5 +17,15 @@ class NumbersUtils {
             number > 1000000 -> "${df.format(number.div(1000000))} million"
             else -> number.toString()
         }
+    }
+
+    fun getLocalTimeFromUnix(unixTime: Long): String {
+        Log.d("NumberUtils", "Passed time to convert: $unixTime")
+        val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+        simpleDateFormat.timeZone = Calendar.getInstance().timeZone
+
+        val localTime: String = simpleDateFormat.format(Date(unixTime * 1000))
+        Log.d("Utils", "Converted unix time: $localTime")
+        return localTime
     }
 }

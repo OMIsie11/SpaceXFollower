@@ -10,13 +10,16 @@ import com.google.android.material.snackbar.Snackbar
 
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.NextLaunch
+import io.github.omisie11.spacexfollower.util.NumbersUtils
 import kotlinx.android.synthetic.main.fragment_next_launch.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class NextLaunchFragment : Fragment() {
 
     private val viewModel: NextLaunchViewModel by viewModel()
+    private val numberUtils: NumbersUtils by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +39,9 @@ class NextLaunchFragment : Fragment() {
 
         viewModel.getNextLaunchInfo().observe(viewLifecycleOwner, Observer<NextLaunch> { nextLaunch ->
             if (nextLaunch != null) {
-                text_next_launch_mission_name.text = nextLaunch.missionName
+                text_flight_number.text = nextLaunch.flightNumber.toString()
+                text_mission_name.text = nextLaunch.missionName
+                text_launch_date.text = numberUtils.getLocalTimeFromUnix(nextLaunch.launchDateUnix)
             }
         })
 
