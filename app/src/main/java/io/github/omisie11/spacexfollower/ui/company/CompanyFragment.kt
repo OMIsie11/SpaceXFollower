@@ -38,28 +38,28 @@ class CompanyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getCompanyInfo().observe(viewLifecycleOwner, Observer<Company> { companyInfo ->
-                text_summary.text = companyInfo.summary
-                text_employees.text = companyInfo.employees.toString()
-                text_vehicles.text = companyInfo.vehicles.toString()
-                text_launch_sites.text = companyInfo.launchSites.toString()
-                text_test_sites.text = companyInfo.testSites.toString()
-                text_valuation.text = resources.getString(
-                    R.string.company_valuation,
-                    numbersUtils.shortenNumberAddPrefix(companyInfo.valuation)
-                )
-                text_address.text = companyInfo.headquarters.address
-                text_city.text = companyInfo.headquarters.city
-                text_state.text = companyInfo.headquarters.state
+            text_summary.text = companyInfo.summary
+            text_employees.text = companyInfo.employees.toString()
+            text_vehicles.text = companyInfo.vehicles.toString()
+            text_launch_sites.text = companyInfo.launchSites.toString()
+            text_test_sites.text = companyInfo.testSites.toString()
+            text_valuation.text = resources.getString(
+                R.string.company_valuation,
+                numbersUtils.shortenNumberAddPrefix(companyInfo.valuation)
+            )
+            text_address.text = companyInfo.headquarters.address
+            text_city.text = companyInfo.headquarters.city
+            text_state.text = companyInfo.headquarters.state
         })
 
         // Observe if data is refreshing and show/hide loading indicator
-        viewModel.getCompanyInfoLoadingStatus()
-            .observe(viewLifecycleOwner, Observer<Boolean> { isCompanyInfoRefreshing ->
+        viewModel.getCompanyInfoLoadingStatus().observe(viewLifecycleOwner,
+            Observer<Boolean> { isCompanyInfoRefreshing ->
                 swipeRefreshLayout.isRefreshing = isCompanyInfoRefreshing
             })
 
         // Show a snackbar whenever the [ViewModel.snackbar] is updated a non-null value
-        viewModel.snackbar.observe(this, Observer { text ->
+        viewModel.snackbar.observe(viewLifecycleOwner, Observer { text ->
             text?.let {
                 Snackbar.make(swipeRefreshLayout, text, Snackbar.LENGTH_LONG).setAction(
                     getString(R.string.snackbar_action_retry), View.OnClickListener {
