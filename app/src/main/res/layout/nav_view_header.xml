@@ -2,7 +2,7 @@
 <!-- Layout contains layout for navigation view header -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="192dp"
+              android:layout_height="wrap_content"
               android:padding="16dp"
               android:orientation="vertical"
               android:gravity="bottom"
@@ -11,6 +11,8 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Space X Follower"/>
+            android:text="SPACE X Follower"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-thin"/>
 
 </LinearLayout>
