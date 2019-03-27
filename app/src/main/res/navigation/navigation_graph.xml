@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_graph"
-            app:startDestination="@id/capsules_dest">
+            app:startDestination="@id/next_launch_dest">
 
     <fragment android:id="@+id/capsules_dest"
               android:name="io.github.omisie11.spacexfollower.ui.capsules.CapsulesFragment"

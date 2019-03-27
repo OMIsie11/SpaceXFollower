@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+            android:id="@id/next_launch_dest"
+            android:title="Next Launch"
+            android:checkable="true"/>
+
+    <item
             android:id="@id/capsules_dest"
             android:title="Capsules"
             android:checkable="true"/>
@@ -14,11 +19,6 @@
     <item
             android:id="@id/company_dest"
             android:title="Company"
-            android:checkable="true"/>
-
-    <item
-            android:id="@id/next_launch_dest"
-            android:title="Next Launch"
             android:checkable="true"/>
 
     <item
