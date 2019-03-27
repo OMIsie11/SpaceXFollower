@@ -18,6 +18,8 @@ class CapsulesRepository(
     private val sharedPrefs: SharedPreferences
 ) {
 
+    private val capsulesJob = Job()
+    private val capsulesScope = CoroutineScope(Dispatchers.IO + capsulesJob)
     // Variables for showing/hiding loading indicators
     private var areCapsulesLoading: MutableLiveData<Boolean> = MutableLiveData()
     // Set value to message to be shown in snackbar
@@ -53,7 +55,7 @@ class CapsulesRepository(
         // Start loading process
         areCapsulesLoading.value = true
         Log.d("Repository", "refreshCapsules called")
-        GlobalScope.launch(Dispatchers.IO) {
+        capsulesScope.launch(Dispatchers.IO) {
             try {
                 fetchCapsulesAndSaveToDb()
             } catch (exception: Exception) {
@@ -69,6 +71,9 @@ class CapsulesRepository(
             }
         }
     }
+
+    // Used to cancel coroutines from CapsulesViewModel
+    fun cancelCoroutines() = capsulesJob.cancel()
 
     private suspend fun fetchCapsulesAndSaveToDb() {
         val response = spaceService.getAllCapsules().await()

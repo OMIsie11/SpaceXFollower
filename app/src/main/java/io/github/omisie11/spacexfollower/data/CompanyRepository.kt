@@ -17,6 +17,8 @@ class CompanyRepository(
     private val sharedPrefs: SharedPreferences
 ) {
 
+    private val companyJob = Job()
+    private val companyScope = CoroutineScope(Dispatchers.IO + companyJob)
     private var isCompanyInfoLoading: MutableLiveData<Boolean> = MutableLiveData()
     private val companyInfoSnackBar = MutableLiveData<String>()
 
@@ -50,7 +52,7 @@ class CompanyRepository(
         // Start loading process
         isCompanyInfoLoading.value = true
         Log.d("Repository", "refreshCompanyInfo called")
-        GlobalScope.launch(Dispatchers.IO) {
+        companyScope.launch(Dispatchers.IO) {
             try {
                 fetchCompanyInfoAndSaveToDb()
             } catch (exception: Exception) {
@@ -66,6 +68,8 @@ class CompanyRepository(
             }
         }
     }
+
+    fun cancelCoroutines() = companyJob.cancel()
 
     private suspend fun fetchCompanyInfoAndSaveToDb() {
         val response = spaceService.getCompanyInfo().await()

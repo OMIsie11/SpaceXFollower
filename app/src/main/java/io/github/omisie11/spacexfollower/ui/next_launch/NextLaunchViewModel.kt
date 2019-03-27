@@ -37,4 +37,9 @@ class NextLaunchViewModel(private val repository: NextLaunchRepository) : ViewMo
         _snackBar.value = null
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        // Cancel running coroutines in repository
+        repository.cancelCoroutines()
+    }
 }

@@ -34,4 +34,10 @@ class CompanyViewModel(private val repository: CompanyRepository) : ViewModel() 
     fun onSnackbarShown() {
         _snackBar.value = null
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        // Cancel running coroutines in repository
+        repository.cancelCoroutines()
+    }
 }

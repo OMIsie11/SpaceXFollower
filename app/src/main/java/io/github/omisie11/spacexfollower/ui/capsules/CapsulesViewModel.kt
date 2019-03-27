@@ -37,4 +37,10 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
     fun onSnackbarShown() {
         _snackBar.value = null
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        // Cancel running coroutines in repository
+        repository.cancelCoroutines()
+    }
 }

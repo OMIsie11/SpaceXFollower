@@ -17,6 +17,8 @@ class CoresRepository(
     private val sharedPrefs: SharedPreferences
 ) {
 
+    private val coresJob = Job()
+    private val coresScope = CoroutineScope(Dispatchers.IO + coresJob)
     private var areCoresLoading: MutableLiveData<Boolean> = MutableLiveData()
     private val coresSnackBar = MutableLiveData<String>()
 
@@ -51,7 +53,7 @@ class CoresRepository(
         // Start loading process
         areCoresLoading.value = true
         Log.d("Repository", "refreshCores called")
-        GlobalScope.launch(Dispatchers.IO) {
+        coresScope.launch(Dispatchers.IO) {
             try {
                 fetchCoresAndSaveToDb()
             } catch (exception: Exception) {
@@ -67,6 +69,8 @@ class CoresRepository(
             }
         }
     }
+
+    fun cancelCoroutines() = coresJob.cancel()
 
     private suspend fun fetchCoresAndSaveToDb() {
         val response = spaceService.getAllCores().await()

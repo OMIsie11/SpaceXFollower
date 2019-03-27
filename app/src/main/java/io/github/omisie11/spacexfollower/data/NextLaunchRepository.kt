@@ -8,10 +8,7 @@ import io.github.omisie11.spacexfollower.data.dao.NextLaunchDao
 import io.github.omisie11.spacexfollower.data.model.NextLaunch
 import io.github.omisie11.spacexfollower.network.SpaceService
 import io.github.omisie11.spacexfollower.util.KEY_NEXT_LAUNCH_LAST_REFRESH
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.IO
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.io.IOException
 
 class NextLaunchRepository(
@@ -20,6 +17,8 @@ class NextLaunchRepository(
     private val sharedPrefs: SharedPreferences
 ) {
 
+    private val nextLaunchJob = Job()
+    private val nextLaunchScope = CoroutineScope(Dispatchers.IO + nextLaunchJob)
     // Variables for showing/hiding loading indicators
     private var isNextLaunchLoading: MutableLiveData<Boolean> = MutableLiveData()
     // Set value to message to be shown in snackbar
@@ -55,7 +54,7 @@ class NextLaunchRepository(
         // Start loading process
         isNextLaunchLoading.value = true
         Log.d("Repository", "refreshNextLaunch called")
-        GlobalScope.launch(Dispatchers.IO) {
+        nextLaunchScope.launch(Dispatchers.IO) {
             try {
                 fetchNextLaunchInfoAndSaveToDb()
             } catch (exception: Exception) {
@@ -71,6 +70,8 @@ class NextLaunchRepository(
             }
         }
     }
+
+    fun cancelCoroutines() = nextLaunchJob.cancel()
 
     private suspend fun fetchNextLaunchInfoAndSaveToDb() {
         val response = spaceService.getNextLaunch().await()
