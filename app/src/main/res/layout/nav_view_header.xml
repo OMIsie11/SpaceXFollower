@@ -11,7 +11,7 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SPACE X Follower"
+            android:text="@string/label_nav_view_header"
             android:textSize="22sp"
             android:fontFamily="sans-serif-thin"/>
 

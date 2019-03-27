@@ -1,10 +1,39 @@
 <resources>
     <string name="app_name">SpaceXFollower</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="snackbar_action_retry">Retry</string>
 
     <!-- Company fragment -->
     <string name="company_valuation">$ %1$s</string>
+
+    <!-- Nav drawer menu items and labels -->
+    <string name="label_nav_view_header">SPACE X Follower</string>
+    <string name="label_next_launch">Next Launch</string>
+    <string name="label_capsules">Capsules</string>
+    <string name="label_cores">Cores</string>
+    <string name="label_company">Company</string>
+    <string name="label_settings">Settings</string>
+    <string name="label_capsule_detail">Capsule Detail</string>
+    <string name="label_core_detail">Core Detail</string>
+
+    <string name="title_capsule_serial">Capsule serial</string>
+    <string name="title_type">Type</string>
+    <string name="title_status">Status</string>
+    <string name="title_original_launch_utc_time">Original launch (UTC time)</string>
+    <string name="title_details">Details</string>
+    <string name="title_landings">Landings</string>
+    <string name="title_reused">Reused</string>
+    <string name="title_spacex">SpaceX</string>
+    <string name="title_summary">Summary</string>
+    <string name="founded_by_elon_musk">Founded by Elon Musk</string>
+    <string name="title_resources">Resources</string>
+    <string name="title_employees">employees</string>
+    <string name="title_vehicles">vehicles</string>
+    <string name="title_launch_sites">launch sites</string>
+    <string name="title_test_sites">test sites</string>
+    <string name="title_valuation">Valuation</string>
+    <string name="title_headquarters">Headquarters</string>
+    <string name="title_city">city</string>
+
+
 </resources>

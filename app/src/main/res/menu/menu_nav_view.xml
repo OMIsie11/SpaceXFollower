@@ -3,26 +3,26 @@
 
     <item
             android:id="@id/next_launch_dest"
-            android:title="Next Launch"
+            android:title="@string/label_next_launch"
             android:checkable="true"/>
 
     <item
             android:id="@id/capsules_dest"
-            android:title="Capsules"
+            android:title="@string/label_capsules"
             android:checkable="true"/>
 
     <item
             android:id="@id/cores_dest"
-            android:title="Cores"
+            android:title="@string/label_cores"
             android:checkable="true"/>
 
     <item
             android:id="@id/company_dest"
-            android:title="Company"
+            android:title="@string/label_company"
             android:checkable="true"/>
 
     <item
             android:id="@id/settings_dest"
-            android:title="Settings"
+            android:title="@string/label_settings"
             android:checkable="true"/>
 </menu>

@@ -1,53 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_graph"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/navigation_graph"
             app:startDestination="@id/next_launch_dest">
 
-    <fragment android:id="@+id/capsules_dest"
-              android:name="io.github.omisie11.spacexfollower.ui.capsules.CapsulesFragment"
-              android:label="Capsules">
-        <action android:id="@+id/action_capsules_dest_to_capsule_detail_dest"
-                app:destination="@id/capsule_detail_dest" app:enterAnim="@anim/nav_default_enter_anim"
-                app:exitAnim="@anim/nav_default_exit_anim"
-        />
-    </fragment>
-
-    <fragment android:id="@+id/cores_dest"
-              android:name="io.github.omisie11.spacexfollower.ui.cores.CoresFragment"
-              android:label="Cores"
-              tools:layout="@layout/fragment_recycler">
-        <action android:id="@+id/action_cores_dest_to_coresDetailFragment"
-                app:destination="@id/core_detail_dest" app:enterAnim="@anim/nav_default_enter_anim"
+    <fragment
+            android:id="@+id/capsules_dest"
+            android:name="io.github.omisie11.spacexfollower.ui.capsules.CapsulesFragment"
+            android:label="@string/label_capsules">
+        <action
+                android:id="@+id/action_capsules_dest_to_capsule_detail_dest"
+                app:destination="@id/capsule_detail_dest"
+                app:enterAnim="@anim/nav_default_enter_anim"
                 app:exitAnim="@anim/nav_default_exit_anim"/>
     </fragment>
 
-    <fragment android:id="@+id/settings_dest"
-              android:name="io.github.omisie11.spacexfollower.ui.SettingsFragment"
-              android:label="Settings"/>
-
-    <fragment android:id="@+id/company_dest"
-              android:name="io.github.omisie11.spacexfollower.ui.company.CompanyFragment"
-              android:label="Company"
-              tools:layout="@layout/fragment_company"/>
-
-    <fragment android:id="@+id/capsule_detail_dest"
-              android:name="io.github.omisie11.spacexfollower.ui.capsules.CapsuleDetailFragment"
-              android:label="Capsule Detail"
-              tools:layout="@layout/fragment_capsule_detail">
-        <argument android:name="itemId"
-                  app:argType="integer"
-                  android:defaultValue="0"/>
+    <fragment
+            android:id="@+id/cores_dest"
+            android:name="io.github.omisie11.spacexfollower.ui.cores.CoresFragment"
+            android:label="@string/label_cores"
+            tools:layout="@layout/fragment_recycler">
+        <action
+                android:id="@+id/action_cores_dest_to_coresDetailFragment"
+                app:destination="@id/core_detail_dest"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"/>
     </fragment>
-    <fragment android:id="@+id/core_detail_dest"
-              android:name="io.github.omisie11.spacexfollower.ui.cores.CoreDetailFragment"
-              android:label="Core Detail"
-              tools:layout="@layout/fragment_core_detail">
-        <argument android:name="itemId"
-                  app:argType="integer"
-                  android:defaultValue="0"/>
+
+    <fragment
+            android:id="@+id/settings_dest"
+            android:name="io.github.omisie11.spacexfollower.ui.SettingsFragment"
+            android:label="@string/label_settings"/>
+
+    <fragment
+            android:id="@+id/company_dest"
+            android:name="io.github.omisie11.spacexfollower.ui.company.CompanyFragment"
+            android:label="@string/label_company"
+            tools:layout="@layout/fragment_company"/>
+
+    <fragment
+            android:id="@+id/capsule_detail_dest"
+            android:name="io.github.omisie11.spacexfollower.ui.capsules.CapsuleDetailFragment"
+            android:label="@string/label_capsule_detail"
+            tools:layout="@layout/fragment_capsule_detail">
+        <argument
+                android:name="itemId"
+                app:argType="integer"
+                android:defaultValue="0"/>
     </fragment>
-    <fragment android:id="@+id/next_launch_dest"
-              android:name="io.github.omisie11.spacexfollower.ui.next_launch.NextLaunchFragment"
-              android:label="Next Launch" tools:layout="@layout/fragment_next_launch"/>
+
+    <fragment
+            android:id="@+id/core_detail_dest"
+            android:name="io.github.omisie11.spacexfollower.ui.cores.CoreDetailFragment"
+            android:label="@string/label_core_detail"
+            tools:layout="@layout/fragment_core_detail">
+        <argument
+                android:name="itemId"
+                app:argType="integer"
+                android:defaultValue="0"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/next_launch_dest"
+            android:name="io.github.omisie11.spacexfollower.ui.next_launch.NextLaunchFragment"
+            android:label="@string/label_next_launch"
+            tools:layout="@layout/fragment_next_launch"/>
 </navigation>
