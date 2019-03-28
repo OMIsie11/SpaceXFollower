@@ -8,6 +8,7 @@ import io.github.omisie11.spacexfollower.data.dao.CapsulesDao
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import io.github.omisie11.spacexfollower.network.SpaceService
 import io.github.omisie11.spacexfollower.util.KEY_CAPSULES_LAST_REFRESH
+import io.github.omisie11.spacexfollower.util.PREFS_KEY_REFRESH_INTERVAL
 import kotlinx.coroutines.*
 import java.io.IOException
 
@@ -96,7 +97,7 @@ class CapsulesRepository(
         val lastRefreshTime = sharedPrefs.getLong(sharedPrefsKey, 0)
         Log.d("Repository", "Current time in millis $currentTimeMillis")
         // Get refresh interval set in app settings (in hours) and multiply to get value in ms
-        val refreshIntervalHours = sharedPrefs.getString("prefs_refresh_interval", "3")?.toInt() ?: 3
+        val refreshIntervalHours = sharedPrefs.getString(PREFS_KEY_REFRESH_INTERVAL, "3")?.toInt() ?: 3
         val refreshInterval = refreshIntervalHours * 3600000
         Log.d("Repository", "Refresh Interval from settings: $refreshInterval")
         // If last refresh was made longer than interval, return true

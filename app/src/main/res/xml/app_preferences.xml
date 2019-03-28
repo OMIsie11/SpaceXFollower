@@ -13,6 +13,13 @@
                 android:entryValues="@array/settings_refresh_interval_values"
                 android:defaultValue="3"/>
 
+        <SwitchPreference
+                android:key="prefs_dark_mode"
+                android:title="Dark mode"
+                android:summaryOn="Dark mode enabled"
+                android:summaryOff="Dark mode disabled"
+                android:defaultValue="false"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>
