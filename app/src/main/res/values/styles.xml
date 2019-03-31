@@ -22,7 +22,6 @@
         <item name="shapeAppearanceLargeComponent">@style/AppShapeAppearance.LargeComponent</item>
 
         <item name="materialButtonStyle">@style/AppButton</item>
-        <item name="materialAlertDialogTheme">@style/MaterialAlertDialog</item>
         <item name="alertDialogTheme">@style/MaterialAlertDialog</item>
 
     </style>
@@ -49,7 +48,8 @@
     </style>
 
     <!-- Styles needed to theme Settings ListPreference button on alert dialog -->
-    <style name="MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+    <style name="MaterialAlertDialog" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <item name="colorAccent">@color/colorSecondary</item>
         <item name="buttonBarButtonStyle">@style/MaterialButtonBarButtonStyle</item>
     </style>
     <style name="MaterialButtonBarButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
