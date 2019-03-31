@@ -28,8 +28,7 @@
             android:layout_gravity="start"
             app:headerLayout="@layout/nav_view_header"
             app:menu="@menu/menu_nav_view"
-            app:itemBackground="@drawable/nav_view_item_background"/>
-         <!--app:itemTextColor="@drawable/nav_view_colors"
-             -->
+            app:itemBackground="@drawable/nav_view_item_background"
+            app:itemTextColor="@drawable/nav_view_text_colors"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
