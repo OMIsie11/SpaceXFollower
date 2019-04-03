@@ -34,7 +34,8 @@ class CoreDetailFragment : Fragment() {
 
         viewModel.getCores().observe(viewLifecycleOwner, Observer<List<Core>> { cores ->
             text_core_serial.text = cores[selectedCoreId].coreSerial
-            text_core_block.text = cores[selectedCoreId].block.toString()
+            text_core_block.text = if (cores[selectedCoreId].block == null)
+                "-" else cores[selectedCoreId].block.toString()
             text_core_status.text = cores[selectedCoreId].status
             text_core_launch.text = if (cores[selectedCoreId].originalLaunch.isNullOrEmpty())
                 "No launch time provided" else cores[selectedCoreId].originalLaunch
@@ -44,7 +45,9 @@ class CoreDetailFragment : Fragment() {
             text_core_rtls_landings.text = cores[selectedCoreId].rtlsLandings.toString()
             text_core_asds_attempts.text = cores[selectedCoreId].asdsAttempts.toString()
             text_core_asds_landings.text = cores[selectedCoreId].asdsLandings.toString()
-            text_core_water_landing.text = cores[selectedCoreId].waterLandings.toString()
+            text_core_water_landing.text = when (cores[selectedCoreId].waterLandings) {
+                true -> "Yes"; false -> "No"
+            }
             text_core_reused.text = cores[selectedCoreId].reuseCount.toString()
         })
     }
