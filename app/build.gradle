@@ -32,6 +32,7 @@ dependencies {
     def retrofit_version = "2.5.0"
     def nav_version = "1.0.0"
     def material_version = "1.1.0-alpha04"
+    def koin_version = "2.0.0-rc-2"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -40,6 +41,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.preference:preference:1.0.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1"
     // Room
     implementation "androidx.room:room-runtime:$room_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -53,14 +55,11 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
     // Koin Android
-    implementation 'org.koin:koin-android:1.0.2'
-    // Koin AndroidX ViewModel feature
-    implementation "org.koin:koin-androidx-viewmodel:1.0.2"
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
     // Navigation component
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version" // use -ktx for Kotlin
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version" // use -ktx for Kotlin
-
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
