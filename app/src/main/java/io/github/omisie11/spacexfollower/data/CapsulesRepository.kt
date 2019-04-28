@@ -44,10 +44,11 @@ class CapsulesRepository(
     fun getCapsulesSnackbar(): MutableLiveData<String> = capsulesSnackBar
 
     suspend fun refreshIfCapsulesDataOld() {
-        if (checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH)) {
+        val isCapsulesRefreshNeeded = withContext(Dispatchers.IO) { checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH) }
+        if (isCapsulesRefreshNeeded) {
+            Log.d("CapsulesRepo", "refreshIfCapsulesDataOld: Refreshing capsules")
             refreshCapsules()
-            Log.d("refreshCapsules", "Refreshing capsules")
-        }
+        } else Log.d("CapsulesRepo", "refreshIfCapsulesDataOld: No refresh needed")
     }
 
     suspend fun refreshCapsules() {
@@ -75,7 +76,7 @@ class CapsulesRepository(
         Log.d("Repo", "fetchCapsulesAndSaveToDb called")
         val response = spaceService.getAllCapsules().await()
         if (response.isSuccessful) {
-            Log.d("Repo", "Response SUCCESSFUL")
+            Log.d("CapsulesRepo", "Response SUCCESSFUL")
             response.body()?.let { capsulesDao.insertCapsules(it) }
             // Save new capsules last refresh time
             with(sharedPrefs.edit()) {

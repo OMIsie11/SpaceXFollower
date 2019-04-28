@@ -12,6 +12,7 @@ import io.github.omisie11.spacexfollower.util.PREFS_KEY_REFRESH_INTERVAL
 import kotlinx.coroutines.*
 import java.io.IOException
 
+
 class CompanyRepository(
     private val spaceService: SpaceService,
     private val companyDao: CompanyDao,
@@ -41,10 +42,11 @@ class CompanyRepository(
     fun getCompanyInfoSnackbar(): MutableLiveData<String> = companyInfoSnackBar
 
     suspend fun refreshIfCompanyDataOld() {
-        if (checkIfRefreshIsNeeded(KEY_COMPANY_LAST_REFRESH)) {
+        val isCompanyRefreshNeeded = withContext(Dispatchers.IO) { checkIfRefreshIsNeeded(KEY_COMPANY_LAST_REFRESH) }
+        if (isCompanyRefreshNeeded) {
+            Log.d("CompanyRepo", "refreshIfCompanyDataOld: Refreshing company info")
             refreshCompanyInfo()
-            Log.d("refreshCompanyInfo", "Refreshing company info")
-        }
+        } else Log.d("CompanyRepo", "refreshIfCompanyDataOld: No refresh needed")
     }
 
     suspend fun refreshCompanyInfo() {
@@ -72,6 +74,7 @@ class CompanyRepository(
     private suspend fun fetchCompanyInfoAndSaveToDb() {
         val response = spaceService.getCompanyInfo().await()
         if (response.isSuccessful) {
+            Log.d("CompanyRepo", "Response SUCCESSFUL")
             response.body()?.let { companyDao.insertCompanyInfo(it) }
             // Save company info last refresh time
             with(sharedPrefs.edit()) {

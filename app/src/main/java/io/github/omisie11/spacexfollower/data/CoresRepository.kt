@@ -12,6 +12,7 @@ import io.github.omisie11.spacexfollower.util.PREFS_KEY_REFRESH_INTERVAL
 import kotlinx.coroutines.*
 import java.io.IOException
 
+
 class CoresRepository(
     private val spaceService: SpaceService,
     private val coresDao: CoresDao,
@@ -42,10 +43,11 @@ class CoresRepository(
     fun getCoresSnackbar(): MutableLiveData<String> = coresSnackBar
 
     suspend fun refreshIfCoresDataOld() {
-        if (checkIfRefreshIsNeeded(KEY_CORES_LAST_REFRESH)) {
+        val isCoresRefreshNeeded = withContext(Dispatchers.IO) { checkIfRefreshIsNeeded(KEY_CORES_LAST_REFRESH) }
+        if (isCoresRefreshNeeded) {
+            Log.d("CoresRepo", "refreshIfCoresDataOld: Refreshing cores")
             refreshCores()
-            Log.d("refreshCores", "Refreshing cores")
-        }
+        } else Log.d("CoresRepo", "refreshIfCoresDataOld: No refresh needed")
     }
 
     suspend fun refreshCores() {
@@ -54,17 +56,7 @@ class CoresRepository(
         Log.d("Repository", "refreshCores called")
         withContext(Dispatchers.IO) {
             try {
-                val response = spaceService.getAllCores().await()
-                if (response.isSuccessful) {
-                    response.body()?.let { coresDao.insertCores(it) }
-                    // Save new cores last refresh time
-                    with(sharedPrefs.edit()) {
-                        putLong(KEY_CORES_LAST_REFRESH, System.currentTimeMillis())
-                        apply()
-                    }
-                } else Log.d("Repository", "Error: ${response.errorBody()}")
-                // Cores no longer fetching, hide loading indicator
-                areCoresLoading.postValue(false)
+                fetchCoresAndSaveToDb()
             } catch (exception: Exception) {
                 // ToDo: Handle exceptions and no network exception
                 areCoresLoading.postValue(false)
@@ -79,11 +71,10 @@ class CoresRepository(
         }
     }
 
-
-/*
     private suspend fun fetchCoresAndSaveToDb() {
         val response = spaceService.getAllCores().await()
         if (response.isSuccessful) {
+            Log.d("CoresRepo", "Response SUCCESSFUL")
             response.body()?.let { coresDao.insertCores(it) }
             // Save new cores last refresh time
             with(sharedPrefs.edit()) {
@@ -94,7 +85,6 @@ class CoresRepository(
         // Cores no longer fetching, hide loading indicator
         areCoresLoading.postValue(false)
     }
-*/
 
     // Check if data refresh is needed
     private fun checkIfRefreshIsNeeded(sharedPrefsKey: String): Boolean {

@@ -12,6 +12,7 @@ import io.github.omisie11.spacexfollower.util.PREFS_KEY_REFRESH_INTERVAL
 import kotlinx.coroutines.*
 import java.io.IOException
 
+
 class NextLaunchRepository(
     private val nextLaunchDao: NextLaunchDao,
     private val spaceService: SpaceService,
@@ -29,10 +30,10 @@ class NextLaunchRepository(
 
     // Wrapper for getting all capsules from Db
     fun getNextLaunch(): LiveData<NextLaunch> {
-       // if (checkIfRefreshIsNeeded(KEY_NEXT_LAUNCH_LAST_REFRESH)) {
-       //     refreshNextLaunchInfo()
-       //     Log.d("refreshNextLaunch", "Refreshing next launch data")
-       // }
+        // if (checkIfRefreshIsNeeded(KEY_NEXT_LAUNCH_LAST_REFRESH)) {
+        //     refreshNextLaunchInfo()
+        //     Log.d("refreshNextLaunch", "Refreshing next launch data")
+        // }
         return nextLaunchDao.getNextLaunch()
     }
 
@@ -43,10 +44,12 @@ class NextLaunchRepository(
     fun getNextLaunchSnackbar(): MutableLiveData<String> = nextLaunchSnackBar
 
     suspend fun refreshIfCapsulesDataOld() {
-        if (checkIfRefreshIsNeeded(KEY_NEXT_LAUNCH_LAST_REFRESH)) {
+        val isNextLaunchRefreshNeeded =
+            withContext(Dispatchers.IO) { checkIfRefreshIsNeeded(KEY_NEXT_LAUNCH_LAST_REFRESH) }
+        if (isNextLaunchRefreshNeeded) {
+            Log.d("NextLaunchRepo", "refreshIfCapsulesDataOld: Refreshing next launch info")
             refreshNextLaunchInfo()
-            Log.d("refreshCapsules", "Refreshing capsules")
-        }
+        } else Log.d("NextLaunchRepo", "refreshIfCapsulesDataOld: No refresh needed")
     }
 
     suspend fun refreshNextLaunchInfo() {
@@ -73,6 +76,7 @@ class NextLaunchRepository(
     private suspend fun fetchNextLaunchInfoAndSaveToDb() {
         val response = spaceService.getNextLaunch().await()
         if (response.isSuccessful) {
+            Log.d("NextLaunchRepo", "Response SUCCESSFUL")
             response.body()?.let { nextLaunchDao.insertNextLaunch(it) }
             // Save new capsules last refresh time
             with(sharedPrefs.edit()) {
