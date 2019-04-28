@@ -5,8 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.github.omisie11.spacexfollower.data.CompanyRepository
 import io.github.omisie11.spacexfollower.data.model.Company
+import kotlinx.coroutines.*
 
 class CompanyViewModel(private val repository: CompanyRepository) : ViewModel() {
+
+    private val viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val mCompanyInfo by lazy { repository.getCompanyInfo() }
     private val _isCompanyInfoLoading by lazy { repository.getCompanyInfoLoadingStatus() }
@@ -16,11 +20,11 @@ class CompanyViewModel(private val repository: CompanyRepository) : ViewModel() 
 
     fun getCompanyInfoLoadingStatus() = _isCompanyInfoLoading
 
-    fun refreshCompanyInfo() = repository.refreshCompanyInfo()
+    fun refreshCompanyInfo() = uiScope.launch { repository.refreshCompanyInfo() }
 
-    fun refreshIfCompanyDataOld() = repository.refreshIfCompanyDataOld()
+    fun refreshIfCompanyDataOld() = uiScope.launch { repository.refreshIfCompanyDataOld() }
 
-    fun deleteCompanyInfo() = repository.deleteCompanyInfo()
+    fun deleteCompanyInfo() = uiScope.launch { repository.deleteCompanyInfo() }
 
     /**
      * Request a snackbar to display a string.
@@ -38,6 +42,6 @@ class CompanyViewModel(private val repository: CompanyRepository) : ViewModel() 
     override fun onCleared() {
         super.onCleared()
         // Cancel running coroutines in repository
-        repository.cancelCoroutines()
+        viewModelJob.cancel()
     }
 }

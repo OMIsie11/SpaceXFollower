@@ -5,8 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.github.omisie11.spacexfollower.data.NextLaunchRepository
 import io.github.omisie11.spacexfollower.data.model.NextLaunch
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class NextLaunchViewModel(private val repository: NextLaunchRepository) : ViewModel() {
+
+    private val viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val nextLaunch: LiveData<NextLaunch> by lazy { repository.getNextLaunch() }
     private val _isNextLaunchLoading: LiveData<Boolean> by lazy { repository.getNextLaunchLoadingStatus() }
@@ -17,12 +24,12 @@ class NextLaunchViewModel(private val repository: NextLaunchRepository) : ViewMo
     fun getNextLaunchLoadingStatus(): LiveData<Boolean> = _isNextLaunchLoading
 
     // Wrapper for refreshing next launch data
-    fun refreshNextLaunch() = repository.refreshNextLaunchInfo()
+    fun refreshNextLaunch() = uiScope.launch { repository.refreshNextLaunchInfo() }
 
     // Wrapper for refreshing old data in onResume
-    fun refreshIfNextLaunchDataOld() = repository.refreshIfCapsulesDataOld()
+    fun refreshIfNextLaunchDataOld() = uiScope.launch { repository.refreshIfCapsulesDataOld() }
 
-    fun deleteNextLaunchData() = repository.deleteNextLaunchData()
+    fun deleteNextLaunchData() = uiScope.launch { repository.deleteNextLaunchData() }
 
     /**
      * Request a snackbar to display a string.
@@ -40,6 +47,6 @@ class NextLaunchViewModel(private val repository: NextLaunchRepository) : ViewMo
     override fun onCleared() {
         super.onCleared()
         // Cancel running coroutines in repository
-        repository.cancelCoroutines()
+        viewModelJob.cancel()
     }
 }

@@ -18,8 +18,6 @@ class CompanyRepository(
     private val sharedPrefs: SharedPreferences
 ) {
 
-    private val companyJob = Job()
-    private val companyScope = CoroutineScope(Dispatchers.IO + companyJob)
     private var isCompanyInfoLoading: MutableLiveData<Boolean> = MutableLiveData()
     private val companyInfoSnackBar = MutableLiveData<String>()
 
@@ -29,31 +27,31 @@ class CompanyRepository(
 
     fun getCompanyInfo(): LiveData<Company> {
         // Check if refresh is needed
-        if (checkIfRefreshIsNeeded(KEY_COMPANY_LAST_REFRESH)) {
-            refreshCompanyInfo()
-            Log.d("refreshCompanyInfo", "Refreshing cores")
-        }
+        //if (checkIfRefreshIsNeeded(KEY_COMPANY_LAST_REFRESH)) {
+        //    refreshCompanyInfo()
+        //    Log.d("refreshCompanyInfo", "Refreshing cores")
+        //}
         return companyDao.getCompanyInfo()
     }
 
-    fun deleteCompanyInfo() = GlobalScope.launch(Dispatchers.IO) { companyDao.deleteCompanyInfo() }
+    suspend fun deleteCompanyInfo() = withContext(Dispatchers.IO) { companyDao.deleteCompanyInfo() }
 
     fun getCompanyInfoLoadingStatus(): LiveData<Boolean> = isCompanyInfoLoading
 
     fun getCompanyInfoSnackbar(): MutableLiveData<String> = companyInfoSnackBar
 
-    fun refreshIfCompanyDataOld() {
+    suspend fun refreshIfCompanyDataOld() {
         if (checkIfRefreshIsNeeded(KEY_COMPANY_LAST_REFRESH)) {
             refreshCompanyInfo()
             Log.d("refreshCompanyInfo", "Refreshing company info")
         }
     }
 
-    fun refreshCompanyInfo() {
+    suspend fun refreshCompanyInfo() {
         // Start loading process
         isCompanyInfoLoading.value = true
         Log.d("Repository", "refreshCompanyInfo called")
-        companyScope.launch(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             try {
                 fetchCompanyInfoAndSaveToDb()
             } catch (exception: Exception) {
@@ -70,7 +68,6 @@ class CompanyRepository(
         }
     }
 
-    fun cancelCoroutines() = companyJob.cancel()
 
     private suspend fun fetchCompanyInfoAndSaveToDb() {
         val response = spaceService.getCompanyInfo().await()

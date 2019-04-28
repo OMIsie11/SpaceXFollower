@@ -44,6 +44,6 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         // Cancel running coroutines in repository
-        uiScope.cancel()
+        viewModelJob.cancel()
     }
 }

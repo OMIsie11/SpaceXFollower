@@ -56,22 +56,7 @@ class CapsulesRepository(
         Log.d("Repository", "refreshCapsules called")
         withContext(Dispatchers.IO) {
             try {
-                //fetchCapsulesAndSaveToDb()
-                val response = spaceService.getAllCapsules().await()
-                if (response.isSuccessful) {
-                    Log.d("Repo", "Response SUCCESSFUL")
-                    response.body()?.let {
-                        Log.d("Repo", "Saving capsules")
-                        capsulesDao.insertCapsules(it)
-                    }
-                    // Save new capsules last refresh time
-                    with(sharedPrefs.edit()) {
-                        putLong(KEY_CAPSULES_LAST_REFRESH, System.currentTimeMillis())
-                        apply()
-                    }
-
-                } else Log.d("Repository", "Error: ${response.errorBody()}")
-                areCapsulesLoading.postValue(false)
+                fetchCapsulesAndSaveToDb()
             } catch (exception: Exception) {
                 // ToDo: Handle exceptions and no network exception
                 areCapsulesLoading.postValue(false)
@@ -86,7 +71,6 @@ class CapsulesRepository(
         }
     }
 
-/*
     private suspend fun fetchCapsulesAndSaveToDb() {
         Log.d("Repo", "fetchCapsulesAndSaveToDb called")
         val response = spaceService.getAllCapsules().await()
@@ -102,8 +86,6 @@ class CapsulesRepository(
         // Capsules no longer fetching, hide loading indicator
         areCapsulesLoading.postValue(false)
     }
-
-*/
 
     // Check if data refresh is needed
     private fun checkIfRefreshIsNeeded(sharedPrefsKey: String): Boolean {

@@ -9,9 +9,9 @@ import io.github.omisie11.spacexfollower.data.converters.HeadquarterConverter
 
 @Entity(tableName = "company_table") // ToDo: Default values
 data class Company(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Long,
+    val id: Long = 1,
     @SerializedName("name")
     @ColumnInfo(name = "name")
     val name: String,

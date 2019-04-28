@@ -18,8 +18,6 @@ class NextLaunchRepository(
     private val sharedPrefs: SharedPreferences
 ) {
 
-    private val nextLaunchJob = Job()
-    private val nextLaunchScope = CoroutineScope(Dispatchers.IO + nextLaunchJob)
     // Variables for showing/hiding loading indicators
     private var isNextLaunchLoading: MutableLiveData<Boolean> = MutableLiveData()
     // Set value to message to be shown in snackbar
@@ -31,31 +29,31 @@ class NextLaunchRepository(
 
     // Wrapper for getting all capsules from Db
     fun getNextLaunch(): LiveData<NextLaunch> {
-        if (checkIfRefreshIsNeeded(KEY_NEXT_LAUNCH_LAST_REFRESH)) {
-            refreshNextLaunchInfo()
-            Log.d("refreshNextLaunch", "Refreshing next launch data")
-        }
+       // if (checkIfRefreshIsNeeded(KEY_NEXT_LAUNCH_LAST_REFRESH)) {
+       //     refreshNextLaunchInfo()
+       //     Log.d("refreshNextLaunch", "Refreshing next launch data")
+       // }
         return nextLaunchDao.getNextLaunch()
     }
 
-    fun deleteNextLaunchData() = GlobalScope.launch(Dispatchers.IO) { nextLaunchDao.deleteNextLaunchInfo() }
+    suspend fun deleteNextLaunchData() = withContext(Dispatchers.IO) { nextLaunchDao.deleteNextLaunchInfo() }
 
     fun getNextLaunchLoadingStatus(): LiveData<Boolean> = isNextLaunchLoading
 
     fun getNextLaunchSnackbar(): MutableLiveData<String> = nextLaunchSnackBar
 
-    fun refreshIfCapsulesDataOld() {
+    suspend fun refreshIfCapsulesDataOld() {
         if (checkIfRefreshIsNeeded(KEY_NEXT_LAUNCH_LAST_REFRESH)) {
             refreshNextLaunchInfo()
             Log.d("refreshCapsules", "Refreshing capsules")
         }
     }
 
-    fun refreshNextLaunchInfo() {
+    suspend fun refreshNextLaunchInfo() {
         // Start loading process
         isNextLaunchLoading.value = true
         Log.d("Repository", "refreshNextLaunch called")
-        nextLaunchScope.launch(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             try {
                 fetchNextLaunchInfoAndSaveToDb()
             } catch (exception: Exception) {
@@ -71,8 +69,6 @@ class NextLaunchRepository(
             }
         }
     }
-
-    fun cancelCoroutines() = nextLaunchJob.cancel()
 
     private suspend fun fetchNextLaunchInfoAndSaveToDb() {
         val response = spaceService.getNextLaunch().await()
