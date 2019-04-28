@@ -19,8 +19,6 @@ class CapsulesRepository(
     private val sharedPrefs: SharedPreferences
 ) {
 
-    //private val capsulesJob = Job()
-    //private val capsulesScope = CoroutineScope(Dispatchers.IO + capsulesJob)
     // Variables for showing/hiding loading indicators
     private var areCapsulesLoading: MutableLiveData<Boolean> = MutableLiveData()
     // Set value to message to be shown in snackbar
@@ -32,10 +30,10 @@ class CapsulesRepository(
 
     // Wrapper for getting all capsules from Db
     fun getCapsules(): LiveData<List<Capsule>> {
-        if (checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH)) {
-            //refreshCapsules()
-            Log.d("refreshCapsules", "Refreshing capsules")
-        }
+        //if (checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH)) {
+        //    refreshCapsules()
+        //    Log.d("refreshCapsules", "Refreshing capsules")
+        //}
         return capsulesDao.getAllCapsules()
     }
 
@@ -45,9 +43,9 @@ class CapsulesRepository(
 
     fun getCapsulesSnackbar(): MutableLiveData<String> = capsulesSnackBar
 
-    fun refreshIfCapsulesDataOld() {
+    suspend fun refreshIfCapsulesDataOld() {
         if (checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH)) {
-            //refreshCapsules()
+            refreshCapsules()
             Log.d("refreshCapsules", "Refreshing capsules")
         }
     }

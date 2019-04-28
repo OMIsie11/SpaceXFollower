@@ -5,8 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.github.omisie11.spacexfollower.data.CoresRepository
 import io.github.omisie11.spacexfollower.data.model.Core
+import kotlinx.coroutines.*
 
 class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
+
+    private val viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val mAllCores: LiveData<List<Core>> by lazy { repository.getCores() }
     private val _areCoresLoading: LiveData<Boolean> by lazy { repository.getCoresLoadingStatus() }
@@ -17,12 +21,12 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
     fun getCoresLoadingStatus(): LiveData<Boolean> = _areCoresLoading
 
     // Wrapper for refreshing cores data
-    fun refreshCores() = repository.refreshCores()
+    fun refreshCores() = uiScope.launch { repository.refreshCores() }
 
     // Wrapper for refreshing old data in onResume
-    fun refreshIfCoresDataOld() = repository.refreshIfCoresDataOld()
+    fun refreshIfCoresDataOld() = uiScope.launch { repository.refreshIfCoresDataOld() }
 
-    fun deleteCoresData() = repository.deleteAllCores()
+    fun deleteCoresData() = uiScope.launch { repository.deleteAllCores() }
 
     /**
      * Request a snackbar to display a string.
@@ -40,6 +44,6 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         // Cancel running coroutines in repository
-        repository.cancelCoroutines()
+        uiScope.cancel()
     }
 }

@@ -18,8 +18,6 @@ class CoresRepository(
     private val sharedPrefs: SharedPreferences
 ) {
 
-    private val coresJob = Job()
-    private val coresScope = CoroutineScope(Dispatchers.IO + coresJob)
     private var areCoresLoading: MutableLiveData<Boolean> = MutableLiveData()
     private val coresSnackBar = MutableLiveData<String>()
 
@@ -30,33 +28,43 @@ class CoresRepository(
     // Wrapper for getting all cores from Db
     fun getCores(): LiveData<List<Core>> {
         // Check if refresh is needed
-        if (checkIfRefreshIsNeeded(KEY_CORES_LAST_REFRESH)) {
-            refreshCores()
-            Log.d("refreshCores", "Refreshing cores")
-        }
+        //if (checkIfRefreshIsNeeded(KEY_CORES_LAST_REFRESH)) {
+        //    refreshCores()
+        //    Log.d("refreshCores", "Refreshing cores")
+        //}
         return coresDao.getAllCores()
     }
 
-    fun deleteAllCores() = GlobalScope.launch(Dispatchers.IO) { coresDao.deleteAllCores() }
+    suspend fun deleteAllCores() = withContext(Dispatchers.IO) { coresDao.deleteAllCores() }
 
     fun getCoresLoadingStatus(): LiveData<Boolean> = areCoresLoading
 
     fun getCoresSnackbar(): MutableLiveData<String> = coresSnackBar
 
-    fun refreshIfCoresDataOld() {
+    suspend fun refreshIfCoresDataOld() {
         if (checkIfRefreshIsNeeded(KEY_CORES_LAST_REFRESH)) {
             refreshCores()
             Log.d("refreshCores", "Refreshing cores")
         }
     }
 
-    fun refreshCores() {
+    suspend fun refreshCores() {
         // Start loading process
         areCoresLoading.value = true
         Log.d("Repository", "refreshCores called")
-        coresScope.launch(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             try {
-                fetchCoresAndSaveToDb()
+                val response = spaceService.getAllCores().await()
+                if (response.isSuccessful) {
+                    response.body()?.let { coresDao.insertCores(it) }
+                    // Save new cores last refresh time
+                    with(sharedPrefs.edit()) {
+                        putLong(KEY_CORES_LAST_REFRESH, System.currentTimeMillis())
+                        apply()
+                    }
+                } else Log.d("Repository", "Error: ${response.errorBody()}")
+                // Cores no longer fetching, hide loading indicator
+                areCoresLoading.postValue(false)
             } catch (exception: Exception) {
                 // ToDo: Handle exceptions and no network exception
                 areCoresLoading.postValue(false)
@@ -71,8 +79,8 @@ class CoresRepository(
         }
     }
 
-    fun cancelCoroutines() = coresJob.cancel()
 
+/*
     private suspend fun fetchCoresAndSaveToDb() {
         val response = spaceService.getAllCores().await()
         if (response.isSuccessful) {
@@ -86,6 +94,7 @@ class CoresRepository(
         // Cores no longer fetching, hide loading indicator
         areCoresLoading.postValue(false)
     }
+*/
 
     // Check if data refresh is needed
     private fun checkIfRefreshIsNeeded(sharedPrefsKey: String): Boolean {
