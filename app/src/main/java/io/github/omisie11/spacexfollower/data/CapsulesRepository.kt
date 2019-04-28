@@ -19,8 +19,8 @@ class CapsulesRepository(
     private val sharedPrefs: SharedPreferences
 ) {
 
-    private val capsulesJob = Job()
-    private val capsulesScope = CoroutineScope(Dispatchers.IO + capsulesJob)
+    //private val capsulesJob = Job()
+    //private val capsulesScope = CoroutineScope(Dispatchers.IO + capsulesJob)
     // Variables for showing/hiding loading indicators
     private var areCapsulesLoading: MutableLiveData<Boolean> = MutableLiveData()
     // Set value to message to be shown in snackbar
@@ -33,13 +33,13 @@ class CapsulesRepository(
     // Wrapper for getting all capsules from Db
     fun getCapsules(): LiveData<List<Capsule>> {
         if (checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH)) {
-            refreshCapsules()
+            //refreshCapsules()
             Log.d("refreshCapsules", "Refreshing capsules")
         }
         return capsulesDao.getAllCapsules()
     }
 
-    fun deleteAllCapsules() = GlobalScope.launch(Dispatchers.IO) { capsulesDao.deleteAllCapsules() }
+    suspend fun deleteAllCapsules() = withContext(Dispatchers.IO) { capsulesDao.deleteAllCapsules() }
 
     fun getCapsulesLoadingStatus(): LiveData<Boolean> = areCapsulesLoading
 
@@ -47,18 +47,33 @@ class CapsulesRepository(
 
     fun refreshIfCapsulesDataOld() {
         if (checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH)) {
-            refreshCapsules()
+            //refreshCapsules()
             Log.d("refreshCapsules", "Refreshing capsules")
         }
     }
 
-    fun refreshCapsules() {
+    suspend fun refreshCapsules() {
         // Start loading process
         areCapsulesLoading.value = true
         Log.d("Repository", "refreshCapsules called")
-        capsulesScope.launch(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             try {
-                fetchCapsulesAndSaveToDb()
+                //fetchCapsulesAndSaveToDb()
+                val response = spaceService.getAllCapsules().await()
+                if (response.isSuccessful) {
+                    Log.d("Repo", "Response SUCCESSFUL")
+                    response.body()?.let {
+                        Log.d("Repo", "Saving capsules")
+                        capsulesDao.insertCapsules(it)
+                    }
+                    // Save new capsules last refresh time
+                    with(sharedPrefs.edit()) {
+                        putLong(KEY_CAPSULES_LAST_REFRESH, System.currentTimeMillis())
+                        apply()
+                    }
+
+                } else Log.d("Repository", "Error: ${response.errorBody()}")
+                areCapsulesLoading.postValue(false)
             } catch (exception: Exception) {
                 // ToDo: Handle exceptions and no network exception
                 areCapsulesLoading.postValue(false)
@@ -73,12 +88,12 @@ class CapsulesRepository(
         }
     }
 
-    // Used to cancel coroutines from CapsulesViewModel
-    fun cancelCoroutines() = capsulesJob.cancel()
-
+/*
     private suspend fun fetchCapsulesAndSaveToDb() {
+        Log.d("Repo", "fetchCapsulesAndSaveToDb called")
         val response = spaceService.getAllCapsules().await()
         if (response.isSuccessful) {
+            Log.d("Repo", "Response SUCCESSFUL")
             response.body()?.let { capsulesDao.insertCapsules(it) }
             // Save new capsules last refresh time
             with(sharedPrefs.edit()) {
@@ -89,6 +104,8 @@ class CapsulesRepository(
         // Capsules no longer fetching, hide loading indicator
         areCapsulesLoading.postValue(false)
     }
+
+*/
 
     // Check if data refresh is needed
     private fun checkIfRefreshIsNeeded(sharedPrefsKey: String): Boolean {

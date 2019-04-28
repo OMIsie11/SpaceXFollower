@@ -101,7 +101,7 @@ class CapsulesFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         // Fetch new data if last fetch was long ago
-        viewModel.refreshIfCapsulesDataOld()
+        //ToDo: viewModel.refreshIfCapsulesDataOld()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

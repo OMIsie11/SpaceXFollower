@@ -5,12 +5,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.github.omisie11.spacexfollower.data.CapsulesRepository
 import io.github.omisie11.spacexfollower.data.model.Capsule
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 
 class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel() {
 
+    private val viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
     private val allCapsules: LiveData<List<Capsule>> by lazy { repository.getCapsules() }
-    private val _areCapsulesLoading: LiveData<Boolean> by lazy { repository.getCapsulesLoadingStatus() }
+    private val _areCapsulesLoading: LiveData<Boolean> = repository.getCapsulesLoadingStatus()
     private val _snackBar: MutableLiveData<String> = repository.getCapsulesSnackbar()
 
     fun getCapsules(): LiveData<List<Capsule>> = allCapsules
@@ -18,12 +25,16 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
     fun getCapsulesLoadingStatus(): LiveData<Boolean> = _areCapsulesLoading
 
     // Wrapper for refreshing capsules data
-    fun refreshCapsules() = repository.refreshCapsules()
+    fun refreshCapsules() {
+        uiScope.launch {
+            repository.refreshCapsules()
+        }
+    }
 
     // Wrapper for refreshing old data in onResume
-    fun refreshIfCapsulesDataOld() = repository.refreshIfCapsulesDataOld()
+    //fun refreshIfCapsulesDataOld() = repository.refreshIfCapsulesDataOld()
 
-    fun deleteCapsulesData() = repository.deleteAllCapsules()
+    fun deleteCapsulesData() = uiScope.launch { repository.deleteAllCapsules() }
 
     /**
      * Request a snackbar to display a string.
@@ -41,6 +52,6 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
     override fun onCleared() {
         super.onCleared()
         // Cancel running coroutines in repository
-        repository.cancelCoroutines()
+        viewModelJob.cancel()
     }
 }
