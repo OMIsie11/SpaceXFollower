@@ -13,12 +13,12 @@
 
         <ImageView
                 android:id="@+id/image_capsule"
-                android:src="@color/colorSecondaryLight"
+                android:src="@drawable/capsule_dragon"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" android:scaleType="centerCrop"/>
 
         <TextView
                 android:text="@string/title_capsule_serial"
