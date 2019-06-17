@@ -14,4 +14,13 @@
         <item name="6_hours">6</item>
         <item name="8_hours">8</item>
     </string-array>
+    
+    <!-- Array containing ids of images to show in detail screens (capsules, cores) -->
+    <array name="detail_fragment_images">
+        <item>@drawable/detail_fragment_image_capsule_dragon</item>
+        <item>@drawable/detail_fragment_image_zuma</item>
+        <item>@drawable/detail_fragment_image_falcon_heavy_demo</item>
+        <item>@drawable/detail_fragment_image_intelsat_35e</item>
+        <item>@drawable/detail_fragment_image_thaicom_8</item>
+    </array>
 </resources>

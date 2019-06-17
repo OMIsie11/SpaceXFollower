@@ -11,6 +11,7 @@ import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import kotlinx.android.synthetic.main.fragment_capsule_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.random.Random
 
 
 class CapsuleDetailFragment : Fragment() {
@@ -42,5 +43,16 @@ class CapsuleDetailFragment : Fragment() {
             text_capsule_landings.text = capsules[selectedCapsuleId].landings.toString()
             text_capsule_reused.text = capsules[selectedCapsuleId].reuseCount.toString()
         })
+
+        // Randomly set image from resources
+        val imageId = Random.nextInt(0, 5)
+        val imagesArray = resources.obtainTypedArray(R.array.detail_fragment_images)
+        image_capsule.setImageResource(
+            imagesArray.getResourceId(
+                imageId,
+                R.drawable.detail_fragment_image_capsule_dragon
+            )
+        )
+        imagesArray.recycle()
     }
 }
