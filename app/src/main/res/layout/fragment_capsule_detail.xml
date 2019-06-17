@@ -13,7 +13,7 @@
 
         <ImageView
                 android:id="@+id/image_capsule"
-                android:src="@drawable/capsule_dragon"
+                android:src="@drawable/detail_fragment_image_capsule_dragon"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 app:layout_constraintStart_toStartOf="parent"
