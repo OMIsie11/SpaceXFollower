@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/text_flight_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            tools:text="75"/>
+
+    <TextView
+            android:id="@+id/text_launch_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/text_flight_number"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            tools:text="2007-03-21T01:10:00.000Z"/>
+
+    <TextView
+            android:id="@+id/text_mission_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            tools:text="Nusantara Satu (PSN-6) / GTO-1 / Beresheet"/>
+
+</RelativeLayout>

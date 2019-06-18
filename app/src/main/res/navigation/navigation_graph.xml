@@ -68,5 +68,5 @@
             tools:layout="@layout/fragment_next_launch"/>
     <fragment android:id="@+id/upcoming_launches_dest"
               android:name="io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesFragment"
-              android:label="@string/label_upcoming_launches" tools:layout="@layout/fragment_upcoming_launches"/>
+              android:label="@string/label_upcoming_launches" tools:layout="@layout/fragment_recycler"/>
 </navigation>
