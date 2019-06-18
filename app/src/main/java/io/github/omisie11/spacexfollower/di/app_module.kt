@@ -4,6 +4,7 @@ import androidx.preference.PreferenceManager
 import androidx.room.Room
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import io.github.omisie11.spacexfollower.data.*
+import io.github.omisie11.spacexfollower.data.dao.UpcomingLaunchesDao
 import io.github.omisie11.spacexfollower.network.SpaceService
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesAdapter
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesViewModel
@@ -11,6 +12,8 @@ import io.github.omisie11.spacexfollower.ui.company.CompanyViewModel
 import io.github.omisie11.spacexfollower.ui.cores.CoresAdapter
 import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel
 import io.github.omisie11.spacexfollower.ui.next_launch.NextLaunchViewModel
+import io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesAdapter
+import io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesViewModel
 import io.github.omisie11.spacexfollower.util.NumbersUtils
 import io.github.omisie11.spacexfollower.util.SPACE_X_BASE_URL
 import org.koin.android.ext.koin.androidApplication
@@ -111,4 +114,15 @@ val nextLaunchModule = module {
     single { NextLaunchRepository(get(), get(), get()) }
 
     viewModel { NextLaunchViewModel(get()) }
+}
+
+val upcomingLaunchesModule = module {
+
+    single { get<SpaceDatabase>().upcomingLaunchesDao() }
+
+    single { UpcomingLaunchesRepository(get(), get(), get()) }
+
+    viewModel { UpcomingLaunchesViewModel(get()) }
+
+    factory { UpcomingLaunchesAdapter() }
 }

@@ -1,9 +1,6 @@
 package io.github.omisie11.spacexfollower.network
 
-import io.github.omisie11.spacexfollower.data.model.Capsule
-import io.github.omisie11.spacexfollower.data.model.Company
-import io.github.omisie11.spacexfollower.data.model.Core
-import io.github.omisie11.spacexfollower.data.model.NextLaunch
+import io.github.omisie11.spacexfollower.data.model.*
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
@@ -25,4 +22,8 @@ interface SpaceService {
     // Next launch info
     @GET("v3/launches/next")
     fun getNextLaunch(): Deferred<Response<NextLaunch>>
+
+    // Upcoming Launches
+    @GET("v3/launches/upcoming")
+    fun getUpcomingLaunches(): Deferred<Response<List<UpcomingLaunch>>>
 }
