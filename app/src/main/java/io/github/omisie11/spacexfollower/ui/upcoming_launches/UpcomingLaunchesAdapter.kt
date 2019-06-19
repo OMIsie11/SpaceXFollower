@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.model.UpcomingLaunch
+import io.github.omisie11.spacexfollower.data.model.Launch.UpcomingLaunch
 import kotlinx.android.synthetic.main.upcoming_launches_recycler_item.view.*
 
 

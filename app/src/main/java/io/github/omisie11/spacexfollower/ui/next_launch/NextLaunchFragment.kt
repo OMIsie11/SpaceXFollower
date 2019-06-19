@@ -10,7 +10,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.snackbar.Snackbar
 
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.model.NextLaunch
+import io.github.omisie11.spacexfollower.data.model.Launch.NextLaunch
 import io.github.omisie11.spacexfollower.util.NumbersUtils
 import kotlinx.android.synthetic.main.fragment_next_launch.*
 import org.koin.android.ext.android.inject

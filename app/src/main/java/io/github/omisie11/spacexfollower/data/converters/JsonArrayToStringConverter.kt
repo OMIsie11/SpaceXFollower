@@ -6,17 +6,17 @@ import com.google.gson.reflect.TypeToken
 import java.util.*
 
 
-class MissionIdConverter {
+class JsonArrayToStringConverter {
 
     private val gson = Gson()
 
     @TypeConverter
-    fun missionsIdListToString(missionIds: MutableList<String>?): String? {
+    fun jsonArrayToString(missionIds: MutableList<String>?): String? {
         return gson.toJson(missionIds)
     }
 
     @TypeConverter
-    fun stringToMissionIdsList(data: String?): MutableList<String>? {
+    fun stringToJsonArray(data: String?): MutableList<String>? {
         if (data == null) {
             return Collections.emptyList()
         }

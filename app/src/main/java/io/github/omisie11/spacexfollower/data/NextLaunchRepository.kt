@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.github.omisie11.spacexfollower.data.dao.NextLaunchDao
-import io.github.omisie11.spacexfollower.data.model.NextLaunch
+import io.github.omisie11.spacexfollower.data.model.Launch.NextLaunch
 import io.github.omisie11.spacexfollower.network.SpaceService
 import io.github.omisie11.spacexfollower.util.KEY_NEXT_LAUNCH_LAST_REFRESH
 import io.github.omisie11.spacexfollower.util.PREFS_KEY_REFRESH_INTERVAL

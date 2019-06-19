@@ -1,12 +1,12 @@
-package io.github.omisie11.spacexfollower.data.model
+package io.github.omisie11.spacexfollower.data.model.Launch
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
-import io.github.omisie11.spacexfollower.data.converters.NextLaunchLaunchSiteConverter
-import io.github.omisie11.spacexfollower.data.converters.NextLaunchRocketConverter
+import io.github.omisie11.spacexfollower.data.converters.LaunchSiteConverter
+import io.github.omisie11.spacexfollower.data.converters.RocketConverter
 
 // Used for Next launch screen
 @Entity(tableName = "next_launch_table")
@@ -22,15 +22,15 @@ data class NextLaunch(
     @ColumnInfo(name = "launch_date_unix")
     val launchDateUnix: Long,
     @SerializedName("rocket")
-    @TypeConverters(NextLaunchRocketConverter::class)
+    @TypeConverters(RocketConverter::class)
     @ColumnInfo(name = "rocket")
     val rocket: Rocket,
     @SerializedName("launch_site")
-    @TypeConverters(NextLaunchLaunchSiteConverter::class)
+    @TypeConverters(LaunchSiteConverter::class)
     @ColumnInfo(name = "launch_site")
     val launchSite: LaunchSite
 ) {
-
+/*
     // ToDo: Implement rocket stages
     data class Rocket(
         @SerializedName("rocket_id")
@@ -48,5 +48,5 @@ data class NextLaunch(
         val siteName: String,
         @SerializedName("site_name_long")
         val siteNameLong: String
-    )
+    ) */
 }

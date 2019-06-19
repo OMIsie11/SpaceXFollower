@@ -6,6 +6,8 @@ import androidx.room.TypeConverters
 import io.github.omisie11.spacexfollower.data.converters.*
 import io.github.omisie11.spacexfollower.data.dao.*
 import io.github.omisie11.spacexfollower.data.model.*
+import io.github.omisie11.spacexfollower.data.model.Launch.NextLaunch
+import io.github.omisie11.spacexfollower.data.model.Launch.UpcomingLaunch
 
 @Database(
     entities = [Capsule::class, Core::class, Company::class, NextLaunch::class, UpcomingLaunch::class],
@@ -13,7 +15,7 @@ import io.github.omisie11.spacexfollower.data.model.*
 )
 @TypeConverters(
     value = [MissionsConverter::class, HeadquarterConverter::class,
-        NextLaunchRocketConverter::class, NextLaunchLaunchSiteConverter::class, MissionIdConverter::class]
+        RocketConverter::class, LaunchSiteConverter::class, JsonArrayToStringConverter::class]
 )
 abstract class SpaceDatabase : RoomDatabase() {
 

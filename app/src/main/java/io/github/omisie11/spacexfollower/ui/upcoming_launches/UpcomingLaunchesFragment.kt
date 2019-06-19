@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.model.UpcomingLaunch
+import io.github.omisie11.spacexfollower.data.model.Launch.UpcomingLaunch
 import io.github.omisie11.spacexfollower.util.OnItemClickListener
 import io.github.omisie11.spacexfollower.util.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_recycler.*
