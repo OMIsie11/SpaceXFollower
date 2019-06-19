@@ -4,9 +4,9 @@ package io.github.omisie11.spacexfollower.ui.upcoming_launches
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -92,12 +92,10 @@ class UpcomingLaunchesFragment : Fragment() {
         recyclerView.addOnItemClickListener(object : OnItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
                 // ToDo: Add detail fragment and navigate
-                //findNavController().navigate(
-                //CapsulesFragmentDirections
-                //    .actionCapsulesDestToCapsuleDetailDest(position)
-
-                //)
-                Toast.makeText(activity, "Item $position clicked!", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(
+                    UpcomingLaunchesFragmentDirections
+                        .actionUpcomingLaunchesDestToUpcomingLaunchesDetailFragment(position)
+                )
             }
         })
     }

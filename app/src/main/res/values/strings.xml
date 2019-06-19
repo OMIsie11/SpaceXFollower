@@ -16,6 +16,7 @@
     <string name="label_capsule_detail">Capsule Detail</string>
     <string name="label_core_detail">Core Detail</string>
     <string name="label_upcoming_launches">Upcoming Launches</string>
+    <string name="label_upcoming_launches_detail">Launch Detail</string>
 
     <string name="title_capsule_serial">Capsule serial</string>
     <string name="title_type">Type</string>
@@ -35,7 +36,6 @@
     <string name="title_valuation">Valuation</string>
     <string name="title_headquarters">Headquarters</string>
     <string name="title_city">city</string>
-
 
 
 </resources>
