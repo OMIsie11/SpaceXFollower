@@ -1,13 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".ui.upcoming_launches.UpcomingLaunchesDetailFragment">
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.upcoming_launches.UpcomingLaunchesDetailFragment">
 
-    <TextView
-            android:id="@+id/test_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</FrameLayout>
+        <TextView
+                android:text="Flight number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"/>
+
+        <TextView
+                android:id="@+id/text_flight_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="82"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/textView"
+                app:layout_constraintStart_toStartOf="@+id/textView"/>
+
+        <TextView
+                android:id="@+id/textView16"
+                android:text="Mission name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/text_flight_number"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"/>
+        <TextView
+                android:id="@+id/text_mission_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@+id/textView16"
+                android:layout_marginTop="8dp"
+                tools:text='"Nusantara Satu (PSN-6) / GTO-1 / Beresheet"' app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
+
+        <TextView
+                android:id="@+id/textView19"
+                android:text="Launch date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/text_mission_name"
+                app:layout_constraintStart_toStartOf="@+id/text_launch_date"
+                app:layout_constraintEnd_toEndOf="@+id/text_launch_date"/>
+        <TextView
+                android:id="@+id/text_launch_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintTop_toBottomOf="@+id/textView19"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                tools:text="2019-02-21T20:45:00-05:00"/>
+
+        <TextView
+                android:id="@+id/textView22"
+                android:text="Launch site"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/text_launch_date"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@+id/text_launch_site_name"
+                app:layout_constraintEnd_toEndOf="@+id/text_launch_site_name"/>
+        <TextView
+                android:id="@+id/text_launch_site_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView22"
+                tools:text="CCAFS SLC 40" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

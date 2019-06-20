@@ -10,13 +10,16 @@ import androidx.lifecycle.Observer
 
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Launch.UpcomingLaunch
+import io.github.omisie11.spacexfollower.util.NumbersUtils
 import kotlinx.android.synthetic.main.fragment_upcoming_launches_detail.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class UpcomingLaunchesDetailFragment : Fragment() {
 
     private val viewModel by viewModel<UpcomingLaunchesViewModel>()
+    private val numberUtils: NumbersUtils by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +36,10 @@ class UpcomingLaunchesDetailFragment : Fragment() {
         val selectedLaunchId: Int = safeArgs?.itemId ?: 0
 
         viewModel.getUpcomingLaunches().observe(viewLifecycleOwner, Observer<List<UpcomingLaunch>> { launches ->
-            test_tv.text = launches[selectedLaunchId].flightNumber.toString()
+            text_flight_number.text = launches[selectedLaunchId].flightNumber.toString()
+            text_mission_name.text = launches[selectedLaunchId].missionName
+            text_launch_date.text = numberUtils.getLocalTimeFromUnix(launches[selectedLaunchId].launchDateUnix)
+            text_launch_site_name.text = launches[selectedLaunchId].launch_site.siteName
         })
     }
 }

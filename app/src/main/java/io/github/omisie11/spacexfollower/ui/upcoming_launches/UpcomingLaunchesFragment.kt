@@ -122,6 +122,4 @@ class UpcomingLaunchesFragment : Fragment() {
         }
         else -> super.onOptionsItemSelected(item)
     }
-
-
 }
