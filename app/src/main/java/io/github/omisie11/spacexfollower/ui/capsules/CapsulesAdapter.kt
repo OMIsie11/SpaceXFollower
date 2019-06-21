@@ -7,12 +7,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Capsule
+import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.capsules_recycler_item.view.*
 
 
 class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
 
-    private var mCapsulesData: List<Capsule> = emptyList()
+    private var capsulesList: List<Capsule> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
         LayoutInflater.from(parent.context)
@@ -21,16 +22,17 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Bind data to views from ViewHolder
-        mCapsulesData.let {
-            holder.capsuleSerialTextView.text = mCapsulesData[position].capsuleSerial
-            holder.capsuleLaunchTextView.text = if (mCapsulesData[position].originalLaunch.isNullOrEmpty())
-                "No launch date info" else mCapsulesData[position].originalLaunch
-            holder.capsuleStatusTextView.text = mCapsulesData[position].status
-            holder.capsuleTypeTextView.text = mCapsulesData[position].type
+        capsulesList.let {
+            holder.capsuleSerialTextView.text = capsulesList[position].capsuleSerial
+            holder.capsuleLaunchTextView.text = if (capsulesList[position].originalLaunchUnix != null)
+                getLocalTimeFromUnix(capsulesList[position].originalLaunchUnix!!) else
+                "No launch date info"
+            holder.capsuleStatusTextView.text = capsulesList[position].status
+            holder.capsuleTypeTextView.text = capsulesList[position].type
         }
     }
 
-    override fun getItemCount(): Int = mCapsulesData.size
+    override fun getItemCount(): Int = capsulesList.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val capsuleSerialTextView: TextView = itemView.text_capsule_serial
@@ -40,7 +42,7 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
     }
 
     fun setData(data: List<Capsule>) {
-        mCapsulesData = data
+        capsulesList = data
         notifyDataSetChanged()
     }
 }

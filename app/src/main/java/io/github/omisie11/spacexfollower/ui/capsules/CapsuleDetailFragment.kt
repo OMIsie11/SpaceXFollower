@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Capsule
+import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.fragment_capsule_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.random.Random
@@ -36,8 +37,9 @@ class CapsuleDetailFragment : Fragment() {
             text_capsule_serial.text = capsules[selectedCapsuleId].capsuleSerial
             text_capsule_type.text = capsules[selectedCapsuleId].type
             text_capsule_status.text = capsules[selectedCapsuleId].status
-            text_capsule_launch.text = if (capsules[selectedCapsuleId].originalLaunch.isNullOrEmpty())
-                "No launch time provided" else capsules[selectedCapsuleId].originalLaunch
+            text_capsule_launch.text = if (capsules[selectedCapsuleId].originalLaunchUnix != null)
+                getLocalTimeFromUnix(capsules[selectedCapsuleId].originalLaunchUnix!!) else
+                "No launch date info"
             text_capsule_details.text = if (capsules[selectedCapsuleId].details.isNullOrEmpty())
                 "No details provided" else capsules[selectedCapsuleId].details
             text_capsule_landings.text = capsules[selectedCapsuleId].landings.toString()

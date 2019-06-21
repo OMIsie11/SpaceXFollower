@@ -7,11 +7,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Core
+import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.cores_recycler_item.view.*
 
 class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
 
-    private var mCoresData: List<Core> = emptyList()
+    private var coresList: List<Core> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -21,15 +22,16 @@ class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Bind data to views from ViewHolder
-        mCoresData.let {
-            holder.coreSerialTextView.text = mCoresData[position].coreSerial
-            holder.coreLaunchTextView.text = if (mCoresData[position].originalLaunch.isNullOrEmpty())
-                "No launch date info" else mCoresData[position].originalLaunch
-            holder.coreStatusTextView.text = mCoresData[position].status
+        coresList.let {
+            holder.coreSerialTextView.text = coresList[position].coreSerial
+            holder.coreLaunchTextView.text = if (coresList[position].originalLaunchUnix != null)
+                getLocalTimeFromUnix(coresList[position].originalLaunchUnix!!) else
+                "No launch date info"
+            holder.coreStatusTextView.text = coresList[position].status
         }
     }
 
-    override fun getItemCount(): Int = mCoresData.size
+    override fun getItemCount(): Int = coresList.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val coreSerialTextView: TextView = itemView.text_core_serial
@@ -38,7 +40,7 @@ class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
     }
 
     fun setData(data: List<Core>) {
-        mCoresData = data
+        coresList = data
         notifyDataSetChanged()
     }
 }

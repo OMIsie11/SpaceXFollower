@@ -24,7 +24,7 @@ data class UpcomingLaunch(
     val missionId: MutableList<String>?,
     @SerializedName("launch_date_unix")
     @ColumnInfo(name = "launch_date_unix")
-    val launchDateUnix: Long,
+    val launchDateUnix: Long?,
     @SerializedName("is_tentative")
     @ColumnInfo(name = "is_tentative")
     val isTentative: Boolean,

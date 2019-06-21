@@ -21,7 +21,7 @@
     <string name="title_capsule_serial">Capsule serial</string>
     <string name="title_type">Type</string>
     <string name="title_status">Status</string>
-    <string name="title_original_launch_utc_time">Original launch (UTC time)</string>
+    <string name="title_original_launch_utc_time">Original launch date</string>
     <string name="title_details">Details</string>
     <string name="title_landings">Landings</string>
     <string name="title_reused">Reused</string>

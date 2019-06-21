@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Core
+import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.fragment_core_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.random.Random
@@ -38,8 +39,9 @@ class CoreDetailFragment : Fragment() {
             text_core_block.text = if (cores[selectedCoreId].block == null)
                 "-" else cores[selectedCoreId].block.toString()
             text_core_status.text = cores[selectedCoreId].status
-            text_core_launch.text = if (cores[selectedCoreId].originalLaunch.isNullOrEmpty())
-                "No launch time provided" else cores[selectedCoreId].originalLaunch
+            text_core_launch.text = if (cores[selectedCoreId].originalLaunchUnix != null)
+                getLocalTimeFromUnix(cores[selectedCoreId].originalLaunchUnix!!) else
+                "No launch date info"
             text_core_details.text = if (cores[selectedCoreId].details.isNullOrEmpty())
                 "No details provided" else cores[selectedCoreId].details
             text_core_rtls_attempts.text = cores[selectedCoreId].rtlsAttempts.toString()

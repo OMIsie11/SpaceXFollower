@@ -11,16 +11,14 @@ import com.google.android.material.snackbar.Snackbar
 
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Company
-import io.github.omisie11.spacexfollower.util.NumbersUtils
+import io.github.omisie11.spacexfollower.util.shortenNumberAddPrefix
 import kotlinx.android.synthetic.main.fragment_company.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class CompanyFragment : Fragment() {
 
     private val viewModel: CompanyViewModel by viewModel()
-    private val numbersUtils: NumbersUtils by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +53,7 @@ class CompanyFragment : Fragment() {
                 text_test_sites.text = companyInfo.testSites.toString()
                 text_valuation.text = resources.getString(
                     R.string.company_valuation,
-                    numbersUtils.shortenNumberAddPrefix(companyInfo.valuation)
+                    shortenNumberAddPrefix(companyInfo.valuation)
                 )
                 text_address.text = companyInfo.headquarters.address
                 text_city.text = companyInfo.headquarters.city

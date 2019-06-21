@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.CoresRepository
 import io.github.omisie11.spacexfollower.data.model.Core
 import io.github.omisie11.spacexfollower.util.OnItemClickListener
 import io.github.omisie11.spacexfollower.util.addOnItemClickListener
@@ -88,10 +87,12 @@ class CoresFragment : Fragment() {
             viewModel.refreshCores()
         }
 
-        recyclerView.addOnItemClickListener(object: OnItemClickListener {
+        recyclerView.addOnItemClickListener(object : OnItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
-                findNavController().navigate(CoresFragmentDirections
-                    .actionCoresDestToCoresDetailFragment(position))
+                findNavController().navigate(
+                    CoresFragmentDirections
+                        .actionCoresDestToCoresDetailFragment(position)
+                )
             }
         })
     }
@@ -106,7 +107,7 @@ class CoresFragment : Fragment() {
         inflater.inflate(R.menu.menu_action_bar, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_refresh -> {
             viewModel.refreshCores()
             true
