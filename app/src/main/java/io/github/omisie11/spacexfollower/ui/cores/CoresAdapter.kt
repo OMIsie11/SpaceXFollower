@@ -26,7 +26,7 @@ class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
             holder.coreSerialTextView.text = coresList[position].coreSerial
             holder.coreLaunchTextView.text = if (coresList[position].originalLaunchUnix != null)
                 getLocalTimeFromUnix(coresList[position].originalLaunchUnix!!) else
-                "No launch date info"
+                holder.itemView.context.getString(R.string.launch_date_null)
             holder.coreStatusTextView.text = coresList[position].status
         }
     }

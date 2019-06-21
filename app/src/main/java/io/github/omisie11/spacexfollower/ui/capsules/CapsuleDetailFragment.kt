@@ -39,9 +39,9 @@ class CapsuleDetailFragment : Fragment() {
             text_capsule_status.text = capsules[selectedCapsuleId].status
             text_capsule_launch.text = if (capsules[selectedCapsuleId].originalLaunchUnix != null)
                 getLocalTimeFromUnix(capsules[selectedCapsuleId].originalLaunchUnix!!) else
-                "No launch date info"
+                getString(R.string.launch_date_null)
             text_capsule_details.text = if (capsules[selectedCapsuleId].details.isNullOrEmpty())
-                "No details provided" else capsules[selectedCapsuleId].details
+                getString(R.string.details_null) else capsules[selectedCapsuleId].details
             text_capsule_landings.text = capsules[selectedCapsuleId].landings.toString()
             text_capsule_reused.text = capsules[selectedCapsuleId].reuseCount.toString()
         })

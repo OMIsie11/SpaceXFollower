@@ -26,7 +26,7 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
             holder.capsuleSerialTextView.text = capsulesList[position].capsuleSerial
             holder.capsuleLaunchTextView.text = if (capsulesList[position].originalLaunchUnix != null)
                 getLocalTimeFromUnix(capsulesList[position].originalLaunchUnix!!) else
-                "No launch date info"
+                holder.itemView.context.getString(R.string.launch_date_null)
             holder.capsuleStatusTextView.text = capsulesList[position].status
             holder.capsuleTypeTextView.text = capsulesList[position].type
         }

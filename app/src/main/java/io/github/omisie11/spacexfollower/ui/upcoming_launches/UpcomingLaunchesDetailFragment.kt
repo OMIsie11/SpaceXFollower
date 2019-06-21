@@ -36,10 +36,9 @@ class UpcomingLaunchesDetailFragment : Fragment() {
         viewModel.getUpcomingLaunches().observe(viewLifecycleOwner, Observer<List<UpcomingLaunch>> { launches ->
             text_flight_number.text = launches[selectedLaunchId].flightNumber.toString()
             text_mission_name.text = launches[selectedLaunchId].missionName
-            //text_launch_date.text = getLocalTimeFromUnix(launches[selectedLaunchId].launchDateUnix)
             text_launch_date.text = if (launches[selectedLaunchId].launchDateUnix != null)
                 getLocalTimeFromUnix(launches[selectedLaunchId].launchDateUnix!!) else
-                "No launch date info"
+                getString(R.string.launch_date_null)
             text_launch_site_name.text = launches[selectedLaunchId].launch_site.siteName
         })
     }

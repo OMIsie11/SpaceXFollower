@@ -26,7 +26,7 @@ class UpcomingLaunchesAdapter : RecyclerView.Adapter<UpcomingLaunchesAdapter.Vie
             holder.flightNumberTextView.text = launchesList[position].flightNumber.toString()
             holder.launchDateTextView.text = if (launchesList[position].launchDateUnix != null)
                 getLocalTimeFromUnix(launchesList[position].launchDateUnix!!) else
-                "No launch date info"
+                holder.itemView.context.getString(R.string.launch_date_null)
             holder.missionNameTextView.text = launchesList[position].missionName
         }
     }

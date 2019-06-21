@@ -37,5 +37,8 @@
     <string name="title_headquarters">Headquarters</string>
     <string name="title_city">city</string>
 
-
+    <string name="launch_date_null">No launch date provided</string>
+    <string name="details_null">No details provided</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

@@ -41,15 +41,15 @@ class CoreDetailFragment : Fragment() {
             text_core_status.text = cores[selectedCoreId].status
             text_core_launch.text = if (cores[selectedCoreId].originalLaunchUnix != null)
                 getLocalTimeFromUnix(cores[selectedCoreId].originalLaunchUnix!!) else
-                "No launch date info"
+                getString(R.string.launch_date_null)
             text_core_details.text = if (cores[selectedCoreId].details.isNullOrEmpty())
-                "No details provided" else cores[selectedCoreId].details
+                getString(R.string.details_null) else cores[selectedCoreId].details
             text_core_rtls_attempts.text = cores[selectedCoreId].rtlsAttempts.toString()
             text_core_rtls_landings.text = cores[selectedCoreId].rtlsLandings.toString()
             text_core_asds_attempts.text = cores[selectedCoreId].asdsAttempts.toString()
             text_core_asds_landings.text = cores[selectedCoreId].asdsLandings.toString()
             text_core_water_landing.text = when (cores[selectedCoreId].waterLandings) {
-                true -> "Yes"; false -> "No"
+                true -> getString(R.string.yes); false -> getString(R.string.no)
             }
             text_core_reused.text = cores[selectedCoreId].reuseCount.toString()
         })
