@@ -23,11 +23,13 @@ class UpcomingLaunchesAdapter : RecyclerView.Adapter<UpcomingLaunchesAdapter.Vie
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Bind data to views from ViewHolder
         launchesList.let {
-            holder.flightNumberTextView.text = launchesList[position].flightNumber.toString()
+            holder.flightNumberTextView.text = holder.itemView.context.resources
+                .getString(R.string.flight_number, launchesList[position].flightNumber)
             holder.launchDateTextView.text = if (launchesList[position].launchDateUnix != null)
                 getLocalTimeFromUnix(launchesList[position].launchDateUnix!!) else
                 holder.itemView.context.getString(R.string.launch_date_null)
             holder.missionNameTextView.text = launchesList[position].missionName
+            holder.launchSiteTextView.text = launchesList[position].launch_site.siteName
         }
     }
 
@@ -37,6 +39,7 @@ class UpcomingLaunchesAdapter : RecyclerView.Adapter<UpcomingLaunchesAdapter.Vie
         val flightNumberTextView: TextView = itemView.text_flight_number
         val launchDateTextView: TextView = itemView.text_launch_date
         val missionNameTextView: TextView = itemView.text_mission_name
+        val launchSiteTextView: TextView = itemView.text_launch_site
     }
 
     fun setData(data: List<UpcomingLaunch>) {
