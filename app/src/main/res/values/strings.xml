@@ -41,4 +41,7 @@
     <string name="details_null">No details provided</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+
+    <string name="core_block">Block %d</string>
+    <string name="core_block_null">Block not assigned</string>
 </resources>
