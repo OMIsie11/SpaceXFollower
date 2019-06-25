@@ -6,6 +6,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -42,6 +43,7 @@ class CapsulesFragment : Fragment() {
         val recyclerView = rootView.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.apply {
             setHasFixedSize(true)
+            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
             layoutManager = viewManager
             adapter = viewAdapter
         }
