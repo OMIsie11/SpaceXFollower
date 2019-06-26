@@ -10,8 +10,8 @@
     <color name="colorSecondaryDark">#c97b63</color>
     <color name="colorOnSecondary">#212121</color>
 
-    <color name="colorError">#f44336</color>
-    <color name="colorOnError">#212121</color>
+    <color name="colorError">#b00020</color>
+    <color name="colorOnError">#ffffff</color>
     <color name="colorSurface">#ffffff</color>
     <color name="colorOnSurface">#212121</color>
     <color name="colorBackground">#ffffff</color>
