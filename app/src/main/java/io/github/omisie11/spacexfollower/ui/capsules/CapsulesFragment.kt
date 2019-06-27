@@ -90,7 +90,12 @@ class CapsulesFragment : Fragment() {
 
         chip_group.check(R.id.chip_serial_oldest)
         chip_group.setOnCheckedChangeListener { group, checkedId ->
-            //Toast.makeText(context, "Checked chip: $checkedId", Toast.LENGTH_SHORT).show()
+            // Set clickable chips, prevent uncheck checked Chip
+            for (i in 0 until group.childCount) {
+                val chip = group.getChildAt(i)
+                chip.isClickable = chip.id != group.checkedChipId
+            }
+
             when (checkedId) {
                 R.id.chip_serial_newest -> viewModel.changeCapsulesSorting(CAPSULES_SORT_SERIAL_DESC)
                 R.id.chip_serial_oldest -> viewModel.changeCapsulesSorting(CAPSULES_SORT_SERIAL_ASC)
