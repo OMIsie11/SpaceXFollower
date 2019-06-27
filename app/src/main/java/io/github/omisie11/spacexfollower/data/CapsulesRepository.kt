@@ -29,13 +29,9 @@ class CapsulesRepository(
     }
 
     // Wrapper for getting all capsules from Db
-    fun getCapsules(): LiveData<List<Capsule>> {
-        //if (checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH)) {
-        //    refreshCapsules()
-        //    Log.d("refreshCapsules", "Refreshing capsules")
-        //}
-        return capsulesDao.getAllCapsules()
-    }
+    fun getCapsulesOrderBySerialDesc(): LiveData<List<Capsule>> = capsulesDao.getAllCapsulesOrderBySerialDesc()
+
+    fun getCapsulesOrderBySerialAsc(): LiveData<List<Capsule>> = capsulesDao.getAllCapsulesOrderBySerialAsc()
 
     suspend fun deleteAllCapsules() = withContext(Dispatchers.IO) { capsulesDao.deleteAllCapsules() }
 

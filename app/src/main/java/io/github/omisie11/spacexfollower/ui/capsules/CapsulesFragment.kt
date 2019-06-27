@@ -3,7 +3,6 @@ package io.github.omisie11.spacexfollower.ui.capsules
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -11,14 +10,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Capsule
-import io.github.omisie11.spacexfollower.util.OnItemClickListener
-import io.github.omisie11.spacexfollower.util.addOnItemClickListener
+import io.github.omisie11.spacexfollower.util.*
 import kotlinx.android.synthetic.main.fragment_capsules_recycler.*
-import kotlinx.android.synthetic.main.fragment_recycler.*
 import kotlinx.android.synthetic.main.fragment_recycler.recyclerView
 import kotlinx.android.synthetic.main.fragment_recycler.swipeRefreshLayout
 import org.koin.android.ext.android.inject
@@ -92,8 +88,15 @@ class CapsulesFragment : Fragment() {
             viewModel.refreshCapsules()
         }
 
+        chip_group.check(R.id.chip_serial_oldest)
         chip_group.setOnCheckedChangeListener { group, checkedId ->
-            Toast.makeText(context, "Checked chip: $checkedId", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, "Checked chip: $checkedId", Toast.LENGTH_SHORT).show()
+            when (checkedId) {
+                R.id.chip_serial_newest -> viewModel.changeCapsulesSorting(CAPSULES_SORT_SERIAL_DESC)
+                R.id.chip_serial_oldest -> viewModel.changeCapsulesSorting(CAPSULES_SORT_SERIAL_ASC)
+                // -1 means chip got unchecked
+                -1 -> viewModel.changeCapsulesSorting(CAPSULES_SORT_SERIAL_ASC)
+            }
         }
 
         // Respond to user clicks on recyclerView items

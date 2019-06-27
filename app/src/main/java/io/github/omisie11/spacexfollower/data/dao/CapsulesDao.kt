@@ -13,8 +13,11 @@ interface CapsulesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCapsules(capsules: List<Capsule>)
 
-    @Query("SELECT * FROM capsules_table")
-    fun getAllCapsules(): LiveData<List<Capsule>>
+    @Query("SELECT * FROM capsules_table ORDER BY capsule_serial DESC")
+    fun getAllCapsulesOrderBySerialDesc(): LiveData<List<Capsule>>
+
+    @Query("SELECT * FROM capsules_table ORDER BY capsule_serial ASC")
+    fun getAllCapsulesOrderBySerialAsc(): LiveData<List<Capsule>>
 
     @Query("DELETE FROM capsules_table")
     fun deleteAllCapsules()

@@ -16,7 +16,7 @@
                 android:id="@+id/text_chips_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sort data by:"
+                android:text="Sort by:"
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"/>
@@ -35,54 +35,24 @@
                     app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
-                        android:id="@+id/chip"
+                        android:id="@+id/chip_serial_newest"
                         style="@style/ChipChoice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checkable="true"
                         android:clickable="true"
                         android:focusable="true"
-                        android:text="Chip"/>
+                        android:text="Serial: newest"/>
 
                 <com.google.android.material.chip.Chip
-                        android:id="@+id/chip2"
+                        android:id="@+id/chip_serial_oldest"
                         style="@style/ChipChoice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checkable="true"
                         android:clickable="true"
                         android:focusable="true"
-                        android:text="Category 1"/>
-
-                <com.google.android.material.chip.Chip
-                        android:id="@+id/chip3"
-                        style="@style/ChipChoice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="Category 2"/>
-
-                <com.google.android.material.chip.Chip
-                        android:id="@+id/chip4"
-                        style="@style/ChipChoice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="Category 3"/>
-
-                <com.google.android.material.chip.Chip
-                        android:id="@+id/chip5"
-                        style="@style/ChipChoice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="Category 4"/>
+                        android:text="Serial: oldest"/>
 
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>

@@ -13,3 +13,7 @@ const val KEY_UPCOMING_LAUNCHES_LAST_REFRESH = "key_upcoming_launches_last_refre
 
 const val PREFS_KEY_REFRESH_INTERVAL = "prefs_refresh_interval"
 const val PREFS_KEY_DARK_MODE = "prefs_dark_mode"
+
+// Sort types for data in ViewModel
+const val CAPSULES_SORT_SERIAL_ASC = "capsules_sort_serial_asc"
+const val CAPSULES_SORT_SERIAL_DESC = "capsules_sort_serial_desc"
