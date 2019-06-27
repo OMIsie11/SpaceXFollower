@@ -29,9 +29,7 @@ class UpcomingLaunchesRepository(
     }
 
     // Wrapper for getting all capsules from Db
-    fun getUpcomingLaunches(): LiveData<List<UpcomingLaunch>> {
-        return upcomingLaunchesDao.getUpcomingLaunches()
-    }
+    fun getUpcomingLaunches(): LiveData<List<UpcomingLaunch>> = upcomingLaunchesDao.getUpcomingLaunches()
 
     suspend fun deleteAllUpcomingLaunches() =
         withContext(Dispatchers.IO) { upcomingLaunchesDao.deleteUpcomingLaunchesData() }
@@ -73,7 +71,7 @@ class UpcomingLaunchesRepository(
 
     private suspend fun fetchLaunchesAndSaveToDb() {
         Log.d("Repo", "fetchLaunchesAndSaveToDb called")
-        val response = spaceService.getUpcomingLaunches().await()
+        val response = spaceService.getUpcomingLaunches()
         if (response.isSuccessful) {
             Log.d("UpcomingLRepo", "Response SUCCESSFUL")
             response.body()?.let { upcomingLaunchesDao.insertUpcomingLaunches(it) }

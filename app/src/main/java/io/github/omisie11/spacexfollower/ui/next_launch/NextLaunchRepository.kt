@@ -28,14 +28,7 @@ class NextLaunchRepository(
         isNextLaunchLoading.value = false
     }
 
-    // Wrapper for getting all capsules from Db
-    fun getNextLaunch(): LiveData<NextLaunch> {
-        // if (checkIfRefreshIsNeeded(KEY_NEXT_LAUNCH_LAST_REFRESH)) {
-        //     refreshNextLaunchInfo()
-        //     Log.d("refreshNextLaunch", "Refreshing next launch data")
-        // }
-        return nextLaunchDao.getNextLaunch()
-    }
+    fun getNextLaunch(): LiveData<NextLaunch> = nextLaunchDao.getNextLaunch()
 
     suspend fun deleteNextLaunchData() = withContext(Dispatchers.IO) { nextLaunchDao.deleteNextLaunchInfo() }
 
@@ -74,7 +67,7 @@ class NextLaunchRepository(
     }
 
     private suspend fun fetchNextLaunchInfoAndSaveToDb() {
-        val response = spaceService.getNextLaunch().await()
+        val response = spaceService.getNextLaunch()
         if (response.isSuccessful) {
             Log.d("NextLaunchRepo", "Response SUCCESSFUL")
             response.body()?.let { nextLaunchDao.insertNextLaunch(it) }

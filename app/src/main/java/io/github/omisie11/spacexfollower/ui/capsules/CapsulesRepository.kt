@@ -28,14 +28,7 @@ class CapsulesRepository(
         areCapsulesLoading.value = false
     }
 
-    // Wrapper for getting all capsules from Db
-    fun getCapsules(): LiveData<List<Capsule>> {
-        //if (checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH)) {
-        //    refreshCapsules()
-        //    Log.d("refreshCapsules", "Refreshing capsules")
-        //}
-        return capsulesDao.getAllCapsules()
-    }
+    fun getCapsules(): LiveData<List<Capsule>> = capsulesDao.getAllCapsules()
 
     suspend fun deleteAllCapsules() = withContext(Dispatchers.IO) { capsulesDao.deleteAllCapsules() }
 
@@ -74,7 +67,7 @@ class CapsulesRepository(
 
     private suspend fun fetchCapsulesAndSaveToDb() {
         Log.d("Repo", "fetchCapsulesAndSaveToDb called")
-        val response = spaceService.getAllCapsules().await()
+        val response = spaceService.getAllCapsules()
         if (response.isSuccessful) {
             Log.d("CapsulesRepo", "Response SUCCESSFUL")
             response.body()?.let { capsulesDao.insertCapsules(it) }

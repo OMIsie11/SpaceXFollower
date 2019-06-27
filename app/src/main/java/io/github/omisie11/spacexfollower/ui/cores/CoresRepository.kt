@@ -26,15 +26,7 @@ class CoresRepository(
         areCoresLoading.value = false
     }
 
-    // Wrapper for getting all cores from Db
-    fun getCores(): LiveData<List<Core>> {
-        // Check if refresh is needed
-        //if (checkIfRefreshIsNeeded(KEY_CORES_LAST_REFRESH)) {
-        //    refreshCores()
-        //    Log.d("refreshCores", "Refreshing cores")
-        //}
-        return coresDao.getAllCores()
-    }
+    fun getCores(): LiveData<List<Core>> = coresDao.getAllCores()
 
     suspend fun deleteAllCores() = withContext(Dispatchers.IO) { coresDao.deleteAllCores() }
 
@@ -72,7 +64,7 @@ class CoresRepository(
     }
 
     private suspend fun fetchCoresAndSaveToDb() {
-        val response = spaceService.getAllCores().await()
+        val response = spaceService.getAllCores()
         if (response.isSuccessful) {
             Log.d("CoresRepo", "Response SUCCESSFUL")
             response.body()?.let { coresDao.insertCores(it) }

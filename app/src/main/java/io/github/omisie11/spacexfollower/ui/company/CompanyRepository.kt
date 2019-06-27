@@ -26,14 +26,7 @@ class CompanyRepository(
         isCompanyInfoLoading.value = false
     }
 
-    fun getCompanyInfo(): LiveData<Company> {
-        // Check if refresh is needed
-        //if (checkIfRefreshIsNeeded(KEY_COMPANY_LAST_REFRESH)) {
-        //    refreshCompanyInfo()
-        //    Log.d("refreshCompanyInfo", "Refreshing cores")
-        //}
-        return companyDao.getCompanyInfo()
-    }
+    fun getCompanyInfo(): LiveData<Company> = companyDao.getCompanyInfo()
 
     suspend fun deleteCompanyInfo() = withContext(Dispatchers.IO) { companyDao.deleteCompanyInfo() }
 
@@ -72,7 +65,7 @@ class CompanyRepository(
 
 
     private suspend fun fetchCompanyInfoAndSaveToDb() {
-        val response = spaceService.getCompanyInfo().await()
+        val response = spaceService.getCompanyInfo()
         if (response.isSuccessful) {
             Log.d("CompanyRepo", "Response SUCCESSFUL")
             response.body()?.let { companyDao.insertCompanyInfo(it) }
