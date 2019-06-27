@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.data
+package io.github.omisie11.spacexfollower.ui.company
 
 import android.content.SharedPreferences
 import android.util.Log

@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.ui
+package io.github.omisie11.spacexfollower.ui.settings
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat

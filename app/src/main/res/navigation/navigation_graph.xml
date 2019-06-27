@@ -30,7 +30,7 @@
 
     <fragment
             android:id="@+id/settings_dest"
-            android:name="io.github.omisie11.spacexfollower.ui.SettingsFragment"
+            android:name="io.github.omisie11.spacexfollower.ui.settings.SettingsFragment"
             android:label="@string/label_settings"/>
 
     <fragment

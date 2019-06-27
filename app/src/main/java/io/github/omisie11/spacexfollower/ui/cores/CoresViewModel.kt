@@ -3,7 +3,6 @@ package io.github.omisie11.spacexfollower.ui.cores
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.github.omisie11.spacexfollower.data.CoresRepository
 import io.github.omisie11.spacexfollower.data.model.Core
 import kotlinx.coroutines.*
 

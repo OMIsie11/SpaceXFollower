@@ -3,7 +3,6 @@ package io.github.omisie11.spacexfollower.ui.next_launch
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.github.omisie11.spacexfollower.data.NextLaunchRepository
 import io.github.omisie11.spacexfollower.data.model.Launch.NextLaunch
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
