@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Launch.UpcomingLaunch
@@ -35,13 +34,13 @@ class UpcomingLaunchesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_recycler, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_recycler, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // Setup recyclerView
         viewManager = LinearLayoutManager(activity)
-        val recyclerView = rootView.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.apply {
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
@@ -49,17 +48,10 @@ class UpcomingLaunchesFragment : Fragment() {
             adapter = viewAdapter
         }
 
-        val swipeRefreshLayout = rootView.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
         swipeRefreshLayout.apply {
             setProgressBackgroundColorSchemeResource(R.color.colorSurface)
             setColorSchemeResources(R.color.colorSecondary)
         }
-
-        return rootView
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         // ViewModel setup
         viewModel.getUpcomingLaunches().observe(viewLifecycleOwner, Observer<List<UpcomingLaunch>> { launches ->
@@ -91,7 +83,6 @@ class UpcomingLaunchesFragment : Fragment() {
         // Respond to user clicks on recyclerView items
         recyclerView.addOnItemClickListener(object : OnItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
-                // ToDo: Add detail fragment and navigate
                 findNavController().navigate(
                     UpcomingLaunchesFragmentDirections
                         .actionUpcomingLaunchesDestToUpcomingLaunchesDetailFragment(position)
