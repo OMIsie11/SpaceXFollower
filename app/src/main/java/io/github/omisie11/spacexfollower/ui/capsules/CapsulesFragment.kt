@@ -34,7 +34,7 @@ class CapsulesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_recycler, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_capsules_recycler, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

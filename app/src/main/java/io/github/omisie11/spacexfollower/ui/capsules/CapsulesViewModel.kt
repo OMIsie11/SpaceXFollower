@@ -1,6 +1,7 @@
 package io.github.omisie11.spacexfollower.ui.capsules
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.github.omisie11.spacexfollower.data.model.Capsule
