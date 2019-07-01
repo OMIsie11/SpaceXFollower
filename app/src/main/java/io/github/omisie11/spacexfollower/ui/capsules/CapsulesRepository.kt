@@ -28,7 +28,10 @@ class CapsulesRepository(
         areCapsulesLoading.value = false
     }
 
-    fun getCapsules(): LiveData<List<Capsule>> = capsulesDao.getAllCapsules()
+    // Wrapper for getting all capsules from Db
+    fun getCapsulesOrderBySerialDesc(): LiveData<List<Capsule>> = capsulesDao.getAllCapsulesOrderBySerialDesc()
+
+    fun getCapsulesOrderBySerialAsc(): LiveData<List<Capsule>> = capsulesDao.getAllCapsulesOrderBySerialAsc()
 
     suspend fun deleteAllCapsules() = withContext(Dispatchers.IO) { capsulesDao.deleteAllCapsules() }
 

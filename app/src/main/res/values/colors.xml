@@ -17,4 +17,9 @@
     <color name="colorBackground">#ffffff</color>
     <color name="colorOnBackground">#212121</color>
 
+    <color name="colorChipBackgroundUnchecked">#e8e8e8</color>
+    <color name="colorChipBackgroundChecked">@color/colorSecondaryLight</color>
+    <color name="colorChipTextUnchecked">#3b3b3b</color>
+    <color name="colorChipTextChecked">#212121</color>
+
 </resources>

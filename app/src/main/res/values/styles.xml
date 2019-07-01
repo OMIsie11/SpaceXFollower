@@ -23,6 +23,7 @@
 
         <item name="materialButtonStyle">@style/AppButton</item>
         <item name="alertDialogTheme">@style/MaterialAlertDialog</item>
+        <item name="chipIconTint">@color/colorSecondaryLight</item>
 
     </style>
 
@@ -54,6 +55,11 @@
     </style>
     <style name="MaterialButtonBarButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textColor">@color/colorSecondary</item>
+    </style>
+
+    <style name="ChipChoice" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/background_color_chip_state_list</item>
+        <item name="android:textColor">@color/text_color_chip_state_list</item>
     </style>
 
 </resources>

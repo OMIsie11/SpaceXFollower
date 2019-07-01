@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Capsule
-import io.github.omisie11.spacexfollower.util.OnItemClickListener
-import io.github.omisie11.spacexfollower.util.addOnItemClickListener
-import kotlinx.android.synthetic.main.fragment_recycler.*
+import io.github.omisie11.spacexfollower.util.*
+import kotlinx.android.synthetic.main.fragment_capsules_recycler.*
+import kotlinx.android.synthetic.main.fragment_recycler.recyclerView
+import kotlinx.android.synthetic.main.fragment_recycler.swipeRefreshLayout
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -77,6 +78,22 @@ class CapsulesFragment : Fragment() {
         swipeRefreshLayout.setOnRefreshListener {
             Log.i("CapsulesFragment", "onRefresh called from SwipeRefreshLayout")
             viewModel.refreshCapsules()
+        }
+
+        chip_group.check(R.id.chip_serial_oldest)
+        chip_group.setOnCheckedChangeListener { group, checkedId ->
+            // Set clickable chips, prevent uncheck checked Chip
+            for (i in 0 until group.childCount) {
+                val chip = group.getChildAt(i)
+                chip.isClickable = chip.id != group.checkedChipId
+            }
+
+            when (checkedId) {
+                R.id.chip_serial_newest -> viewModel.changeCapsulesSorting(CAPSULES_SORT_SERIAL_DESC)
+                R.id.chip_serial_oldest -> viewModel.changeCapsulesSorting(CAPSULES_SORT_SERIAL_ASC)
+                // -1 means chip got unchecked
+                -1 -> viewModel.changeCapsulesSorting(CAPSULES_SORT_SERIAL_ASC)
+            }
         }
 
         // Respond to user clicks on recyclerView items
