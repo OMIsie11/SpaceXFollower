@@ -6,11 +6,10 @@ import androidx.room.TypeConverters
 import io.github.omisie11.spacexfollower.data.converters.*
 import io.github.omisie11.spacexfollower.data.dao.*
 import io.github.omisie11.spacexfollower.data.model.*
-import io.github.omisie11.spacexfollower.data.model.Launch.NextLaunch
 import io.github.omisie11.spacexfollower.data.model.Launch.UpcomingLaunch
 
 @Database(
-    entities = [Capsule::class, Core::class, Company::class, NextLaunch::class, UpcomingLaunch::class],
+    entities = [Capsule::class, Core::class, Company::class, UpcomingLaunch::class],
     version = 1
 )
 @TypeConverters(
@@ -22,7 +21,6 @@ abstract class SpaceDatabase : RoomDatabase() {
     abstract fun capsulesDao(): CapsulesDao
     abstract fun coresDao(): CoresDao
     abstract fun companyDao(): CompanyDao
-    abstract fun nextLaunchDao(): NextLaunchDao
     abstract fun upcomingLaunchesDao(): UpcomingLaunchesDao
 
 }

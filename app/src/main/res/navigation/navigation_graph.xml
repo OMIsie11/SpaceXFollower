@@ -3,7 +3,7 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/navigation_graph"
-            app:startDestination="@id/next_launch_dest">
+            app:startDestination="@id/upcoming_launches_dest">
 
     <fragment
             android:id="@+id/capsules_dest"
@@ -60,12 +60,6 @@
                 app:argType="integer"
                 android:defaultValue="0"/>
     </fragment>
-
-    <fragment
-            android:id="@+id/next_launch_dest"
-            android:name="io.github.omisie11.spacexfollower.ui.next_launch.NextLaunchFragment"
-            android:label="@string/label_next_launch"
-            tools:layout="@layout/fragment_next_launch"/>
 
     <fragment
             android:id="@+id/upcoming_launches_dest"

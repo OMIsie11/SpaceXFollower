@@ -8,7 +8,6 @@
 
     <!-- Nav drawer menu items and labels -->
     <string name="label_nav_view_header">SPACE X Follower</string>
-    <string name="label_next_launch">Next Launch</string>
     <string name="label_capsules">Capsules</string>
     <string name="label_cores">Cores</string>
     <string name="label_company">Company</string>

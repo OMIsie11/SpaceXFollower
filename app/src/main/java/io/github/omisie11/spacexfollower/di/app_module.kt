@@ -12,8 +12,6 @@ import io.github.omisie11.spacexfollower.ui.company.CompanyViewModel
 import io.github.omisie11.spacexfollower.ui.cores.CoresAdapter
 import io.github.omisie11.spacexfollower.ui.cores.CoresRepository
 import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel
-import io.github.omisie11.spacexfollower.ui.next_launch.NextLaunchRepository
-import io.github.omisie11.spacexfollower.ui.next_launch.NextLaunchViewModel
 import io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesAdapter
 import io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesRepository
 import io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesViewModel
@@ -101,17 +99,6 @@ val companyModule = module {
     // ViewModel instance for CompanyInfo
     viewModel { CompanyViewModel(get()) }
 
-}
-
-val nextLaunchModule = module {
-
-    // NextLaunch DAO instance
-    single { get<SpaceDatabase>().nextLaunchDao() }
-
-    // Single instance of NextLaunchRepository
-    single { NextLaunchRepository(get(), get(), get()) }
-
-    viewModel { NextLaunchViewModel(get()) }
 }
 
 val upcomingLaunchesModule = module {

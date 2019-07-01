@@ -23,7 +23,7 @@ class MyApplication : Application() {
 
             // module list
             modules(listOf(appModule, remoteDataSourceModule, capsulesModule,
-                coresModule, companyModule, nextLaunchModule, upcomingLaunchesModule))
+                coresModule, companyModule, upcomingLaunchesModule))
         }
     }
 }
