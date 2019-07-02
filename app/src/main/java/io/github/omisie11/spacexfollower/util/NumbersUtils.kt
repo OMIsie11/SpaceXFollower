@@ -6,7 +6,6 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-// ToDo: Add tests
 // Used to convert SpaceX valuation, no need to support negative numbers
 fun shortenNumberAddPrefix(numberToFormat: Long): String {
     val number = numberToFormat.toDouble()
@@ -14,7 +13,7 @@ fun shortenNumberAddPrefix(numberToFormat: Long): String {
     return when {
         number > 1000000000 -> "${df.format(number.div(1000000000))} billion"
         number > 1000000 -> "${df.format(number.div(1000000))} million"
-        else -> number.toString()
+        else -> number.toInt().toString()
     }
 }
 
