@@ -4,6 +4,7 @@ package io.github.omisie11.spacexfollower.ui.company
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -81,6 +82,12 @@ class CompanyFragment : Fragment() {
         swipeRefreshLayout.setOnRefreshListener {
             Log.i("CompanyInfoFragment", "onRefresh called from SwipeRefreshLayout")
             viewModel.refreshCompanyInfo()
+        }
+
+        image_logo.setOnClickListener {
+            Toast.makeText(
+                activity, getString(R.string.lottie_rocket_attribution), Toast.LENGTH_LONG
+            ).show()
         }
     }
 

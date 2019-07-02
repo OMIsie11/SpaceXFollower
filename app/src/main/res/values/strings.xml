@@ -52,4 +52,8 @@
     <string name="settings_dark_mode_summary_on">Dark mode enabled</string>
     <string name="settings_dark_mode_summary_off">Dark mode disabled</string>
     <string name="settings_refresh_interval_dialog_title">Set data auto refresh interval</string>
+
+    <string name="lottie_rocket_attribution">Animation made by Donghwa Kang, check her work at
+        lottiefiles.com/dongdona
+    </string>
 </resources>
