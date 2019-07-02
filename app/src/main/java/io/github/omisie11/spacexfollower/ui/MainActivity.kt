@@ -23,9 +23,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sharedPrefsListener: SharedPreferences.OnSharedPreferenceChangeListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
+        setTheme(R.style.AppTheme_NoActionBar)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
         AppCompatDelegate.setDefaultNightMode(translateValueToDayNightMode(
                 sharedPrefs.getBoolean(PREFS_KEY_DARK_MODE, false)))
 

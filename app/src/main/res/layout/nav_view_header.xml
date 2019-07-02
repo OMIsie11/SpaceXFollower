@@ -13,6 +13,7 @@
             android:layout_height="wrap_content"
             android:text="@string/label_nav_view_header"
             android:textSize="22sp"
+            android:layout_marginTop="32dp"
             android:fontFamily="sans-serif-thin"/>
 
 </LinearLayout>

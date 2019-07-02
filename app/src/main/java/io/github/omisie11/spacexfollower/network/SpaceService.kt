@@ -1,7 +1,7 @@
 package io.github.omisie11.spacexfollower.network
 
 import io.github.omisie11.spacexfollower.data.model.*
-import io.github.omisie11.spacexfollower.data.model.Launch.UpcomingLaunch
+import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
 import retrofit2.Response
 import retrofit2.http.GET
 

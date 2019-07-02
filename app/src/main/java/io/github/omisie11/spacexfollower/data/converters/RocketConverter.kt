@@ -3,7 +3,7 @@ package io.github.omisie11.spacexfollower.data.converters
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import io.github.omisie11.spacexfollower.data.model.Launch.Rocket
+import io.github.omisie11.spacexfollower.data.model.launch.Rocket
 
 
 // Used for Next NextLaunch

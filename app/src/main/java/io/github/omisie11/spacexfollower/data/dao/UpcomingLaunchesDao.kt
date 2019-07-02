@@ -2,7 +2,7 @@ package io.github.omisie11.spacexfollower.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import io.github.omisie11.spacexfollower.data.model.Launch.UpcomingLaunch
+import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
 
 @Dao
 interface UpcomingLaunchesDao {

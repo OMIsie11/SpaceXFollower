@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.data.model.Launch
+package io.github.omisie11.spacexfollower.data.model.launch
 
 import com.google.gson.annotations.SerializedName
 

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.model.Launch.UpcomingLaunch
+import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.fragment_upcoming_launches_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
