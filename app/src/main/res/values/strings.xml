@@ -45,4 +45,6 @@
     <string name="core_block_null">Block not assigned</string>
     <string name="launch_site">Launch site</string>
     <string name="flight_number">Flight %d</string>
+    <string name="settings_refresh_interval_title">Data refresh interval</string>
+    <string name="settings_dark_mode_title">Dark mode</string>
 </resources>
