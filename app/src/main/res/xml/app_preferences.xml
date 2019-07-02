@@ -6,18 +6,18 @@
 
         <ListPreference
                 android:key="prefs_refresh_interval"
-                android:title="Data refresh interval"
+                android:title="@string/settings_refresh_interval_title"
                 android:summary="%s"
-                android:dialogTitle="Set data auto refresh interval"
+                android:dialogTitle="@string/settings_refresh_interval_dialog_title"
                 android:entries="@array/settings_refresh_interval_entries"
                 android:entryValues="@array/settings_refresh_interval_values"
                 android:defaultValue="3"/>
 
         <SwitchPreference
                 android:key="prefs_dark_mode"
-                android:title="Dark mode"
-                android:summaryOn="Dark mode enabled"
-                android:summaryOff="Dark mode disabled"
+                android:title="@string/settings_dark_mode_title"
+                android:summaryOn="@string/settings_dark_mode_summary_on"
+                android:summaryOff="@string/settings_dark_mode_summary_off"
                 android:defaultValue="false"/>
 
     </PreferenceCategory>
