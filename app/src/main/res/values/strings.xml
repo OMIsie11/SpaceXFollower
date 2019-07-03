@@ -57,5 +57,7 @@
     <string name="lottie_rocket_attribution">Animation made by Donghwa Kang, check her work at
         lottiefiles.com/dongdona
     </string>
+    <string name="about_app_description">This is an app that provides access to information about SpaceX launches.
+    </string>
 
 </resources>

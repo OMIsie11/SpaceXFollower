@@ -6,7 +6,7 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorOnPrimary">#ffffff</color>
     <color name="colorSecondary">#ffab91</color>
-    <color name="colorSecondaryLight">#FFDDC1</color>
+    <color name="colorSecondaryLight">#ffddc1</color>
     <color name="colorSecondaryDark">#c97b63</color>
     <color name="colorOnSecondary">#212121</color>
 

@@ -105,4 +105,16 @@ class NavDrawerEspressoTests {
                 )
             )
     }
+
+    @Test
+    fun clickOnNavDrawerOpenAboutFragment() {
+        onView(withId(R.id.drawer_layout))
+            .check(matches(isClosed(Gravity.START)))
+            .perform(DrawerActions.open())
+
+        onView(withId(R.id.navigation_view))
+            .perform(NavigationViewActions.navigateTo(R.id.about_dest))
+        onView(withId(R.id.root_layout))
+            .check(matches(isDisplayed()))
+    }
 }
