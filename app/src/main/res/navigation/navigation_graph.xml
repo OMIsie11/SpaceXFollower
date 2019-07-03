@@ -82,4 +82,6 @@
                 app:argType="integer"
                 android:defaultValue="0"/>
     </fragment>
+    <fragment android:id="@+id/about_dest" android:name="io.github.omisie11.spacexfollower.ui.about.AboutFragment"
+              android:label="@string/label_about" tools:layout="@layout/fragment_about"/>
 </navigation>

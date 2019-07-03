@@ -25,4 +25,9 @@
             android:id="@id/settings_dest"
             android:title="@string/label_settings"
             android:checkable="true"/>
+
+    <item
+            android:id="@id/about_dest"
+            android:title="@string/label_about"
+            android:checkable="true"/>
 </menu>
