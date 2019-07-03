@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SpaceXFollower</string>
+    <string name="app_name" translatable="false">SpaceXFollower</string>
 
     <string name="snackbar_action_retry">Retry</string>
 
@@ -57,7 +57,12 @@
     <string name="lottie_rocket_attribution">Animation made by Donghwa Kang, check her work at
         lottiefiles.com/dongdona
     </string>
-    <string name="about_app_description">This is an app that provides access to information about SpaceX launches.
-    </string>
-
+    <!-- About screen -->
+    <string name="created_by">Created by</string>
+    <string name="omisie11" translatable="false">OMIsie11</string>
+    <string name="you_can_find_me_at">You can find me at:</string>
+    <string name="github" translatable="false">GitHub</string>
+    <string name="github_url_omisie11" translatable="false">https://github.com/OMIsie11</string>
+    <string name="twitter" translatable="false">Twitter</string>
+    <string name="twitter_url_omisie11" translatable="false">https://twitter.com/omisie11</string>
 </resources>

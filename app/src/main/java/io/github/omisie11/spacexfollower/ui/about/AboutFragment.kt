@@ -1,6 +1,8 @@
 package io.github.omisie11.spacexfollower.ui.about
 
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,5 +29,12 @@ class AboutFragment : Fragment() {
                 activity, getString(R.string.lottie_rocket_attribution), Toast.LENGTH_LONG
             ).show()
         }
+
+        chip_github.setOnClickListener { openWebUrl(getString(R.string.github_url_omisie11)) }
+        chip_twitter.setOnClickListener { openWebUrl(getString(R.string.twitter_url_omisie11)) }
+    }
+
+    private fun openWebUrl(urlAddress: String) {
+        if (urlAddress.isNotEmpty()) startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlAddress)))
     }
 }
