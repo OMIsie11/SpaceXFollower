@@ -1,18 +1,20 @@
 package io.github.omisie11.spacexfollower.ui.company
 
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
-
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Company
 import io.github.omisie11.spacexfollower.util.shortenNumberAddPrefix
+import kotlinx.android.synthetic.main.bottom_sheet_attribution.view.*
 import kotlinx.android.synthetic.main.fragment_company.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -84,11 +86,12 @@ class CompanyFragment : Fragment() {
             viewModel.refreshCompanyInfo()
         }
 
-        image_logo.setOnClickListener {
-            Toast.makeText(
-                activity, getString(R.string.lottie_rocket_attribution), Toast.LENGTH_LONG
-            ).show()
-        }
+        val attributionBottomSheetDialog = BottomSheetDialog(activity!!)
+        val sheetView = activity!!.layoutInflater.inflate(R.layout.bottom_sheet_attribution, null)
+        attributionBottomSheetDialog.setContentView(sheetView)
+
+        image_logo.setOnClickListener { attributionBottomSheetDialog.show() }
+        sheetView.text_attribution.setOnClickListener { openWebUrl(getString(R.string.lottie_files_url_dongdona)) }
     }
 
     override fun onResume() {
@@ -110,5 +113,9 @@ class CompanyFragment : Fragment() {
             true
         }
         else -> super.onOptionsItemSelected(item)
+    }
+
+    private fun openWebUrl(urlAddress: String) {
+        if (urlAddress.isNotEmpty()) startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlAddress)))
     }
 }

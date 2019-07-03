@@ -54,9 +54,9 @@
     <string name="settings_dark_mode_summary_off">Dark mode disabled</string>
     <string name="settings_refresh_interval_dialog_title">Set data auto refresh interval</string>
 
-    <string name="lottie_rocket_attribution">Animation made by Donghwa Kang, check her work at
-        lottiefiles.com/dongdona
-    </string>
+    <string name="lottie_attribution_dongdona">Animation made by <b>Donghwa Kang</b>, check her work at
+        <a href="https://lottiefiles.com/dongdona"><b>lottiefiles.com/dongdona</b></a></string>
+    <string name="lottie_files_url_dongdona" translatable="false">https://lottiefiles.com/dongdona</string>
     <!-- About screen -->
     <string name="created_by">Created by</string>
     <string name="omisie11" translatable="false">OMIsie11</string>

@@ -7,10 +7,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.github.omisie11.spacexfollower.R
+import kotlinx.android.synthetic.main.bottom_sheet_attribution.view.*
 import kotlinx.android.synthetic.main.fragment_about.*
 
 
@@ -24,14 +24,16 @@ class AboutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        image_planet.setOnClickListener {
-            Toast.makeText(
-                activity, getString(R.string.lottie_rocket_attribution), Toast.LENGTH_LONG
-            ).show()
-        }
+        val attributionBottomSheetDialog = BottomSheetDialog(activity!!)
+        val sheetView = activity!!.layoutInflater.inflate(R.layout.bottom_sheet_attribution, null)
+        attributionBottomSheetDialog.setContentView(sheetView)
+
+        image_planet.setOnClickListener { attributionBottomSheetDialog.show() }
+        sheetView.text_attribution.setOnClickListener { openWebUrl(getString(R.string.lottie_files_url_dongdona)) }
 
         chip_github.setOnClickListener { openWebUrl(getString(R.string.github_url_omisie11)) }
         chip_twitter.setOnClickListener { openWebUrl(getString(R.string.twitter_url_omisie11)) }
+
     }
 
     private fun openWebUrl(urlAddress: String) {
