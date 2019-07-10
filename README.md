@@ -7,7 +7,7 @@ Application is using [Space X REST API](https://github.com/r-spacex/SpaceX-API) 
 * Kotlin 💎
 * [KOIN](https://insert-koin.io)
 * [Retrofit](https://square.github.io/retrofit/)
-* [Retrofit2 Kotlin Coroutines Adapter](https://github.com/JakeWharton/retrofit2-kotlin-coroutines-adapter)
+* [Lottie](http://airbnb.io/lottie/#/)
 * Navigation component
 * Room database
 * LiveData, ViewModel
