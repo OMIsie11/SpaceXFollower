@@ -47,8 +47,8 @@ dependencies {
     implementation "org.koin:koin-android:$rootProject.koin_version"
     implementation "org.koin:koin-androidx-viewmodel:$rootProject.koin_version"
     // Navigation component
-    implementation "android.arch.navigation:navigation-fragment-ktx:$rootProject.nav_version"
-    implementation "android.arch.navigation:navigation-ui-ktx:$rootProject.nav_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.nav_version"
 
     implementation "com.airbnb.android:lottie:$rootProject.lottie_version"
 
