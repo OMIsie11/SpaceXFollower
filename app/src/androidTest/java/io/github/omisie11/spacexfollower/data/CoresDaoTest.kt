@@ -67,5 +67,4 @@ class CoresDaoTest {
         val coresList = getValue(coresDao.getAllCores())
         assertThat(coresList.size, equalTo(3))
     }
-
 }
