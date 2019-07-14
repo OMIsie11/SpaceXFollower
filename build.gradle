@@ -37,8 +37,11 @@ ext {
     coroutines_android_version = '1.2.1'
     lottie_version = '3.0.1'
     junit_version = '4.12'
+    test_core_version = '1.2.0'
     test_runner_version = '1.1.1'
     test_rules_version = '1.1.1'
+    test_ext_junit_version = '1.1.1'
+    test_ext_truth_version = '1.2.0'
     espresso_version = '3.1.1'
 }
 

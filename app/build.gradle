@@ -20,6 +20,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -36,7 +39,6 @@ dependencies {
     // Room
     implementation "androidx.room:room-runtime:$rootProject.room_version"
     kapt "androidx.room:room-compiler:$rootProject.room_version"
-    testImplementation "androidx.room:room-testing:$rootProject.room_version"
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycle_version"
@@ -51,11 +53,25 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.nav_version"
 
     implementation "com.airbnb.android:lottie:$rootProject.lottie_version"
-
-    testImplementation "junit:junit:$rootProject.junit_version"
+    // Testing dependencies
+    // Core library
+    androidTestImplementation "androidx.test:core:$rootProject.test_core_version"
+    // AndroidJUnitRunner and JUnit Rules
     androidTestImplementation "androidx.test:runner:$rootProject.test_runner_version"
     androidTestImplementation "androidx.test:rules:$rootProject.test_rules_version"
+    // Assertions
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.test_ext_junit_version"
+    androidTestImplementation "androidx.test.ext:truth:$rootProject.test_ext_truth_version"
+    androidTestImplementation 'com.google.truth:truth:0.42'
+    // Espresso dependencies
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espresso_version"
+    // Room
+    androidTestImplementation "androidx.room:room-testing:$rootProject.room_version"
+    // Lifecycle
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.lifecycle_version"
+    // Koin
+    testImplementation "org.koin:koin-test:$rootProject.koin_version"
+    testImplementation "junit:junit:$rootProject.junit_version"
 
 }
