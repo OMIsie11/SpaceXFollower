@@ -2,8 +2,8 @@ package io.github.omisie11.spacexfollower.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
 import io.github.omisie11.spacexfollower.data.dao.CoresDao
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import io.github.omisie11.spacexfollower.data.model.Core
@@ -63,7 +63,7 @@ class CoresDaoTest {
     }
 
     @Test
-    fun testGetCores() {
+    fun testGetAllCores() {
         val coresList = getValue(coresDao.getAllCores())
         assertThat(coresList.size, equalTo(3))
     }

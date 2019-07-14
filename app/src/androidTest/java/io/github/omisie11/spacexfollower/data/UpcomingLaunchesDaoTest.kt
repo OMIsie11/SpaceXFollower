@@ -39,7 +39,7 @@ class UpcomingLaunchesDaoTest {
         ), "Demonstration mission to ISS for NASA with an uncrewed Dragon 2 capsule."
     )
 
-    private val launchesList = listOf(launch1, launch2)
+    private val testLaunchesData = listOf(launch1, launch2)
 
     private lateinit var database: SpaceDatabase
     private lateinit var upcomingLaunchesDao: UpcomingLaunchesDao
@@ -53,7 +53,7 @@ class UpcomingLaunchesDaoTest {
         database = Room.inMemoryDatabaseBuilder(context, SpaceDatabase::class.java).build()
         upcomingLaunchesDao = database.upcomingLaunchesDao()
 
-        upcomingLaunchesDao.insertUpcomingLaunches(launchesList)
+        upcomingLaunchesDao.insertUpcomingLaunches(testLaunchesData)
     }
 
     @After
@@ -62,8 +62,8 @@ class UpcomingLaunchesDaoTest {
     }
 
     @Test
-    fun testGetCores() {
-        val data = getValue(upcomingLaunchesDao.getUpcomingLaunches())
-        Assert.assertThat(data.size, Matchers.equalTo(launchesList.size))
+    fun testGetUpcomingLaunches() {
+        val launchesList = getValue(upcomingLaunchesDao.getUpcomingLaunches())
+        Assert.assertThat(launchesList.size, Matchers.equalTo(testLaunchesData.size))
     }
 }

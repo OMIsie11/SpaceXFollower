@@ -2,8 +2,8 @@ package io.github.omisie11.spacexfollower.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
 import io.github.omisie11.spacexfollower.data.dao.CompanyDao
 import io.github.omisie11.spacexfollower.data.model.Company
 import io.github.omisie11.spacexfollower.utilities.getValue
@@ -16,7 +16,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class CompanyDaoTest {
 
-    private val companyInfo = Company(
+    private val testCompanyInfo = Company(
         1, "SpaceX", "Elon Musk", 2002, 7000, 3,
         3, 1, "Elon Musk", "Elon Musk", "Gwynne Shotwell",
         "Tom Mueller", 15000000000, Company.Headquarters(
@@ -40,7 +40,7 @@ class CompanyDaoTest {
         database = Room.inMemoryDatabaseBuilder(context, SpaceDatabase::class.java).build()
         companyDao = database.companyDao()
 
-        companyDao.insertCompanyInfo(companyInfo)
+        companyDao.insertCompanyInfo(testCompanyInfo)
     }
 
     @After
@@ -49,8 +49,8 @@ class CompanyDaoTest {
     }
 
     @Test
-    fun testGetCores() {
-        val data = getValue(companyDao.getCompanyInfo())
-        assert(data == companyInfo)
+    fun testGetCompanyInfo() {
+        val companyData = getValue(companyDao.getCompanyInfo())
+        assert(companyData == testCompanyInfo)
     }
 }
