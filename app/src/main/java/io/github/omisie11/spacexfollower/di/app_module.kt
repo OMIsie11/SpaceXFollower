@@ -28,7 +28,7 @@ val appModule = module {
 
     // Space database instance
     single {
-        Room.databaseBuilder<SpaceDatabase>(
+        Room.databaseBuilder(
             androidApplication(),
             SpaceDatabase::class.java,
             "space_data.db"

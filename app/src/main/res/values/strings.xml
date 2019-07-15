@@ -45,7 +45,9 @@
     <string name="core_block">Block %d</string>
     <string name="core_block_null">Block not assigned</string>
     <string name="launch_site">Launch site</string>
-    <string name="flight_number">Flight %d</string>
+    <string name="flight_number_template">Flight %d</string>
+    
+    <string name="empty_content_sign" translatable="false">-</string>
 
     <!-- Settings  -->
     <string name="settings_refresh_interval_title">Data refresh interval</string>
@@ -65,4 +67,25 @@
     <string name="github_url_omisie11" translatable="false">https://github.com/OMIsie11</string>
     <string name="twitter" translatable="false">Twitter</string>
     <string name="twitter_url_omisie11" translatable="false">https://twitter.com/omisie11</string>
+
+    <string name="detail_fragment_image_content_desc">Picture connected with SpaceX missions and operations</string>
+    <string name="sort_by">Sort by:</string>
+    <string name="serial_newest">Serial: newest</string>
+    <string name="serial_oldest">Serial: oldest</string>
+    <string name="core_serial">Core serial</string>
+    <string name="block">Block</string>
+    <string name="status">Status</string>
+    <string name="original_launch">Original launch</string>
+    <string name="details">Details</string>
+    <string name="rtls_attempts">RTLS attempts</string>
+    <string name="rtls_landings">RTLS landings</string>
+    <string name="asds_attempts">ASDS attempts</string>
+    <string name="asds_landings">ASDS landings</string>
+    <string name="water_landing">Water landing</string>
+    <string name="reused">Reused</string>
+    <string name="flight_number">Flight number</string>
+    <string name="mission_name">Mission name</string>
+    <string name="launch_date">Launch date</string>
+    <string name="refresh">Refresh</string>
+    <string name="delete">Delete</string>
 </resources>

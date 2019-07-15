@@ -17,7 +17,7 @@
                 android:id="@+id/text_chips_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sort by:"
+                android:text="@string/sort_by"
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"/>
@@ -43,7 +43,7 @@
                         android:checkable="true"
                         android:clickable="true"
                         android:focusable="true"
-                        android:text="Serial: newest"/>
+                        android:text="@string/serial_newest"/>
 
                 <com.google.android.material.chip.Chip
                         android:id="@+id/chip_serial_oldest"
@@ -53,7 +53,7 @@
                         android:checkable="true"
                         android:clickable="true"
                         android:focusable="true"
-                        android:text="Serial: oldest"/>
+                        android:text="@string/serial_oldest"/>
 
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
@@ -61,8 +61,10 @@
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipeRefreshLayout"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.recyclerview.widget.RecyclerView

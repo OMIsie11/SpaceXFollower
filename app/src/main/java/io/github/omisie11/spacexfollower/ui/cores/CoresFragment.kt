@@ -67,9 +67,10 @@ class CoresFragment : Fragment() {
         viewModel.snackbar.observe(this, Observer { text ->
             text?.let {
                 Snackbar.make(swipeRefreshLayout, text, Snackbar.LENGTH_LONG).setAction(
-                    getString(R.string.snackbar_action_retry), View.OnClickListener {
-                        viewModel.refreshCores()
-                    }).show()
+                    getString(R.string.snackbar_action_retry)
+                ) {
+                    viewModel.refreshCores()
+                }.show()
                 viewModel.onSnackbarShown()
             }
         })

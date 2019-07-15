@@ -67,9 +67,10 @@ class CapsulesFragment : Fragment() {
         viewModel.snackbar.observe(this, Observer { text ->
             text?.let {
                 Snackbar.make(swipeRefreshLayout, text, Snackbar.LENGTH_LONG).setAction(
-                    getString(R.string.snackbar_action_retry), View.OnClickListener {
-                        viewModel.refreshCapsules()
-                    }).show()
+                    getString(R.string.snackbar_action_retry)
+                ) {
+                    viewModel.refreshCapsules()
+                }.show()
                 viewModel.onSnackbarShown()
             }
         })

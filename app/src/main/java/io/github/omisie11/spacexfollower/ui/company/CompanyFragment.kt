@@ -74,9 +74,10 @@ class CompanyFragment : Fragment() {
         viewModel.snackbar.observe(viewLifecycleOwner, Observer { text ->
             text?.let {
                 Snackbar.make(swipeRefreshLayout, text, Snackbar.LENGTH_LONG).setAction(
-                    getString(R.string.snackbar_action_retry), View.OnClickListener {
-                        viewModel.refreshCompanyInfo()
-                    }).show()
+                    getString(R.string.snackbar_action_retry)
+                ) {
+                    viewModel.refreshCompanyInfo()
+                }.show()
                 viewModel.onSnackbarShown()
             }
         })

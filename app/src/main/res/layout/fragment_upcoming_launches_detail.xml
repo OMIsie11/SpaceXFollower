@@ -12,7 +12,7 @@
             android:layout_height="wrap_content">
 
         <TextView
-                android:text="Flight number"
+                android:text="@string/flight_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView"
@@ -36,7 +36,7 @@
 
         <TextView
                 android:id="@+id/textView16"
-                android:text="Mission name"
+                android:text="@string/mission_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -53,13 +53,14 @@
                 android:textAlignment="center"
                 app:layout_constraintTop_toBottomOf="@+id/textView16"
                 android:layout_marginTop="8dp"
-                tools:text='"Nusantara Satu (PSN-6) / GTO-1 / Beresheet"' app:layout_constraintEnd_toEndOf="parent"
+                tools:text='"Nusantara Satu (PSN-6) / GTO-1 / Beresheet"'
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"/>
 
         <TextView
                 android:id="@+id/textView19"
-                android:text="Launch date"
+                android:text="@string/launch_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -82,7 +83,7 @@
 
         <TextView
                 android:id="@+id/textView22"
-                android:text="Launch site"
+                android:text="@string/launch_site"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/text_launch_date"
@@ -100,7 +101,6 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/textView22"
                 tools:text="CCAFS SLC 40" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

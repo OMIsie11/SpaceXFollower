@@ -89,7 +89,6 @@
                     app:layout_constraintEnd_toStartOf="@+id/text_employees"
                     android:layout_marginEnd="16dp"/>
             <TextView
-                    android:text="0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_employees"
@@ -98,6 +97,7 @@
                     app:layout_constraintStart_toEndOf="@+id/text_title_employees"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/empty_content_sign"
                     tools:text="7000"
                     android:layout_marginStart="16dp"/>
             <TextView
@@ -109,7 +109,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/text_title_employees"
                     app:layout_constraintStart_toStartOf="@+id/text_title_employees"/>
             <TextView
-                    android:text="0"
+                    android:text="@string/empty_content_sign"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_vehicles"
@@ -126,7 +126,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/text_title_vehicles"
                     app:layout_constraintStart_toStartOf="@+id/text_title_vehicles"/>
             <TextView
-                    android:text="0"
+                    android:text="@string/empty_content_sign"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_launch_sites"
@@ -143,7 +143,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/text_title_launch_sites"
                     app:layout_constraintStart_toStartOf="@+id/text_title_launch_sites"/>
             <TextView
-                    android:text="0"
+                    android:text="@string/empty_content_sign"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_test_sites"
@@ -164,7 +164,7 @@
                     android:layout_marginEnd="8dp"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
             <TextView
-                    android:text="0"
+                    android:text="@string/empty_content_sign"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_valuation"
@@ -190,7 +190,7 @@
                     android:layout_marginEnd="8dp"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
             <TextView
-                    android:text="TextView"
+                    android:text="@string/empty_content_sign"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_address"
@@ -201,7 +201,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp" tools:text="Rocket Road"/>
             <TextView
-                    android:text="TextView"
+                    android:text="@string/empty_content_sign"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_city"

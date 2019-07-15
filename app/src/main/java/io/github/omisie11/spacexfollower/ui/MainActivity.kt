@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         // Get NavHostFragment and NavController
         val host: NavHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment ?: return
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = host.navController
         // Setup NavigationView menu
         findViewById<NavigationView>(R.id.navigation_view).setupWithNavController(navController)

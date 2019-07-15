@@ -24,7 +24,7 @@ class UpcomingLaunchesAdapter : RecyclerView.Adapter<UpcomingLaunchesAdapter.Vie
         // Bind data to views from ViewHolder
         launchesList.let {
             holder.flightNumberTextView.text = holder.itemView.context.resources
-                .getString(R.string.flight_number, launchesList[position].flightNumber)
+                .getString(R.string.flight_number_template, launchesList[position].flightNumber)
             holder.launchDateTextView.text = if (launchesList[position].launchDateUnix != null)
                 getLocalTimeFromUnix(launchesList[position].launchDateUnix!!) else
                 holder.itemView.context.getString(R.string.launch_date_null)

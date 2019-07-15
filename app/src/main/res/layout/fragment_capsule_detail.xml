@@ -14,6 +14,7 @@
         <ImageView
                 android:id="@+id/image_capsule"
                 android:src="@drawable/detail_fragment_image_capsule_dragon"
+                android:contentDescription="@string/detail_fragment_image_content_desc"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +36,6 @@
                 android:id="@+id/text_capsule_serial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="..."
                 tools:text="C102"
                 android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/text_capsule_type"/>
 
         <TextView
-                android:text="..."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/text_capsule_type"
@@ -78,7 +77,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/text_capsule_status"/>
 
         <TextView
-                android:text="..."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/text_capsule_status"
@@ -128,7 +126,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_capsule_launch"/>
 
         <TextView
-                android:text="..."
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/text_capsule_details"
@@ -155,7 +152,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_capsule_details"/>
 
         <TextView
-                android:text="0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/text_capsule_landings"
@@ -163,6 +159,7 @@
                 app:layout_constraintStart_toEndOf="@+id/textView3"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/empty_content_sign"
                 tools:text="0"/>
 
         <TextView
@@ -177,12 +174,12 @@
                 android:layout_marginBottom="8dp"/>
 
         <TextView
-                android:text="0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/text_capsule_reused"
                 app:layout_constraintTop_toTopOf="@+id/textView5"
                 app:layout_constraintEnd_toEndOf="@+id/text_capsule_landings"
+                android:text="@string/empty_content_sign"
                 tools:text="0"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
