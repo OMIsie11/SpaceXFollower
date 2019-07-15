@@ -9,6 +9,7 @@ import io.github.omisie11.spacexfollower.data.model.launch.LaunchSite
 import io.github.omisie11.spacexfollower.data.model.launch.Rocket
 import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
 import io.github.omisie11.spacexfollower.utilities.getValue
+import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers
 import org.junit.*
 import org.junit.runner.RunWith
@@ -65,5 +66,12 @@ class UpcomingLaunchesDaoTest {
     fun testGetUpcomingLaunches() {
         val launchesList = getValue(upcomingLaunchesDao.getUpcomingLaunches())
         Assert.assertThat(launchesList.size, Matchers.equalTo(testLaunchesData.size))
+    }
+
+    @Test
+    fun testDeleteUpcomingLaunches() {
+        upcomingLaunchesDao.deleteUpcomingLaunchesData()
+        val coresList = getValue(upcomingLaunchesDao.getUpcomingLaunches())
+        assertThat(coresList.size, Matchers.equalTo(0))
     }
 }

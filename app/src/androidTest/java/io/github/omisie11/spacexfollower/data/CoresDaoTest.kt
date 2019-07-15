@@ -67,4 +67,11 @@ class CoresDaoTest {
         val coresList = getValue(coresDao.getAllCores())
         assertThat(coresList.size, equalTo(3))
     }
+
+    @Test
+    fun testDeleteCores() {
+        coresDao.deleteAllCores()
+        val coresList = getValue(coresDao.getAllCores())
+        assertThat(coresList.size, equalTo(0))
+    }
 }

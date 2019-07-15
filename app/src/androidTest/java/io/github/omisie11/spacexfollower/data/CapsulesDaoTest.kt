@@ -80,4 +80,11 @@ class CapsulesDaoTest {
         assertThat(capsulesList[1], equalTo(capsule2))
         assertThat(capsulesList[2], equalTo(capsule3))
     }
+
+    @Test
+    fun testDeleteCapsules() {
+        capsulesDao.deleteAllCapsules()
+        val coresList = getValue(capsulesDao.getAllCapsulesOrderBySerialDesc())
+        assertThat(coresList.size, equalTo(0))
+    }
 }
