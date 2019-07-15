@@ -31,7 +31,7 @@ ext {
     lifecycle_version = "2.0.0"
     retrofit_version = "2.6.0"
     nav_version = "2.0.0"
-    material_version = "1.1.0-alpha05"
+    material_version = "1.1.0-alpha07"
     preference_version = '1.0.0'
     koin_version = "2.0.1"
     coroutines_android_version = '1.2.1'
