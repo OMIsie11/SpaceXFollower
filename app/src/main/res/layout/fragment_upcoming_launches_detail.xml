@@ -102,5 +102,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView22"
                 tools:text="CCAFS SLC 40" />
 
+        <TextView
+                android:text="First stage cores"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView15"
+                app:layout_constraintTop_toBottomOf="@+id/text_launch_site_name"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:layout_marginTop="16dp"/>
+        <FrameLayout
+                android:id="@+id/frame_cores_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.481"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" android:layout_marginTop="8dp">
+        </FrameLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
