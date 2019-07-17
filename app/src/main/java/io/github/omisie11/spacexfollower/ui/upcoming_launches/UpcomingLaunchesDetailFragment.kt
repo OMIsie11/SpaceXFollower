@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import androidx.transition.AutoTransition
+import androidx.transition.Transition
 import androidx.transition.TransitionManager
 
 import io.github.omisie11.spacexfollower.R
@@ -102,8 +104,10 @@ class UpcomingLaunchesDetailFragment : Fragment() {
             }
         })
 
+        val expandCardTransition = AutoTransition().apply { duration = 200 }
         card_cores_list.setOnClickListener {
-            TransitionManager.beginDelayedTransition(card_cores_list)
+            //val autoTransition = AutoTransition().apply { duration = 200 }
+            TransitionManager.beginDelayedTransition(card_cores_list, expandCardTransition)
             when (frame_cores_list.visibility) {
                 View.GONE -> frame_cores_list.visibility = View.VISIBLE
                 View.VISIBLE -> frame_cores_list.visibility = View.GONE
@@ -113,7 +117,7 @@ class UpcomingLaunchesDetailFragment : Fragment() {
         }
 
         card_payloads.setOnClickListener {
-            TransitionManager.beginDelayedTransition(card_payloads)
+            TransitionManager.beginDelayedTransition(card_payloads, expandCardTransition)
             when (frame_payloads.visibility) {
                 View.GONE -> frame_payloads.visibility = View.VISIBLE
                 View.VISIBLE -> frame_payloads.visibility = View.GONE
