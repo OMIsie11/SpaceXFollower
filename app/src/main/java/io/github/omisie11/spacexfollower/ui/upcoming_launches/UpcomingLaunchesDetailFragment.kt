@@ -48,6 +48,7 @@ class UpcomingLaunchesDetailFragment : Fragment() {
                 getString(R.string.launch_date_null)
             text_launch_site_name.text = launches[selectedLaunchId].launch_site.siteName
 
+            // Dynamically add views for Cores used in flight
             if (launches[selectedLaunchId].rocket.first_stage.cores == null) {
                 val noCoresTextView = TextView(activity).apply {
                     text = "No cores are used in this mission"
@@ -72,6 +73,33 @@ class UpcomingLaunchesDetailFragment : Fragment() {
                     }
                 }
             }
+            // Dynamically add views for Payloads in flight
+            if (launches[selectedLaunchId].rocket.second_stage.payloads == null) {
+                val noPayloadsTextView = TextView(activity).apply {
+                    text = "No payloads"
+                }
+                frame_cores_list.addView(noPayloadsTextView)
+            } else {
+                for (payload in launches[selectedLaunchId].rocket.second_stage.payloads!!) {
+                    if (payload.payload_id.isNullOrEmpty() || payload.reused == null || payload.manufacturer == null) {
+                        val noDataTextView = TextView(activity).apply {
+                            text = "No precision info provided"
+                        }
+                        frame_payloads.addView(noDataTextView)
+                    } else {
+                        val coreLinearLayout = layoutInflater.inflate(
+                            R.layout.upcoming_launch_cores,
+                            frame_payloads, false
+                        )
+                        frame_payloads.addView(coreLinearLayout)
+                        coreLinearLayout.text_core_serial.text = payload.payload_id
+                        coreLinearLayout.text_core_block.text = payload.payload_type
+                        coreLinearLayout.text_core_flight.text = payload.nationality
+                    }
+                }
+            }
+
+
         })
     }
 }

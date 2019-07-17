@@ -10,9 +10,9 @@ data class Rocket(
     @SerializedName("rocket_type")
     val rocket_type: String,
     @SerializedName("first_stage")
-    val first_stage: FirstStage
-    //@SerializedName("second_stage")
-    //val second_stage: SecondStage
+    val first_stage: FirstStage,
+    @SerializedName("second_stage")
+    val second_stage: SecondStage
     //@SerializedName("fairings") val fairings: Fairings
 ) {
 
@@ -43,25 +43,25 @@ data class Rocket(
         //@SerializedName("landing_vehicle")
         //val landing_vehicle: String?
     )
-/*
+
     data class SecondStage(
         @SerializedName("block")
         val block: Int?,
         @SerializedName("payloads")
-        val payloads: List<Payload>
+        val payloads: List<Payload>?
     )
 
     data class Payload(
         @SerializedName("payload_id")
-        val payload_id: String,
+        val payload_id: String?,
         //@SerializedName("norad_id")
         //val norad_id: List<String>,
         @SerializedName("reused")
-        val reused: Boolean,
+        val reused: Boolean?,
         @SerializedName("customers")
         val customers: List<String>,
         @SerializedName("nationality")
-        val nationality: String,
+        val nationality: String?,
         @SerializedName("manufacturer")
         val manufacturer: String?,
         @SerializedName("payload_type")
@@ -73,6 +73,6 @@ data class Rocket(
         @SerializedName("orbit")
         val orbit: String
         //@SerializedName("orbit_params")
-        // val orbit_params : Orbit_params
-    ) */
+        //val orbit_params : Orbit_params
+    )
 }
