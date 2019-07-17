@@ -24,6 +24,7 @@ class UpcomingLaunchesDetailFragment : Fragment() {
     private val viewModel by viewModel<UpcomingLaunchesViewModel>()
     // Variable used in animating expand/collapse icon
     private var coresIconRotationAngle = 0f
+    private var payloadsIconRotationAngle = 0f
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,14 +51,14 @@ class UpcomingLaunchesDetailFragment : Fragment() {
             // Dynamically add views for Cores used in flight
             if (launches[selectedLaunchId].rocket.first_stage.cores == null) {
                 val noCoresTextView = TextView(activity).apply {
-                    text = "No cores are used in this mission"
+                    text = context.getString(R.string.no_cores_used_in_launch)
                 }
                 frame_cores_list.addView(noCoresTextView)
             } else {
                 for (core in launches[selectedLaunchId].rocket.first_stage.cores!!) {
                     if (core.core_serial.isNullOrEmpty() || core.block == null || core.flight == null) {
                         val noDataTextView = TextView(activity).apply {
-                            text = "No precision info provided"
+                            text = context.getString(R.string.no_precision_info)
                         }
                         frame_cores_list.addView(noDataTextView)
                     } else {
@@ -67,22 +68,24 @@ class UpcomingLaunchesDetailFragment : Fragment() {
                         )
                         frame_cores_list.addView(coreLinearLayout)
                         coreLinearLayout.text_core_serial.text = core.core_serial
-                        coreLinearLayout.text_core_block.text = core.block.toString()
-                        coreLinearLayout.text_core_flight.text = core.flight.toString()
+                        coreLinearLayout.text_core_block.text =
+                            resources.getString(R.string.block_number_template, core.block)
+                        coreLinearLayout.text_core_flight.text =
+                            resources.getString(R.string.flight_number_template, core.flight)
                     }
                 }
             }
             // Dynamically add views for Payloads in flight
             if (launches[selectedLaunchId].rocket.second_stage.payloads == null) {
                 val noPayloadsTextView = TextView(activity).apply {
-                    text = "No payloads"
+                    text = context.getString(R.string.no_payloads)
                 }
                 frame_cores_list.addView(noPayloadsTextView)
             } else {
                 for (payload in launches[selectedLaunchId].rocket.second_stage.payloads!!) {
                     if (payload.payload_id.isNullOrEmpty() || payload.reused == null || payload.manufacturer == null) {
                         val noDataTextView = TextView(activity).apply {
-                            text = "No precision info provided"
+                            text = context.getString(R.string.no_precision_info)
                         }
                         frame_payloads.addView(noDataTextView)
                     } else {
@@ -97,7 +100,6 @@ class UpcomingLaunchesDetailFragment : Fragment() {
                     }
                 }
             }
-
         })
 
         card_cores_list.setOnClickListener {
@@ -107,7 +109,17 @@ class UpcomingLaunchesDetailFragment : Fragment() {
                 View.VISIBLE -> frame_cores_list.visibility = View.GONE
             }
             coresIconRotationAngle = if (coresIconRotationAngle == 0f) 180f else 0f
-            image_cores_expand_arrow.animate().rotation(coresIconRotationAngle).setDuration(500).start()
+            image_cores_expand_arrow.animate().rotation(coresIconRotationAngle).setDuration(250).start()
+        }
+
+        card_payloads.setOnClickListener {
+            TransitionManager.beginDelayedTransition(card_payloads)
+            when (frame_payloads.visibility) {
+                View.GONE -> frame_payloads.visibility = View.VISIBLE
+                View.VISIBLE -> frame_payloads.visibility = View.GONE
+            }
+            payloadsIconRotationAngle = if (payloadsIconRotationAngle == 0f) 180f else 0f
+            image_payloads_expand_arrow.animate().rotation(payloadsIconRotationAngle).setDuration(250).start()
         }
     }
 }
