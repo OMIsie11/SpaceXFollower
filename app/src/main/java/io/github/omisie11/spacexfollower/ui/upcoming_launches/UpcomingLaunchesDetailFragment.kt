@@ -2,22 +2,19 @@ package io.github.omisie11.spacexfollower.ui.upcoming_launches
 
 
 import android.os.Bundle
-import android.text.Layout
-import android.util.AttributeSet
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import androidx.transition.TransitionManager
 
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.fragment_upcoming_launches_detail.*
 import kotlinx.android.synthetic.main.fragment_upcoming_launches_detail.frame_cores_list
-import kotlinx.android.synthetic.main.fragment_upcoming_launches_detail.view.*
 import kotlinx.android.synthetic.main.upcoming_launch_cores.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,6 +22,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class UpcomingLaunchesDetailFragment : Fragment() {
 
     private val viewModel by viewModel<UpcomingLaunchesViewModel>()
+    // Variable used in animating expand/collapse icon
+    private var coresIconRotationAngle = 0f
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -99,7 +98,16 @@ class UpcomingLaunchesDetailFragment : Fragment() {
                 }
             }
 
-
         })
+
+        card_cores_list.setOnClickListener {
+            TransitionManager.beginDelayedTransition(card_cores_list)
+            when (frame_cores_list.visibility) {
+                View.GONE -> frame_cores_list.visibility = View.VISIBLE
+                View.VISIBLE -> frame_cores_list.visibility = View.GONE
+            }
+            coresIconRotationAngle = if (coresIconRotationAngle == 0f) 180f else 0f
+            image_cores_expand_arrow.animate().rotation(coresIconRotationAngle).setDuration(500).start()
+        }
     }
 }

@@ -28,20 +28,20 @@ data class Rocket(
         val flight: Int?,
         @SerializedName("block")
         val block: Int?,
-        //@SerializedName("gridfins")
-        //val gridfins: Boolean,
-        //@SerializedName("legs")
-        //val legs: Boolean?,
+        @SerializedName("gridfins")
+        val gridfins: Boolean,
+        @SerializedName("legs")
+        val legs: Boolean?,
         @SerializedName("reused")
-        val reused: Boolean?
-        //@SerializedName("land_success")
-        //val land_success: String?,
-        //@SerializedName("landing_intent")
-        //val landing_intent: Boolean?,
-        //@SerializedName("landing_type")
-        //val landing_type: String?,
-        //@SerializedName("landing_vehicle")
-        //val landing_vehicle: String?
+        val reused: Boolean?,
+        @SerializedName("land_success")
+        val land_success: String?,
+        @SerializedName("landing_intent")
+        val landing_intent: Boolean?,
+        @SerializedName("landing_type")
+        val landing_type: String?,
+        @SerializedName("landing_vehicle")
+        val landing_vehicle: String?
     )
 
     data class SecondStage(
