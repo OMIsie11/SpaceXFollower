@@ -34,6 +34,8 @@ class AboutFragment : Fragment() {
         chip_github.setOnClickListener { openWebUrl(getString(R.string.github_url_omisie11)) }
         chip_twitter.setOnClickListener { openWebUrl(getString(R.string.twitter_url_omisie11)) }
 
+        card_attribution_dongdona.setOnClickListener { openWebUrl(getString(R.string.lottie_files_url_dongdona)) }
+        card_attribution_spacex_photos.setOnClickListener { openWebUrl(getString(R.string.photos_spacex_url)) }
     }
 
     private fun openWebUrl(urlAddress: String) {

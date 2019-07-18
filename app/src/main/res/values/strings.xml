@@ -105,4 +105,5 @@
     <string name="second_stage_payloads">Second stage payloads</string>
     <string name="first_stage_cores">First stage cores</string>
     <string name="expand_collapse_arrow_image">Expand and collapse arrow image</string>
+    <string name="credits">Credits</string>
 </resources>
