@@ -46,7 +46,7 @@
     <string name="core_block_null">Block not assigned</string>
     <string name="launch_site">Launch site</string>
     <string name="flight_number_template">Flight %d</string>
-    
+
     <string name="empty_content_sign" translatable="false">-</string>
 
     <!-- Settings  -->
@@ -57,8 +57,17 @@
     <string name="settings_refresh_interval_dialog_title">Set data auto refresh interval</string>
 
     <string name="lottie_attribution_dongdona">Animation made by <b>Donghwa Kang</b>, check her work at
-        <a href="https://lottiefiles.com/dongdona"><b>lottiefiles.com/dongdona</b></a></string>
+        <a href="https://lottiefiles.com/dongdona">
+            <b>lottiefiles.com/dongdona</b>
+        </a>
+    </string>
     <string name="lottie_files_url_dongdona" translatable="false">https://lottiefiles.com/dongdona</string>
+    <string name="photos_attribution_spacex">All photos come from
+        <a href="https://www.flickr.com/people/spacex/">
+            <b>SpaceX Flickr Profile</b>
+        </a>. Click here to visit it.
+    </string>
+    <string name="photos_spacex_url" translatable="false">https://www.flickr.com/people/spacex/</string>
     <!-- About screen -->
     <string name="created_by">Created by</string>
     <string name="omisie11" translatable="false">OMIsie11</string>

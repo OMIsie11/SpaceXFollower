@@ -1,15 +1,19 @@
 package io.github.omisie11.spacexfollower.ui.capsules
 
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
+import kotlinx.android.synthetic.main.bottom_sheet_attribution.view.*
 import kotlinx.android.synthetic.main.fragment_capsule_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.random.Random
@@ -56,5 +60,17 @@ class CapsuleDetailFragment : Fragment() {
             )
         )
         imagesArray.recycle()
+
+        val attributionBottomSheetDialog = BottomSheetDialog(activity!!)
+        val sheetView = activity!!.layoutInflater.inflate(R.layout.bottom_sheet_attribution, null)
+        sheetView.text_attribution.text = getString(R.string.photos_attribution_spacex)
+        attributionBottomSheetDialog.setContentView(sheetView)
+
+        image_capsule.setOnClickListener { attributionBottomSheetDialog.show() }
+        sheetView.setOnClickListener { openWebUrl(getString(R.string.photos_spacex_url)) }
+    }
+
+    private fun openWebUrl(urlAddress: String) {
+        if (urlAddress.isNotEmpty()) startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlAddress)))
     }
 }
