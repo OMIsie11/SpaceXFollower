@@ -36,6 +36,7 @@ class AboutFragment : Fragment() {
 
         card_attribution_dongdona.setOnClickListener { openWebUrl(getString(R.string.lottie_files_url_dongdona)) }
         card_attribution_spacex_photos.setOnClickListener { openWebUrl(getString(R.string.photos_spacex_url)) }
+        card_attribution_space_api.setOnClickListener { openWebUrl(getString(R.string.space_api_url)) }
     }
 
     private fun openWebUrl(urlAddress: String) {

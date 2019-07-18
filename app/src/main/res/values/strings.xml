@@ -65,9 +65,17 @@
     <string name="photos_attribution_spacex">All photos come from
         <a href="https://www.flickr.com/people/spacex/">
             <b>SpaceX Flickr Profile</b>
-        </a>. Click here to visit it.
+        </a>
+        . Click here to visit it.
     </string>
     <string name="photos_spacex_url" translatable="false">https://www.flickr.com/people/spacex/</string>
+    <string name="attribution_space_api">Application is getting data from Unofficial
+        <a href="https://github.com/r-spacex/SpaceX-API">
+            <b>Open Source SpaceX API</b>
+        </a>
+        . Click here to visit site.
+    </string>
+    <string name="space_api_url" translatable="false">https://github.com/r-spacex/SpaceX-API</string>
     <!-- About screen -->
     <string name="created_by">Created by</string>
     <string name="omisie11" translatable="false">OMIsie11</string>
@@ -106,4 +114,7 @@
     <string name="first_stage_cores">First stage cores</string>
     <string name="expand_collapse_arrow_image">Expand and collapse arrow image</string>
     <string name="credits">Credits</string>
+
+    <string name="application_no_affiliation">Developer and Application are not affiliated with SpaceX in any way.
+    </string>
 </resources>
