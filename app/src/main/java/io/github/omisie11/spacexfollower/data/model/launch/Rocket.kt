@@ -65,13 +65,13 @@ data class Rocket(
         @SerializedName("manufacturer")
         val manufacturer: String?,
         @SerializedName("payload_type")
-        val payload_type: String,
+        val payload_type: String?,
         @SerializedName("payload_mass_kg")
-        val payload_mass_kg: Int,
+        val payload_mass_kg: Int?,
         @SerializedName("payload_mass_lbs")
-        val payload_mass_lbs: Double,
+        val payload_mass_lbs: Double?,
         @SerializedName("orbit")
-        val orbit: String
+        val orbit: String?
         //@SerializedName("orbit_params")
         //val orbit_params : Orbit_params
     )
