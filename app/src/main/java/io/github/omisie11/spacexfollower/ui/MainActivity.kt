@@ -27,8 +27,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        AppCompatDelegate.setDefaultNightMode(translateValueToDayNightMode(
-                sharedPrefs.getBoolean(PREFS_KEY_DARK_MODE, false)))
+        AppCompatDelegate.setDefaultNightMode(
+            translateValueToDayNightMode(
+                sharedPrefs.getBoolean(PREFS_KEY_DARK_MODE, false)
+            )
+        )
 
         // Set default values of preferences for first app launch (third argument set
         // to false ensures that this is won't set user settings to defaults with every call)
@@ -47,9 +50,21 @@ class MainActivity : AppCompatActivity() {
             when (key) {
                 PREFS_KEY_DARK_MODE -> {
                     AppCompatDelegate.setDefaultNightMode(
-                        translateValueToDayNightMode(sharedPrefs.getBoolean(PREFS_KEY_DARK_MODE,
-                            false))) ; recreate() }
+                        translateValueToDayNightMode(
+                            sharedPrefs.getBoolean(
+                                PREFS_KEY_DARK_MODE,
+                                false
+                            )
+                        )
+                    ); recreate()
+                }
             }
+        }
+
+        when (intent.action) {
+            SHORTCUT_CAPSULES -> navController.navigate(R.id.capsules_dest)
+            SHORTCUT_CORES -> navController.navigate(R.id.cores_dest)
+            SHORTCUT_COMPANY -> navController.navigate(R.id.company_dest)
         }
 
     }
@@ -74,5 +89,11 @@ class MainActivity : AppCompatActivity() {
     private fun translateValueToDayNightMode(value: Boolean): Int = when (value) {
         true -> AppCompatDelegate.MODE_NIGHT_YES
         false -> AppCompatDelegate.MODE_NIGHT_NO
+    }
+
+    companion object {
+        private const val SHORTCUT_CAPSULES: String = "io.github.omisie11.spacexfollower.SHORTCUT_CAPSULES"
+        private const val SHORTCUT_CORES: String = "io.github.omisie11.spacexfollower.SHORTCUT_CORES"
+        private const val SHORTCUT_COMPANY: String = "io.github.omisie11.spacexfollower.SHORTCUT_COMPANY"
     }
 }
