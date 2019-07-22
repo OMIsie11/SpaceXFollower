@@ -18,13 +18,12 @@ import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.fragment_upcoming_launches_detail.*
 import kotlinx.android.synthetic.main.upcoming_launch_cores.view.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class UpcomingLaunchesDetailFragment : Fragment() {
 
-    private val payloadsRecyclerViewAdapter: PayloadsRecyclerAdapter by inject()
+    private lateinit var payloadsRecyclerViewAdapter: PayloadsRecyclerAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
     private val viewModel by viewModel<UpcomingLaunchesViewModel>()
     // Variable used in animating expand/collapse icon
@@ -45,6 +44,7 @@ class UpcomingLaunchesDetailFragment : Fragment() {
         val safeArgs = arguments?.let { UpcomingLaunchesDetailFragmentArgs.fromBundle(it) }
         val selectedLaunchId: Int = safeArgs?.itemId ?: 0
 
+        payloadsRecyclerViewAdapter = PayloadsRecyclerAdapter()
         viewManager = LinearLayoutManager(activity)
         payloads_recycler.apply {
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
