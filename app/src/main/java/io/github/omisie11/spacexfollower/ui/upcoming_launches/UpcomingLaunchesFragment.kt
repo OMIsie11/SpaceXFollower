@@ -16,13 +16,12 @@ import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
 import io.github.omisie11.spacexfollower.util.OnItemClickListener
 import io.github.omisie11.spacexfollower.util.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_recycler.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class UpcomingLaunchesFragment : Fragment() {
 
-    private val viewAdapter: UpcomingLaunchesAdapter by inject()
+    private lateinit var viewAdapter: UpcomingLaunchesAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
     private val viewModel: UpcomingLaunchesViewModel by viewModel()
 
@@ -38,6 +37,8 @@ class UpcomingLaunchesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewAdapter = UpcomingLaunchesAdapter()
 
         // Setup recyclerView
         viewManager = LinearLayoutManager(activity)

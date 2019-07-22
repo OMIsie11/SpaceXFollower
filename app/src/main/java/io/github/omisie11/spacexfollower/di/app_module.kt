@@ -12,8 +12,6 @@ import io.github.omisie11.spacexfollower.ui.company.CompanyViewModel
 import io.github.omisie11.spacexfollower.ui.cores.CoresAdapter
 import io.github.omisie11.spacexfollower.ui.cores.CoresRepository
 import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel
-import io.github.omisie11.spacexfollower.ui.upcoming_launches.PayloadsRecyclerAdapter
-import io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesAdapter
 import io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesRepository
 import io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesViewModel
 import io.github.omisie11.spacexfollower.util.SPACE_X_BASE_URL
@@ -110,7 +108,4 @@ val upcomingLaunchesModule = module {
 
     viewModel { UpcomingLaunchesViewModel(get()) }
 
-    factory { UpcomingLaunchesAdapter() }
-
-    factory { PayloadsRecyclerAdapter() }
 }
