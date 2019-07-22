@@ -114,4 +114,9 @@ class UpcomingLaunchesFragment : Fragment() {
         }
         else -> super.onOptionsItemSelected(item)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        recyclerView.adapter = null
+    }
 }

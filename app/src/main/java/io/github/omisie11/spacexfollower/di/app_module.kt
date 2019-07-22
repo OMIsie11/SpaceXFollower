@@ -2,7 +2,7 @@ package io.github.omisie11.spacexfollower.di
 
 import androidx.preference.PreferenceManager
 import androidx.room.Room
-import io.github.omisie11.spacexfollower.data.*
+import io.github.omisie11.spacexfollower.data.SpaceDatabase
 import io.github.omisie11.spacexfollower.network.SpaceService
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesAdapter
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesRepository
