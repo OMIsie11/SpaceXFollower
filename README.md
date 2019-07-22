@@ -3,7 +3,9 @@ Android app for tracking Space X data 🚀
 
 Application is using open source [Space X REST API](https://github.com/r-spacex/SpaceX-API) for getting all data.
 
-This application is not affiliated with, funded or in any other way associated with SpaceX company.
+**This application is not affiliated with, funded or in any other way associated with SpaceX company.**
+
+![space_app_screenshots](https://user-images.githubusercontent.com/31706606/61631590-0e307880-ac8b-11e9-8be7-6be10d68334c.png)
 
 ## App is using:
 * Kotlin 💎
