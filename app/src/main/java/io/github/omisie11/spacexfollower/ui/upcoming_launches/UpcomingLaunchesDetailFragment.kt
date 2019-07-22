@@ -2,27 +2,30 @@ package io.github.omisie11.spacexfollower.ui.upcoming_launches
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.AutoTransition
-import androidx.transition.Transition
 import androidx.transition.TransitionManager
-
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.fragment_upcoming_launches_detail.*
-import kotlinx.android.synthetic.main.fragment_upcoming_launches_detail.frame_cores_list
 import kotlinx.android.synthetic.main.upcoming_launch_cores.view.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class UpcomingLaunchesDetailFragment : Fragment() {
 
+    private val payloadsRecyclerViewAdapter: PayloadsRecyclerAdapter by inject()
+    private lateinit var viewManager: RecyclerView.LayoutManager
     private val viewModel by viewModel<UpcomingLaunchesViewModel>()
     // Variable used in animating expand/collapse icon
     private var coresIconRotationAngle = 0f
@@ -41,6 +44,14 @@ class UpcomingLaunchesDetailFragment : Fragment() {
 
         val safeArgs = arguments?.let { UpcomingLaunchesDetailFragmentArgs.fromBundle(it) }
         val selectedLaunchId: Int = safeArgs?.itemId ?: 0
+
+        viewManager = LinearLayoutManager(activity)
+        payloads_recycler.apply {
+            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = payloadsRecyclerViewAdapter
+        }
 
         viewModel.getUpcomingLaunches().observe(viewLifecycleOwner, Observer<List<UpcomingLaunch>> { launches ->
             text_flight_number.text = launches[selectedLaunchId].flightNumber.toString()
@@ -77,31 +88,8 @@ class UpcomingLaunchesDetailFragment : Fragment() {
                     }
                 }
             }
-            // Dynamically add views for Payloads in flight
-            if (launches[selectedLaunchId].rocket.second_stage.payloads == null) {
-                val noPayloadsTextView = TextView(activity).apply {
-                    text = context.getString(R.string.no_payloads)
-                }
-                frame_cores_list.addView(noPayloadsTextView)
-            } else {
-                for (payload in launches[selectedLaunchId].rocket.second_stage.payloads!!) {
-                    if (payload.payload_id.isNullOrEmpty() || payload.reused == null || payload.manufacturer == null) {
-                        val noDataTextView = TextView(activity).apply {
-                            text = context.getString(R.string.no_precision_info)
-                        }
-                        frame_payloads.addView(noDataTextView)
-                    } else {
-                        val coreLinearLayout = layoutInflater.inflate(
-                            R.layout.upcoming_launch_cores,
-                            frame_payloads, false
-                        )
-                        frame_payloads.addView(coreLinearLayout)
-                        coreLinearLayout.text_core_serial.text = payload.payload_id
-                        coreLinearLayout.text_core_block.text = payload.payload_type
-                        coreLinearLayout.text_core_flight.text = payload.nationality
-                    }
-                }
-            }
+
+            payloadsRecyclerViewAdapter.setData(launches[selectedLaunchId].rocket.second_stage.payloads)
         })
 
         val expandCardTransition = AutoTransition().apply { duration = 200 }

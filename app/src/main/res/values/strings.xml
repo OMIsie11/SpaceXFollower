@@ -117,4 +117,10 @@
 
     <string name="application_no_affiliation">Developer and Application are not affiliated with SpaceX in any way.
     </string>
+    <string name="nationality">nationality</string>
+    <string name="manufacturer">manufacturer</string>
+    <string name="payload_type">payload type</string>
+    <string name="payload_mass_kg">payload mass [kg]</string>
+    <string name="orbit">orbit</string>
+    <string name="payload_reused">reused</string>
 </resources>

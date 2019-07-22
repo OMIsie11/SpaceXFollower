@@ -213,12 +213,18 @@
 
                 <FrameLayout
                         android:id="@+id/frame_payloads"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingEnd="8dp"
                         android:paddingStart="8dp"
                         android:paddingBottom="8dp"
                         android:visibility="gone">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/payloads_recycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
                 </FrameLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
