@@ -8,21 +8,18 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Core
 import io.github.omisie11.spacexfollower.util.OnItemClickListener
 import io.github.omisie11.spacexfollower.util.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_recycler.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class CoresFragment : Fragment() {
 
-    private val viewAdapter: CoresAdapter by inject()
-    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var viewAdapter: CoresAdapter
     private val viewModel: CoresViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,11 +37,11 @@ class CoresFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Setup recyclerView
-        viewManager = LinearLayoutManager(activity)
+        viewAdapter = CoresAdapter()
         recyclerView.apply {
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
-            layoutManager = viewManager
+            layoutManager = LinearLayoutManager(activity)
             adapter = viewAdapter
         }
 
@@ -95,6 +92,11 @@ class CoresFragment : Fragment() {
         super.onResume()
         // Fetch new data if last fetch was long ago
         viewModel.refreshIfCoresDataOld()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        recyclerView.adapter = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

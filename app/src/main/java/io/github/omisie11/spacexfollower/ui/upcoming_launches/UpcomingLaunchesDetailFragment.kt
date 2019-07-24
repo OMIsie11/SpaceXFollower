@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import io.github.omisie11.spacexfollower.R
@@ -24,7 +23,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class UpcomingLaunchesDetailFragment : Fragment() {
 
     private lateinit var payloadsRecyclerViewAdapter: PayloadsRecyclerAdapter
-    private lateinit var viewManager: RecyclerView.LayoutManager
     private val viewModel by viewModel<UpcomingLaunchesViewModel>()
     // Variable used in animating expand/collapse icon
     private var coresIconRotationAngle = 0f
@@ -45,11 +43,10 @@ class UpcomingLaunchesDetailFragment : Fragment() {
         val selectedLaunchId: Int = safeArgs?.itemId ?: 0
 
         payloadsRecyclerViewAdapter = PayloadsRecyclerAdapter()
-        viewManager = LinearLayoutManager(activity)
         payloads_recycler.apply {
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
-            layoutManager = viewManager
+            layoutManager = LinearLayoutManager(activity)
             adapter = payloadsRecyclerViewAdapter
         }
 

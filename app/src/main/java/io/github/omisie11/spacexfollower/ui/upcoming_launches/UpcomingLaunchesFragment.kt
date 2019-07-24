@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
@@ -22,7 +21,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class UpcomingLaunchesFragment : Fragment() {
 
     private lateinit var viewAdapter: UpcomingLaunchesAdapter
-    private lateinit var viewManager: RecyclerView.LayoutManager
     private val viewModel: UpcomingLaunchesViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,14 +36,12 @@ class UpcomingLaunchesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewAdapter = UpcomingLaunchesAdapter()
-
         // Setup recyclerView
-        viewManager = LinearLayoutManager(activity)
+        viewAdapter = UpcomingLaunchesAdapter()
         recyclerView.apply {
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
-            layoutManager = viewManager
+            layoutManager = LinearLayoutManager(activity)
             adapter = viewAdapter
         }
 
@@ -99,6 +95,11 @@ class UpcomingLaunchesFragment : Fragment() {
         viewModel.refreshIfLaunchesDataOld()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        recyclerView.adapter = null
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_action_bar, menu)
     }
@@ -114,10 +115,5 @@ class UpcomingLaunchesFragment : Fragment() {
             true
         }
         else -> super.onOptionsItemSelected(item)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        recyclerView.adapter = null
     }
 }
