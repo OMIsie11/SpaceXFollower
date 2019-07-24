@@ -8,22 +8,22 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Capsule
-import io.github.omisie11.spacexfollower.util.*
+import io.github.omisie11.spacexfollower.util.CAPSULES_SORT_SERIAL_ASC
+import io.github.omisie11.spacexfollower.util.CAPSULES_SORT_SERIAL_DESC
+import io.github.omisie11.spacexfollower.util.OnItemClickListener
+import io.github.omisie11.spacexfollower.util.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_capsules_recycler.*
 import kotlinx.android.synthetic.main.fragment_recycler.recyclerView
 import kotlinx.android.synthetic.main.fragment_recycler.swipeRefreshLayout
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class CapsulesFragment : Fragment() {
 
-    private val viewAdapter: CapsulesAdapter by inject()
-    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var viewAdapter: CapsulesAdapter
     private val viewModel: CapsulesViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,11 +40,11 @@ class CapsulesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Setup recyclerView
-        viewManager = LinearLayoutManager(activity)
+        viewAdapter = CapsulesAdapter()
         recyclerView.apply {
             setHasFixedSize(true)
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
-            layoutManager = viewManager
+            layoutManager = LinearLayoutManager(activity)
             adapter = viewAdapter
         }
 
@@ -114,6 +114,11 @@ class CapsulesFragment : Fragment() {
         viewModel.refreshIfCapsulesDataOld()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        recyclerView.adapter = null
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_action_bar, menu)
     }
@@ -125,7 +130,7 @@ class CapsulesFragment : Fragment() {
         }
         R.id.action_delete -> {
             viewModel.deleteCapsulesData()
-            viewAdapter.notifyDataSetChanged()
+            recyclerView.adapter?.notifyDataSetChanged()
             true
         }
         else -> super.onOptionsItemSelected(item)

@@ -4,12 +4,10 @@ import androidx.preference.PreferenceManager
 import androidx.room.Room
 import io.github.omisie11.spacexfollower.data.SpaceDatabase
 import io.github.omisie11.spacexfollower.network.SpaceService
-import io.github.omisie11.spacexfollower.ui.capsules.CapsulesAdapter
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesRepository
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesViewModel
 import io.github.omisie11.spacexfollower.ui.company.CompanyRepository
 import io.github.omisie11.spacexfollower.ui.company.CompanyViewModel
-import io.github.omisie11.spacexfollower.ui.cores.CoresAdapter
 import io.github.omisie11.spacexfollower.ui.cores.CoresRepository
 import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel
 import io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesRepository
@@ -65,10 +63,6 @@ val capsulesModule = module {
 
     // ViewModel instance of CapsulesViewModel
     viewModel { CapsulesViewModel(get()) }
-
-    // Adapter for capsules recyclerView
-    factory { CapsulesAdapter() }
-
 }
 
 val coresModule = module {
@@ -81,10 +75,6 @@ val coresModule = module {
 
     // ViewModel instance of CoresViewModel
     viewModel { CoresViewModel(get()) }
-
-    // Adapter for cores recyclerView
-    factory { CoresAdapter() }
-
 }
 
 val companyModule = module {
@@ -97,7 +87,6 @@ val companyModule = module {
 
     // ViewModel instance for CompanyInfo
     viewModel { CompanyViewModel(get()) }
-
 }
 
 val upcomingLaunchesModule = module {
@@ -107,5 +96,4 @@ val upcomingLaunchesModule = module {
     single { UpcomingLaunchesRepository(get(), get(), get()) }
 
     viewModel { UpcomingLaunchesViewModel(get()) }
-
 }
