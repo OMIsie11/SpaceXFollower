@@ -29,7 +29,7 @@ data class Rocket(
         @SerializedName("block")
         val block: Int?,
         @SerializedName("gridfins")
-        val gridfins: Boolean,
+        val gridfins: Boolean?,
         @SerializedName("legs")
         val legs: Boolean?,
         @SerializedName("reused")
@@ -67,7 +67,7 @@ data class Rocket(
         @SerializedName("payload_type")
         val payload_type: String?,
         @SerializedName("payload_mass_kg")
-        val payload_mass_kg: Int?,
+        val payload_mass_kg: Double?,
         @SerializedName("payload_mass_lbs")
         val payload_mass_lbs: Double?,
         @SerializedName("orbit")
