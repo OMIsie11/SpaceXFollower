@@ -52,7 +52,7 @@ class UpcomingLaunchesFragment : Fragment() {
 
         // ViewModel setup
         viewModel.getUpcomingLaunches().observe(viewLifecycleOwner, Observer<List<UpcomingLaunch>> { launches ->
-            viewAdapter.setData(launches)
+            if (launches != null) viewAdapter.setData(launches)
         })
 
         // Observe if data is refreshing and show/hide loading indicator

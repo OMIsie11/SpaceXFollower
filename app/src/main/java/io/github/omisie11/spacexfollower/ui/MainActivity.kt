@@ -30,11 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        AppCompatDelegate.setDefaultNightMode(
-            translateValueToDayNightMode(
-                sharedPrefs.getBoolean(PREFS_KEY_DARK_MODE, false)
-            )
-        )
+
         // Logging in Debug build, in release log only crashesf
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree()) else Timber.plant(CrashReportingTree())
 
@@ -61,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                                 false
                             )
                         )
-                    ); recreate()
+                    )
                 }
             }
         }
