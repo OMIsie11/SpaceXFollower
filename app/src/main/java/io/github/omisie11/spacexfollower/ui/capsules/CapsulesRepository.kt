@@ -1,7 +1,6 @@
 package io.github.omisie11.spacexfollower.ui.capsules
 
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.github.omisie11.spacexfollower.data.dao.CapsulesDao
@@ -9,7 +8,9 @@ import io.github.omisie11.spacexfollower.data.model.Capsule
 import io.github.omisie11.spacexfollower.network.SpaceService
 import io.github.omisie11.spacexfollower.util.KEY_CAPSULES_LAST_REFRESH
 import io.github.omisie11.spacexfollower.util.PREFS_KEY_REFRESH_INTERVAL
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.io.IOException
 
 
@@ -42,15 +43,15 @@ class CapsulesRepository(
     suspend fun refreshIfCapsulesDataOld() {
         val isCapsulesRefreshNeeded = withContext(Dispatchers.IO) { checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH) }
         if (isCapsulesRefreshNeeded) {
-            Log.d("CapsulesRepo", "refreshIfCapsulesDataOld: Refreshing capsules")
+            Timber.d("refreshIfCapsulesDataOld: Refreshing capsules")
             refreshCapsules()
-        } else Log.d("CapsulesRepo", "refreshIfCapsulesDataOld: No refresh needed")
+        } else Timber.d("refreshIfCapsulesDataOld: No refresh needed")
     }
 
     suspend fun refreshCapsules() {
         // Start loading process
         areCapsulesLoading.value = true
-        Log.d("Repository", "refreshCapsules called")
+        Timber.d("refreshCapsules called")
         withContext(Dispatchers.IO) {
             try {
                 fetchCapsulesAndSaveToDb()
@@ -60,7 +61,7 @@ class CapsulesRepository(
                     is IOException -> capsulesSnackBar.postValue("Network problem occurred")
                     else -> {
                         capsulesSnackBar.postValue("Unexpected problem occurred")
-                        Log.d("Repo", "Exception: $exception")
+                        Timber.d("Exception: $exception")
                     }
                 }
             }
@@ -68,17 +69,17 @@ class CapsulesRepository(
     }
 
     private suspend fun fetchCapsulesAndSaveToDb() {
-        Log.d("Repo", "fetchCapsulesAndSaveToDb called")
+        Timber.d( "fetchCapsulesAndSaveToDb called")
         val response = spaceService.getAllCapsules()
         if (response.isSuccessful) {
-            Log.d("CapsulesRepo", "Response SUCCESSFUL")
+            Timber.d( "Response SUCCESSFUL")
             response.body()?.let { capsulesDao.insertCapsules(it) }
             // Save new capsules last refresh time
             with(sharedPrefs.edit()) {
                 putLong(KEY_CAPSULES_LAST_REFRESH, System.currentTimeMillis())
                 apply()
             }
-        } else Log.d("Repository", "Error: ${response.errorBody()}")
+        } else Timber.d("Error: ${response.errorBody()}")
         // Capsules no longer fetching, hide loading indicator
         areCapsulesLoading.postValue(false)
     }
@@ -88,11 +89,11 @@ class CapsulesRepository(
         // Get current time in milliseconds
         val currentTimeMillis: Long = System.currentTimeMillis()
         val lastRefreshTime = sharedPrefs.getLong(sharedPrefsKey, 0)
-        Log.d("Repository", "Current time in millis $currentTimeMillis")
+        Timber.d("Current time in millis $currentTimeMillis")
         // Get refresh interval set in app settings (in hours) and multiply to get value in ms
         val refreshIntervalHours = sharedPrefs.getString(PREFS_KEY_REFRESH_INTERVAL, "3")?.toInt() ?: 3
         val refreshInterval = refreshIntervalHours * 3600000
-        Log.d("Repository", "Refresh Interval from settings: $refreshInterval")
+        Timber.d("Refresh Interval from settings: $refreshInterval")
         // If last refresh was made longer than interval, return true
         return currentTimeMillis - lastRefreshTime > refreshInterval
     }

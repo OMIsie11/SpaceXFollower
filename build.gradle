@@ -31,6 +31,7 @@ ext {
     lifecycle_version = "2.0.0"
     retrofit_version = "2.6.0"
     nav_version = "2.0.0"
+    timber_version = '4.7.1'
     material_version = "1.1.0-alpha07"
     preference_version = '1.0.0'
     koin_version = "2.0.1"

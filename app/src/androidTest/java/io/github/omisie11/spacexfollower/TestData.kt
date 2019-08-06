@@ -82,7 +82,7 @@ val launch1 = UpcomingLaunch(
                 Rocket.Payload(
                     "Nusantara Satu (PSN-6)",
                     false, listOf("Pasifik Satelit Nusantara"), "Indonesia", "SSL",
-                    "Satellite", 5000, 11023.11, "GTO"
+                    "Satellite", 5000.0, 11023.11, "GTO"
                 )
             )
         )

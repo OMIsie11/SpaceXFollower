@@ -1,7 +1,6 @@
 package io.github.omisie11.spacexfollower.ui.capsules
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_capsules_recycler.*
 import kotlinx.android.synthetic.main.fragment_recycler.recyclerView
 import kotlinx.android.synthetic.main.fragment_recycler.swipeRefreshLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
 class CapsulesFragment : Fragment() {
@@ -77,7 +77,7 @@ class CapsulesFragment : Fragment() {
 
         // Swipe to refresh
         swipeRefreshLayout.setOnRefreshListener {
-            Log.i("CapsulesFragment", "onRefresh called from SwipeRefreshLayout")
+            Timber.i("onRefresh called from SwipeRefreshLayout")
             viewModel.refreshCapsules()
         }
 

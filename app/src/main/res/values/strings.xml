@@ -125,4 +125,5 @@
     <string name="payload_reused">reused</string>
     <string name="website">Website</string>
     <string name="get_the_app_source_code_on_github">Get the app source code on GitHub</string>
+    <string name="customers_payloads">Customers:</string>
 </resources>

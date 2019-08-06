@@ -51,6 +51,8 @@ dependencies {
     // Navigation component
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.nav_version"
+    // Timber
+    implementation "com.jakewharton.timber:timber:$rootProject.timber_version"
 
     implementation "com.airbnb.android:lottie:$rootProject.lottie_version"
     // Testing dependencies

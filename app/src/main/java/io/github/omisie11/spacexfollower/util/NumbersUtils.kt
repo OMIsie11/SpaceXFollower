@@ -1,6 +1,5 @@
 package io.github.omisie11.spacexfollower.util
 
-import android.util.Log
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
@@ -18,11 +17,7 @@ fun shortenNumberAddPrefix(numberToFormat: Long): String {
 }
 
 fun getLocalTimeFromUnix(unixTime: Long): String {
-    Log.d("NumberUtils", "Passed time to convert: $unixTime")
     val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
     simpleDateFormat.timeZone = Calendar.getInstance().timeZone
-
-    val localTime: String = simpleDateFormat.format(Date(unixTime * 1000))
-    Log.d("Utils", "Converted unix time: $localTime")
-    return localTime
+    return simpleDateFormat.format(Date(unixTime * 1000))
 }
