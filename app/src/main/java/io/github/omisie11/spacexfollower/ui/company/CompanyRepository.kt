@@ -50,7 +50,6 @@ class CompanyRepository(
             try {
                 fetchCompanyInfoAndSaveToDb()
             } catch (exception: Exception) {
-                // ToDO: handle exceptions
                 isCompanyInfoLoading.postValue(false)
                 when (exception) {
                     is IOException -> companyInfoSnackBar.postValue("Network problem occurred")

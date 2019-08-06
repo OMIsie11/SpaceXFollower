@@ -50,7 +50,6 @@ class CoresRepository(
             try {
                 fetchCoresAndSaveToDb()
             } catch (exception: Exception) {
-                // ToDo: Handle exceptions and no network exception
                 areCoresLoading.postValue(false)
                 when (exception) {
                     is IOException -> coresSnackBar.postValue("Network problem occurred")

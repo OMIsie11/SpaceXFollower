@@ -56,7 +56,6 @@ class UpcomingLaunchesRepository(
             try {
                 fetchLaunchesAndSaveToDb()
             } catch (exception: Exception) {
-                // ToDo: Handle exceptions and no network exception
                 areLaunchesLoading.postValue(false)
                 when (exception) {
                     is IOException -> launchesSnackBar.postValue("Network problem occurred")

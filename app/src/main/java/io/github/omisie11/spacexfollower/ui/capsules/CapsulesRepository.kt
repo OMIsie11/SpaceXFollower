@@ -55,7 +55,6 @@ class CapsulesRepository(
             try {
                 fetchCapsulesAndSaveToDb()
             } catch (exception: Exception) {
-                // ToDo: Handle exceptions and no network exception
                 areCapsulesLoading.postValue(false)
                 when (exception) {
                     is IOException -> capsulesSnackBar.postValue("Network problem occurred")

@@ -9,7 +9,7 @@ import io.github.omisie11.spacexfollower.data.converters.MissionsConverter
 
 
 // Single capsule
-@Entity(tableName = "capsules_table") // ToDo: Default values
+@Entity(tableName = "capsules_table")
 data class Capsule(
     @SerializedName("capsule_serial")
     @PrimaryKey

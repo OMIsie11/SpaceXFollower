@@ -9,7 +9,7 @@ import io.github.omisie11.spacexfollower.data.converters.MissionsConverter
 
 
 // Single Core data
-@Entity(tableName = "cores_table") // ToDo: Default values
+@Entity(tableName = "cores_table")
 data class Core(
     @SerializedName("core_serial")
     @PrimaryKey
