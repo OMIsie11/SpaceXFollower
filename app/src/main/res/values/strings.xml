@@ -62,11 +62,8 @@
         </a>
     </string>
     <string name="lottie_files_url_dongdona" translatable="false">https://lottiefiles.com/dongdona</string>
-    <string name="photos_attribution_spacex">All photos come from
-        <a href="https://www.flickr.com/people/spacex/">
-            <b>SpaceX Flickr Profile</b>
-        </a>
-        . Click here to visit it.
+    <string name="photos_attribution_spacex">All photos come from <a href="https://www.flickr.com/people/spacex/">SpaceX
+        Flickr Profile</a>.\nClick here to visit it.
     </string>
     <string name="photos_spacex_url" translatable="false">https://www.flickr.com/people/spacex/</string>
     <string name="attribution_space_api">Application is getting data from Unofficial
@@ -84,6 +81,9 @@
     <string name="github_url_omisie11" translatable="false">https://github.com/OMIsie11</string>
     <string name="twitter" translatable="false">Twitter</string>
     <string name="twitter_url_omisie11" translatable="false">https://twitter.com/omisie11</string>
+    <string name="website_url_omisie11" translatable="false">https://omisie11.github.io</string>
+    <string name="source_code">Source code</string>
+    <string name="source_code_url" translatable="false">https://github.com/OMIsie11/SpaceXFollower</string>
 
     <string name="detail_fragment_image_content_desc">Picture connected with SpaceX missions and operations</string>
     <string name="sort_by">Sort by:</string>
@@ -123,4 +123,6 @@
     <string name="payload_mass_kg">payload mass [kg]</string>
     <string name="orbit">orbit</string>
     <string name="payload_reused">reused</string>
+    <string name="website">Website</string>
+    <string name="get_the_app_source_code_on_github">Get the app source code on GitHub</string>
 </resources>
