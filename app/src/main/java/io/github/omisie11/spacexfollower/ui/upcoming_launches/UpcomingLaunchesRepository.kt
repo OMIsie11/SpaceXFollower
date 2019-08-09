@@ -73,7 +73,7 @@ class UpcomingLaunchesRepository(
         val response = spaceService.getUpcomingLaunches()
         if (response.isSuccessful) {
             Log.d("UpcomingLRepo", "Response SUCCESSFUL")
-            response.body()?.let { upcomingLaunchesDao.insertUpcomingLaunches(it) }
+            response.body()?.let { upcomingLaunchesDao.insertNewUpcomingLaunches(it) }
             // Save new launches last refresh time
             with(sharedPrefs.edit()) {
                 putLong(KEY_UPCOMING_LAUNCHES_LAST_REFRESH, System.currentTimeMillis())

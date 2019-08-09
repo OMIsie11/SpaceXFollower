@@ -10,6 +10,12 @@ interface UpcomingLaunchesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUpcomingLaunches(upcomingLaunches: List<UpcomingLaunch>)
 
+    @Transaction
+    fun insertNewUpcomingLaunches(upcomingLaunches: List<UpcomingLaunch>) {
+        deleteUpcomingLaunchesData()
+        insertUpcomingLaunches(upcomingLaunches)
+    }
+
     @Query("SELECT * FROM upcoming_launches_table")
     fun getUpcomingLaunches(): LiveData<List<UpcomingLaunch>>
 
