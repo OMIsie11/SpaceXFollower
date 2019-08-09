@@ -4,7 +4,6 @@ package io.github.omisie11.spacexfollower.ui.company
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,6 +16,7 @@ import io.github.omisie11.spacexfollower.util.shortenNumberAddPrefix
 import kotlinx.android.synthetic.main.bottom_sheet_attribution.view.*
 import kotlinx.android.synthetic.main.fragment_company.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
 class CompanyFragment : Fragment() {
@@ -83,7 +83,7 @@ class CompanyFragment : Fragment() {
         })
 
         swipeRefreshLayout.setOnRefreshListener {
-            Log.i("CompanyInfoFragment", "onRefresh called from SwipeRefreshLayout")
+            Timber.i("onRefresh called from SwipeRefreshLayout")
             viewModel.refreshCompanyInfo()
         }
 

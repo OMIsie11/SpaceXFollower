@@ -1,6 +1,10 @@
 package io.github.omisie11.spacexfollower.di
 
 import android.app.Application
+import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatDelegate
+import io.github.omisie11.spacexfollower.util.PREFS_KEY_DARK_MODE
+import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
@@ -25,5 +29,17 @@ class MyApplication : Application() {
             modules(listOf(appModule, remoteDataSourceModule, capsulesModule,
                 coresModule, companyModule, upcomingLaunchesModule))
         }
+
+        val sharedPrefs: SharedPreferences = get()
+        AppCompatDelegate.setDefaultNightMode(
+            translateValueToDayNightMode(
+                sharedPrefs.getBoolean(PREFS_KEY_DARK_MODE, false)
+            )
+        )
+    }
+
+    private fun translateValueToDayNightMode(value: Boolean): Int = when (value) {
+        true -> AppCompatDelegate.MODE_NIGHT_YES
+        false -> AppCompatDelegate.MODE_NIGHT_NO
     }
 }

@@ -154,7 +154,7 @@
             tools:text="@string/yes"/>
     <TextView
             android:id="@+id/textView34"
-            android:text="Customers:"
+            android:text="@string/customers_payloads"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxWidth="100dp"

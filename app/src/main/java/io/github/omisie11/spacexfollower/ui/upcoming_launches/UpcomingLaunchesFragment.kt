@@ -2,7 +2,6 @@ package io.github.omisie11.spacexfollower.ui.upcoming_launches
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,6 +15,7 @@ import io.github.omisie11.spacexfollower.util.OnItemClickListener
 import io.github.omisie11.spacexfollower.util.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
 class UpcomingLaunchesFragment : Fragment() {
@@ -52,7 +52,7 @@ class UpcomingLaunchesFragment : Fragment() {
 
         // ViewModel setup
         viewModel.getUpcomingLaunches().observe(viewLifecycleOwner, Observer<List<UpcomingLaunch>> { launches ->
-            viewAdapter.setData(launches)
+            if (launches != null) viewAdapter.setData(launches)
         })
 
         // Observe if data is refreshing and show/hide loading indicator
@@ -74,7 +74,7 @@ class UpcomingLaunchesFragment : Fragment() {
 
         // Swipe to refresh
         swipeRefreshLayout.setOnRefreshListener {
-            Log.i("UpcomingLFragment", "onRefresh called from SwipeRefreshLayout")
+            Timber.i("onRefresh called from SwipeRefreshLayout")
             viewModel.refreshUpcomingLaunches()
         }
 

@@ -1,7 +1,6 @@
 package io.github.omisie11.spacexfollower.ui.cores
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,6 +14,7 @@ import io.github.omisie11.spacexfollower.util.OnItemClickListener
 import io.github.omisie11.spacexfollower.util.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
 class CoresFragment : Fragment() {
@@ -74,7 +74,7 @@ class CoresFragment : Fragment() {
 
         // Swipe to refresh
         swipeRefreshLayout.setOnRefreshListener {
-            Log.i("CapsulesFragment", "onRefresh called from SwipeRefreshLayout")
+            Timber.i("onRefresh called from SwipeRefreshLayout")
             viewModel.refreshCores()
         }
 

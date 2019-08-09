@@ -51,42 +51,43 @@ class UpcomingLaunchesDetailFragment : Fragment() {
         }
 
         viewModel.getUpcomingLaunches().observe(viewLifecycleOwner, Observer<List<UpcomingLaunch>> { launches ->
-            text_flight_number.text = launches[selectedLaunchId].flightNumber.toString()
-            text_mission_name.text = launches[selectedLaunchId].missionName
-            text_launch_date.text = if (launches[selectedLaunchId].launchDateUnix != null)
-                getLocalTimeFromUnix(launches[selectedLaunchId].launchDateUnix!!) else
-                getString(R.string.launch_date_null)
-            text_launch_site_name.text = launches[selectedLaunchId].launch_site.siteName
+            if (launches != null) {
+                text_flight_number.text = launches[selectedLaunchId].flightNumber.toString()
+                text_mission_name.text = launches[selectedLaunchId].missionName
+                text_launch_date.text = if (launches[selectedLaunchId].launchDateUnix != null)
+                    getLocalTimeFromUnix(launches[selectedLaunchId].launchDateUnix!!) else
+                    getString(R.string.launch_date_null)
+                text_launch_site_name.text = launches[selectedLaunchId].launch_site.siteName
 
-            // Dynamically add views for Cores used in flight
-            if (launches[selectedLaunchId].rocket.first_stage.cores == null) {
-                val noCoresTextView = TextView(activity).apply {
-                    text = context.getString(R.string.no_cores_used_in_launch)
-                }
-                frame_cores_list.addView(noCoresTextView)
-            } else {
-                for (core in launches[selectedLaunchId].rocket.first_stage.cores!!) {
-                    if (core.core_serial.isNullOrEmpty() || core.block == null || core.flight == null) {
-                        val noDataTextView = TextView(activity).apply {
-                            text = context.getString(R.string.no_precision_info)
+                // Dynamically add views for Cores used in flight
+                if (launches[selectedLaunchId].rocket.first_stage.cores == null) {
+                    val noCoresTextView = TextView(activity).apply {
+                        text = context.getString(R.string.no_cores_used_in_launch)
+                    }
+                    frame_cores_list.addView(noCoresTextView)
+                } else {
+                    for (core in launches[selectedLaunchId].rocket.first_stage.cores!!) {
+                        if (core.core_serial.isNullOrEmpty() || core.block == null || core.flight == null) {
+                            val noDataTextView = TextView(activity).apply {
+                                text = context.getString(R.string.no_precision_info)
+                            }
+                            frame_cores_list.addView(noDataTextView)
+                        } else {
+                            val coreLinearLayout = layoutInflater.inflate(
+                                R.layout.upcoming_launch_cores,
+                                frame_cores_list, false
+                            )
+                            frame_cores_list.addView(coreLinearLayout)
+                            coreLinearLayout.text_core_serial.text = core.core_serial
+                            coreLinearLayout.text_core_block.text =
+                                resources.getString(R.string.block_number_template, core.block)
+                            coreLinearLayout.text_core_flight.text =
+                                resources.getString(R.string.flight_number_template, core.flight)
                         }
-                        frame_cores_list.addView(noDataTextView)
-                    } else {
-                        val coreLinearLayout = layoutInflater.inflate(
-                            R.layout.upcoming_launch_cores,
-                            frame_cores_list, false
-                        )
-                        frame_cores_list.addView(coreLinearLayout)
-                        coreLinearLayout.text_core_serial.text = core.core_serial
-                        coreLinearLayout.text_core_block.text =
-                            resources.getString(R.string.block_number_template, core.block)
-                        coreLinearLayout.text_core_flight.text =
-                            resources.getString(R.string.flight_number_template, core.flight)
                     }
                 }
+                payloadsRecyclerViewAdapter.setData(launches[selectedLaunchId].rocket.second_stage.payloads)
             }
-
-            payloadsRecyclerViewAdapter.setData(launches[selectedLaunchId].rocket.second_stage.payloads)
         })
 
         val expandCardTransition = AutoTransition().apply { duration = 200 }
