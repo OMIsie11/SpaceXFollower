@@ -73,7 +73,7 @@ class UpcomingLaunchesRepository(
         val response = spaceService.getUpcomingLaunches()
         if (response.isSuccessful) {
             Timber.d("Response SUCCESSFUL")
-            response.body()?.let { upcomingLaunchesDao.insertNewUpcomingLaunches(it) }
+            response.body()?.let { upcomingLaunchesDao.replaceUpcomingLaunches(it) }
             // Save new launches last refresh time
             with(sharedPrefs.edit()) {
                 putLong(KEY_UPCOMING_LAUNCHES_LAST_REFRESH, System.currentTimeMillis())

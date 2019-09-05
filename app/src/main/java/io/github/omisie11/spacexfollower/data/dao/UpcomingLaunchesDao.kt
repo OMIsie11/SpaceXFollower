@@ -11,7 +11,7 @@ interface UpcomingLaunchesDao {
     fun insertUpcomingLaunches(upcomingLaunches: List<UpcomingLaunch>)
 
     @Transaction
-    fun insertNewUpcomingLaunches(upcomingLaunches: List<UpcomingLaunch>) {
+    fun replaceUpcomingLaunches(upcomingLaunches: List<UpcomingLaunch>) {
         deleteUpcomingLaunchesData()
         insertUpcomingLaunches(upcomingLaunches)
     }

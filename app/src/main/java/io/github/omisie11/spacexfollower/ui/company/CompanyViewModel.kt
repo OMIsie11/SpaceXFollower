@@ -11,11 +11,11 @@ class CompanyViewModel(private val repository: CompanyRepository) : ViewModel() 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val mCompanyInfo by lazy { repository.getCompanyInfo() }
+    private val companyData by lazy { repository.getCompanyInfo() }
     private val _isCompanyInfoLoading by lazy { repository.getCompanyInfoLoadingStatus() }
     private val _snackBar: MutableLiveData<String> = repository.getCompanyInfoSnackbar()
 
-    fun getCompanyInfo(): LiveData<Company> = mCompanyInfo
+    fun getCompanyInfo(): LiveData<Company> = companyData
 
     fun getCompanyInfoLoadingStatus() = _isCompanyInfoLoading
 
