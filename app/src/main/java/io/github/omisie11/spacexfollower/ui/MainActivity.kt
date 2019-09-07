@@ -76,8 +76,8 @@ class MainActivity : AppCompatActivity() {
         sharedPrefs.registerOnSharedPreferenceChangeListener(sharedPrefsListener)
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
         sharedPrefs.unregisterOnSharedPreferenceChangeListener(sharedPrefsListener)
     }
 
