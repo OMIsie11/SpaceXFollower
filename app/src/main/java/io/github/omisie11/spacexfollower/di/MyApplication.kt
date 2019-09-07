@@ -3,12 +3,15 @@ package io.github.omisie11.spacexfollower.di
 import android.app.Application
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
+import io.github.omisie11.spacexfollower.BuildConfig
+import io.github.omisie11.spacexfollower.util.CrashReportingTree
 import io.github.omisie11.spacexfollower.util.PREFS_KEY_DARK_MODE
 import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import timber.log.Timber
 
 class MyApplication : Application() {
 
@@ -29,6 +32,9 @@ class MyApplication : Application() {
             modules(listOf(appModule, remoteDataSourceModule, capsulesModule,
                 coresModule, companyModule, upcomingLaunchesModule))
         }
+
+        // Logging in Debug build, in release log only crashes
+        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree()) else Timber.plant(CrashReportingTree())
 
         val sharedPrefs: SharedPreferences = get()
         AppCompatDelegate.setDefaultNightMode(

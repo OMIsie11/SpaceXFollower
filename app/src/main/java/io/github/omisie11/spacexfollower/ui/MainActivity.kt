@@ -1,8 +1,8 @@
 package io.github.omisie11.spacexfollower.ui
 
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -11,13 +11,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
-import io.github.omisie11.spacexfollower.BuildConfig
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.util.CrashReportingTree
 import io.github.omisie11.spacexfollower.util.PREFS_KEY_DARK_MODE
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
-import timber.log.Timber
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,9 +27,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        // Logging in Debug build, in release log only crashesf
-        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree()) else Timber.plant(CrashReportingTree())
 
         // Set default values of preferences for first app launch (third argument set
         // to false ensures that this is won't set user settings to defaults with every call)
