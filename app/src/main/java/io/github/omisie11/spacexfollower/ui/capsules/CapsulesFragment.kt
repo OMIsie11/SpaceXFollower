@@ -55,7 +55,7 @@ class CapsulesFragment : Fragment() {
 
         // ViewModel setup
         viewModel.getCapsules().observe(viewLifecycleOwner, Observer<List<Capsule>> { capsules ->
-            viewAdapter.setData(capsules)
+            if (!capsules.isNullOrEmpty()) viewAdapter.setData(capsules)
         })
 
         // Observe if data is refreshing and show/hide loading indicator
