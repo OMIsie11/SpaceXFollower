@@ -29,12 +29,17 @@ class MyApplication : Application() {
             androidFileProperties()
 
             // module list
-            modules(listOf(appModule, remoteDataSourceModule, capsulesModule,
-                coresModule, companyModule, upcomingLaunchesModule))
+            modules(
+                listOf(
+                    appModule, remoteDataSourceModule, capsulesModule,
+                    coresModule, companyModule, upcomingLaunchesModule
+                )
+            )
         }
 
         // Logging in Debug build, in release log only crashes
-        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree()) else Timber.plant(CrashReportingTree())
+        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree()) else
+            Timber.plant(CrashReportingTree())
 
         val sharedPrefs: SharedPreferences = get()
         AppCompatDelegate.setDefaultNightMode(

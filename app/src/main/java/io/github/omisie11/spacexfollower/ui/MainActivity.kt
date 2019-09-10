@@ -87,8 +87,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val SHORTCUT_CAPSULES: String = "io.github.omisie11.spacexfollower.SHORTCUT_CAPSULES"
-        private const val SHORTCUT_CORES: String = "io.github.omisie11.spacexfollower.SHORTCUT_CORES"
-        private const val SHORTCUT_COMPANY: String = "io.github.omisie11.spacexfollower.SHORTCUT_COMPANY"
+        private const val SHORTCUT_CAPSULES: String =
+            "io.github.omisie11.spacexfollower.SHORTCUT_CAPSULES"
+        private const val SHORTCUT_CORES: String =
+            "io.github.omisie11.spacexfollower.SHORTCUT_CORES"
+        private const val SHORTCUT_COMPANY: String =
+            "io.github.omisie11.spacexfollower.SHORTCUT_COMPANY"
     }
 }
