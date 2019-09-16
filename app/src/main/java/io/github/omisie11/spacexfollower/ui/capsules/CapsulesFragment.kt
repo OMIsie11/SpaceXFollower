@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Capsule
-import io.github.omisie11.spacexfollower.util.CAPSULES_SORT_SERIAL_ASC
-import io.github.omisie11.spacexfollower.util.CAPSULES_SORT_SERIAL_DESC
+import io.github.omisie11.spacexfollower.ui.capsules.CapsulesViewModel.CapsulesSortOrder
 import io.github.omisie11.spacexfollower.util.OnItemClickListener
 import io.github.omisie11.spacexfollower.util.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_capsules_recycler.*
@@ -59,9 +58,10 @@ class CapsulesFragment : Fragment() {
         })
 
         // Observe if data is refreshing and show/hide loading indicator
-        viewModel.getCapsulesLoadingStatus().observe(viewLifecycleOwner, Observer<Boolean> { areCapsulesRefreshing ->
-            swipeRefreshLayout.isRefreshing = areCapsulesRefreshing
-        })
+        viewModel.getCapsulesLoadingStatus()
+            .observe(viewLifecycleOwner, Observer<Boolean> { areCapsulesRefreshing ->
+                swipeRefreshLayout.isRefreshing = areCapsulesRefreshing
+            })
 
         // Show a snackbar whenever the [ViewModel.snackbar] is updated a non-null value
         viewModel.snackbar.observe(this, Observer { text ->
@@ -90,10 +90,14 @@ class CapsulesFragment : Fragment() {
             }
 
             when (checkedId) {
-                R.id.chip_serial_newest -> viewModel.changeCapsulesSorting(CAPSULES_SORT_SERIAL_DESC)
-                R.id.chip_serial_oldest -> viewModel.changeCapsulesSorting(CAPSULES_SORT_SERIAL_ASC)
+                R.id.chip_serial_newest -> viewModel.changeCapsulesSorting(
+                    CapsulesSortOrder.BY_SERIAL_DESC
+                )
+                R.id.chip_serial_oldest -> viewModel.changeCapsulesSorting(
+                    CapsulesSortOrder.BY_SERIAL_ASC
+                )
                 // -1 means chip got unchecked
-                -1 -> viewModel.changeCapsulesSorting(CAPSULES_SORT_SERIAL_ASC)
+                -1 -> viewModel.changeCapsulesSorting(CapsulesSortOrder.BY_SERIAL_ASC)
             }
         }
 

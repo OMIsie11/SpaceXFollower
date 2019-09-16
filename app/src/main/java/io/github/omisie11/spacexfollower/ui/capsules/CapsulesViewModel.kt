@@ -5,8 +5,6 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.github.omisie11.spacexfollower.data.model.Capsule
-import io.github.omisie11.spacexfollower.util.CAPSULES_SORT_SERIAL_ASC
-import io.github.omisie11.spacexfollower.util.CAPSULES_SORT_SERIAL_DESC
 import kotlinx.coroutines.*
 
 
@@ -19,20 +17,28 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
     private val _snackBar: MutableLiveData<String> = repository.getCapsulesSnackbar()
 
     // LiveData stream from database
-    private val _capsulesBySerialDesc: LiveData<List<Capsule>> by lazy { repository.getCapsulesOrderBySerialDesc() }
-    private val _capsulesBySerialAsc: LiveData<List<Capsule>> by lazy { repository.getCapsulesOrderBySerialAsc() }
+    private val _capsulesBySerialDesc: LiveData<List<Capsule>> by lazy {
+        repository.getCapsulesOrderBySerialDesc()
+    }
+    private val _capsulesBySerialAsc: LiveData<List<Capsule>> by lazy {
+        repository.getCapsulesOrderBySerialAsc()
+    }
     // MediatorLiveData for sorting books
     private val capsules = MediatorLiveData<List<Capsule>>()
 
-    private var currentSortType: String = CAPSULES_SORT_SERIAL_ASC
+    private var currentSortType: CapsulesSortOrder = CapsulesSortOrder.BY_SERIAL_ASC
 
     init {
         // Add sources to mediator live data
         capsules.addSource(_capsulesBySerialAsc) { result ->
-            if (currentSortType == CAPSULES_SORT_SERIAL_ASC) result.let { capsules.value = it }
+            if (currentSortType == CapsulesSortOrder.BY_SERIAL_ASC) result.let {
+                capsules.value = it
+            }
         }
         capsules.addSource(_capsulesBySerialDesc) { result ->
-            if (currentSortType == CAPSULES_SORT_SERIAL_DESC) result.let { capsules.value = it }
+            if (currentSortType == CapsulesSortOrder.BY_SERIAL_DESC) result.let {
+                capsules.value = it
+            }
         }
     }
 
@@ -40,10 +46,9 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
 
     fun getCapsulesLoadingStatus(): LiveData<Boolean> = _areCapsulesLoading
 
-    fun changeCapsulesSorting(sortType: String) = when (sortType) {
-        CAPSULES_SORT_SERIAL_ASC -> _capsulesBySerialAsc.value.let { capsules.value = it }
-        CAPSULES_SORT_SERIAL_DESC -> _capsulesBySerialDesc.value.let { capsules.value = it }
-        else -> _capsulesBySerialAsc.value.let { capsules.value = it }
+    fun changeCapsulesSorting(sortType: CapsulesSortOrder) = when (sortType) {
+        CapsulesSortOrder.BY_SERIAL_ASC -> _capsulesBySerialAsc.value.let { capsules.value = it }
+        CapsulesSortOrder.BY_SERIAL_DESC -> _capsulesBySerialDesc.value.let { capsules.value = it }
     }.also { currentSortType = sortType }
 
     // Wrapper for refreshing capsules data
@@ -76,4 +81,8 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
         // Cancel running coroutines in repository
         viewModelJob.cancel()
     }
+
+    // Class representing all possible sort orders of capsules
+    enum class CapsulesSortOrder { BY_SERIAL_ASC, BY_SERIAL_DESC }
 }
+
