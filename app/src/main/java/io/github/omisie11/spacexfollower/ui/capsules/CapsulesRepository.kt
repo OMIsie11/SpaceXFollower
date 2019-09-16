@@ -21,7 +21,7 @@ class CapsulesRepository(
 ) {
 
     // Variables for showing/hiding loading indicators
-    private var areCapsulesLoading: MutableLiveData<Boolean> = MutableLiveData()
+    private val areCapsulesLoading: MutableLiveData<Boolean> = MutableLiveData()
     // Set value to message to be shown in snackbar
     private val capsulesSnackBar = MutableLiveData<String>()
 

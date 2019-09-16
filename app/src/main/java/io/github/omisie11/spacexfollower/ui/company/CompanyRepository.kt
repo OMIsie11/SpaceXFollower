@@ -20,7 +20,7 @@ class CompanyRepository(
     private val sharedPrefs: SharedPreferences
 ) {
 
-    private var isCompanyInfoLoading: MutableLiveData<Boolean> = MutableLiveData()
+    private val isCompanyInfoLoading: MutableLiveData<Boolean> = MutableLiveData()
     private val companyInfoSnackBar = MutableLiveData<String>()
 
     init {

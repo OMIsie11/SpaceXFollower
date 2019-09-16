@@ -10,5 +10,6 @@ const val KEY_CORES_LAST_REFRESH = "key_cores_last_refresh"
 const val KEY_COMPANY_LAST_REFRESH = "key_company_last_refresh"
 const val KEY_UPCOMING_LAUNCHES_LAST_REFRESH = "key_upcoming_launches_last_refresh"
 
+// Shared prefs keys for items that are present on application settings screen
 const val PREFS_KEY_REFRESH_INTERVAL = "prefs_refresh_interval"
 const val PREFS_KEY_DARK_MODE = "prefs_dark_mode"

@@ -20,7 +20,7 @@ class CoresRepository(
     private val sharedPrefs: SharedPreferences
 ) {
 
-    private var areCoresLoading: MutableLiveData<Boolean> = MutableLiveData()
+    private val areCoresLoading: MutableLiveData<Boolean> = MutableLiveData()
     private val coresSnackBar = MutableLiveData<String>()
 
     init {

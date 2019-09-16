@@ -20,7 +20,7 @@ class UpcomingLaunchesRepository(
 ) {
 
     // Variables for showing/hiding loading indicators
-    private var areLaunchesLoading: MutableLiveData<Boolean> = MutableLiveData()
+    private val areLaunchesLoading: MutableLiveData<Boolean> = MutableLiveData()
     // Set value to message to be shown in snackbar
     private val launchesSnackBar = MutableLiveData<String>()
 
