@@ -21,24 +21,25 @@ class CapsulesAdapter : RecyclerView.Adapter<CapsulesAdapter.ViewHolder>() {
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // Bind data to views from ViewHolder
-        capsulesList.let {
-            holder.capsuleSerialTextView.text = capsulesList[position].capsuleSerial
-            holder.capsuleLaunchTextView.text = if (capsulesList[position].originalLaunchUnix != null)
-                getLocalTimeFromUnix(capsulesList[position].originalLaunchUnix!!) else
-                holder.itemView.context.getString(R.string.launch_date_null)
-            holder.capsuleStatusTextView.text = capsulesList[position].status
-            holder.capsuleTypeTextView.text = capsulesList[position].type
-        }
+        if (capsulesList.isNotEmpty()) holder.bind(capsulesList[position])
     }
 
     override fun getItemCount(): Int = capsulesList.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val capsuleSerialTextView: TextView = itemView.text_capsule_serial
-        val capsuleLaunchTextView: TextView = itemView.text_capsule_launch
-        val capsuleStatusTextView: TextView = itemView.text_capsule_status
-        val capsuleTypeTextView: TextView = itemView.text_capsule_type
+        private val capsuleSerialTextView: TextView = itemView.text_capsule_serial
+        private val capsuleLaunchTextView: TextView = itemView.text_capsule_launch
+        private val capsuleStatusTextView: TextView = itemView.text_capsule_status
+        private val capsuleTypeTextView: TextView = itemView.text_capsule_type
+
+        fun bind(capsule: Capsule) {
+            capsuleSerialTextView.text = capsule.capsuleSerial
+            capsuleLaunchTextView.text = if (capsule.originalLaunchUnix != null)
+                getLocalTimeFromUnix(capsule.originalLaunchUnix) else
+                itemView.context.getString(R.string.launch_date_null)
+            capsuleStatusTextView.text = capsule.status
+            capsuleTypeTextView.text = capsule.type
+        }
     }
 
     fun setData(data: List<Capsule>) {

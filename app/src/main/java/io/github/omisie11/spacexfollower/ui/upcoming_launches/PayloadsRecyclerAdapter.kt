@@ -19,35 +19,34 @@ class PayloadsRecyclerAdapter : RecyclerView.Adapter<PayloadsRecyclerAdapter.Vie
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (!payloads.isNullOrEmpty()) payloads.let {
-            holder.payloadIdTextView.text = payloads!![position].payload_id
-            holder.nationalityTextView.text = payloads!![position].nationality
-            holder.manufacturerTextView.text = payloads!![position].manufacturer
-            holder.payloadTypeTextView.text = payloads!![position].payload_type
-            holder.payloadMassKgTextView.text = payloads!![position].payload_mass_kg.toString()
-            holder.orbitTextView.text = payloads!![position].orbit
-            holder.reusedTextView.text =
-                if (payloads!![position].reused == null || payloads!![position].reused!!)
-                    holder.itemView.context.getString(R.string.yes)
-                else holder.itemView.context.getString(
-                    R.string.no
-                )
-
-            holder.customersTextView.text = payloads!![position].customers.joinToString()
-        }
+        if (!payloads.isNullOrEmpty()) holder.bind(payloads!![position])
     }
 
     override fun getItemCount(): Int = payloads?.size ?: 0
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val payloadIdTextView: TextView = itemView.text_payload_id
-        val nationalityTextView: TextView = itemView.text_nationality
-        val manufacturerTextView: TextView = itemView.text_manufacturer
-        val payloadTypeTextView: TextView = itemView.text_payload_type
-        val payloadMassKgTextView: TextView = itemView.text_payload_mass_kg
-        val orbitTextView: TextView = itemView.text_orbit
-        val reusedTextView: TextView = itemView.text_reused
-        val customersTextView: TextView = itemView.text_customers
+        private val payloadIdTextView: TextView = itemView.text_payload_id
+        private val nationalityTextView: TextView = itemView.text_nationality
+        private val manufacturerTextView: TextView = itemView.text_manufacturer
+        private val payloadTypeTextView: TextView = itemView.text_payload_type
+        private val payloadMassKgTextView: TextView = itemView.text_payload_mass_kg
+        private val orbitTextView: TextView = itemView.text_orbit
+        private val reusedTextView: TextView = itemView.text_reused
+        private val customersTextView: TextView = itemView.text_customers
+
+        fun bind(payload: Rocket.Payload) {
+            payloadIdTextView.text = payload.payload_id
+            nationalityTextView.text = payload.nationality
+            manufacturerTextView.text = payload.manufacturer
+            payloadTypeTextView.text = payload.payload_type
+            payloadMassKgTextView.text = payload.payload_mass_kg.toString()
+            orbitTextView.text = payload.orbit
+            reusedTextView.text =
+                if (payload.reused == null || payload.reused)
+                    itemView.context.getString(R.string.yes)
+                else itemView.context.getString(R.string.no)
+            customersTextView.text = payload.customers.joinToString()
+        }
     }
 
     fun setData(data: List<Rocket.Payload>?) {

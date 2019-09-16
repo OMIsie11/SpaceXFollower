@@ -21,26 +21,27 @@ class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // Bind data to views from ViewHolder
-        coresList.let {
-            holder.coreBlockTextView.text = if (coresList[position].block != null)
-                holder.itemView.context.resources.getString(R.string.core_block, coresList[position].block)
-            else holder.itemView.context.resources.getString(R.string.core_block_null)
-            holder.coreSerialTextView.text = coresList[position].coreSerial
-            holder.coreLaunchTextView.text = if (coresList[position].originalLaunchUnix != null)
-                getLocalTimeFromUnix(coresList[position].originalLaunchUnix!!) else
-                holder.itemView.context.getString(R.string.launch_date_null)
-            holder.coreStatusTextView.text = coresList[position].status
-        }
+        if (coresList.isNotEmpty()) holder.bind(coresList[position])
     }
 
     override fun getItemCount(): Int = coresList.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val coreBlockTextView: TextView = itemView.text_core_block
-        val coreSerialTextView: TextView = itemView.text_core_serial
-        val coreLaunchTextView: TextView = itemView.text_core_launch
-        val coreStatusTextView: TextView = itemView.text_core_status
+        private val coreBlockTextView: TextView = itemView.text_core_block
+        private val coreSerialTextView: TextView = itemView.text_core_serial
+        private val coreLaunchTextView: TextView = itemView.text_core_launch
+        private val coreStatusTextView: TextView = itemView.text_core_status
+
+        fun bind(core: Core) {
+            coreBlockTextView.text = if (core.block != null)
+                itemView.context.resources.getString(R.string.core_block, core.block) else
+                itemView.context.resources.getString(R.string.core_block_null)
+            coreSerialTextView.text = core.coreSerial
+            coreLaunchTextView.text = if (core.originalLaunchUnix != null)
+                getLocalTimeFromUnix(core.originalLaunchUnix) else
+                itemView.context.getString(R.string.launch_date_null)
+            coreStatusTextView.text = core.status
+        }
     }
 
     fun setData(data: List<Core>) {

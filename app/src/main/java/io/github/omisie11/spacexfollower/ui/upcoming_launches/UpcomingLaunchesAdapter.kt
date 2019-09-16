@@ -21,25 +21,28 @@ class UpcomingLaunchesAdapter : RecyclerView.Adapter<UpcomingLaunchesAdapter.Vie
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // Bind data to views from ViewHolder
-        launchesList.let {
-            holder.flightNumberTextView.text = holder.itemView.context.resources
-                .getString(R.string.flight_number_template, launchesList[position].flightNumber)
-            holder.launchDateTextView.text = if (launchesList[position].launchDateUnix != null)
-                getLocalTimeFromUnix(launchesList[position].launchDateUnix!!) else
-                holder.itemView.context.getString(R.string.launch_date_null)
-            holder.missionNameTextView.text = launchesList[position].missionName
-            holder.launchSiteTextView.text = launchesList[position].launch_site.siteName
-        }
+        if (launchesList.isNotEmpty()) holder.bind(launchesList[position])
     }
 
     override fun getItemCount(): Int = launchesList.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val flightNumberTextView: TextView = itemView.text_flight_number
-        val launchDateTextView: TextView = itemView.text_launch_date
-        val missionNameTextView: TextView = itemView.text_mission_name
-        val launchSiteTextView: TextView = itemView.text_launch_site
+        private val flightNumberTextView: TextView = itemView.text_flight_number
+        private val launchDateTextView: TextView = itemView.text_launch_date
+        private val missionNameTextView: TextView = itemView.text_mission_name
+        private val launchSiteTextView: TextView = itemView.text_launch_site
+
+        fun bind(launch: UpcomingLaunch) {
+            flightNumberTextView.text = itemView.context.resources.getString(
+                R.string.flight_number_template,
+                launch.flightNumber
+            )
+            launchDateTextView.text =
+                if (launch.launchDateUnix != null) getLocalTimeFromUnix(launch.launchDateUnix) else
+                    itemView.context.getString(R.string.launch_date_null)
+            missionNameTextView.text = launch.missionName
+            launchSiteTextView.text = launch.launch_site.siteName
+        }
     }
 
     fun setData(data: List<UpcomingLaunch>) {
