@@ -11,7 +11,8 @@ import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.upcoming_launches_recycler_item.view.*
 
 
-class UpcomingLaunchesAdapter : RecyclerView.Adapter<UpcomingLaunchesAdapter.ViewHolder>() {
+class UpcomingLaunchesAdapter(private val itemClickListener: OnItemClickListener) :
+    RecyclerView.Adapter<UpcomingLaunchesAdapter.ViewHolder>() {
 
     private var launchesList: List<UpcomingLaunch> = emptyList()
 
@@ -21,18 +22,18 @@ class UpcomingLaunchesAdapter : RecyclerView.Adapter<UpcomingLaunchesAdapter.Vie
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (launchesList.isNotEmpty()) holder.bind(launchesList[position])
+        if (launchesList.isNotEmpty()) holder.bind(launchesList[position], itemClickListener)
     }
 
     override fun getItemCount(): Int = launchesList.size
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val flightNumberTextView: TextView = itemView.text_flight_number
         private val launchDateTextView: TextView = itemView.text_launch_date
         private val missionNameTextView: TextView = itemView.text_mission_name
         private val launchSiteTextView: TextView = itemView.text_launch_site
 
-        fun bind(launch: UpcomingLaunch) {
+        fun bind(launch: UpcomingLaunch, itemClickListener: OnItemClickListener) {
             flightNumberTextView.text = itemView.context.resources.getString(
                 R.string.flight_number_template,
                 launch.flightNumber
@@ -42,6 +43,12 @@ class UpcomingLaunchesAdapter : RecyclerView.Adapter<UpcomingLaunchesAdapter.Vie
                     itemView.context.getString(R.string.launch_date_null)
             missionNameTextView.text = launch.missionName
             launchSiteTextView.text = launch.launch_site.siteName
+
+            itemView.setOnClickListener {
+                if (adapterPosition != -1) itemClickListener.onItemClicked(
+                    launchesList.indexOf(launch)
+                )
+            }
         }
     }
 
@@ -50,4 +57,7 @@ class UpcomingLaunchesAdapter : RecyclerView.Adapter<UpcomingLaunchesAdapter.Vie
         notifyDataSetChanged()
     }
 
+    interface OnItemClickListener {
+        fun onItemClicked(launchIndex: Int)
+    }
 }

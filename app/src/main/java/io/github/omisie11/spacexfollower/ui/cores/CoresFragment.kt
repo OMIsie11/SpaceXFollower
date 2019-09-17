@@ -89,6 +89,7 @@ class CoresFragment : Fragment(), CoresAdapter.OnItemClickListener {
         recyclerView.adapter = null
     }
 
+    // Respond to user clicks on recyclerView items
     override fun onItemClicked(coreIndex: Int) {
         findNavController().navigate(
             CoresFragmentDirections

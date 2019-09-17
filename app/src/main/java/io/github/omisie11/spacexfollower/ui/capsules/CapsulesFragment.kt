@@ -111,9 +111,8 @@ class CapsulesFragment : Fragment(), CapsulesAdapter.OnItemClickListener {
         recyclerView.adapter = null
     }
 
+    // Respond to user clicks on recyclerView items
     override fun onItemClicked(capsuleIndex: Int) {
-        Timber.d("Capsule passed to viewmodel: ${capsuleIndex}")
-        //viewModel.setCapsuleForDetail(capsule)
         findNavController().navigate(
             CapsulesFragmentDirections
                 .actionCapsulesDestToCapsuleDetailDest(capsuleIndex)

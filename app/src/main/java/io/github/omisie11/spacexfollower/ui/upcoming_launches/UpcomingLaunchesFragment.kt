@@ -11,17 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
-import io.github.omisie11.spacexfollower.util.OnItemClickListener
-import io.github.omisie11.spacexfollower.util.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_recycler.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
 
-class UpcomingLaunchesFragment : Fragment() {
+class UpcomingLaunchesFragment : Fragment(), UpcomingLaunchesAdapter.OnItemClickListener {
 
     private lateinit var viewAdapter: UpcomingLaunchesAdapter
-    private val viewModel: UpcomingLaunchesViewModel by viewModel()
+    private val viewModel: UpcomingLaunchesViewModel by sharedViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +35,7 @@ class UpcomingLaunchesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Setup recyclerView
-        viewAdapter = UpcomingLaunchesAdapter()
+        viewAdapter = UpcomingLaunchesAdapter(this)
         recyclerView.apply {
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
@@ -51,14 +49,16 @@ class UpcomingLaunchesFragment : Fragment() {
         }
 
         // ViewModel setup
-        viewModel.getUpcomingLaunches().observe(viewLifecycleOwner, Observer<List<UpcomingLaunch>> { launches ->
-            if (launches != null) viewAdapter.setData(launches)
-        })
+        viewModel.getUpcomingLaunches()
+            .observe(viewLifecycleOwner, Observer<List<UpcomingLaunch>> { launches ->
+                if (launches != null) viewAdapter.setData(launches)
+            })
 
         // Observe if data is refreshing and show/hide loading indicator
-        viewModel.getLaunchesLoadingStatus().observe(viewLifecycleOwner, Observer<Boolean> { areLaunchesRefreshing ->
-            swipeRefreshLayout.isRefreshing = areLaunchesRefreshing
-        })
+        viewModel.getLaunchesLoadingStatus()
+            .observe(viewLifecycleOwner, Observer<Boolean> { areLaunchesRefreshing ->
+                swipeRefreshLayout.isRefreshing = areLaunchesRefreshing
+            })
 
         // Show a snackbar whenever the [ViewModel.snackbar] is updated a non-null value
         viewModel.snackbar.observe(this, Observer { text ->
@@ -77,16 +77,6 @@ class UpcomingLaunchesFragment : Fragment() {
             Timber.i("onRefresh called from SwipeRefreshLayout")
             viewModel.refreshUpcomingLaunches()
         }
-
-        // Respond to user clicks on recyclerView items
-        recyclerView.addOnItemClickListener(object : OnItemClickListener {
-            override fun onItemClicked(position: Int, view: View) {
-                findNavController().navigate(
-                    UpcomingLaunchesFragmentDirections
-                        .actionUpcomingLaunchesDestToUpcomingLaunchesDetailFragment(position)
-                )
-            }
-        })
     }
 
     override fun onResume() {
@@ -98,6 +88,14 @@ class UpcomingLaunchesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         recyclerView.adapter = null
+    }
+
+    // Respond to user clicks on recyclerView items
+    override fun onItemClicked(launchIndex: Int) {
+        findNavController().navigate(
+            UpcomingLaunchesFragmentDirections
+                .actionUpcomingLaunchesDestToUpcomingLaunchesDetailFragment(launchIndex)
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

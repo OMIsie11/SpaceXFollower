@@ -36,7 +36,8 @@ class CoresRepository(
     fun getCoresSnackbar(): MutableLiveData<String> = coresSnackBar
 
     suspend fun refreshIfCoresDataOld() {
-        val isCoresRefreshNeeded = withContext(Dispatchers.IO) { checkIfRefreshIsNeeded(KEY_CORES_LAST_REFRESH) }
+        val isCoresRefreshNeeded =
+            withContext(Dispatchers.IO) { checkIfRefreshIsNeeded(KEY_CORES_LAST_REFRESH) }
         if (isCoresRefreshNeeded) {
             Timber.d("refreshIfCoresDataOld: Refreshing cores")
             refreshCores()
@@ -85,7 +86,8 @@ class CoresRepository(
         val lastRefreshTime = sharedPrefs.getLong(sharedPrefsKey, 0)
         Timber.d("Current time in millis $currentTimeMillis")
         // Get refresh interval set in app settings (in hours) and multiply to get value in ms
-        val refreshIntervalHours = sharedPrefs.getString(PREFS_KEY_REFRESH_INTERVAL, "3")?.toInt() ?: 3
+        val refreshIntervalHours =
+            sharedPrefs.getString(PREFS_KEY_REFRESH_INTERVAL, "3")?.toInt() ?: 3
         val refreshInterval = refreshIntervalHours * 3600000
         Timber.d("Refresh Interval from settings: $refreshInterval")
         // If last refresh was made longer than interval, return true
