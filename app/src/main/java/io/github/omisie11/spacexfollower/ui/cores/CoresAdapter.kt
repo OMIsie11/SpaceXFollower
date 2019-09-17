@@ -10,7 +10,8 @@ import io.github.omisie11.spacexfollower.data.model.Core
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.cores_recycler_item.view.*
 
-class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
+class CoresAdapter(private val itemClickListener: OnItemClickListener) :
+    RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
 
     private var coresList: List<Core> = emptyList()
 
@@ -21,18 +22,18 @@ class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (coresList.isNotEmpty()) holder.bind(coresList[position])
+        if (coresList.isNotEmpty()) holder.bind(coresList[position], itemClickListener)
     }
 
     override fun getItemCount(): Int = coresList.size
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val coreBlockTextView: TextView = itemView.text_core_block
         private val coreSerialTextView: TextView = itemView.text_core_serial
         private val coreLaunchTextView: TextView = itemView.text_core_launch
         private val coreStatusTextView: TextView = itemView.text_core_status
 
-        fun bind(core: Core) {
+        fun bind(core: Core, itemClickListener: OnItemClickListener) {
             coreBlockTextView.text = if (core.block != null)
                 itemView.context.resources.getString(R.string.core_block, core.block) else
                 itemView.context.resources.getString(R.string.core_block_null)
@@ -41,11 +42,21 @@ class CoresAdapter : RecyclerView.Adapter<CoresAdapter.ViewHolder>() {
                 getLocalTimeFromUnix(core.originalLaunchUnix) else
                 itemView.context.getString(R.string.launch_date_null)
             coreStatusTextView.text = core.status
+
+            itemView.setOnClickListener {
+                if (adapterPosition != -1) itemClickListener.onItemClicked(
+                    coresList.indexOf(core)
+                )
+            }
         }
     }
 
     fun setData(data: List<Core>) {
         coresList = data
         notifyDataSetChanged()
+    }
+
+    interface OnItemClickListener {
+        fun onItemClicked(coreIndex: Int)
     }
 }

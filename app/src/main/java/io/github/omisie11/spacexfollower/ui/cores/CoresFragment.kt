@@ -10,17 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Core
-import io.github.omisie11.spacexfollower.util.OnItemClickListener
-import io.github.omisie11.spacexfollower.util.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_recycler.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
 
-class CoresFragment : Fragment() {
+class CoresFragment : Fragment(), CoresAdapter.OnItemClickListener {
 
     private lateinit var viewAdapter: CoresAdapter
-    private val viewModel: CoresViewModel by viewModel()
+    private val viewModel: CoresViewModel by sharedViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +35,7 @@ class CoresFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Setup recyclerView
-        viewAdapter = CoresAdapter()
+        viewAdapter = CoresAdapter(this)
         recyclerView.apply {
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
@@ -56,9 +54,10 @@ class CoresFragment : Fragment() {
         })
 
         // Observe if data is refreshing and show/hide loading indicator
-        viewModel.getCoresLoadingStatus().observe(viewLifecycleOwner, Observer<Boolean> { areCoresRefreshing ->
-            swipeRefreshLayout.isRefreshing = areCoresRefreshing
-        })
+        viewModel.getCoresLoadingStatus()
+            .observe(viewLifecycleOwner, Observer<Boolean> { areCoresRefreshing ->
+                swipeRefreshLayout.isRefreshing = areCoresRefreshing
+            })
 
         // Show a snackbar whenever the [ViewModel.snackbar] is updated a non-null value
         viewModel.snackbar.observe(this, Observer { text ->
@@ -77,15 +76,6 @@ class CoresFragment : Fragment() {
             Timber.i("onRefresh called from SwipeRefreshLayout")
             viewModel.refreshCores()
         }
-
-        recyclerView.addOnItemClickListener(object : OnItemClickListener {
-            override fun onItemClicked(position: Int, view: View) {
-                findNavController().navigate(
-                    CoresFragmentDirections
-                        .actionCoresDestToCoresDetailFragment(position)
-                )
-            }
-        })
     }
 
     override fun onResume() {
@@ -97,6 +87,13 @@ class CoresFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         recyclerView.adapter = null
+    }
+
+    override fun onItemClicked(coreIndex: Int) {
+        findNavController().navigate(
+            CoresFragmentDirections
+                .actionCoresDestToCoresDetailFragment(coreIndex)
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

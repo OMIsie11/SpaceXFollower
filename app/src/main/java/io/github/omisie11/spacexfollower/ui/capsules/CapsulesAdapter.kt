@@ -43,12 +43,9 @@ class CapsulesAdapter(private val itemClickListener: OnItemClickListener) :
 
             itemView.setOnClickListener {
                 if (adapterPosition != -1) itemClickListener.onItemClicked(
-                    capsulesList.indexOf(
-                        capsule
-                    )
+                    capsulesList.indexOf(capsule)
                 )
             }
-
         }
     }
 

@@ -10,19 +10,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialog
-
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Core
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.bottom_sheet_attribution.view.*
 import kotlinx.android.synthetic.main.fragment_core_detail.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import kotlin.random.Random
 
 
 class CoreDetailFragment : Fragment() {
 
-    private val viewModel: CoresViewModel by viewModel()
+    private val viewModel: CoresViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,23 +38,24 @@ class CoreDetailFragment : Fragment() {
         val selectedCoreId: Int = safeArgs?.itemId ?: 0
 
         viewModel.getCores().observe(viewLifecycleOwner, Observer<List<Core>> { cores ->
-            text_core_serial.text = cores[selectedCoreId].coreSerial
-            text_core_block.text = if (cores[selectedCoreId].block == null)
-                "-" else cores[selectedCoreId].block.toString()
-            text_core_status.text = cores[selectedCoreId].status
-            text_core_launch.text = if (cores[selectedCoreId].originalLaunchUnix != null)
-                getLocalTimeFromUnix(cores[selectedCoreId].originalLaunchUnix!!) else
+            val core = cores[selectedCoreId]
+
+            text_core_serial.text = core.coreSerial
+            text_core_block.text = if (core.block == null) "-" else core.block.toString()
+            text_core_status.text = core.status
+            text_core_launch.text = if (core.originalLaunchUnix != null)
+                getLocalTimeFromUnix(core.originalLaunchUnix) else
                 getString(R.string.launch_date_null)
-            text_core_details.text = if (cores[selectedCoreId].details.isNullOrEmpty())
-                getString(R.string.details_null) else cores[selectedCoreId].details
-            text_core_rtls_attempts.text = cores[selectedCoreId].rtlsAttempts.toString()
-            text_core_rtls_landings.text = cores[selectedCoreId].rtlsLandings.toString()
-            text_core_asds_attempts.text = cores[selectedCoreId].asdsAttempts.toString()
-            text_core_asds_landings.text = cores[selectedCoreId].asdsLandings.toString()
-            text_core_water_landing.text = when (cores[selectedCoreId].waterLandings) {
+            text_core_details.text = if (core.details.isNullOrEmpty())
+                getString(R.string.details_null) else core.details
+            text_core_rtls_attempts.text = core.rtlsAttempts.toString()
+            text_core_rtls_landings.text = core.rtlsLandings.toString()
+            text_core_asds_attempts.text = core.asdsAttempts.toString()
+            text_core_asds_landings.text = core.asdsLandings.toString()
+            text_core_water_landing.text = when (core.waterLandings) {
                 true -> getString(R.string.yes); false -> getString(R.string.no)
             }
-            text_core_reused.text = cores[selectedCoreId].reuseCount.toString()
+            text_core_reused.text = core.reuseCount.toString()
         })
 
         // Randomly set image from resources
@@ -70,7 +70,10 @@ class CoreDetailFragment : Fragment() {
         imagesArray.recycle()
 
         val attributionBottomSheetDialog = BottomSheetDialog(activity!!)
-        val sheetView = activity!!.layoutInflater.inflate(R.layout.bottom_sheet_attribution, null)
+        val sheetView = activity!!.layoutInflater.inflate(
+            R.layout.bottom_sheet_attribution,
+            null
+        )
         sheetView.text_attribution.text = getString(R.string.photos_attribution_spacex)
         attributionBottomSheetDialog.setContentView(sheetView)
 
@@ -79,6 +82,11 @@ class CoreDetailFragment : Fragment() {
     }
 
     private fun openWebUrl(urlAddress: String) {
-        if (urlAddress.isNotEmpty()) startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlAddress)))
+        if (urlAddress.isNotEmpty()) startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(urlAddress)
+            )
+        )
     }
 }

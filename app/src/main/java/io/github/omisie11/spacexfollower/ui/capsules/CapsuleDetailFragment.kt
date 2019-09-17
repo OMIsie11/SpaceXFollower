@@ -37,7 +37,7 @@ class CapsuleDetailFragment : Fragment() {
         val safeArgs = arguments?.let { CapsuleDetailFragmentArgs.fromBundle(it) }
         val selectedCapsuleId: Int = safeArgs?.itemId ?: 0
 
-        viewModel.getCapsules().observe(viewLifecycleOwner, Observer<List<Capsule>> { capsules->
+        viewModel.getCapsules().observe(viewLifecycleOwner, Observer<List<Capsule>> { capsules ->
             val capsule = capsules[selectedCapsuleId]
             text_capsule_serial.text = capsule.capsuleSerial
             text_capsule_type.text = capsule.type
@@ -63,7 +63,10 @@ class CapsuleDetailFragment : Fragment() {
         imagesArray.recycle()
 
         val attributionBottomSheetDialog = BottomSheetDialog(activity!!)
-        val sheetView = activity!!.layoutInflater.inflate(R.layout.bottom_sheet_attribution, null)
+        val sheetView = activity!!.layoutInflater.inflate(
+            R.layout.bottom_sheet_attribution,
+            null
+        )
         sheetView.text_attribution.text = getString(R.string.photos_attribution_spacex)
         attributionBottomSheetDialog.setContentView(sheetView)
 
@@ -72,6 +75,11 @@ class CapsuleDetailFragment : Fragment() {
     }
 
     private fun openWebUrl(urlAddress: String) {
-        if (urlAddress.isNotEmpty()) startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlAddress)))
+        if (urlAddress.isNotEmpty()) startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(urlAddress)
+            )
+        )
     }
 }
