@@ -30,18 +30,22 @@ class CapsulesRepository(
     }
 
     // Wrapper for getting all capsules from Db
-    fun getCapsulesOrderBySerialDesc(): LiveData<List<Capsule>> = capsulesDao.getAllCapsulesOrderBySerialDesc()
+    fun getCapsulesOrderBySerialDesc(): LiveData<List<Capsule>> =
+        capsulesDao.getAllCapsulesOrderBySerialDesc()
 
-    fun getCapsulesOrderBySerialAsc(): LiveData<List<Capsule>> = capsulesDao.getAllCapsulesOrderBySerialAsc()
+    fun getCapsulesOrderBySerialAsc(): LiveData<List<Capsule>> =
+        capsulesDao.getAllCapsulesOrderBySerialAsc()
 
-    suspend fun deleteAllCapsules() = withContext(Dispatchers.IO) { capsulesDao.deleteAllCapsules() }
+    suspend fun deleteAllCapsules() =
+        withContext(Dispatchers.IO) { capsulesDao.deleteAllCapsules() }
 
     fun getCapsulesLoadingStatus(): LiveData<Boolean> = areCapsulesLoading
 
     fun getCapsulesSnackbar(): MutableLiveData<String> = capsulesSnackBar
 
     suspend fun refreshIfCapsulesDataOld() {
-        val isCapsulesRefreshNeeded = withContext(Dispatchers.IO) { checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH) }
+        val isCapsulesRefreshNeeded =
+            withContext(Dispatchers.IO) { checkIfRefreshIsNeeded(KEY_CAPSULES_LAST_REFRESH) }
         if (isCapsulesRefreshNeeded) {
             Timber.d("refreshIfCapsulesDataOld: Refreshing capsules")
             refreshCapsules()
@@ -69,10 +73,10 @@ class CapsulesRepository(
     }
 
     private suspend fun fetchCapsulesAndSaveToDb() {
-        Timber.d( "fetchCapsulesAndSaveToDb called")
+        Timber.d("fetchCapsulesAndSaveToDb called")
         val response = spaceService.getAllCapsules()
         if (response.isSuccessful) {
-            Timber.d( "Response SUCCESSFUL")
+            Timber.d("Response SUCCESSFUL")
             response.body()?.let { capsulesDao.insertCapsules(it) }
             // Save new capsules last refresh time
             with(sharedPrefs.edit()) {
@@ -91,7 +95,8 @@ class CapsulesRepository(
         val lastRefreshTime = sharedPrefs.getLong(sharedPrefsKey, 0)
         Timber.d("Current time in millis $currentTimeMillis")
         // Get refresh interval set in app settings (in hours) and multiply to get value in ms
-        val refreshIntervalHours = sharedPrefs.getString(PREFS_KEY_REFRESH_INTERVAL, "3")?.toInt() ?: 3
+        val refreshIntervalHours =
+            sharedPrefs.getString(PREFS_KEY_REFRESH_INTERVAL, "3")?.toInt() ?: 3
         val refreshInterval = refreshIntervalHours * 3600000
         Timber.d("Refresh Interval from settings: $refreshInterval")
         // If last refresh was made longer than interval, return true

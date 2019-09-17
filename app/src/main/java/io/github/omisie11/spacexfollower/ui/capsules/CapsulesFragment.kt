@@ -98,16 +98,6 @@ class CapsulesFragment : Fragment(), CapsulesAdapter.OnItemClickListener {
                 -1 -> viewModel.changeCapsulesSorting(CapsulesSortOrder.BY_SERIAL_ASC)
             }
         }
-/*
-        // Respond to user clicks on recyclerView items
-        recyclerView.addOnItemClickListener(object : OnItemClickListener {
-            override fun onItemClicked(position: Int, view: View) {
-                findNavController().navigate(
-                    CapsulesFragmentDirections
-                        .actionCapsulesDestToCapsuleDetailDest(position)
-                )
-            }
-        }) */
     }
 
     override fun onResume() {
@@ -121,12 +111,12 @@ class CapsulesFragment : Fragment(), CapsulesAdapter.OnItemClickListener {
         recyclerView.adapter = null
     }
 
-    override fun onItemClicked(capsule: Capsule) {
-        Timber.d("Capsule passed to viewmodel: ${capsule.capsuleSerial}")
-        viewModel.setCapsuleForDetail(capsule)
+    override fun onItemClicked(capsuleIndex: Int) {
+        Timber.d("Capsule passed to viewmodel: ${capsuleIndex}")
+        //viewModel.setCapsuleForDetail(capsule)
         findNavController().navigate(
             CapsulesFragmentDirections
-                .actionCapsulesDestToCapsuleDetailDest()
+                .actionCapsulesDestToCapsuleDetailDest(capsuleIndex)
         )
     }
 

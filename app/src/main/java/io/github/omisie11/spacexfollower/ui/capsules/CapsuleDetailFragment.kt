@@ -37,7 +37,8 @@ class CapsuleDetailFragment : Fragment() {
         val safeArgs = arguments?.let { CapsuleDetailFragmentArgs.fromBundle(it) }
         val selectedCapsuleId: Int = safeArgs?.itemId ?: 0
 
-        viewModel.selectedCapsule.observe(viewLifecycleOwner, Observer<Capsule> { capsule ->
+        viewModel.getCapsules().observe(viewLifecycleOwner, Observer<List<Capsule>> { capsules->
+            val capsule = capsules[selectedCapsuleId]
             text_capsule_serial.text = capsule.capsuleSerial
             text_capsule_type.text = capsule.type
             text_capsule_status.text = capsule.status

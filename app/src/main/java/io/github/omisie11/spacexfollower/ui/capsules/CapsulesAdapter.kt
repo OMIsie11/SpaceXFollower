@@ -42,7 +42,11 @@ class CapsulesAdapter(private val itemClickListener: OnItemClickListener) :
             capsuleTypeTextView.text = capsule.type
 
             itemView.setOnClickListener {
-                if (adapterPosition != -1) itemClickListener.onItemClicked(capsule)
+                if (adapterPosition != -1) itemClickListener.onItemClicked(
+                    capsulesList.indexOf(
+                        capsule
+                    )
+                )
             }
 
         }
@@ -54,6 +58,6 @@ class CapsulesAdapter(private val itemClickListener: OnItemClickListener) :
     }
 
     interface OnItemClickListener {
-        fun onItemClicked(capsule: Capsule)
+        fun onItemClicked(capsuleIndex: Int)
     }
 }

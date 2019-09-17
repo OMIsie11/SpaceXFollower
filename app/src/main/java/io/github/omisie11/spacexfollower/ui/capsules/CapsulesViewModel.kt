@@ -16,10 +16,6 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
     private val _areCapsulesLoading: LiveData<Boolean> = repository.getCapsulesLoadingStatus()
     private val _snackBar: MutableLiveData<String> = repository.getCapsulesSnackbar()
 
-    // Selected capsule for detail fragment
-    private val _selectedCapsule = MutableLiveData<Capsule>()
-    val selectedCapsule: LiveData<Capsule> = _selectedCapsule
-
     // LiveData stream from database
     private val _capsulesBySerialDesc: LiveData<List<Capsule>> by lazy {
         repository.getCapsulesOrderBySerialDesc()
@@ -47,10 +43,6 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
     }
 
     fun getCapsules(): LiveData<List<Capsule>> = capsules
-
-    fun setCapsuleForDetail(capsule: Capsule) {
-        _selectedCapsule.value = capsule
-    }
 
     fun getCapsulesLoadingStatus(): LiveData<Boolean> = _areCapsulesLoading
 
