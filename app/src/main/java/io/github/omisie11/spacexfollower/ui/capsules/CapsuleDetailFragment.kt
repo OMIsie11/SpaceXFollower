@@ -15,13 +15,13 @@ import io.github.omisie11.spacexfollower.data.model.Capsule
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.bottom_sheet_attribution.view.*
 import kotlinx.android.synthetic.main.fragment_capsule_detail.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import kotlin.random.Random
 
 
 class CapsuleDetailFragment : Fragment() {
 
-    private val viewModel: CapsulesViewModel by viewModel()
+    private val viewModel: CapsulesViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,17 +37,17 @@ class CapsuleDetailFragment : Fragment() {
         val safeArgs = arguments?.let { CapsuleDetailFragmentArgs.fromBundle(it) }
         val selectedCapsuleId: Int = safeArgs?.itemId ?: 0
 
-        viewModel.getCapsules().observe(viewLifecycleOwner, Observer<List<Capsule>> { capsules ->
-            text_capsule_serial.text = capsules[selectedCapsuleId].capsuleSerial
-            text_capsule_type.text = capsules[selectedCapsuleId].type
-            text_capsule_status.text = capsules[selectedCapsuleId].status
-            text_capsule_launch.text = if (capsules[selectedCapsuleId].originalLaunchUnix != null)
-                getLocalTimeFromUnix(capsules[selectedCapsuleId].originalLaunchUnix!!) else
+        viewModel.selectedCapsule.observe(viewLifecycleOwner, Observer<Capsule> { capsule ->
+            text_capsule_serial.text = capsule.capsuleSerial
+            text_capsule_type.text = capsule.type
+            text_capsule_status.text = capsule.status
+            text_capsule_launch.text = if (capsule.originalLaunchUnix != null)
+                getLocalTimeFromUnix(capsule.originalLaunchUnix) else
                 getString(R.string.launch_date_null)
-            text_capsule_details.text = if (capsules[selectedCapsuleId].details.isNullOrEmpty())
-                getString(R.string.details_null) else capsules[selectedCapsuleId].details
-            text_capsule_landings.text = capsules[selectedCapsuleId].landings.toString()
-            text_capsule_reused.text = capsules[selectedCapsuleId].reuseCount.toString()
+            text_capsule_details.text = if (capsule.details.isNullOrEmpty())
+                getString(R.string.details_null) else capsule.details
+            text_capsule_landings.text = capsule.landings.toString()
+            text_capsule_reused.text = capsule.reuseCount.toString()
         })
 
         // Randomly set image from resources

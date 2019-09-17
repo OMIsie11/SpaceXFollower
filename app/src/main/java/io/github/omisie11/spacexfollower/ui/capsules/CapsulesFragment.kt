@@ -11,19 +11,17 @@ import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesViewModel.CapsulesSortOrder
-import io.github.omisie11.spacexfollower.util.OnItemClickListener
-import io.github.omisie11.spacexfollower.util.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_capsules_recycler.*
 import kotlinx.android.synthetic.main.fragment_recycler.recyclerView
 import kotlinx.android.synthetic.main.fragment_recycler.swipeRefreshLayout
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
 
-class CapsulesFragment : Fragment() {
+class CapsulesFragment : Fragment(), CapsulesAdapter.OnItemClickListener {
 
     private lateinit var viewAdapter: CapsulesAdapter
-    private val viewModel: CapsulesViewModel by viewModel()
+    private val viewModel: CapsulesViewModel by sharedViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +37,7 @@ class CapsulesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Setup recyclerView
-        viewAdapter = CapsulesAdapter()
+        viewAdapter = CapsulesAdapter(this)
         recyclerView.apply {
             setHasFixedSize(true)
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
@@ -100,7 +98,7 @@ class CapsulesFragment : Fragment() {
                 -1 -> viewModel.changeCapsulesSorting(CapsulesSortOrder.BY_SERIAL_ASC)
             }
         }
-
+/*
         // Respond to user clicks on recyclerView items
         recyclerView.addOnItemClickListener(object : OnItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
@@ -109,7 +107,7 @@ class CapsulesFragment : Fragment() {
                         .actionCapsulesDestToCapsuleDetailDest(position)
                 )
             }
-        })
+        }) */
     }
 
     override fun onResume() {
@@ -121,6 +119,15 @@ class CapsulesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         recyclerView.adapter = null
+    }
+
+    override fun onItemClicked(capsule: Capsule) {
+        Timber.d("Capsule passed to viewmodel: ${capsule.capsuleSerial}")
+        viewModel.setCapsuleForDetail(capsule)
+        findNavController().navigate(
+            CapsulesFragmentDirections
+                .actionCapsulesDestToCapsuleDetailDest()
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
