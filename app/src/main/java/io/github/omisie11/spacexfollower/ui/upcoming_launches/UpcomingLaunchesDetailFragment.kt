@@ -15,6 +15,7 @@ import androidx.transition.TransitionManager
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
+import io.github.omisie11.spacexfollower.util.toggleVisibility
 import kotlinx.android.synthetic.main.fragment_upcoming_launches_detail.*
 import kotlinx.android.synthetic.main.upcoming_launch_cores.view.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -103,12 +104,9 @@ class UpcomingLaunchesDetailFragment : Fragment() {
 
         val expandCardTransition = AutoTransition().apply { duration = 200 }
         card_cores_list.setOnClickListener {
-            //val autoTransition = AutoTransition().apply { duration = 200 }
             TransitionManager.beginDelayedTransition(card_cores_list, expandCardTransition)
-            when (frame_cores_list.visibility) {
-                View.GONE -> frame_cores_list.visibility = View.VISIBLE
-                View.VISIBLE -> frame_cores_list.visibility = View.GONE
-            }
+
+            frame_cores_list.toggleVisibility()
             coresIconRotationAngle = if (coresIconRotationAngle == 0f) 180f else 0f
             image_cores_expand_arrow.animate().rotation(coresIconRotationAngle).setDuration(250)
                 .start()
@@ -116,10 +114,8 @@ class UpcomingLaunchesDetailFragment : Fragment() {
 
         card_payloads.setOnClickListener {
             TransitionManager.beginDelayedTransition(card_payloads, expandCardTransition)
-            when (frame_payloads.visibility) {
-                View.GONE -> frame_payloads.visibility = View.VISIBLE
-                View.VISIBLE -> frame_payloads.visibility = View.GONE
-            }
+
+            frame_payloads.toggleVisibility()
             payloadsIconRotationAngle = if (payloadsIconRotationAngle == 0f) 180f else 0f
             image_payloads_expand_arrow.animate().rotation(payloadsIconRotationAngle)
                 .setDuration(250).start()
