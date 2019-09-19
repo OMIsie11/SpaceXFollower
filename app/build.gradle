@@ -65,7 +65,7 @@ dependencies {
     // Assertions
     androidTestImplementation "androidx.test.ext:junit:$rootProject.test_ext_junit_version"
     androidTestImplementation "androidx.test.ext:truth:$rootProject.test_ext_truth_version"
-    androidTestImplementation 'com.google.truth:truth:0.42'
+    androidTestImplementation "com.google.truth:truth:$rootProject.google_truth_version"
     // Espresso dependencies
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espresso_version"
