@@ -14,5 +14,4 @@ class CrashReportingTree : Timber.Tree() {
 
         // Implement crash reporting (Crashlytics) here in future
     }
-
 }

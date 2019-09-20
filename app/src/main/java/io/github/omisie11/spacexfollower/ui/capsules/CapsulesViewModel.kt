@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import kotlinx.coroutines.*
 
-
 class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel() {
 
     private val viewModelJob = Job()
@@ -85,4 +84,3 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
     // Class representing all possible sort orders of capsules
     enum class CapsulesSortOrder { BY_SERIAL_ASC, BY_SERIAL_DESC }
 }
-

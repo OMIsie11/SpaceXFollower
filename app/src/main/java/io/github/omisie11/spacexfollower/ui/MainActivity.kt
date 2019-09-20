@@ -16,7 +16,6 @@ import io.github.omisie11.spacexfollower.util.PREFS_KEY_DARK_MODE
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 
-
 class MainActivity : AppCompatActivity() {
 
     private val sharedPrefs: SharedPreferences by inject()
@@ -61,7 +60,6 @@ class MainActivity : AppCompatActivity() {
             SHORTCUT_CORES -> navController.navigate(R.id.cores_dest)
             SHORTCUT_COMPANY -> navController.navigate(R.id.company_dest)
         }
-
     }
 
     // Override to let NavigationUI handle back pressed

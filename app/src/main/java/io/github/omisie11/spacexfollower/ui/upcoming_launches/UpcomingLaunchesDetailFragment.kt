@@ -1,6 +1,5 @@
 package io.github.omisie11.spacexfollower.ui.upcoming_launches
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +19,6 @@ import kotlinx.android.synthetic.main.fragment_upcoming_launches_detail.*
 import kotlinx.android.synthetic.main.upcoming_launch_cores.view.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-
 class UpcomingLaunchesDetailFragment : Fragment() {
 
     private lateinit var payloadsRecyclerViewAdapter: PayloadsRecyclerAdapter
@@ -30,7 +28,8 @@ class UpcomingLaunchesDetailFragment : Fragment() {
     private var payloadsIconRotationAngle = 0f
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment

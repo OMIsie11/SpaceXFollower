@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
-
 class CoresFragment : Fragment(), CoresAdapter.OnItemClickListener {
 
     private lateinit var viewAdapter: CoresAdapter
@@ -26,10 +25,10 @@ class CoresFragment : Fragment(), CoresAdapter.OnItemClickListener {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_recycler, container, false)
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

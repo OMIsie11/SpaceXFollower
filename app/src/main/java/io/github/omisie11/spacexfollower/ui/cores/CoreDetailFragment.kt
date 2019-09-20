@@ -1,6 +1,5 @@
 package io.github.omisie11.spacexfollower.ui.cores
 
-
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -18,13 +17,13 @@ import kotlinx.android.synthetic.main.fragment_core_detail.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import kotlin.random.Random
 
-
 class CoreDetailFragment : Fragment() {
 
     private val viewModel: CoresViewModel by sharedViewModel()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment

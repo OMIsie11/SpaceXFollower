@@ -13,7 +13,6 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.IOException
 
-
 class CapsulesRepository(
     private val capsulesDao: CapsulesDao,
     private val spaceService: SpaceService,

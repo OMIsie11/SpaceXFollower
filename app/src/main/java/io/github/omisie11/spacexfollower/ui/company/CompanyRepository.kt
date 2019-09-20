@@ -13,7 +13,6 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.IOException
 
-
 class CompanyRepository(
     private val spaceService: SpaceService,
     private val companyDao: CompanyDao,
@@ -62,7 +61,6 @@ class CompanyRepository(
             }
         }
     }
-
 
     private suspend fun fetchCompanyInfoAndSaveToDb() {
         val response = spaceService.getCompanyInfo()

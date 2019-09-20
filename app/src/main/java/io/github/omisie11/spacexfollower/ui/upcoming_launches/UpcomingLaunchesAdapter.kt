@@ -10,7 +10,6 @@ import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.upcoming_launches_recycler_item.view.*
 
-
 class UpcomingLaunchesAdapter(private val itemClickListener: OnItemClickListener) :
     RecyclerView.Adapter<UpcomingLaunchesAdapter.ViewHolder>() {
 

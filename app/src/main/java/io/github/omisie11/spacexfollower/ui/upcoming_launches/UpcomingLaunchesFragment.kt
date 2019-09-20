@@ -1,6 +1,5 @@
 package io.github.omisie11.spacexfollower.ui.upcoming_launches
 
-
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -15,7 +14,6 @@ import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
-
 class UpcomingLaunchesFragment : Fragment(), UpcomingLaunchesAdapter.OnItemClickListener {
 
     private lateinit var viewAdapter: UpcomingLaunchesAdapter
@@ -27,7 +25,8 @@ class UpcomingLaunchesFragment : Fragment(), UpcomingLaunchesAdapter.OnItemClick
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_recycler, container, false)
 

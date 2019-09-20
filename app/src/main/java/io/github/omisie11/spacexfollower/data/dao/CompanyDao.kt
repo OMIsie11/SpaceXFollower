@@ -8,7 +8,7 @@ import androidx.room.Query
 import io.github.omisie11.spacexfollower.data.model.Company
 
 @Dao
-interface CompanyDao{
+interface CompanyDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCompanyInfo(companyInfo: Company)

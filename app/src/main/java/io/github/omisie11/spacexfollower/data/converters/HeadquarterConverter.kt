@@ -5,10 +5,10 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.github.omisie11.spacexfollower.data.model.Company
 
-class HeadquarterConverter{
+class HeadquarterConverter {
 
     private val gson = Gson()
-    private val type = object: TypeToken<Company.Headquarters>() {}.type
+    private val type = object : TypeToken<Company.Headquarters>() {}.type
 
     @TypeConverter
     fun headquartersToString(headquarters: Company.Headquarters): String? {

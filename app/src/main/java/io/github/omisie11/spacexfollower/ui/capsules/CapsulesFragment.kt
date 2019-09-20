@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_recycler.swipeRefreshLayout
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
-
 class CapsulesFragment : Fragment(), CapsulesAdapter.OnItemClickListener {
 
     private lateinit var viewAdapter: CapsulesAdapter
@@ -29,7 +28,8 @@ class CapsulesFragment : Fragment(), CapsulesAdapter.OnItemClickListener {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_capsules_recycler, container, false)
 

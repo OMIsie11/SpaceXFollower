@@ -8,7 +8,6 @@ import com.google.gson.annotations.SerializedName
 import io.github.omisie11.spacexfollower.data.converters.JsonArrayToStringConverter
 import io.github.omisie11.spacexfollower.data.converters.RocketConverter
 
-
 @Entity(tableName = "upcoming_launches_table")
 data class UpcomingLaunch(
     @SerializedName("flight_number")

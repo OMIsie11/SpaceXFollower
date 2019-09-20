@@ -21,7 +21,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 class DetailDestinationsEspressoTests {
@@ -77,7 +76,6 @@ class DetailDestinationsEspressoTests {
             .check(matches(isDisplayed()))
         onView(withId(R.id.text_capsule_status))
             .check(matches(isDisplayed()))
-
     }
 
     @Test
@@ -104,5 +102,4 @@ class DetailDestinationsEspressoTests {
         onView(withId(R.id.text_core_status))
             .check(matches(isDisplayed()))
     }
-
 }

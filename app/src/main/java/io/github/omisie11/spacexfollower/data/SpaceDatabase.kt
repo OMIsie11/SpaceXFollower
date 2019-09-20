@@ -22,5 +22,4 @@ abstract class SpaceDatabase : RoomDatabase() {
     abstract fun coresDao(): CoresDao
     abstract fun companyDao(): CompanyDao
     abstract fun upcomingLaunchesDao(): UpcomingLaunchesDao
-
 }

@@ -1,6 +1,5 @@
 package io.github.omisie11.spacexfollower.ui.about
 
-
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,11 +12,11 @@ import io.github.omisie11.spacexfollower.R
 import kotlinx.android.synthetic.main.bottom_sheet_attribution.view.*
 import kotlinx.android.synthetic.main.fragment_about.*
 
-
 class AboutFragment : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_about, container, false)
 

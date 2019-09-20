@@ -5,7 +5,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.*
 
-
 class JsonArrayToStringConverter {
 
     private val gson = Gson()
@@ -22,7 +21,6 @@ class JsonArrayToStringConverter {
         }
 
         val listType = object : TypeToken<MutableList<String>>() {
-
         }.type
 
         return gson.fromJson(data, listType)

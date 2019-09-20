@@ -7,7 +7,6 @@ import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 import io.github.omisie11.spacexfollower.data.converters.MissionsConverter
 
-
 // Single capsule
 @Entity(tableName = "capsules_table")
 data class Capsule(

@@ -21,5 +21,4 @@ interface UpcomingLaunchesDao {
 
     @Query("DELETE FROM upcoming_launches_table")
     fun deleteUpcomingLaunchesData()
-
 }

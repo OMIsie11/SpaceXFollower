@@ -1,6 +1,5 @@
 package io.github.omisie11.spacexfollower.ui.company
 
-
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -18,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_company.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-
 class CompanyFragment : Fragment() {
 
     private val viewModel: CompanyViewModel by viewModel()
@@ -29,7 +27,8 @@ class CompanyFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment

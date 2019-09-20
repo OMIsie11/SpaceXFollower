@@ -53,5 +53,4 @@ class PayloadsRecyclerAdapter : RecyclerView.Adapter<PayloadsRecyclerAdapter.Vie
         payloads = data
         notifyDataSetChanged()
     }
-
 }

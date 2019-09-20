@@ -13,6 +13,7 @@ Application is using open source [Space X REST API](https://github.com/r-spacex/
 * [KOIN](https://insert-koin.io)
 * [Retrofit](https://square.github.io/retrofit/)
 * [Lottie](http://airbnb.io/lottie/#/)
+* [ktlint](https://ktlint.github.io)
 * Navigation component
 * Room database
 * LiveData, ViewModel

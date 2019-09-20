@@ -97,5 +97,4 @@ class UpcomingLaunchesRepository(
         // If last refresh was made longer than interval, return true
         return currentTimeMillis - lastRefreshTime > refreshInterval
     }
-
 }
