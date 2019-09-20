@@ -68,7 +68,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" android:id="@+id/horizontalScrollView">
+                android:layout_marginEnd="8dp"
+                android:id="@+id/horizontalScrollView">
 
             <com.google.android.material.chip.ChipGroup
                     android:id="@+id/chip_group"
@@ -120,8 +121,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView20" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView23" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView23"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"/>
 
         <com.google.android.material.chip.Chip
@@ -144,18 +147,26 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/chip_source_code"/>
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/chip_source_code"/>
 
         <androidx.cardview.widget.CardView
                 android:id="@+id/card_attribution_space_api"
                 android:layout_width="wrap_content"
+                android:minWidth="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 app:cardCornerRadius="24dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textView18">
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView18">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
             <TextView
                     android:id="@+id/text_attribution_space_api"
                     android:text="@string/attribution_space_api"
@@ -163,12 +174,14 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:maxWidth="300dp"
-                    android:gravity="center"/>
+                    android:textAlignment="center"/>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
                 android:id="@+id/card_attribution_dongdona"
                 android:layout_width="wrap_content"
+                android:minWidth="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
@@ -177,6 +190,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/card_attribution_space_api">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
             <TextView
                     android:id="@+id/text_attribution_dongdona"
                     android:text="@string/lottie_attribution_dongdona"
@@ -184,21 +202,29 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:maxWidth="300dp"
-                    android:gravity="center"/>
+                    android:textAlignment="center"/>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
                 android:id="@+id/card_attribution_spacex_photos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="320dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 app:cardCornerRadius="24dp"
                 app:layout_constraintTop_toBottomOf="@+id/card_attribution_dongdona"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
             <TextView
                     android:id="@+id/text_attribution_spacex_photos"
                     android:text="@string/photos_attribution_spacex"
@@ -206,7 +232,8 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:maxWidth="300dp"
-                    android:gravity="center"/>
+                    android:textAlignment="center" />
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
