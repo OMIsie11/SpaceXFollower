@@ -26,6 +26,8 @@
         <item name="chipIconTint">@color/colorSecondaryLight</item>
         <item name="bottomSheetDialogTheme">@style/BottomSheetDialogTheme</item>
 
+        <item name="android:colorEdgeEffect">@color/colorSecondary</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar">
