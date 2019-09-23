@@ -4,6 +4,7 @@ import androidx.preference.PreferenceManager
 import androidx.room.Room
 import io.github.omisie11.spacexfollower.data.SpaceDatabase
 import io.github.omisie11.spacexfollower.network.SpaceService
+import io.github.omisie11.spacexfollower.ui.about.used_libraries.UsedLibrariesViewModel
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesRepository
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesViewModel
 import io.github.omisie11.spacexfollower.ui.company.CompanyRepository
@@ -95,4 +96,9 @@ val upcomingLaunchesModule = module {
     single { UpcomingLaunchesRepository(get(), get(), get()) }
 
     viewModel { UpcomingLaunchesViewModel(get()) }
+}
+
+val aboutModule = module {
+
+    viewModel { UsedLibrariesViewModel() }
 }

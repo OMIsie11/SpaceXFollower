@@ -11,11 +11,11 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val mAllCores: LiveData<List<Core>> by lazy { repository.getCores() }
+    private val allCores: LiveData<List<Core>> by lazy { repository.getCores() }
     private val _areCoresLoading: LiveData<Boolean> by lazy { repository.getCoresLoadingStatus() }
     private val _snackBar: MutableLiveData<String> = repository.getCoresSnackbar()
 
-    fun getCores(): LiveData<List<Core>> = mAllCores
+    fun getCores(): LiveData<List<Core>> = allCores
 
     fun getCoresLoadingStatus(): LiveData<Boolean> = _areCoresLoading
 

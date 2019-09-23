@@ -1,0 +1,74 @@
+[
+    {
+        "name": "AndroidX",
+        "description": "Suite of libraries, tools, and guidance to help developers write high-quality apps easier.",
+        "license": "Apache-2.0",
+        "repositoryUrl": "https://android.googlesource.com/platform/frameworks/support/+/androidx-master-dev"
+    },
+    {
+        "name": "Material Components Android",
+        "description": "Modular and customizable Material Design UI components for Android",
+        "license": "Apache-2.0",
+        "repositoryUrl": "https://github.com/material-components/material-components-android"
+    },
+    {
+        "name": "Kotlin Standard Library",
+        "description": "Library support for Kotlin coroutines",
+        "license": "Apache-2.0",
+        "repositoryUrl": "https://github.com/JetBrains/kotlin/tree/master/libraries/stdlib"
+    },
+    {
+        "name": "KotlinX Coroutines Android",
+        "description": "Coroutines library with support for Android",
+        "license": "Apache-2.0",
+        "repositoryUrl": "https://github.com/Kotlin/kotlinx.coroutines"
+    },
+    {
+        "name": "Retrofit",
+        "description": "Type-safe HTTP client for Android and Java by Square, Inc.",
+        "license": "Apache-2.0",
+        "repositoryUrl": "https://square.github.io/retrofit/"
+    },
+    {
+        "name": "Gson",
+        "description": "A Java serialization/deserialization library to convert Java Objects into JSON and back",
+        "license": "Apache-2.0",
+        "repositoryUrl": "https://github.com/google/gson"
+    },
+    {
+        "name": "KOIN",
+        "description": "A pragmatic lightweight dependency injection framework for Kotlin",
+        "license": "Apache-2.0",
+        "repositoryUrl": "https://insert-koin.io"
+    },
+    {
+        "name": "Timber",
+        "description": "A logger with a small, extensible API which provides utility on top of Android's normal Log class. http",
+        "license": "Apache-2.0",
+        "repositoryUrl": "https://github.com/JakeWharton/timber"
+    },
+    {
+        "name": "Lottie",
+        "description": "Render After Effects animations natively on Android and iOS, Web, and React Native",
+        "license": "Apache-2.0",
+        "repositoryUrl": "https://github.com/airbnb/lottie-android"
+    },
+    {
+        "name": "Truth",
+        "description": "Fluent assertions for Java and Android",
+        "license": "Apache-2.0",
+        "repositoryUrl": "https://github.com/google/truth"
+    },
+    {
+        "name": "JUnit",
+        "description": "A programmer-oriented testing framework for Java.",
+        "license": "EPL-1.0",
+        "repositoryUrl": "https://github.com/junit-team/junit4"
+    },
+    {
+        "name": "LeakCanary",
+        "description": "LeakCanary is a memory leak detection library for Android.",
+        "license": "Apache-2.0",
+        "repositoryUrl": "https://square.github.io/leakcanary/"
+    }
+]

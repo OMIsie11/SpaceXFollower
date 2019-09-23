@@ -17,6 +17,7 @@
     <string name="label_upcoming_launches">Upcoming Launches</string>
     <string name="label_upcoming_launches_detail">Launch Detail</string>
     <string name="label_about">About</string>
+    <string name="label_used_libs">Used Libraries</string>
 
     <string name="title_capsule_serial">Capsule serial</string>
     <string name="title_type">Type</string>
@@ -73,6 +74,7 @@
         . Click here to visit site.
     </string>
     <string name="space_api_url" translatable="false">https://github.com/r-spacex/SpaceX-API</string>
+
     <!-- About screen -->
     <string name="created_by">Created by</string>
     <string name="omisie11" translatable="false">OMIsie11</string>
@@ -126,4 +128,5 @@
     <string name="website">Website</string>
     <string name="get_the_app_source_code_on_github">Get the app source code on GitHub</string>
     <string name="customers_payloads">Customers:</string>
+    <string name="attribution_used_libraries">Click here to check out awesome libraries that helped with making this app.</string>
 </resources>

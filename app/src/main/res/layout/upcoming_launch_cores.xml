@@ -5,7 +5,7 @@
               android:layout_height="wrap_content">
 
     <TextView
-            android:id="@+id/text_core_serial"
+            android:id="@+id/text_lib_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

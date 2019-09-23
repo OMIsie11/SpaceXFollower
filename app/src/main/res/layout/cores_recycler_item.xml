@@ -16,7 +16,7 @@
             tools:text="Block: 1"/>
 
     <TextView
-            android:id="@+id/text_core_serial"
+            android:id="@+id/text_lib_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/text_core_block"
@@ -26,10 +26,10 @@
             tools:text="Merlin1A"/>
 
     <TextView
-            android:id="@+id/text_core_launch"
+            android:id="@+id/text_lib_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_core_serial"
+            android:layout_below="@id/text_lib_name"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"

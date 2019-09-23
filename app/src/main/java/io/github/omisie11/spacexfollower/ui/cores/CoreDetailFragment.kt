@@ -39,10 +39,10 @@ class CoreDetailFragment : Fragment() {
         viewModel.getCores().observe(viewLifecycleOwner, Observer<List<Core>> { cores ->
             val core = cores[selectedCoreId]
 
-            text_core_serial.text = core.coreSerial
+            text_lib_name.text = core.coreSerial
             text_core_block.text = if (core.block == null) "-" else core.block.toString()
             text_core_status.text = core.status
-            text_core_launch.text = if (core.originalLaunchUnix != null)
+            text_lib_desc.text = if (core.originalLaunchUnix != null)
                 getLocalTimeFromUnix(core.originalLaunchUnix) else
                 getString(R.string.launch_date_null)
             text_core_details.text = if (core.details.isNullOrEmpty())

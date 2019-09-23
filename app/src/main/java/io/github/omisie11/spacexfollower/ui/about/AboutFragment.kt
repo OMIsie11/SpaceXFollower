@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.github.omisie11.spacexfollower.R
 import kotlinx.android.synthetic.main.bottom_sheet_attribution.view.*
@@ -24,23 +25,43 @@ class AboutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val attributionBottomSheetDialog = BottomSheetDialog(activity!!)
-        val sheetView = activity!!.layoutInflater.inflate(R.layout.bottom_sheet_attribution, null)
+        val sheetView = activity!!.layoutInflater.inflate(
+            R.layout.bottom_sheet_attribution, null
+        )
         attributionBottomSheetDialog.setContentView(sheetView)
 
         image_planet.setOnClickListener { attributionBottomSheetDialog.show() }
-        sheetView.text_attribution.setOnClickListener { openWebUrl(getString(R.string.lottie_files_url_dongdona)) }
+        sheetView.text_attribution.setOnClickListener {
+            openWebUrl(getString(R.string.lottie_files_url_dongdona))
+        }
 
         chip_github.setOnClickListener { openWebUrl(getString(R.string.github_url_omisie11)) }
         chip_twitter.setOnClickListener { openWebUrl(getString(R.string.twitter_url_omisie11)) }
         chip_website_omisie11.setOnClickListener { openWebUrl(getString(R.string.website_url_omisie11)) }
         chip_source_code.setOnClickListener { openWebUrl(getString(R.string.source_code_url)) }
 
-        card_attribution_dongdona.setOnClickListener { openWebUrl(getString(R.string.lottie_files_url_dongdona)) }
-        card_attribution_spacex_photos.setOnClickListener { openWebUrl(getString(R.string.photos_spacex_url)) }
-        card_attribution_space_api.setOnClickListener { openWebUrl(getString(R.string.space_api_url)) }
+        card_attribution_dongdona.setOnClickListener {
+            openWebUrl(getString(R.string.lottie_files_url_dongdona))
+        }
+        card_attribution_spacex_photos.setOnClickListener {
+            openWebUrl(getString(R.string.photos_spacex_url))
+        }
+        card_attribution_space_api.setOnClickListener {
+            openWebUrl(getString(R.string.space_api_url))
+        }
+        card_attribution_used_libraries.setOnClickListener {
+            findNavController().navigate(
+                AboutFragmentDirections.actionAboutDestToUsedLibrariesFragment()
+            )
+        }
     }
 
     private fun openWebUrl(urlAddress: String) {
-        if (urlAddress.isNotEmpty()) startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlAddress)))
+        if (urlAddress.isNotEmpty()) startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(urlAddress)
+            )
+        )
     }
 }

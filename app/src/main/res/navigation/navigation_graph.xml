@@ -83,5 +83,14 @@
                 android:defaultValue="0"/>
     </fragment>
     <fragment android:id="@+id/about_dest" android:name="io.github.omisie11.spacexfollower.ui.about.AboutFragment"
-              android:label="@string/label_about" tools:layout="@layout/fragment_about"/>
+              android:label="@string/label_about" tools:layout="@layout/fragment_about">
+        <action
+            android:id="@+id/action_about_dest_to_usedLibrariesFragment"
+            app:destination="@id/used_libs_dest" />
+    </fragment>
+    <fragment
+        android:id="@+id/used_libs_dest"
+        android:name="io.github.omisie11.spacexfollower.ui.about.used_libraries.UsedLibrariesFragment"
+        android:label="@string/label_used_libs"
+        tools:layout="@layout/fragment_used_libraries" />
 </navigation>

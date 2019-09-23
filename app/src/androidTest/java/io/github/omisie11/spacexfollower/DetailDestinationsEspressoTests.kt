@@ -95,7 +95,7 @@ class DetailDestinationsEspressoTests {
                 RecyclerViewActions
                     .actionOnItemAtPosition<CoresAdapter.ViewHolder>(1, click())
             )
-        onView(withId(R.id.text_core_serial))
+        onView(withId(R.id.text_lib_name))
             .check(matches(isDisplayed()))
         onView(withId(R.id.text_core_block))
             .check(matches(isDisplayed()))

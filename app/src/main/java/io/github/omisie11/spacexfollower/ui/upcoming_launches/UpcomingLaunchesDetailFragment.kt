@@ -86,7 +86,7 @@ class UpcomingLaunchesDetailFragment : Fragment() {
                                     frame_cores_list, false
                                 )
                                 frame_cores_list.addView(coreLinearLayout)
-                                coreLinearLayout.text_core_serial.text = core.core_serial
+                                coreLinearLayout.text_lib_name.text = core.core_serial
                                 coreLinearLayout.text_core_block.text =
                                     resources.getString(R.string.block_number_template, core.block)
                                 coreLinearLayout.text_core_flight.text =
