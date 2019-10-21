@@ -2,32 +2,37 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@id/upcoming_launches_dest"
-            android:title="@string/label_upcoming_launches"
-            android:checkable="true"/>
+        android:id="@id/upcoming_launches_dest"
+        android:checkable="true"
+        android:title="@string/label_upcoming_launches" />
 
     <item
-            android:id="@id/capsules_dest"
-            android:title="@string/label_capsules"
-            android:checkable="true"/>
+        android:id="@id/capsules_dest"
+        android:checkable="true"
+        android:title="@string/label_capsules" />
 
     <item
-            android:id="@id/cores_dest"
-            android:title="@string/label_cores"
-            android:checkable="true"/>
+        android:id="@id/cores_dest"
+        android:checkable="true"
+        android:title="@string/label_cores" />
 
     <item
-            android:id="@id/company_dest"
-            android:title="@string/label_company"
-            android:checkable="true"/>
+        android:id="@id/launch_pads_dest"
+        android:checkable="true"
+        android:title="@string/label_launch_pads" />
 
     <item
-            android:id="@id/settings_dest"
-            android:title="@string/label_settings"
-            android:checkable="true"/>
+        android:id="@id/company_dest"
+        android:checkable="true"
+        android:title="@string/label_company" />
 
     <item
-            android:id="@id/about_dest"
-            android:title="@string/label_about"
-            android:checkable="true"/>
+        android:id="@id/settings_dest"
+        android:checkable="true"
+        android:title="@string/label_settings" />
+
+    <item
+        android:id="@id/about_dest"
+        android:checkable="true"
+        android:title="@string/label_about" />
 </menu>

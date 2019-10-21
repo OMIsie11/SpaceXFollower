@@ -93,4 +93,8 @@
         android:name="io.github.omisie11.spacexfollower.ui.about.used_libraries.UsedLibrariesFragment"
         android:label="@string/label_used_libs"
         tools:layout="@layout/fragment_used_libraries" />
+    <fragment
+        android:id="@+id/launch_pads_dest"
+        android:name="io.github.omisie11.spacexfollower.ui.launch_pads.LaunchPadsFragment"
+        android:label="@string/label_launch_pads" />
 </navigation>

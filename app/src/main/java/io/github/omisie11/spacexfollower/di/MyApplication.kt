@@ -33,7 +33,7 @@ class MyApplication : Application() {
                 listOf(
                     appModule, remoteDataSourceModule, capsulesModule,
                     coresModule, companyModule, upcomingLaunchesModule,
-                    aboutModule
+                    launchPadsModule, aboutModule
                 )
             )
         }

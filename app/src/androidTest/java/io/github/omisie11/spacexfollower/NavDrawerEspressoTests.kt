@@ -79,6 +79,19 @@ class NavDrawerEspressoTests {
     }
 
     @Test
+    fun clickOnNavDrawerOpenLaunchPadsFragment() {
+        onView(withId(R.id.drawer_layout))
+            .check(matches(isClosed(Gravity.START)))
+            .perform(DrawerActions.open())
+
+        onView(withId(R.id.navigation_view))
+            .perform(NavigationViewActions.navigateTo(R.id.launch_pads_dest))
+
+        onView(withId(R.id.recycler_root_view))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
     fun clickOnNavDrawerOpenSettingsFragment() {
         onView(withId(R.id.drawer_layout))
             .check(matches(isClosed(Gravity.START)))

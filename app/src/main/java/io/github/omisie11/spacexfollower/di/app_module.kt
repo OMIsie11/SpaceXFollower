@@ -11,6 +11,8 @@ import io.github.omisie11.spacexfollower.ui.company.CompanyRepository
 import io.github.omisie11.spacexfollower.ui.company.CompanyViewModel
 import io.github.omisie11.spacexfollower.ui.cores.CoresRepository
 import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel
+import io.github.omisie11.spacexfollower.ui.launch_pads.LaunchPadsRepository
+import io.github.omisie11.spacexfollower.ui.launch_pads.LaunchPadsViewModel
 import io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesRepository
 import io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesViewModel
 import io.github.omisie11.spacexfollower.util.SPACE_X_BASE_URL
@@ -30,6 +32,7 @@ val appModule = module {
             SpaceDatabase::class.java,
             "space_data.db"
         )
+            .fallbackToDestructiveMigration()
             .build()
     }
 
@@ -96,6 +99,15 @@ val upcomingLaunchesModule = module {
     single { UpcomingLaunchesRepository(get(), get(), get()) }
 
     viewModel { UpcomingLaunchesViewModel(get()) }
+}
+
+val launchPadsModule = module {
+
+    single { get<SpaceDatabase>().launchPadsDao() }
+
+    single { LaunchPadsRepository(get(), get(), get()) }
+
+    viewModel { LaunchPadsViewModel(get()) }
 }
 
 val aboutModule = module {
