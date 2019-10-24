@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
 
     <TextView
-            android:id="@+id/text_flight_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            tools:text="Flight number: 85"/>
+        android:id="@+id/text_flight_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        tools:text="Flight number: 85" />
 
     <TextView
-            android:id="@+id/text_mission_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxWidth="240dp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:layout_below="@id/text_flight_number"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            tools:text="CRS-18"/>
+        android:id="@+id/text_mission_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_flight_number"
+        android:layout_marginStart="16dp"
+        android:ellipsize="end"
+        android:maxWidth="240dp"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        tools:text="CRS-18" />
 
     <TextView
-            android:id="@+id/text_launch_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text_mission_name"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            tools:text="2007-03-21T01:10:00.000Z"/>
+        android:id="@+id/text_launch_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_mission_name"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        tools:text="2007-03-21T01:10:00.000Z" />
 
     <TextView
-            android:id="@+id/textview"
-            android:text="@string/launch_site"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"/>
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/launch_site" />
 
     <TextView
-            android:id="@+id/text_launch_site"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxWidth="100dp"
-            android:layout_below="@id/textview"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            tools:text="CCAFS SLC 40"/>
+        android:id="@+id/text_launch_site"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:maxWidth="100dp"
+        tools:text="CCAFS SLC 40" />
 
 </RelativeLayout>

@@ -36,7 +36,6 @@ class CoresFragment : Fragment(), CoresAdapter.OnItemClickListener {
         // Setup recyclerView
         viewAdapter = CoresAdapter(this)
         recyclerView.apply {
-            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
             adapter = viewAdapter

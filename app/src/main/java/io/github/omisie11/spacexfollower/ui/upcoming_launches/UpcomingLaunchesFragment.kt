@@ -36,7 +36,6 @@ class UpcomingLaunchesFragment : Fragment(), UpcomingLaunchesAdapter.OnItemClick
         // Setup recyclerView
         viewAdapter = UpcomingLaunchesAdapter(this)
         recyclerView.apply {
-            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
             adapter = viewAdapter

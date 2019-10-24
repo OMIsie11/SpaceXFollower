@@ -29,8 +29,8 @@ class CoresAdapter(private val itemClickListener: OnItemClickListener) :
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val coreBlockTextView: TextView = itemView.text_core_block
-        private val coreSerialTextView: TextView = itemView.text_lib_name
-        private val coreLaunchTextView: TextView = itemView.text_lib_desc
+        private val coreSerialTextView: TextView = itemView.text_core_name
+        private val coreLaunchTextView: TextView = itemView.text_core_desc
         private val coreStatusTextView: TextView = itemView.text_core_status
 
         fun bind(core: Core, itemClickListener: OnItemClickListener) {

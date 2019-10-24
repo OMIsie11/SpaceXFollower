@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.github.omisie11.spacexfollower.R
-import kotlinx.android.synthetic.main.cores_recycler_item.view.text_lib_desc
-import kotlinx.android.synthetic.main.cores_recycler_item.view.text_lib_name
 import kotlinx.android.synthetic.main.used_libraries_recycler_item.view.*
 
 class UsedLibrariesAdapter(private val itemClickListener: OnItemClickListener) :

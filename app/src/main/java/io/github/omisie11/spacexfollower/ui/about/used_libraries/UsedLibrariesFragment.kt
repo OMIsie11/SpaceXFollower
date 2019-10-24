@@ -38,7 +38,6 @@ class UsedLibrariesFragment : Fragment(), UsedLibrariesAdapter.OnItemClickListen
 
         viewAdapter = UsedLibrariesAdapter(this)
         recyclerView_libs.apply {
-            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
             adapter = viewAdapter

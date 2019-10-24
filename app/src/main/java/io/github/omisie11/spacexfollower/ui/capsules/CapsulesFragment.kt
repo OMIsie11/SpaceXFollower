@@ -40,7 +40,6 @@ class CapsulesFragment : Fragment(), CapsulesAdapter.OnItemClickListener {
         viewAdapter = CapsulesAdapter(this)
         recyclerView.apply {
             setHasFixedSize(true)
-            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
             layoutManager = LinearLayoutManager(activity)
             adapter = viewAdapter
         }
