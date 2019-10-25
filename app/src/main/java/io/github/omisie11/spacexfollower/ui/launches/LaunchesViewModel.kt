@@ -1,26 +1,26 @@
-package io.github.omisie11.spacexfollower.ui.upcoming_launches
+package io.github.omisie11.spacexfollower.ui.launches
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
+import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class UpcomingLaunchesViewModel(
-    private val repository: UpcomingLaunchesRepository
+class LaunchesViewModel(
+    private val repository: LaunchesRepository
 ) : ViewModel() {
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val allUpcomingLaunches: LiveData<List<UpcomingLaunch>> by lazy { repository.getUpcomingLaunches() }
+    private val allLaunches: LiveData<List<Launch>> by lazy { repository.getUpcomingLaunches() }
     private val _areLaunchesLoading: LiveData<Boolean> = repository.getLaunchesLoadingStatus()
     private val _snackBar: MutableLiveData<String> = repository.getLaunchesSnackbar()
 
-    fun getUpcomingLaunches(): LiveData<List<UpcomingLaunch>> = allUpcomingLaunches
+    fun getUpcomingLaunches(): LiveData<List<Launch>> = allLaunches
 
     fun getLaunchesLoadingStatus(): LiveData<Boolean> = _areLaunchesLoading
 

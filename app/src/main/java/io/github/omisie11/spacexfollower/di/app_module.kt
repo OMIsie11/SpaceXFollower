@@ -13,8 +13,8 @@ import io.github.omisie11.spacexfollower.ui.cores.CoresRepository
 import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel
 import io.github.omisie11.spacexfollower.ui.launch_pads.LaunchPadsRepository
 import io.github.omisie11.spacexfollower.ui.launch_pads.LaunchPadsViewModel
-import io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesRepository
-import io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesViewModel
+import io.github.omisie11.spacexfollower.ui.launches.LaunchesRepository
+import io.github.omisie11.spacexfollower.ui.launches.LaunchesViewModel
 import io.github.omisie11.spacexfollower.util.SPACE_X_BASE_URL
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -96,9 +96,9 @@ val upcomingLaunchesModule = module {
 
     single { get<SpaceDatabase>().upcomingLaunchesDao() }
 
-    single { UpcomingLaunchesRepository(get(), get(), get()) }
+    single { LaunchesRepository(get(), get(), get()) }
 
-    viewModel { UpcomingLaunchesViewModel(get()) }
+    viewModel { LaunchesViewModel(get()) }
 }
 
 val launchPadsModule = module {

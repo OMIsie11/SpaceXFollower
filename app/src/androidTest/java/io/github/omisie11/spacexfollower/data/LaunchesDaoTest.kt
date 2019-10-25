@@ -14,7 +14,7 @@ import org.junit.*
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class UpcomingLaunchesDaoTest {
+class LaunchesDaoTest {
 
     private lateinit var database: SpaceDatabase
     private lateinit var upcomingLaunchesDao: UpcomingLaunchesDao

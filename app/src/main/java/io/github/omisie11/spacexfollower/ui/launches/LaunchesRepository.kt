@@ -1,10 +1,10 @@
-package io.github.omisie11.spacexfollower.ui.upcoming_launches
+package io.github.omisie11.spacexfollower.ui.launches
 
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.github.omisie11.spacexfollower.data.dao.UpcomingLaunchesDao
-import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
+import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import io.github.omisie11.spacexfollower.network.SpaceService
 import io.github.omisie11.spacexfollower.util.KEY_UPCOMING_LAUNCHES_LAST_REFRESH
 import io.github.omisie11.spacexfollower.util.PREFS_KEY_REFRESH_INTERVAL
@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.IOException
 
-class UpcomingLaunchesRepository(
+class LaunchesRepository(
     private val upcomingLaunchesDao: UpcomingLaunchesDao,
     private val spaceService: SpaceService,
     private val sharedPrefs: SharedPreferences
@@ -29,7 +29,7 @@ class UpcomingLaunchesRepository(
     }
 
     // Wrapper for getting all capsules from Db
-    fun getUpcomingLaunches(): LiveData<List<UpcomingLaunch>> = upcomingLaunchesDao.getUpcomingLaunches()
+    fun getUpcomingLaunches(): LiveData<List<Launch>> = upcomingLaunchesDao.getUpcomingLaunches()
 
     suspend fun deleteAllUpcomingLaunches() =
         withContext(Dispatchers.IO) { upcomingLaunchesDao.deleteUpcomingLaunchesData() }

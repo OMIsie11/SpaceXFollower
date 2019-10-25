@@ -16,7 +16,7 @@ import androidx.test.rule.ActivityTestRule
 import io.github.omisie11.spacexfollower.ui.MainActivity
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesAdapter
 import io.github.omisie11.spacexfollower.ui.cores.CoresAdapter
-import io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesAdapter
+import io.github.omisie11.spacexfollower.ui.launches.LaunchesAdapter
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,14 +36,14 @@ class DetailDestinationsEspressoTests {
             .perform(DrawerActions.open())
         // Start fragment
         onView(withId(R.id.navigation_view))
-            .perform(NavigationViewActions.navigateTo(R.id.upcoming_launches_dest))
+            .perform(NavigationViewActions.navigateTo(R.id.launches_dest))
         // Check if fragment appeared
         onView(withId(R.id.recycler_root_view))
             .check(matches(isDisplayed()))
         onView(withId(R.id.recyclerView))
             .perform(
                 RecyclerViewActions
-                    .actionOnItemAtPosition<UpcomingLaunchesAdapter.ViewHolder>(1, click())
+                    .actionOnItemAtPosition<LaunchesAdapter.ViewHolder>(1, click())
             )
         onView(withId(R.id.text_flight_number))
             .check(matches(isDisplayed()))

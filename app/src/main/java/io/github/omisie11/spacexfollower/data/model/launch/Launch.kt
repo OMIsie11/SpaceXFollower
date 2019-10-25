@@ -9,7 +9,7 @@ import io.github.omisie11.spacexfollower.data.converters.JsonArrayToStringConver
 import io.github.omisie11.spacexfollower.data.converters.RocketConverter
 
 @Entity(tableName = "upcoming_launches_table")
-data class UpcomingLaunch(
+data class Launch(
     @SerializedName("flight_number")
     @PrimaryKey
     @ColumnInfo(name = "flight_number")

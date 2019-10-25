@@ -6,7 +6,7 @@ import io.github.omisie11.spacexfollower.data.model.Core
 import io.github.omisie11.spacexfollower.data.model.LaunchPad
 import io.github.omisie11.spacexfollower.data.model.launch.LaunchSite
 import io.github.omisie11.spacexfollower.data.model.launch.Rocket
-import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
+import io.github.omisie11.spacexfollower.data.model.launch.Launch
 
 val capsule1 = Capsule(
     "C101", "dragon1", "retired",
@@ -63,7 +63,7 @@ val testCompanyInfo = Company(
             "goal of enabling people to live on other planets."
 )
 
-val launch1 = UpcomingLaunch(
+val launch1 = Launch(
     75, "Nusantara Satu (PSN-6) / GTO-1 / Beresheet", null,
     1550799900, false,
     LaunchSite(
@@ -98,7 +98,7 @@ val launch1 = UpcomingLaunch(
     ), null
 )
 
-val launch2 = UpcomingLaunch(
+val launch2 = Launch(
     76, "CCtCap Demo Mission 1", mutableListOf("EE86F74"),
     1551512700, false,
     LaunchSite(

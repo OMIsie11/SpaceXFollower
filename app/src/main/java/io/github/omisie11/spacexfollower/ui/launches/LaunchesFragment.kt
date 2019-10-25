@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.ui.upcoming_launches
+package io.github.omisie11.spacexfollower.ui.launches
 
 import android.os.Bundle
 import android.view.*
@@ -8,15 +8,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
+import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
-class UpcomingLaunchesFragment : Fragment(), UpcomingLaunchesAdapter.OnItemClickListener {
+class LaunchesFragment : Fragment(), LaunchesAdapter.OnItemClickListener {
 
-    private lateinit var viewAdapter: UpcomingLaunchesAdapter
-    private val viewModel: UpcomingLaunchesViewModel by sharedViewModel()
+    private lateinit var viewAdapter: LaunchesAdapter
+    private val viewModel: LaunchesViewModel by sharedViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class UpcomingLaunchesFragment : Fragment(), UpcomingLaunchesAdapter.OnItemClick
         super.onViewCreated(view, savedInstanceState)
 
         // Setup recyclerView
-        viewAdapter = UpcomingLaunchesAdapter(this)
+        viewAdapter = LaunchesAdapter(this)
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
@@ -47,7 +47,7 @@ class UpcomingLaunchesFragment : Fragment(), UpcomingLaunchesAdapter.OnItemClick
 
         // ViewModel setup
         viewModel.getUpcomingLaunches()
-            .observe(viewLifecycleOwner, Observer<List<UpcomingLaunch>> { launches ->
+            .observe(viewLifecycleOwner, Observer<List<Launch>> { launches ->
                 if (launches != null) viewAdapter.setData(launches)
             })
 
@@ -90,7 +90,7 @@ class UpcomingLaunchesFragment : Fragment(), UpcomingLaunchesAdapter.OnItemClick
     // Respond to user clicks on recyclerView items
     override fun onItemClicked(launchIndex: Int) {
         findNavController().navigate(
-            UpcomingLaunchesFragmentDirections
+            LaunchesFragmentDirections
                 .actionUpcomingLaunchesDestToUpcomingLaunchesDetailFragment(launchIndex)
         )
     }
