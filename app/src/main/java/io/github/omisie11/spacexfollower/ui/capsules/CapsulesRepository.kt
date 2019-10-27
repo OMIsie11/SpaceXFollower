@@ -76,7 +76,7 @@ class CapsulesRepository(
         val response = spaceService.getAllCapsules()
         if (response.isSuccessful) {
             Timber.d("Response SUCCESSFUL")
-            response.body()?.let { capsulesDao.insertCapsules(it) }
+            response.body()?.let { capsulesDao.replaceCapsulesData(it) }
             // Save new capsules last refresh time
             with(sharedPrefs.edit()) {
                 putLong(KEY_CAPSULES_LAST_REFRESH, System.currentTimeMillis())

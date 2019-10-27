@@ -67,7 +67,7 @@ class CoresRepository(
         val response = spaceService.getAllCores()
         if (response.isSuccessful) {
             Timber.d("Response SUCCESSFUL")
-            response.body()?.let { coresDao.insertCores(it) }
+            response.body()?.let { coresDao.replaceCoresData(it) }
             // Save new cores last refresh time
             with(sharedPrefs.edit()) {
                 putLong(KEY_CORES_LAST_REFRESH, System.currentTimeMillis())
