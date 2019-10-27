@@ -10,8 +10,10 @@ import io.github.omisie11.spacexfollower.data.converters.MissionsConverter
 // Single capsule
 @Entity(tableName = "capsules_table")
 data class Capsule(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "_id")
+    val _id: Long,
     @SerializedName("capsule_serial")
-    @PrimaryKey
     @ColumnInfo(name = "capsule_serial")
     val capsuleSerial: String,
     @SerializedName("capsule_id")

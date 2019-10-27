@@ -11,7 +11,7 @@ import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
 @Database(
     entities = [Capsule::class, Core::class, Company::class, UpcomingLaunch::class,
         LaunchPad::class],
-    version = 2
+    version = 3
 )
 @TypeConverters(
     value = [MissionsConverter::class, HeadquarterConverter::class,

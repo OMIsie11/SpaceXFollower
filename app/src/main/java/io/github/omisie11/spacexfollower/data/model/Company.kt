@@ -11,7 +11,7 @@ import io.github.omisie11.spacexfollower.data.converters.HeadquarterConverter
 data class Company(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Long = 1,
+    val id: Long,
     @SerializedName("name")
     @ColumnInfo(name = "name")
     val name: String,

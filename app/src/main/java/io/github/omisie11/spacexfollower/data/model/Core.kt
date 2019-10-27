@@ -10,8 +10,10 @@ import io.github.omisie11.spacexfollower.data.converters.MissionsConverter
 // Single Core data
 @Entity(tableName = "cores_table")
 data class Core(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "_id")
+    val _id: Long,
     @SerializedName("core_serial")
-    @PrimaryKey
     @ColumnInfo(name = "core_serial")
     val coreSerial: String,
     @SerializedName("block")
