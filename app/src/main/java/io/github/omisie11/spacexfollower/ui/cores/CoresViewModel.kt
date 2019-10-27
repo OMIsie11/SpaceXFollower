@@ -5,15 +5,24 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.github.omisie11.spacexfollower.data.model.Core
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 
 class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val allCores: LiveData<List<Core>> by lazy { repository.getCores() }
+    private val allCores: MutableLiveData<List<Core>> = MutableLiveData()
     private val _areCoresLoading: LiveData<Boolean> by lazy { repository.getCoresLoadingStatus() }
     private val _snackBar: MutableLiveData<String> = repository.getCoresSnackbar()
+
+    init {
+        uiScope.launch(Dispatchers.Default) {
+            repository.getAllCoresFlow()
+                .collect { cores ->
+                    allCores.postValue(cores.sortedByDescending { it._id }) }
+        }
+    }
 
     fun getCores(): LiveData<List<Core>> = allCores
 
