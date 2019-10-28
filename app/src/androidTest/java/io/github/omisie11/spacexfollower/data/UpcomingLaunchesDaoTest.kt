@@ -45,6 +45,16 @@ class UpcomingLaunchesDaoTest {
     }
 
     @Test
+    fun testReplaceLaunches() {
+        // Perform action double to check if data is properly erased and there is no duplicates
+        upcomingLaunchesDao.replaceUpcomingLaunches(testLaunchesData)
+        upcomingLaunchesDao.replaceUpcomingLaunches(testLaunchesData)
+
+        val launchesList = getValue(upcomingLaunchesDao.getUpcomingLaunches())
+        Assert.assertThat(launchesList.size, Matchers.equalTo(testLaunchesData.size))
+    }
+
+    @Test
     fun testDeleteUpcomingLaunches() {
         upcomingLaunchesDao.deleteUpcomingLaunchesData()
         val coresList = getValue(upcomingLaunchesDao.getUpcomingLaunches())

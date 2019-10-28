@@ -49,6 +49,16 @@ class CoresDaoTest {
     }
 
     @Test
+    fun testReplaceCoresData() {
+        // Perform action double to check if data is properly erased and there is no duplicates
+        coresDao.replaceCoresData(testCoresList)
+        coresDao.replaceCoresData(testCoresList)
+
+        val coresList = getValue(coresDao.getAllCores())
+        assertThat(coresList.size, equalTo(testCoresList.size))
+    }
+
+    @Test
     fun testDeleteCores() {
         coresDao.deleteAllCores()
         val coresList = getValue(coresDao.getAllCores())

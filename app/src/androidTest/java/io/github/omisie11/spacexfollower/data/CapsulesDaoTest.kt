@@ -64,6 +64,16 @@ class CapsulesDaoTest {
     }
 
     @Test
+    fun testReplaceCapsulesData() {
+        // Perform action double to check if data is properly erased and there is no duplicates
+        capsulesDao.replaceCapsulesData(testCapsulesList)
+        capsulesDao.replaceCapsulesData(testCapsulesList)
+
+        val capsulesList = getValue(capsulesDao.getAllCapsulesOrderBySerialAsc())
+        assertThat(capsulesList.size, equalTo(testCapsulesList.size))
+    }
+
+    @Test
     fun testDeleteCapsules() {
         capsulesDao.deleteAllCapsules()
         val coresList = getValue(capsulesDao.getAllCapsulesOrderBySerialDesc())
