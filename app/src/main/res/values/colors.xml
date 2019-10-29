@@ -22,4 +22,6 @@
     <color name="colorChipTextUnchecked">#3b3b3b</color>
     <color name="colorChipTextChecked">#212121</color>
 
+    <color name="horizontalDividerBackground">#dadce0</color>
+
 </resources>

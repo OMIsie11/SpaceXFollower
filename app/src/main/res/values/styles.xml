@@ -56,6 +56,11 @@
         <item name="backgroundTint">?attr/colorSecondary</item>
     </style>
 
+    <style name="AppTextButton.Icon" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
     <!-- Styles needed to theme Settings ListPreference button on alert dialog -->
     <style name="MaterialAlertDialog" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
         <item name="colorAccent">@color/colorSecondary</item>

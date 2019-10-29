@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Core
-import kotlinx.android.synthetic.main.fragment_recycler.*
+import kotlinx.android.synthetic.main.fragment_cores_recycler.*
+import kotlinx.android.synthetic.main.fragment_recycler.recyclerView
+import kotlinx.android.synthetic.main.fragment_recycler.swipeRefreshLayout
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
@@ -27,7 +29,7 @@ class CoresFragment : Fragment(), CoresAdapter.OnItemClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_recycler, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_cores_recycler, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,10 +70,26 @@ class CoresFragment : Fragment(), CoresAdapter.OnItemClickListener {
             }
         })
 
+        viewModel.getCoresSortingOrder().observe(viewLifecycleOwner, Observer { sortingOrder ->
+            button_sorting.text = when (sortingOrder) {
+                CoresViewModel.CoresSortingOrder.BY_SERIAL_NEWEST -> "Serial: newest"
+                CoresViewModel.CoresSortingOrder.BY_SERIAL_OLDEST -> "Serial: oldest"
+            }
+        })
+
         // Swipe to refresh
         swipeRefreshLayout.setOnRefreshListener {
             Timber.i("onRefresh called from SwipeRefreshLayout")
             viewModel.refreshCores()
+        }
+
+        button_sorting.setOnClickListener {
+            val sortingBottomSheetDialog = CoresSortingBottomSheetFragment()
+
+            sortingBottomSheetDialog.show(
+                childFragmentManager,
+                CoresSortingBottomSheetFragment.TAG
+            )
         }
     }
 

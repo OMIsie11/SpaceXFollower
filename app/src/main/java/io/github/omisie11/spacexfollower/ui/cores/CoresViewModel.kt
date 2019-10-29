@@ -16,15 +16,59 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
     private val _areCoresLoading: LiveData<Boolean> by lazy { repository.getCoresLoadingStatus() }
     private val _snackBar: MutableLiveData<String> = repository.getCoresSnackbar()
 
+    private val _sortingOrder = MutableLiveData<CoresSortingOrder>()
+
     init {
+        _sortingOrder.value = CoresSortingOrder.BY_SERIAL_NEWEST
+
         uiScope.launch(Dispatchers.Default) {
             repository.getAllCoresFlow()
-                .collect { cores ->
-                    allCores.postValue(cores.sortedByDescending { it._id }) }
+                .collect { cores -> sortAndSetCores(cores)
+//                    allCores.postValue(cores.sortedByDescending { it._id })
+//                    allCores.postValue(when {
+//                        _sortingOrder.value == CoresSortingOrder.BY_SERIAL_NEWEST -> {
+//                            cores.sortedByDescending { it._id }
+//                        }
+//                        _sortingOrder.value == CoresSortingOrder.BY_SERIAL_OLDEST -> {
+//                            cores.sortedBy { it._id }
+//                        }
+//                        else -> cores.sortedByDescending { it._id }
+//                    })
+                }
         }
     }
 
+    fun sortAndSetCores(cores: List<Core>) {
+        allCores.postValue(when {
+            _sortingOrder.value == CoresSortingOrder.BY_SERIAL_NEWEST -> {
+                cores.sortedByDescending { it._id }
+            }
+            _sortingOrder.value == CoresSortingOrder.BY_SERIAL_OLDEST -> {
+                cores.sortedBy { it._id }
+            }
+            else -> cores.sortedByDescending { it._id }
+        })
+    }
+
     fun getCores(): LiveData<List<Core>> = allCores
+
+    fun getCoresSortingOrder(): LiveData<CoresSortingOrder> = _sortingOrder
+
+    fun setCoresSortingOrder(sortingOrder: CoresSortingOrder) {
+        _sortingOrder.value = sortingOrder
+        uiScope.launch(Dispatchers.Default) {
+            if (allCores.value != null) sortAndSetCores(allCores.value!!)
+//            allCores.postValue(when {
+//                _sortingOrder.value == CoresSortingOrder.BY_SERIAL_NEWEST -> {
+//                    allCores.value?.sortedByDescending { it._id }
+//                }
+//                _sortingOrder.value == CoresSortingOrder.BY_SERIAL_OLDEST -> {
+//                    allCores.value?.sortedBy { it._id }
+//                }
+//                else -> allCores.value?.sortedByDescending { it._id }
+//            })
+        }
+    }
 
     fun getCoresLoadingStatus(): LiveData<Boolean> = _areCoresLoading
 
@@ -54,4 +98,6 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
         // Cancel running coroutines in repository
         viewModelJob.cancel()
     }
+
+    enum class CoresSortingOrder { BY_SERIAL_NEWEST, BY_SERIAL_OLDEST }
 }
