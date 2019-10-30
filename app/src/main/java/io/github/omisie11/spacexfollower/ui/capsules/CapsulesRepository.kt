@@ -9,6 +9,7 @@ import io.github.omisie11.spacexfollower.network.SpaceService
 import io.github.omisie11.spacexfollower.util.KEY_CAPSULES_LAST_REFRESH
 import io.github.omisie11.spacexfollower.util.PREFS_KEY_REFRESH_INTERVAL
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.IOException
@@ -28,12 +29,8 @@ class CapsulesRepository(
         areCapsulesLoading.value = false
     }
 
-    // Wrapper for getting all capsules from Db
-    fun getCapsulesOrderBySerialDesc(): LiveData<List<Capsule>> =
-        capsulesDao.getAllCapsulesOrderBySerialDesc()
-
-    fun getCapsulesOrderBySerialAsc(): LiveData<List<Capsule>> =
-        capsulesDao.getAllCapsulesOrderBySerialAsc()
+    fun getAllCapsulesFlow(): Flow<List<Capsule>> =
+        capsulesDao.getAllCapsulesFlow()
 
     suspend fun deleteAllCapsules() =
         withContext(Dispatchers.IO) { capsulesDao.deleteAllCapsules() }

@@ -41,6 +41,7 @@ dependencies {
     // Room
     implementation "androidx.room:room-runtime:$rootProject.room_version"
     kapt "androidx.room:room-compiler:$rootProject.room_version"
+    implementation "androidx.room:room-ktx:$rootProject.room_version"
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycle_version"
@@ -77,6 +78,8 @@ dependencies {
     // Koin
     testImplementation "org.koin:koin-test:$rootProject.koin_version"
     testImplementation "junit:junit:$rootProject.junit_version"
+    // Coroutines test
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.coroutines_android_version"
     // Leak Canary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leak_canary_version"
 }

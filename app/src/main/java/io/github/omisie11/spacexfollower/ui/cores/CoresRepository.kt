@@ -9,6 +9,7 @@ import io.github.omisie11.spacexfollower.network.SpaceService
 import io.github.omisie11.spacexfollower.util.KEY_CORES_LAST_REFRESH
 import io.github.omisie11.spacexfollower.util.PREFS_KEY_REFRESH_INTERVAL
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.IOException
@@ -26,7 +27,7 @@ class CoresRepository(
         areCoresLoading.value = false
     }
 
-    fun getCores(): LiveData<List<Core>> = coresDao.getAllCores()
+    fun getAllCoresFlow(): Flow<List<Core>> = coresDao.getAllCoresFlow()
 
     suspend fun deleteAllCores() = withContext(Dispatchers.IO) { coresDao.deleteAllCores() }
 
