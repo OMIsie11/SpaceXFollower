@@ -23,31 +23,8 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
 
         uiScope.launch(Dispatchers.Default) {
             repository.getAllCoresFlow()
-                .collect { cores -> sortAndSetCores(cores)
-//                    allCores.postValue(cores.sortedByDescending { it._id })
-//                    allCores.postValue(when {
-//                        _sortingOrder.value == CoresSortingOrder.BY_SERIAL_NEWEST -> {
-//                            cores.sortedByDescending { it._id }
-//                        }
-//                        _sortingOrder.value == CoresSortingOrder.BY_SERIAL_OLDEST -> {
-//                            cores.sortedBy { it._id }
-//                        }
-//                        else -> cores.sortedByDescending { it._id }
-//                    })
-                }
+                .collect { cores -> sortAndSetCores(cores) }
         }
-    }
-
-    fun sortAndSetCores(cores: List<Core>) {
-        allCores.postValue(when {
-            _sortingOrder.value == CoresSortingOrder.BY_SERIAL_NEWEST -> {
-                cores.sortedByDescending { it._id }
-            }
-            _sortingOrder.value == CoresSortingOrder.BY_SERIAL_OLDEST -> {
-                cores.sortedBy { it._id }
-            }
-            else -> cores.sortedByDescending { it._id }
-        })
     }
 
     fun getCores(): LiveData<List<Core>> = allCores
@@ -58,15 +35,6 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
         _sortingOrder.value = sortingOrder
         uiScope.launch(Dispatchers.Default) {
             if (allCores.value != null) sortAndSetCores(allCores.value!!)
-//            allCores.postValue(when {
-//                _sortingOrder.value == CoresSortingOrder.BY_SERIAL_NEWEST -> {
-//                    allCores.value?.sortedByDescending { it._id }
-//                }
-//                _sortingOrder.value == CoresSortingOrder.BY_SERIAL_OLDEST -> {
-//                    allCores.value?.sortedBy { it._id }
-//                }
-//                else -> allCores.value?.sortedByDescending { it._id }
-//            })
         }
     }
 
@@ -91,6 +59,18 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
      */
     fun onSnackbarShown() {
         _snackBar.value = null
+    }
+
+    private fun sortAndSetCores(cores: List<Core>) {
+        allCores.postValue(when {
+            _sortingOrder.value == CoresSortingOrder.BY_SERIAL_NEWEST -> {
+                cores.sortedByDescending { it._id }
+            }
+            _sortingOrder.value == CoresSortingOrder.BY_SERIAL_OLDEST -> {
+                cores.sortedBy { it._id }
+            }
+            else -> cores.sortedByDescending { it._id }
+        })
     }
 
     override fun onCleared() {

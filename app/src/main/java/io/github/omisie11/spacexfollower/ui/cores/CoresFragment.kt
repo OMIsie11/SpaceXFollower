@@ -72,8 +72,11 @@ class CoresFragment : Fragment(), CoresAdapter.OnItemClickListener {
 
         viewModel.getCoresSortingOrder().observe(viewLifecycleOwner, Observer { sortingOrder ->
             button_sorting.text = when (sortingOrder) {
-                CoresViewModel.CoresSortingOrder.BY_SERIAL_NEWEST -> "Serial: newest"
-                CoresViewModel.CoresSortingOrder.BY_SERIAL_OLDEST -> "Serial: oldest"
+                CoresViewModel.CoresSortingOrder.BY_SERIAL_NEWEST ->
+                    getString(R.string.serial_newest)
+                CoresViewModel.CoresSortingOrder.BY_SERIAL_OLDEST ->
+                    getString(R.string.serial_oldest)
+                else -> getString(R.string.serial_oldest)
             }
         })
 

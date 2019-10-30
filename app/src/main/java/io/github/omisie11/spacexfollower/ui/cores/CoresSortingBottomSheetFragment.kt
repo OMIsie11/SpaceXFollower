@@ -26,17 +26,35 @@ class CoresSortingBottomSheetFragment : BottomSheetDialogFragment() {
 
         viewModel.getCoresSortingOrder().observe(viewLifecycleOwner, Observer { sortingOrder ->
             selectedSorting = sortingOrder
+
+            when (selectedSorting) {
+                CoresViewModel.CoresSortingOrder.BY_SERIAL_NEWEST -> radio_group_sorting.check(
+                    radio_button_serial_newest.id
+                )
+                CoresViewModel.CoresSortingOrder.BY_SERIAL_OLDEST -> radio_group_sorting.check(
+                    radio_button_serial_oldest.id
+                )
+            }
         })
 
-        button_sorting_serial_newest.setOnClickListener {
-            viewModel.setCoresSortingOrder(CoresViewModel.CoresSortingOrder.BY_SERIAL_NEWEST)
-            dismiss()
+        radio_group_sorting.check(radio_button_serial_newest.id)
+        radio_group_sorting.setOnCheckedChangeListener { group, checkedId ->
+            when (group.checkedRadioButtonId) {
+                radio_button_serial_newest.id -> {
+                    viewModel.setCoresSortingOrder(
+                        CoresViewModel
+                            .CoresSortingOrder.BY_SERIAL_NEWEST
+                    )
+                }
+                radio_button_serial_oldest.id -> {
+                    viewModel.setCoresSortingOrder(
+                        CoresViewModel
+                            .CoresSortingOrder.BY_SERIAL_OLDEST
+                    )
+                }
+            }
+            if (isVisible) dismiss()
         }
-        button_sorting_serial_oldest.setOnClickListener {
-            viewModel.setCoresSortingOrder(CoresViewModel.CoresSortingOrder.BY_SERIAL_OLDEST)
-            dismiss()
-        }
-
     }
 
     companion object {
