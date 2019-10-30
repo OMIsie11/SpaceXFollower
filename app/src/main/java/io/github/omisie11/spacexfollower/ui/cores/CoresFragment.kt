@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Core
-import kotlinx.android.synthetic.main.fragment_cores_recycler.*
+import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel.CoresSortingOrder
 import kotlinx.android.synthetic.main.fragment_recycler.recyclerView
 import kotlinx.android.synthetic.main.fragment_recycler.swipeRefreshLayout
+import kotlinx.android.synthetic.main.fragment_recycler_sorting.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
@@ -29,7 +30,7 @@ class CoresFragment : Fragment(), CoresAdapter.OnItemClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_cores_recycler, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_recycler_sorting, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -72,10 +73,8 @@ class CoresFragment : Fragment(), CoresAdapter.OnItemClickListener {
 
         viewModel.getCoresSortingOrder().observe(viewLifecycleOwner, Observer { sortingOrder ->
             button_sorting.text = when (sortingOrder) {
-                CoresViewModel.CoresSortingOrder.BY_SERIAL_NEWEST ->
-                    getString(R.string.serial_newest)
-                CoresViewModel.CoresSortingOrder.BY_SERIAL_OLDEST ->
-                    getString(R.string.serial_oldest)
+                CoresSortingOrder.BY_SERIAL_NEWEST -> getString(R.string.serial_newest)
+                CoresSortingOrder.BY_SERIAL_OLDEST -> getString(R.string.serial_oldest)
                 else -> getString(R.string.serial_oldest)
             }
         })

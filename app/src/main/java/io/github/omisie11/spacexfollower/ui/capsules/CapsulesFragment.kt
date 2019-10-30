@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Capsule
-import io.github.omisie11.spacexfollower.ui.capsules.CapsulesViewModel.CapsulesSortOrder
-import kotlinx.android.synthetic.main.fragment_capsules_recycler.*
+import io.github.omisie11.spacexfollower.ui.capsules.CapsulesViewModel.CapsulesSortingOrder
 import kotlinx.android.synthetic.main.fragment_recycler.recyclerView
 import kotlinx.android.synthetic.main.fragment_recycler.swipeRefreshLayout
+import kotlinx.android.synthetic.main.fragment_recycler_sorting.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
@@ -30,7 +30,7 @@ class CapsulesFragment : Fragment(), CapsulesAdapter.OnItemClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_capsules_recycler, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_recycler_sorting, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,30 +71,27 @@ class CapsulesFragment : Fragment(), CapsulesAdapter.OnItemClickListener {
             }
         })
 
+        viewModel.getCapsulesSortingOrder().observe(viewLifecycleOwner, Observer { sortingOrder ->
+            button_sorting.text = when (sortingOrder) {
+                CapsulesSortingOrder.BY_SERIAL_NEWEST -> getString(R.string.serial_newest)
+                CapsulesSortingOrder.BY_SERIAL_OLDEST -> getString(R.string.serial_oldest)
+                else -> getString(R.string.serial_oldest)
+            }
+        })
+
         // Swipe to refresh
         swipeRefreshLayout.setOnRefreshListener {
             Timber.i("onRefresh called from SwipeRefreshLayout")
             viewModel.refreshCapsules()
         }
 
-        chip_group.check(R.id.chip_serial_oldest)
-        chip_group.setOnCheckedChangeListener { group, checkedId ->
-            // Set clickable chips, prevent uncheck checked Chip
-            for (i in 0 until group.childCount) {
-                val chip = group.getChildAt(i)
-                chip.isClickable = chip.id != group.checkedChipId
-            }
+        button_sorting.setOnClickListener {
+            val sortingBottomSheetDialog = CapsulesSortingBottomSheetFragment()
 
-            when (checkedId) {
-                R.id.chip_serial_newest -> viewModel.changeCapsulesSorting(
-                    CapsulesSortOrder.BY_SERIAL_DESC
-                )
-                R.id.chip_serial_oldest -> viewModel.changeCapsulesSorting(
-                    CapsulesSortOrder.BY_SERIAL_ASC
-                )
-                // -1 means chip got unchecked
-                -1 -> viewModel.changeCapsulesSorting(CapsulesSortOrder.BY_SERIAL_ASC)
-            }
+            sortingBottomSheetDialog.show(
+                childFragmentManager,
+                CapsulesSortingBottomSheetFragment.TAG
+            )
         }
     }
 
