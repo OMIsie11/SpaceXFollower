@@ -7,6 +7,7 @@ import io.github.omisie11.spacexfollower.data.model.LaunchPad
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class LaunchPadsViewModel(private val repository: LaunchPadsRepository) : ViewModel() {
@@ -14,9 +15,17 @@ class LaunchPadsViewModel(private val repository: LaunchPadsRepository) : ViewMo
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val allLaunchPads: LiveData<List<LaunchPad>> by lazy { repository.getLaunchPads() }
+    private val allLaunchPads: MutableLiveData<List<LaunchPad>> = MutableLiveData()
     private val _isDataLoading: LiveData<Boolean> by lazy { repository.getDataLoadingStatus() }
     private val _snackBar: MutableLiveData<String> = repository.getLaunchPadsSnackbar()
+
+    init {
+        uiScope.launch(Dispatchers.Default) {
+            repository.getLaunchPadsFlow().collect {launchPads ->
+                allLaunchPads.postValue(launchPads)
+            }
+        }
+    }
 
     fun getLaunchPads(): LiveData<List<LaunchPad>> = allLaunchPads
 

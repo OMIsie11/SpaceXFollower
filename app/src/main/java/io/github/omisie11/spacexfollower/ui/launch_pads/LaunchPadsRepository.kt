@@ -9,6 +9,7 @@ import io.github.omisie11.spacexfollower.network.SpaceService
 import io.github.omisie11.spacexfollower.util.KEY_LAUNCH_PADS_LAST_REFRESH
 import io.github.omisie11.spacexfollower.util.PREFS_KEY_REFRESH_INTERVAL
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.IOException
@@ -26,7 +27,7 @@ class LaunchPadsRepository(
         areLaunchPadsLoading.value = false
     }
 
-    fun getLaunchPads(): LiveData<List<LaunchPad>> = launchPadsDao.getLaunchPads()
+    fun getLaunchPadsFlow(): Flow<List<LaunchPad>> = launchPadsDao.getLaunchPadsFlow()
 
     suspend fun deleteLaunchPadsData() =
         withContext(Dispatchers.IO) { launchPadsDao.deleteLaunchPadsData() }
@@ -68,7 +69,7 @@ class LaunchPadsRepository(
         val response = spaceService.getLaunchPads()
         if (response.isSuccessful) {
             Timber.d("Response SUCCESSFUL")
-            response.body()?.let { launchPadsDao.insertLaunchPads(it) }
+            response.body()?.let { launchPadsDao.replaceLaunchPads(it) }
             // Save data last refresh time
             with(sharedPrefs.edit()) {
                 putLong(KEY_LAUNCH_PADS_LAST_REFRESH, System.currentTimeMillis())
