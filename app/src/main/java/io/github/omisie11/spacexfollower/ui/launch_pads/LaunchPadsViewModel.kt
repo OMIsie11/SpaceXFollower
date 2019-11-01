@@ -21,7 +21,7 @@ class LaunchPadsViewModel(private val repository: LaunchPadsRepository) : ViewMo
 
     init {
         uiScope.launch(Dispatchers.Default) {
-            repository.getLaunchPadsFlow().collect {launchPads ->
+            repository.getLaunchPadsFlow().collect { launchPads ->
                 allLaunchPads.postValue(launchPads)
             }
         }
