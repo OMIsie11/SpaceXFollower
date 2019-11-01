@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.ui.upcoming_launches
+package io.github.omisie11.spacexfollower.ui.launches
 
 import android.view.LayoutInflater
 import android.view.View

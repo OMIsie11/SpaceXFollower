@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.ui.upcoming_launches
+package io.github.omisie11.spacexfollower.ui.launches
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,18 +6,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
+import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
-import kotlinx.android.synthetic.main.upcoming_launches_recycler_item.view.*
+import kotlinx.android.synthetic.main.launches_recycler_item.view.*
 
-class UpcomingLaunchesAdapter(private val itemClickListener: OnItemClickListener) :
-    RecyclerView.Adapter<UpcomingLaunchesAdapter.ViewHolder>() {
+class LaunchesAdapter(private val itemClickListener: OnItemClickListener) :
+    RecyclerView.Adapter<LaunchesAdapter.ViewHolder>() {
 
-    private var launchesList: List<UpcomingLaunch> = emptyList()
+    private var launchesList: List<Launch> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
         LayoutInflater.from(parent.context)
-            .inflate(R.layout.upcoming_launches_recycler_item, parent, false)
+            .inflate(R.layout.launches_recycler_item, parent, false)
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -32,7 +32,7 @@ class UpcomingLaunchesAdapter(private val itemClickListener: OnItemClickListener
         private val missionNameTextView: TextView = itemView.text_mission_name
         private val launchSiteTextView: TextView = itemView.text_launch_site
 
-        fun bind(launch: UpcomingLaunch, itemClickListener: OnItemClickListener) {
+        fun bind(launch: Launch, itemClickListener: OnItemClickListener) {
             flightNumberTextView.text = itemView.context.resources.getString(
                 R.string.flight_number_template,
                 launch.flightNumber
@@ -51,7 +51,7 @@ class UpcomingLaunchesAdapter(private val itemClickListener: OnItemClickListener
         }
     }
 
-    fun setData(data: List<UpcomingLaunch>) {
+    fun setData(data: List<Launch>) {
         launchesList = data
         notifyDataSetChanged()
     }

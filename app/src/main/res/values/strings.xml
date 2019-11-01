@@ -14,7 +14,7 @@
     <string name="label_settings">Settings</string>
     <string name="label_capsule_detail">Capsule Detail</string>
     <string name="label_core_detail">Core Detail</string>
-    <string name="label_upcoming_launches">Upcoming Launches</string>
+    <string name="label_all_launches">All Launches</string>
     <string name="label_upcoming_launches_detail">Launch Detail</string>
     <string name="label_launch_pads">Launch Pads</string>
     <string name="label_about">About</string>

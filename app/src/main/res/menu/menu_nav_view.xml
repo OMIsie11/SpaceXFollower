@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@id/upcoming_launches_dest"
+        android:id="@id/launches_dest"
         android:checkable="true"
-        android:title="@string/label_upcoming_launches" />
+        android:title="@string/label_all_launches" />
 
     <item
         android:id="@id/capsules_dest"

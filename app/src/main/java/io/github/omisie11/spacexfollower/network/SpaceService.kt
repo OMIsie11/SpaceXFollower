@@ -1,7 +1,7 @@
 package io.github.omisie11.spacexfollower.network
 
 import io.github.omisie11.spacexfollower.data.model.*
-import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
+import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import retrofit2.Response
 import retrofit2.http.GET
 
@@ -20,8 +20,8 @@ interface SpaceService {
     suspend fun getCompanyInfo(): Response<Company>
 
     // Upcoming Launches
-    @GET("v3/launches/upcoming")
-    suspend fun getUpcomingLaunches(): Response<List<UpcomingLaunch>>
+    @GET("v3/launches")
+    suspend fun getUpcomingLaunches(): Response<List<Launch>>
 
     @GET("v3/launchpads")
     suspend fun getLaunchPads(): Response<List<LaunchPad>>

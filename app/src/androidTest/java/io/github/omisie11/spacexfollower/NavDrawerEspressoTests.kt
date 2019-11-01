@@ -33,7 +33,7 @@ class NavDrawerEspressoTests {
             .perform(DrawerActions.open())
         // Start fragment
         onView(withId(R.id.navigation_view))
-            .perform(NavigationViewActions.navigateTo(R.id.upcoming_launches_dest))
+            .perform(NavigationViewActions.navigateTo(R.id.launches_dest))
         // Check if fragment appeared
         onView(withId(R.id.recycler_root_view))
             .check(matches(isDisplayed()))

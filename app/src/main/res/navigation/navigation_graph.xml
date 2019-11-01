@@ -3,7 +3,7 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/navigation_graph"
-            app:startDestination="@id/upcoming_launches_dest">
+            app:startDestination="@id/launches_dest">
 
     <fragment
             android:id="@+id/capsules_dest"
@@ -62,21 +62,21 @@
     </fragment>
 
     <fragment
-            android:id="@+id/upcoming_launches_dest"
-            android:name="io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesFragment"
-            android:label="@string/label_upcoming_launches"
+            android:id="@+id/launches_dest"
+            android:name="io.github.omisie11.spacexfollower.ui.launches.LaunchesFragment"
+            android:label="@string/label_all_launches"
             tools:layout="@layout/fragment_recycler">
         <action android:id="@+id/action_upcoming_launches_dest_to_upcomingLaunchesDetailFragment"
-                app:destination="@id/upcoming_launches_detail_dest"
+                app:destination="@id/launches_detail_dest"
                 app:enterAnim="@anim/nav_default_enter_anim"
                 app:exitAnim="@anim/nav_default_exit_anim"/>
     </fragment>
 
     <fragment
-            android:id="@+id/upcoming_launches_detail_dest"
-            android:name="io.github.omisie11.spacexfollower.ui.upcoming_launches.UpcomingLaunchesDetailFragment"
+            android:id="@+id/launches_detail_dest"
+            android:name="io.github.omisie11.spacexfollower.ui.launches.LaunchesDetailFragment"
             android:label="@string/label_upcoming_launches_detail"
-            tools:layout="@layout/fragment_upcoming_launches_detail">
+            tools:layout="@layout/fragment_launches_detail">
         <argument
                 android:name="itemId"
                 app:argType="integer"

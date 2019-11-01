@@ -6,10 +6,10 @@ import androidx.room.TypeConverters
 import io.github.omisie11.spacexfollower.data.converters.*
 import io.github.omisie11.spacexfollower.data.dao.*
 import io.github.omisie11.spacexfollower.data.model.*
-import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
+import io.github.omisie11.spacexfollower.data.model.launch.Launch
 
 @Database(
-    entities = [Capsule::class, Core::class, Company::class, UpcomingLaunch::class,
+    entities = [Capsule::class, Core::class, Company::class, Launch::class,
         LaunchPad::class],
     version = 3
 )

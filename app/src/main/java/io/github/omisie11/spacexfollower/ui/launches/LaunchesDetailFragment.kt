@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.ui.upcoming_launches
+package io.github.omisie11.spacexfollower.ui.launches
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,17 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.model.launch.UpcomingLaunch
+import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import io.github.omisie11.spacexfollower.util.toggleVisibility
-import kotlinx.android.synthetic.main.fragment_upcoming_launches_detail.*
-import kotlinx.android.synthetic.main.upcoming_launch_cores.view.*
+import kotlinx.android.synthetic.main.fragment_launches_detail.*
+import kotlinx.android.synthetic.main.launch_cores.view.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class UpcomingLaunchesDetailFragment : Fragment() {
+class LaunchesDetailFragment : Fragment() {
 
     private lateinit var payloadsRecyclerViewAdapter: PayloadsRecyclerAdapter
-    private val viewModel by sharedViewModel<UpcomingLaunchesViewModel>()
+    private val viewModel by sharedViewModel<LaunchesViewModel>()
     // Variable used in animating expand/collapse icon
     private var coresIconRotationAngle = 0f
     private var payloadsIconRotationAngle = 0f
@@ -34,7 +34,7 @@ class UpcomingLaunchesDetailFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(
-            R.layout.fragment_upcoming_launches_detail, container,
+            R.layout.fragment_launches_detail, container,
             false
         )
     }
@@ -42,7 +42,7 @@ class UpcomingLaunchesDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val safeArgs = arguments?.let { UpcomingLaunchesDetailFragmentArgs.fromBundle(it) }
+        val safeArgs = arguments?.let { LaunchesDetailFragmentArgs.fromBundle(it) }
         val selectedLaunchId: Int = safeArgs?.itemId ?: 0
 
         payloadsRecyclerViewAdapter = PayloadsRecyclerAdapter()
@@ -54,7 +54,7 @@ class UpcomingLaunchesDetailFragment : Fragment() {
         }
 
         viewModel.getUpcomingLaunches()
-            .observe(viewLifecycleOwner, Observer<List<UpcomingLaunch>> { launches ->
+            .observe(viewLifecycleOwner, Observer<List<Launch>> { launches ->
                 if (launches != null) {
                     val launch = launches[selectedLaunchId]
 
@@ -82,7 +82,7 @@ class UpcomingLaunchesDetailFragment : Fragment() {
                                 frame_cores_list.addView(noDataTextView)
                             } else {
                                 val coreLinearLayout = layoutInflater.inflate(
-                                    R.layout.upcoming_launch_cores,
+                                    R.layout.launch_cores,
                                     frame_cores_list, false
                                 )
                                 frame_cores_list.addView(coreLinearLayout)
