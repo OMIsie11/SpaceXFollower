@@ -50,6 +50,8 @@
     <string name="capsule_serial_oldest">Capsule serial: oldest</string>
     <string name="core_serial_newest">Core serial: newest</string>
     <string name="core_serial_oldest">Core serial: oldest</string>
+    <string name="flight_number_newest">Flight number: newest</string>
+    <string name="flight_number_oldest">Flight number: oldest</string>
     <string name="launch_site">Launch site</string>
     <string name="flight_number_template">Flight %d</string>
 

@@ -4,20 +4,35 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import io.github.omisie11.spacexfollower.data.dao.UpcomingLaunchesDao
+import io.github.omisie11.spacexfollower.data.dao.AllLaunchesDao
 import io.github.omisie11.spacexfollower.launch1
 import io.github.omisie11.spacexfollower.launch2
-import io.github.omisie11.spacexfollower.utilities.getValue
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers
-import org.junit.*
+import org.hamcrest.Matchers.equalTo
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.Executors
 
+@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 class LaunchesDaoTest {
 
     private lateinit var database: SpaceDatabase
-    private lateinit var upcomingLaunchesDao: UpcomingLaunchesDao
+    private lateinit var launchesDao: AllLaunchesDao
+
+    private val testDispatcher = TestCoroutineDispatcher()
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -25,39 +40,73 @@ class LaunchesDaoTest {
     private val testLaunchesData = listOf(launch1, launch2)
 
     @Before
-    fun createDb() {
-        val context = InstrumentationRegistry.getInstrumentation().targetContext
-        database = Room.inMemoryDatabaseBuilder(context, SpaceDatabase::class.java).build()
-        upcomingLaunchesDao = database.upcomingLaunchesDao()
+    fun setup() {
+        Dispatchers.setMain(testDispatcher)
 
-        upcomingLaunchesDao.insertUpcomingLaunches(testLaunchesData)
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        database = Room
+            .inMemoryDatabaseBuilder(context, SpaceDatabase::class.java)
+            .setTransactionExecutor(Executors.newSingleThreadExecutor())
+            .build()
+        launchesDao = database.upcomingLaunchesDao()
     }
 
     @After
-    fun closeDb() {
+    fun cleanup() {
         database.close()
+
+        Dispatchers.resetMain()
+        testDispatcher.cleanupTestCoroutines()
     }
 
     @Test
-    fun testGetUpcomingLaunches() {
-        val launchesList = getValue(upcomingLaunchesDao.getUpcomingLaunches())
-        Assert.assertThat(launchesList.size, Matchers.equalTo(testLaunchesData.size))
+    fun testInsertAndGetUpcomingLaunches() = runBlocking {
+        launchesDao.insertLaunches(testLaunchesData)
+
+        val latch = CountDownLatch(1)
+        val job = launch(Dispatchers.IO) {
+            launchesDao.getAllLaunchesFlow().collect { launches ->
+                assertThat(launches.size, equalTo(testLaunchesData.size))
+                latch.countDown()
+            }
+        }
+
+        latch.await()
+        job.cancel()
     }
 
     @Test
-    fun testReplaceLaunches() {
+    fun testReplaceLaunchesData() = runBlocking {
         // Perform action double to check if data is properly erased and there is no duplicates
-        upcomingLaunchesDao.replaceUpcomingLaunches(testLaunchesData)
-        upcomingLaunchesDao.replaceUpcomingLaunches(testLaunchesData)
+        launchesDao.replaceUpcomingLaunches(testLaunchesData)
+        launchesDao.replaceUpcomingLaunches(testLaunchesData)
 
-        val launchesList = getValue(upcomingLaunchesDao.getUpcomingLaunches())
-        Assert.assertThat(launchesList.size, Matchers.equalTo(testLaunchesData.size))
+        val latch = CountDownLatch(1)
+        val job = launch(Dispatchers.IO) {
+            launchesDao.getAllLaunchesFlow().collect { launches ->
+                assertThat(launches.size, equalTo(testLaunchesData.size))
+                latch.countDown()
+            }
+        }
+
+        latch.await()
+        job.cancel()
     }
 
     @Test
-    fun testDeleteUpcomingLaunches() {
-        upcomingLaunchesDao.deleteUpcomingLaunchesData()
-        val coresList = getValue(upcomingLaunchesDao.getUpcomingLaunches())
-        assertThat(coresList.size, Matchers.equalTo(0))
+    fun testDeleteUpcomingLaunches() = runBlocking {
+        launchesDao.insertLaunches(testLaunchesData)
+        launchesDao.deleteUpcomingLaunchesData()
+
+        val latch = CountDownLatch(1)
+        val job = launch(Dispatchers.IO) {
+            launchesDao.getAllLaunchesFlow().collect { launches ->
+                assertThat(launches.size, equalTo(0))
+                latch.countDown()
+            }
+        }
+
+        latch.await()
+        job.cancel()
     }
 }

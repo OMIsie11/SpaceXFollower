@@ -1,24 +1,24 @@
 package io.github.omisie11.spacexfollower.data.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface UpcomingLaunchesDao {
+interface AllLaunchesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUpcomingLaunches(launches: List<Launch>)
+    suspend fun insertLaunches(launches: List<Launch>)
 
     @Transaction
-    fun replaceUpcomingLaunches(launches: List<Launch>) {
+    suspend fun replaceUpcomingLaunches(launches: List<Launch>) {
         deleteUpcomingLaunchesData()
-        insertUpcomingLaunches(launches)
+        insertLaunches(launches)
     }
 
     @Query("SELECT * FROM upcoming_launches_table")
-    fun getUpcomingLaunches(): LiveData<List<Launch>>
+    fun getAllLaunchesFlow(): Flow<List<Launch>>
 
     @Query("DELETE FROM upcoming_launches_table")
-    fun deleteUpcomingLaunchesData()
+    suspend fun deleteUpcomingLaunchesData()
 }

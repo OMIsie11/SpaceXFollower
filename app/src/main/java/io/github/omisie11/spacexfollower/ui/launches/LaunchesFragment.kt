@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
-import kotlinx.android.synthetic.main.fragment_recycler.*
+import kotlinx.android.synthetic.main.fragment_recycler.recyclerView
+import kotlinx.android.synthetic.main.fragment_recycler.swipeRefreshLayout
+import kotlinx.android.synthetic.main.fragment_recycler_sorting.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
@@ -27,7 +29,7 @@ class LaunchesFragment : Fragment(), LaunchesAdapter.OnItemClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_recycler, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_recycler_sorting, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,10 +48,9 @@ class LaunchesFragment : Fragment(), LaunchesAdapter.OnItemClickListener {
         }
 
         // ViewModel setup
-        viewModel.getUpcomingLaunches()
-            .observe(viewLifecycleOwner, Observer<List<Launch>> { launches ->
-                if (launches != null) viewAdapter.setData(launches)
-            })
+        viewModel.getAllLaunches().observe(viewLifecycleOwner, Observer<List<Launch>> { launches ->
+            if (launches != null) viewAdapter.setData(launches)
+        })
 
         // Observe if data is refreshing and show/hide loading indicator
         viewModel.getLaunchesLoadingStatus()
@@ -63,16 +64,35 @@ class LaunchesFragment : Fragment(), LaunchesAdapter.OnItemClickListener {
                 Snackbar.make(swipeRefreshLayout, text, Snackbar.LENGTH_LONG).setAction(
                     getString(R.string.snackbar_action_retry)
                 ) {
-                    viewModel.refreshUpcomingLaunches()
+                    viewModel.refreshAllLaunches()
                 }.show()
                 viewModel.onSnackbarShown()
+            }
+        })
+
+        viewModel.getLaunchesSortingOrder().observe(viewLifecycleOwner, Observer { sortingOrder ->
+            button_sorting.text = when (sortingOrder) {
+                LaunchesViewModel.LaunchesSortingOrder.BY_FLIGHT_NUMBER_NEWEST ->
+                    getString(R.string.flight_number_newest)
+                LaunchesViewModel.LaunchesSortingOrder.BY_FLIGHT_NUMBER_OLDEST ->
+                    getString(R.string.flight_number_oldest)
+                else -> getString(R.string.flight_number_newest)
             }
         })
 
         // Swipe to refresh
         swipeRefreshLayout.setOnRefreshListener {
             Timber.i("onRefresh called from SwipeRefreshLayout")
-            viewModel.refreshUpcomingLaunches()
+            viewModel.refreshAllLaunches()
+        }
+
+        button_sorting.setOnClickListener {
+            val sortingBottomSheetDialog = LaunchesSortingBottomSheetFragment()
+
+            sortingBottomSheetDialog.show(
+                childFragmentManager,
+                LaunchesSortingBottomSheetFragment.TAG
+            )
         }
     }
 
@@ -101,7 +121,7 @@ class LaunchesFragment : Fragment(), LaunchesAdapter.OnItemClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_refresh -> {
-            viewModel.refreshUpcomingLaunches()
+            viewModel.refreshAllLaunches()
             true
         }
         R.id.action_delete -> {

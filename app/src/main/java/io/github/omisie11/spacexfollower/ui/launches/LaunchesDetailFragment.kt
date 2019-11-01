@@ -53,7 +53,7 @@ class LaunchesDetailFragment : Fragment() {
             adapter = payloadsRecyclerViewAdapter
         }
 
-        viewModel.getUpcomingLaunches()
+        viewModel.getAllLaunches()
             .observe(viewLifecycleOwner, Observer<List<Launch>> { launches ->
                 if (launches != null) {
                     val launch = launches[selectedLaunchId]

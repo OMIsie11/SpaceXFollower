@@ -3,18 +3,19 @@ package io.github.omisie11.spacexfollower.ui.launches
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import io.github.omisie11.spacexfollower.data.dao.UpcomingLaunchesDao
+import io.github.omisie11.spacexfollower.data.dao.AllLaunchesDao
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import io.github.omisie11.spacexfollower.network.SpaceService
 import io.github.omisie11.spacexfollower.util.KEY_UPCOMING_LAUNCHES_LAST_REFRESH
 import io.github.omisie11.spacexfollower.util.PREFS_KEY_REFRESH_INTERVAL
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.IOException
 
 class LaunchesRepository(
-    private val upcomingLaunchesDao: UpcomingLaunchesDao,
+    private val allLaunchesDao: AllLaunchesDao,
     private val spaceService: SpaceService,
     private val sharedPrefs: SharedPreferences
 ) {
@@ -29,10 +30,10 @@ class LaunchesRepository(
     }
 
     // Wrapper for getting all capsules from Db
-    fun getUpcomingLaunches(): LiveData<List<Launch>> = upcomingLaunchesDao.getUpcomingLaunches()
+    fun getAllLaunchesFlow(): Flow<List<Launch>> = allLaunchesDao.getAllLaunchesFlow()
 
     suspend fun deleteAllUpcomingLaunches() =
-        withContext(Dispatchers.IO) { upcomingLaunchesDao.deleteUpcomingLaunchesData() }
+        withContext(Dispatchers.IO) { allLaunchesDao.deleteUpcomingLaunchesData() }
 
     fun getLaunchesLoadingStatus(): LiveData<Boolean> = areLaunchesLoading
 
@@ -51,7 +52,7 @@ class LaunchesRepository(
     suspend fun refreshUpcomingLaunches() {
         // Start loading process
         areLaunchesLoading.value = true
-        Timber.d("refreshUpcomingLaunches called")
+        Timber.d("refreshAllLaunches called")
         withContext(Dispatchers.IO) {
             try {
                 fetchLaunchesAndSaveToDb()
@@ -73,7 +74,7 @@ class LaunchesRepository(
         val response = spaceService.getUpcomingLaunches()
         if (response.isSuccessful) {
             Timber.d("Response SUCCESSFUL")
-            response.body()?.let { upcomingLaunchesDao.replaceUpcomingLaunches(it) }
+            response.body()?.let { allLaunchesDao.replaceUpcomingLaunches(it) }
             // Save new launches last refresh time
             with(sharedPrefs.edit()) {
                 putLong(KEY_UPCOMING_LAUNCHES_LAST_REFRESH, System.currentTimeMillis())
