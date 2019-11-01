@@ -1,5 +1,7 @@
 package io.github.omisie11.spacexfollower.ui.launch_pads
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -12,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
-class LaunchPadsFragment : Fragment() {
+class LaunchPadsFragment : Fragment(), LaunchPadsAdapter.OnItemClickListener {
 
     private lateinit var viewAdapter: LaunchPadsAdapter
     private val viewModel: LaunchPadsViewModel by sharedViewModel()
@@ -32,7 +34,7 @@ class LaunchPadsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Setup recyclerView
-        viewAdapter = LaunchPadsAdapter()
+        viewAdapter = LaunchPadsAdapter(this)
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
@@ -84,6 +86,18 @@ class LaunchPadsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         recyclerView.adapter = null
+    }
+
+    override fun onItemClicked(launchPadCoordinates: Triple<Double, Double, String>) {
+        // Google Maps expects name of location with spaces replaced with '+'
+        val locationName = launchPadCoordinates.third.replace(" ", "+")
+        val mapUri = Uri.parse(
+            "geo:${launchPadCoordinates.first},${launchPadCoordinates.second}" +
+                    "?q=$locationName"
+        )
+        val mapIntent =
+            Intent(Intent.ACTION_VIEW, mapUri).apply { setPackage("com.google.android.apps.maps") }
+        startActivity(mapIntent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
