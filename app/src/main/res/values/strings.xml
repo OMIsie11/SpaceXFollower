@@ -11,6 +11,7 @@
     <string name="label_capsules">Capsules</string>
     <string name="label_cores">Cores</string>
     <string name="label_company">Company</string>
+    <string name="label_dashboard">Dashboard</string>
     <string name="label_settings">Settings</string>
     <string name="label_capsule_detail">Capsule Detail</string>
     <string name="label_core_detail">Core Detail</string>
@@ -136,5 +137,6 @@
     <string name="get_the_app_source_code_on_github">Get the app source code on GitHub</string>
     <string name="customers_payloads">Customers:</string>
     <string name="attribution_used_libraries">Click here to check out awesome libraries that helped with making this app.</string>
+    <string name="launches">Launches</string>
 
 </resources>

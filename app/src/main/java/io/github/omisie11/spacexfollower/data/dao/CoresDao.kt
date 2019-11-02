@@ -19,6 +19,9 @@ interface CoresDao {
     @Query("SELECT * FROM cores_table")
     fun getAllCoresFlow(): Flow<List<Core>>
 
+    @Query("SELECT COUNT(_id) FROM cores_table")
+    fun getNumberOfCoresFlow(): Flow<Int>
+
     @Query("DELETE FROM cores_table")
     suspend fun deleteAllCores()
 }

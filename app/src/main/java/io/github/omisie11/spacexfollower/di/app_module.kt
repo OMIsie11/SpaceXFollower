@@ -11,6 +11,8 @@ import io.github.omisie11.spacexfollower.ui.company.CompanyRepository
 import io.github.omisie11.spacexfollower.ui.company.CompanyViewModel
 import io.github.omisie11.spacexfollower.ui.cores.CoresRepository
 import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel
+import io.github.omisie11.spacexfollower.ui.dashboard.DashboardRepository
+import io.github.omisie11.spacexfollower.ui.dashboard.DashboardViewModel
 import io.github.omisie11.spacexfollower.ui.launch_pads.LaunchPadsRepository
 import io.github.omisie11.spacexfollower.ui.launch_pads.LaunchPadsViewModel
 import io.github.omisie11.spacexfollower.ui.launches.LaunchesRepository
@@ -108,6 +110,13 @@ val launchPadsModule = module {
     single { LaunchPadsRepository(get(), get(), get()) }
 
     viewModel { LaunchPadsViewModel(get()) }
+}
+
+val dashboardModule = module {
+
+    single { DashboardRepository(get(), get(), get()) }
+
+    viewModel { DashboardViewModel(get()) }
 }
 
 val aboutModule = module {

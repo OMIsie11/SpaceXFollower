@@ -96,7 +96,7 @@ class LaunchesDaoTest {
     @Test
     fun testDeleteUpcomingLaunches() = runBlocking {
         launchesDao.insertLaunches(testLaunchesData)
-        launchesDao.deleteUpcomingLaunchesData()
+        launchesDao.deleteLaunchesData()
 
         val latch = CountDownLatch(1)
         val job = launch(Dispatchers.IO) {

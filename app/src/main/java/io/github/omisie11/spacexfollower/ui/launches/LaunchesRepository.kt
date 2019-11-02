@@ -33,7 +33,7 @@ class LaunchesRepository(
     fun getAllLaunchesFlow(): Flow<List<Launch>> = allLaunchesDao.getAllLaunchesFlow()
 
     suspend fun deleteAllUpcomingLaunches() =
-        withContext(Dispatchers.IO) { allLaunchesDao.deleteUpcomingLaunchesData() }
+        withContext(Dispatchers.IO) { allLaunchesDao.deleteLaunchesData() }
 
     fun getLaunchesLoadingStatus(): LiveData<Boolean> = areLaunchesLoading
 

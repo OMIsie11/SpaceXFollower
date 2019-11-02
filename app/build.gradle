@@ -56,6 +56,8 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.nav_version"
     // Timber
     implementation "com.jakewharton.timber:timber:$rootProject.timber_version"
+    // MPAndroidChart
+    implementation "com.github.PhilJay:MPAndroidChart:$rootProject.mpandroidchart_version"
 
     implementation "com.airbnb.android:lottie:$rootProject.lottie_version"
     // Testing dependencies
