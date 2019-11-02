@@ -136,5 +136,6 @@
     <string name="get_the_app_source_code_on_github">Get the app source code on GitHub</string>
     <string name="customers_payloads">Customers:</string>
     <string name="attribution_used_libraries">Click here to check out awesome libraries that helped with making this app.</string>
+    <string name="show_headquarters_location_in_google_maps">Show headquarters location in Google Maps</string>
 
 </resources>

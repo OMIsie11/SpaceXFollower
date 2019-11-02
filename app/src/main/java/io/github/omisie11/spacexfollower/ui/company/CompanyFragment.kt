@@ -20,6 +20,8 @@ import timber.log.Timber
 class CompanyFragment : Fragment() {
 
     private val viewModel: CompanyViewModel by viewModel()
+    // Used to build an intent to Google Maps (default value)
+    private var spaceXLocation = "SpaceX+Rocket+Road+Hawthorne+California"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +62,9 @@ class CompanyFragment : Fragment() {
                 text_address.text = companyInfo.headquarters.address
                 text_city.text = companyInfo.headquarters.city
                 text_state.text = companyInfo.headquarters.state
+
+                spaceXLocation = "SpaceX ${companyInfo.headquarters.address} " +
+                        "${companyInfo.headquarters.city} ${companyInfo.headquarters.state}"
             }
         })
 
@@ -87,11 +92,24 @@ class CompanyFragment : Fragment() {
         }
 
         val attributionBottomSheetDialog = BottomSheetDialog(activity!!)
-        val sheetView = activity!!.layoutInflater.inflate(R.layout.bottom_sheet_attribution, null)
+        val sheetView = activity!!.layoutInflater.inflate(
+            R.layout.bottom_sheet_attribution, null
+        )
         attributionBottomSheetDialog.setContentView(sheetView)
 
         image_logo.setOnClickListener { attributionBottomSheetDialog.show() }
-        sheetView.text_attribution.setOnClickListener { openWebUrl(getString(R.string.lottie_files_url_dongdona)) }
+        sheetView.text_attribution.setOnClickListener {
+            openWebUrl(getString(R.string.lottie_files_url_dongdona))
+        }
+
+        image_location_pin.setOnClickListener {
+            // Google Maps expects name of location with spaces replaced with '+'
+            val location = spaceXLocation.replace(" ", "+")
+            val mapUri = Uri.parse("geo:0,0?q=$location")
+            val mapIntent = Intent(Intent.ACTION_VIEW, mapUri)
+                .apply { setPackage("com.google.android.apps.maps") }
+            startActivity(mapIntent)
+        }
     }
 
     override fun onResume() {
@@ -116,6 +134,11 @@ class CompanyFragment : Fragment() {
     }
 
     private fun openWebUrl(urlAddress: String) {
-        if (urlAddress.isNotEmpty()) startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlAddress)))
+        if (urlAddress.isNotEmpty()) startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(urlAddress)
+            )
+        )
     }
 }
