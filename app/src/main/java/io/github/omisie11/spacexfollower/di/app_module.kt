@@ -114,7 +114,7 @@ val launchPadsModule = module {
 
 val dashboardModule = module {
 
-    single { DashboardRepository(get(), get(), get()) }
+    single { DashboardRepository(get(), get(), get(), get(), get(), get()) }
 
     viewModel { DashboardViewModel(get()) }
 }
