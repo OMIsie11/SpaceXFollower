@@ -45,6 +45,7 @@ class DashboardRepository(
         coresRepository.refreshCores()
     }
 
+    // Map list of launches to list of Entries that shows number of launches in particular months
     private fun mapLaunchesToEntriesForMonthsStats(launches: List<Launch>): List<Entry> {
         // Initialize list for entries (12 for each month of year)
         val entriesList = MutableList(12) { Entry(it.toFloat(), 0f) }

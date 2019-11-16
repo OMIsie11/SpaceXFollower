@@ -110,4 +110,20 @@ class CoresDaoTest {
         latch.await()
         job.cancel()
     }
+
+    @Test
+    fun testInsertAndGetNumberOfCores() = runBlocking {
+        coresDao.insertCores(testCoresList)
+
+        val latch = CountDownLatch(1)
+        val job = launch(Dispatchers.IO) {
+            coresDao.getNumberOfCoresFlow().collect { numberOfCores ->
+                assertThat(numberOfCores, equalTo(testCoresList.size))
+                latch.countDown()
+            }
+        }
+
+        latch.await()
+        job.cancel()
+    }
 }
