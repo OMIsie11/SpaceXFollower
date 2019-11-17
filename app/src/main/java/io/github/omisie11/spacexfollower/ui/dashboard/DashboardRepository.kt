@@ -23,7 +23,7 @@ class DashboardRepository(
     private val coresRepository: CoresRepository
 ) {
 
-    // ToDo: temporary hardcoded values for start and end of 2019
+    // ToDo: temporary hardcoded values for start and end of 2019, support more options in future
     private val startOf2019Timestamp: Long = 1546300801
     private val endOf2019Timestamp: Long = 1577836801
 
