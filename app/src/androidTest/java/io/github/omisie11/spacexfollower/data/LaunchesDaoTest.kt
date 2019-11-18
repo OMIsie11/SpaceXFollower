@@ -60,7 +60,7 @@ class LaunchesDaoTest {
     }
 
     @Test
-    fun testInsertAndGetUpcomingLaunches() = runBlocking {
+    fun testInsertAndGetAllLaunches() = runBlocking {
         launchesDao.insertLaunches(testLaunchesData)
 
         val latch = CountDownLatch(1)
@@ -111,13 +111,30 @@ class LaunchesDaoTest {
     }
 
     @Test
-    fun testInsertAndGetNumberOfCapsules() = runBlocking {
+    fun testInsertAndGetNumberOfLaunches() = runBlocking {
         launchesDao.insertLaunches(testLaunchesData)
 
         val latch = CountDownLatch(1)
         val job = launch(Dispatchers.IO) {
             launchesDao.getNumberOfLaunchesFlow().collect { numberOfLaunches ->
                 assertThat(numberOfLaunches, equalTo(testLaunchesData.size))
+                latch.countDown()
+            }
+        }
+
+        latch.await()
+        job.cancel()
+    }
+
+    @Test
+    fun testInsertAndGetLaunchesBetweenDates() = runBlocking {
+        launchesDao.insertLaunches(testLaunchesData)
+
+        val latch = CountDownLatch(1)
+        val job = launch(Dispatchers.IO) {
+            launchesDao.getLaunchesBetweenDatesFlow(1540799900, 1561512700).collect { launches ->
+                // 0 launches should be returned, because we query in different dates
+                assertThat(launches.size, equalTo(testLaunchesData.size))
                 latch.countDown()
             }
         }
