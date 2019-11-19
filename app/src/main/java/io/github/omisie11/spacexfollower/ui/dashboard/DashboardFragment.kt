@@ -5,6 +5,7 @@ import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -55,7 +56,7 @@ class DashboardFragment : Fragment() {
             setNoDataTextColor(ContextCompat.getColor(context!!, R.color.colorSecondary))
             launches_chart.legend.textColor =
                 ContextCompat.getColor(context!!, R.color.colorOnBackground)
-            launches_chart.animateXY(1000, 1000)
+            launches_chart.animateY(1000, Easing.Linear)
         }
         launches_chart.invalidate()
 
@@ -74,6 +75,12 @@ class DashboardFragment : Fragment() {
         viewModel.getNumberOfCores().observe(viewLifecycleOwner, Observer { numberOfCores ->
             text_number_of_cores.animateNumber(finalValue = numberOfCores)
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Fetch new data if last fetch was long ago
+        viewModel.refreshIfDataIsOld()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

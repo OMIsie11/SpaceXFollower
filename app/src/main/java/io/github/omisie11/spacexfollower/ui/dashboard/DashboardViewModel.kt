@@ -55,6 +55,8 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
 
     fun refreshData() = uiScope.launch { repository.refreshData() }
 
+    fun refreshIfDataIsOld() = uiScope.launch { repository.refreshIfDataIsOld() }
+
     override fun onCleared() {
         super.onCleared()
         // Cancel running coroutines in repository

@@ -1,5 +1,8 @@
 package io.github.omisie11.spacexfollower.util
 
+import org.threeten.bp.Instant
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZoneId
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
@@ -20,4 +23,10 @@ fun getLocalTimeFromUnix(unixTime: Long): String {
     val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
     simpleDateFormat.timeZone = Calendar.getInstance().timeZone
     return simpleDateFormat.format(Date(unixTime * 1000))
+}
+
+fun getMonthValueFromUnixTime(unixTime: Long): Int {
+    val instant = Instant.ofEpochSecond(unixTime)
+    val localDataTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
+    return localDataTime.monthValue
 }

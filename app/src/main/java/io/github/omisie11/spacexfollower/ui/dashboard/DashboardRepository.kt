@@ -8,11 +8,9 @@ import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesRepository
 import io.github.omisie11.spacexfollower.ui.cores.CoresRepository
 import io.github.omisie11.spacexfollower.ui.launches.LaunchesRepository
+import io.github.omisie11.spacexfollower.util.getMonthValueFromUnixTime
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import org.threeten.bp.Instant
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.ZoneId
 
 class DashboardRepository(
     private val allLaunchesDao: AllLaunchesDao,
@@ -28,7 +26,10 @@ class DashboardRepository(
     private val endOf2019Timestamp: Long = 1577836801
 
     fun getLaunchesInTimeIntervalFlow(): Flow<List<Entry>> =
-        allLaunchesDao.getLaunchesBetweenDatesFlow(startOf2019Timestamp, endOf2019Timestamp)
+        allLaunchesDao.getLaunchesBetweenDatesFlow(
+            YearInterval.YEAR_2019.startUnix,
+            YearInterval.YEAR_2019.endUnix
+        )
             .map { launches ->
                 mapLaunchesToEntriesForMonthsStats(launches)
             }
@@ -43,6 +44,12 @@ class DashboardRepository(
         launchesRepository.refreshUpcomingLaunches()
         capsulesRepository.refreshCapsules()
         coresRepository.refreshCores()
+    }
+
+    suspend fun refreshIfDataIsOld() {
+        launchesRepository.refreshIfLaunchesDataOld()
+        capsulesRepository.refreshIfCapsulesDataOld()
+        coresRepository.refreshIfCoresDataOld()
     }
 
     // Map list of launches to list of Entries that shows number of launches in particular months
@@ -63,9 +70,8 @@ class DashboardRepository(
         return entriesList
     }
 
-    private fun getMonthValueFromUnixTime(unixTime: Long): Int {
-        val instant = Instant.ofEpochSecond(unixTime)
-        val localDataTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
-        return localDataTime.monthValue
+    // Representation year, Pair.first is start of the year in Unix Time, second is the end date
+    enum class YearInterval(val startUnix: Long, val endUnix: Long) {
+        YEAR_2019(1546300801, 1577836801), YEAR_2018(1514764800, 1546214400)
     }
 }

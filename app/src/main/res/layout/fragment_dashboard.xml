@@ -1,104 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.dashboard.DashboardFragment">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/text_launches_chart_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/number_of_launches_in_2019"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/launches_chart"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="240dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_launches_chart_title" />
+        android:layout_height="match_parent"
+        tools:context=".ui.dashboard.DashboardFragment">
 
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/actual_stats"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/launches_chart" />
+        <TextView
+            android:id="@+id/text_launches_chart_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/number_of_launches_in_2019"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_number_of_capsules"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        app:layout_constraintBottom_toBottomOf="@+id/text_number_of_launches"
-        app:layout_constraintEnd_toStartOf="@+id/text_number_of_launches"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/text_number_of_launches"
-        tools:text="86" />
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/launches_chart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="240dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_launches_chart_title" />
 
-    <TextView
-        android:id="@+id/textView25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_capsules"
-        app:layout_constraintEnd_toEndOf="@+id/text_number_of_capsules"
-        app:layout_constraintStart_toStartOf="@+id/text_number_of_capsules"
-        app:layout_constraintTop_toBottomOf="@+id/text_number_of_capsules" />
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/actual_stats"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/launches_chart" />
 
-    <TextView
-        android:id="@+id/textView33"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/launches"
-        app:layout_constraintEnd_toEndOf="@+id/text_number_of_launches"
-        app:layout_constraintStart_toStartOf="@+id/text_number_of_launches"
-        app:layout_constraintTop_toBottomOf="@+id/text_number_of_launches" />
+        <TextView
+            android:id="@+id/text_number_of_capsules"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintBottom_toBottomOf="@+id/text_number_of_launches"
+            app:layout_constraintEnd_toStartOf="@+id/text_number_of_launches"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_number_of_launches"
+            tools:text="86" />
 
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_cores"
-        app:layout_constraintEnd_toEndOf="@+id/text_number_of_cores"
-        app:layout_constraintStart_toStartOf="@+id/text_number_of_cores"
-        app:layout_constraintTop_toBottomOf="@+id/text_number_of_cores" />
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_capsules"
+            app:layout_constraintEnd_toEndOf="@+id/text_number_of_capsules"
+            app:layout_constraintStart_toStartOf="@+id/text_number_of_capsules"
+            app:layout_constraintTop_toBottomOf="@+id/text_number_of_capsules" />
 
-    <TextView
-        android:id="@+id/text_number_of_cores"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        app:layout_constraintBottom_toBottomOf="@+id/text_number_of_launches"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/text_number_of_launches"
-        app:layout_constraintTop_toTopOf="@+id/text_number_of_launches"
-        tools:text="43" />
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/launches"
+            app:layout_constraintEnd_toEndOf="@+id/text_number_of_launches"
+            app:layout_constraintStart_toStartOf="@+id/text_number_of_launches"
+            app:layout_constraintTop_toBottomOf="@+id/text_number_of_launches" />
 
-    <TextView
-        android:id="@+id/text_number_of_launches"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        app:layout_constraintEnd_toStartOf="@+id/text_number_of_cores"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/text_number_of_capsules"
-        app:layout_constraintTop_toBottomOf="@+id/textView31"
-        tools:text="135" />
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_cores"
+            app:layout_constraintEnd_toEndOf="@+id/text_number_of_cores"
+            app:layout_constraintStart_toStartOf="@+id/text_number_of_cores"
+            app:layout_constraintTop_toBottomOf="@+id/text_number_of_cores" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/text_number_of_cores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintBottom_toBottomOf="@+id/text_number_of_launches"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/text_number_of_launches"
+            app:layout_constraintTop_toTopOf="@+id/text_number_of_launches"
+            tools:text="43" />
+
+        <TextView
+            android:id="@+id/text_number_of_launches"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintEnd_toStartOf="@+id/text_number_of_cores"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/text_number_of_capsules"
+            app:layout_constraintTop_toBottomOf="@+id/textView31"
+            tools:text="135" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
