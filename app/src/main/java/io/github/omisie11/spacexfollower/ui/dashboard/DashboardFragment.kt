@@ -14,12 +14,13 @@ import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.charts_formatters.MonthsValueFormatter
 import io.github.omisie11.spacexfollower.data.charts_formatters.RoundNumbersValueFormatter
 import io.github.omisie11.spacexfollower.util.animateNumber
+import io.github.omisie11.spacexfollower.util.getYearValueFromUnixTime
 import kotlinx.android.synthetic.main.fragment_dashboard.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DashboardFragment : Fragment() {
 
-    private val viewModel: DashboardViewModel by viewModel()
+    private val viewModel: DashboardViewModel by sharedViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +57,6 @@ class DashboardFragment : Fragment() {
             setNoDataTextColor(ContextCompat.getColor(context!!, R.color.colorSecondary))
             launches_chart.legend.textColor =
                 ContextCompat.getColor(context!!, R.color.colorOnBackground)
-            launches_chart.animateY(1000, Easing.Linear)
         }
         launches_chart.invalidate()
 
@@ -75,6 +75,22 @@ class DashboardFragment : Fragment() {
         viewModel.getNumberOfCores().observe(viewLifecycleOwner, Observer { numberOfCores ->
             text_number_of_cores.animateNumber(finalValue = numberOfCores)
         })
+
+        viewModel.getLaunchesChartYear().observe(viewLifecycleOwner, Observer { yearToShowInChart ->
+            text_launches_chart_title.text = getString(
+                R.string.launches_in_template,
+                getYearValueFromUnixTime(yearToShowInChart.startUnix)
+            )
+        })
+
+        button_change_chart_year.setOnClickListener {
+            val launchesYearChangeBottomSheetDialog = LaunchesChartYearBottomSheetFragment()
+
+            launchesYearChangeBottomSheetDialog.show(
+                childFragmentManager,
+                LaunchesChartYearBottomSheetFragment.TAG
+            )
+        }
     }
 
     override fun onResume() {
@@ -100,7 +116,8 @@ class DashboardFragment : Fragment() {
         setupDataSetStyle(dataSet)
         val lineData = LineData(dataSet)
         launches_chart.data = lineData
-        launches_chart.notifyDataSetChanged()
+        launches_chart.animateY(1000, Easing.Linear)
+        launches_chart.invalidate()
     }
 
     private fun setupDataSetStyle(dataSet: LineDataSet) {

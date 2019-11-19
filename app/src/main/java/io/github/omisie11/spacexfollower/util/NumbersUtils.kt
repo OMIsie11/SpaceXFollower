@@ -30,3 +30,9 @@ fun getMonthValueFromUnixTime(unixTime: Long): Int {
     val localDataTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
     return localDataTime.monthValue
 }
+
+fun getYearValueFromUnixTime(unixTime: Long): Int {
+    val instant = Instant.ofEpochSecond(unixTime)
+    val localDataTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
+    return localDataTime.year
+}

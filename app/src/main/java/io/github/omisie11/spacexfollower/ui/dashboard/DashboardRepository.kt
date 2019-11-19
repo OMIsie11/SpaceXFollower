@@ -21,18 +21,11 @@ class DashboardRepository(
     private val coresRepository: CoresRepository
 ) {
 
-    // ToDo: temporary hardcoded values for start and end of 2019, support more options in future
-    private val startOf2019Timestamp: Long = 1546300801
-    private val endOf2019Timestamp: Long = 1577836801
-
-    fun getLaunchesInTimeIntervalFlow(): Flow<List<Entry>> =
+    fun getLaunchesInTimeIntervalFlow(yearToShow: YearInterval): Flow<List<Entry>> =
         allLaunchesDao.getLaunchesBetweenDatesFlow(
-            YearInterval.YEAR_2019.startUnix,
-            YearInterval.YEAR_2019.endUnix
-        )
-            .map { launches ->
-                mapLaunchesToEntriesForMonthsStats(launches)
-            }
+            yearToShow.startUnix,
+            yearToShow.endUnix
+        ).map { launches -> mapLaunchesToEntriesForMonthsStats(launches) }
 
     fun getNumberOfLaunchesFlow(): Flow<Int> = allLaunchesDao.getNumberOfLaunchesFlow()
 
@@ -72,6 +65,9 @@ class DashboardRepository(
 
     // Representation year, Pair.first is start of the year in Unix Time, second is the end date
     enum class YearInterval(val startUnix: Long, val endUnix: Long) {
-        YEAR_2019(1546300801, 1577836801), YEAR_2018(1514764800, 1546214400)
+        YEAR_2020(1577836800, 1609372800), YEAR_2019(1546300801, 1577836801),
+        YEAR_2018(1514764800, 1546214400), YEAR_2017(1483228800, 1514678400),
+        YEAR_2016(1451606400, 1483142400), YEAR_2015(1420070400, 1451520000),
+        YEAR_2014(1388534400, 1419984000)
     }
 }

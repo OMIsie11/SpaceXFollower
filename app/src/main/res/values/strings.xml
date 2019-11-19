@@ -150,7 +150,10 @@
     <string name="month_short_october">Oct.</string>
     <string name="month_short_november">Nov.</string>
     <string name="month_short_december">Dec.</string>
-    <string name="number_of_launches_in_2019">Number of launches in 2019</string>
+    <string name="Launches_in_2019">Launches in 2019</string>
     <string name="actual_stats">Actual stats</string>
+    <string name="change_year">Change year</string>
+    <string name="year_to_show_in_chart">Year to show in chart</string>
+    <string name="launches_in_template">Launches in %d</string>
 
 </resources>

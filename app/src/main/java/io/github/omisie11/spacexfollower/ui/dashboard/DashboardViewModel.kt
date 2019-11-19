@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class DashboardViewModel(private val repository: DashboardRepository) : ViewModel() {
 
@@ -17,17 +18,17 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
 
     // List of entries for chart with stats of launches by months
     private val launchesStats = MutableLiveData<List<Entry>>()
+    private var launchesChartYear = MutableLiveData<DashboardRepository.YearInterval>()
 
     private val numberOfLaunches = MutableLiveData<Int>()
     private val numberOfCapsules = MutableLiveData<Int>()
     private val numberOfCores = MutableLiveData<Int>()
 
     init {
-        uiScope.launch(Dispatchers.Default) {
-            repository.getLaunchesInTimeIntervalFlow().collect {
-                launchesStats.postValue(it)
-            }
-        }
+        launchesChartYear.value = DashboardRepository.YearInterval.YEAR_2019
+
+        uiScope.launch(Dispatchers.Default) { fetchLaunchesStatsFromDatabase() }
+
         uiScope.launch(Dispatchers.Default) {
             repository.getNumberOfLaunchesFlow().collect { numberOfLaunchesInDb ->
                 numberOfLaunches.postValue(numberOfLaunchesInDb)
@@ -53,9 +54,27 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
 
     fun getNumberOfCores(): LiveData<Int> = numberOfCores
 
+    fun getLaunchesChartYear(): LiveData<DashboardRepository.YearInterval> = launchesChartYear
+
+    fun setLaunchesChartYear(yearToShowInChart: DashboardRepository.YearInterval) {
+        launchesChartYear.value = yearToShowInChart
+        uiScope.launch(Dispatchers.Default) {
+            fetchLaunchesStatsFromDatabase()
+        }
+    }
+
     fun refreshData() = uiScope.launch { repository.refreshData() }
 
     fun refreshIfDataIsOld() = uiScope.launch { repository.refreshIfDataIsOld() }
+
+    private suspend fun fetchLaunchesStatsFromDatabase() {
+        repository.getLaunchesInTimeIntervalFlow(
+            launchesChartYear.value ?: DashboardRepository.YearInterval.YEAR_2019
+        ).collect {
+            Timber.d("launches: $it")
+            launchesStats.postValue(it)
+        }
+    }
 
     override fun onCleared() {
         super.onCleared()
