@@ -13,6 +13,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.charts_formatters.MonthsValueFormatter
 import io.github.omisie11.spacexfollower.data.charts_formatters.RoundNumbersValueFormatter
+import io.github.omisie11.spacexfollower.util.ChartMarkerView
 import io.github.omisie11.spacexfollower.util.animateNumber
 import io.github.omisie11.spacexfollower.util.getYearValueFromUnixTime
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -51,6 +52,7 @@ class DashboardFragment : Fragment() {
         launches_chart.axisRight.isEnabled = false
 
         launches_chart.apply {
+            marker = ChartMarkerView(context, R.layout.marker_view)
             description.isEnabled = false
             legend.isEnabled = false
             setPinchZoom(false)
@@ -138,7 +140,7 @@ class DashboardFragment : Fragment() {
         getString(R.string.month_short_march), getString(R.string.month_short_april),
         getString(R.string.month_may), getString(R.string.month_short_june),
         getString(R.string.month_short_july), getString(R.string.month_short_august),
-        getString(R.string.september), getString(R.string.month_short_october),
+        getString(R.string.month_short_september), getString(R.string.month_short_october),
         getString(R.string.month_short_november), getString(R.string.month_short_december)
     )
 }
