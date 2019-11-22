@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.data.charts_formatters
+package io.github.omisie11.spacexfollower.util.charts_utils
 
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.formatter.ValueFormatter

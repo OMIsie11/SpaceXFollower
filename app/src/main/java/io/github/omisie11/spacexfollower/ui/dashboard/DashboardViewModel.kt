@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.PieEntry
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -24,10 +25,14 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
     private val numberOfCapsules = MutableLiveData<Int>()
     private val numberOfCores = MutableLiveData<Int>()
 
+    private val capsulesStatusStats = MutableLiveData<List<PieEntry>>()
+
     init {
         launchesChartYear.value = DashboardRepository.YearInterval.YEAR_2019
 
-        uiScope.launch(Dispatchers.Default) { fetchLaunchesStatsFromDatabase() }
+        uiScope.launch(Dispatchers.Default) { fetchLaunchesStatsFromDb() }
+
+        uiScope.launch(Dispatchers.Default) { fetchCapsulesStatusStatsFromDb() }
 
         uiScope.launch(Dispatchers.Default) {
             repository.getNumberOfLaunchesFlow().collect { numberOfLaunchesInDb ->
@@ -54,12 +59,14 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
 
     fun getNumberOfCores(): LiveData<Int> = numberOfCores
 
+    fun getCapsulesStatusStats(): LiveData<List<PieEntry>> = capsulesStatusStats
+
     fun getLaunchesChartYear(): LiveData<DashboardRepository.YearInterval> = launchesChartYear
 
     fun setLaunchesChartYear(yearToShowInChart: DashboardRepository.YearInterval) {
         launchesChartYear.value = yearToShowInChart
         uiScope.launch(Dispatchers.Default) {
-            fetchLaunchesStatsFromDatabase()
+            fetchLaunchesStatsFromDb()
         }
     }
 
@@ -67,12 +74,18 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
 
     fun refreshIfDataIsOld() = uiScope.launch { repository.refreshIfDataIsOld() }
 
-    private suspend fun fetchLaunchesStatsFromDatabase() {
-        repository.getLaunchesInTimeIntervalFlow(
+    private suspend fun fetchLaunchesStatsFromDb() {
+        repository.getEntriesLaunchesStatsFlow(
             launchesChartYear.value ?: DashboardRepository.YearInterval.YEAR_2019
         ).collect {
             Timber.d("launches: $it")
             launchesStats.postValue(it)
+        }
+    }
+
+    private suspend fun fetchCapsulesStatusStatsFromDb() {
+        repository.getEntriesCapsulesStatusFlow().collect {
+            capsulesStatusStats.postValue(it)
         }
     }
 

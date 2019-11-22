@@ -5,7 +5,7 @@
     <color name="colorPrimaryLight">#484848</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorOnPrimary">#ffffff</color>
-    <color name="colorSecondary">#ffab91</color>
+    <color name="colorSecondary">#ffccbc</color>
     <color name="colorSecondaryLight">#ffddc1</color>
     <color name="colorSecondaryDark">#c97b63</color>
     <color name="colorOnSecondary">#212121</color>
@@ -23,5 +23,14 @@
     <color name="colorChipTextChecked">#212121</color>
 
     <color name="horizontalDividerBackground">#5f6368</color>
+
+    <!-- Colors used as a pallette for pie chart -->
+    <color name="pie_chart_color_1">#b39ddb</color>
+    <color name="pie_chart_color_2">#80deea</color>
+    <color name="pie_chart_color_3">#a5d6a7</color>
+    <color name="pie_chart_color_4">#ffcc80</color>
+    <color name="pie_chart_color_5">#ef9a9a</color>
+    
+    <color name="pie_chart_text_color">#000000</color>
 
 </resources>

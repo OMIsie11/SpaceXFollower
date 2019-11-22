@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.util
+package io.github.omisie11.spacexfollower.util.charts_utils
 
 import android.content.Context
 import com.github.mikephil.charting.components.MarkerView

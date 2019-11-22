@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/dashboard_dest"
+        android:checkable="true"
+        android:title="@string/label_dashboard" />
+
+    <item
         android:id="@id/launches_dest"
         android:checkable="true"
         android:title="@string/label_all_launches" />
@@ -20,11 +25,6 @@
         android:id="@id/launch_pads_dest"
         android:checkable="true"
         android:title="@string/label_launch_pads" />
-
-    <item
-        android:id="@+id/dashboard_dest"
-        android:checkable="true"
-        android:title="@string/label_dashboard" />
 
     <item
         android:id="@id/company_dest"

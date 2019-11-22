@@ -1,9 +1,11 @@
 package io.github.omisie11.spacexfollower.ui.dashboard
 
 import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.PieEntry
 import io.github.omisie11.spacexfollower.data.dao.AllLaunchesDao
 import io.github.omisie11.spacexfollower.data.dao.CapsulesDao
 import io.github.omisie11.spacexfollower.data.dao.CoresDao
+import io.github.omisie11.spacexfollower.data.model.Capsule
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesRepository
 import io.github.omisie11.spacexfollower.ui.cores.CoresRepository
@@ -21,7 +23,7 @@ class DashboardRepository(
     private val coresRepository: CoresRepository
 ) {
 
-    fun getLaunchesInTimeIntervalFlow(yearToShow: YearInterval): Flow<List<Entry>> =
+    fun getEntriesLaunchesStatsFlow(yearToShow: YearInterval): Flow<List<Entry>> =
         allLaunchesDao.getLaunchesBetweenDatesFlow(
             yearToShow.startUnix,
             yearToShow.endUnix
@@ -32,6 +34,9 @@ class DashboardRepository(
     fun getNumberOfCapsulesFlow(): Flow<Int> = capsulesDao.getNumberOfCapsulesFlow()
 
     fun getNumberOfCoresFlow(): Flow<Int> = coresDao.getNumberOfCoresFlow()
+
+    fun getEntriesCapsulesStatusFlow(): Flow<List<PieEntry>> = capsulesDao.getAllCapsulesFlow()
+        .map { capsules -> mapCapsulesToEntriesWithStatus(capsules) }
 
     suspend fun refreshData() {
         launchesRepository.refreshUpcomingLaunches()
@@ -61,6 +66,24 @@ class DashboardRepository(
             }
         }
         return entriesList
+    }
+
+    private fun mapCapsulesToEntriesWithStatus(capsules: List<Capsule>): List<PieEntry> {
+        val statusesMap = mutableMapOf<String, Int>()
+        capsules.forEach { capsule ->
+            val status = capsule.status
+            if (status.isNotBlank() || status != "null") {
+                if (statusesMap.contains(status)) {
+                    statusesMap[status] = statusesMap[status]!!.plus(1)
+                } else statusesMap[status] = 1
+            }
+        }
+
+        val entries = mutableListOf<PieEntry>()
+        for (item in statusesMap) {
+            entries.add(PieEntry(item.value.toFloat(), item.key))
+        }
+        return entries
     }
 
     // Representation year, Pair.first is start of the year in Unix Time, second is the end date

@@ -155,5 +155,6 @@
     <string name="change_year">Change year</string>
     <string name="year_to_show_in_chart">Year to show in chart</string>
     <string name="launches_in_template">Launches in %d</string>
+    <string name="status_of_capsules">Status of capsules</string>
 
 </resources>
