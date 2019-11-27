@@ -26,6 +26,7 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
     private val numberOfCores = MutableLiveData<Int>()
 
     private val capsulesStatusStats = MutableLiveData<List<PieEntry>>()
+    private val coresStatusStats = MutableLiveData<List<PieEntry>>()
 
     init {
         launchesChartYear.value = DashboardRepository.YearInterval.YEAR_2019
@@ -33,6 +34,8 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
         uiScope.launch(Dispatchers.Default) { fetchLaunchesStatsFromDb() }
 
         uiScope.launch(Dispatchers.Default) { fetchCapsulesStatusStatsFromDb() }
+
+        uiScope.launch(Dispatchers.Default) { fetchCoresStatusStatsFromDb() }
 
         uiScope.launch(Dispatchers.Default) {
             repository.getNumberOfLaunchesFlow().collect { numberOfLaunchesInDb ->
@@ -61,6 +64,8 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
 
     fun getCapsulesStatusStats(): LiveData<List<PieEntry>> = capsulesStatusStats
 
+    fun getCoresStatusStats(): LiveData<List<PieEntry>> = coresStatusStats
+
     fun getLaunchesChartYear(): LiveData<DashboardRepository.YearInterval> = launchesChartYear
 
     fun setLaunchesChartYear(yearToShowInChart: DashboardRepository.YearInterval) {
@@ -86,6 +91,12 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
     private suspend fun fetchCapsulesStatusStatsFromDb() {
         repository.getEntriesCapsulesStatusFlow().collect {
             capsulesStatusStats.postValue(it)
+        }
+    }
+
+    private suspend fun fetchCoresStatusStatsFromDb() {
+        repository.getEntriesCoresStatusFlow().collect {
+            coresStatusStats.postValue(it)
         }
     }
 

@@ -6,6 +6,7 @@ import io.github.omisie11.spacexfollower.data.dao.AllLaunchesDao
 import io.github.omisie11.spacexfollower.data.dao.CapsulesDao
 import io.github.omisie11.spacexfollower.data.dao.CoresDao
 import io.github.omisie11.spacexfollower.data.model.Capsule
+import io.github.omisie11.spacexfollower.data.model.Core
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesRepository
 import io.github.omisie11.spacexfollower.ui.cores.CoresRepository
@@ -37,6 +38,9 @@ class DashboardRepository(
 
     fun getEntriesCapsulesStatusFlow(): Flow<List<PieEntry>> = capsulesDao.getAllCapsulesFlow()
         .map { capsules -> mapCapsulesToEntriesWithStatus(capsules) }
+
+    fun getEntriesCoresStatusFlow(): Flow<List<PieEntry>> = coresDao.getAllCoresFlow()
+        .map { cores -> mapCoresToStatusEntries(cores) }
 
     suspend fun refreshData() {
         launchesRepository.refreshUpcomingLaunches()
@@ -83,6 +87,22 @@ class DashboardRepository(
         for (item in statusesMap) {
             entries.add(PieEntry(item.value.toFloat(), item.key))
         }
+        return entries
+    }
+
+    private fun mapCoresToStatusEntries(cores: List<Core>): List<PieEntry> {
+        val statusesMap = mutableMapOf<String, Int>()
+        cores.forEach { core ->
+            val status = core.status
+            if (status.isNotBlank() || status != "null") {
+                if (statusesMap.contains(status)) {
+                    statusesMap[status] = statusesMap[status]!!.plus(1)
+                } else statusesMap[status] = 1
+            }
+        }
+
+        val entries = mutableListOf<PieEntry>()
+        statusesMap.forEach { entries.add(PieEntry(it.value.toFloat(), it.key)) }
         return entries
     }
 

@@ -6,6 +6,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import io.github.omisie11.spacexfollower.R
@@ -39,10 +41,19 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         styleLaunchesStatsChart()
-        styleCapsulesStatusStatsChart()
+        styleStatusPieChart(chart_capsules_status)
+        styleStatusPieChart(chart_cores_status)
 
         viewModel.getLaunchesStats().observe(viewLifecycleOwner, Observer { launchesStats ->
             setLaunchesStatsDataToChart(launchesStats)
+        })
+
+        viewModel.getLaunchesChartYear().observe(viewLifecycleOwner, Observer { yearToShowInChart ->
+            text_launches_chart_title.text =
+                getString(
+                    R.string.launches_in_template,
+                    getYearValueFromUnixTime(yearToShowInChart.startUnix)
+                )
         })
 
         viewModel.getNumberOfLaunches().observe(viewLifecycleOwner, Observer { numberOfLaunches ->
@@ -57,16 +68,12 @@ class DashboardFragment : Fragment() {
             text_number_of_cores.animateNumber(finalValue = numberOfCores)
         })
 
-        viewModel.getCapsulesStatusStats().observe(viewLifecycleOwner, Observer { stats ->
-            setCapsulesStatsDataToChart(stats)
+        viewModel.getCapsulesStatusStats().observe(viewLifecycleOwner, Observer { capsulesStats ->
+            setDataToPieChart(data = capsulesStats, chart = chart_capsules_status)
         })
 
-        viewModel.getLaunchesChartYear().observe(viewLifecycleOwner, Observer { yearToShowInChart ->
-            text_launches_chart_title.text =
-                getString(
-                    R.string.launches_in_template,
-                    getYearValueFromUnixTime(yearToShowInChart.startUnix)
-                )
+        viewModel.getCoresStatusStats().observe(viewLifecycleOwner, Observer { coresStats ->
+            setDataToPieChart(data = coresStats, chart = chart_cores_status)
         })
 
         button_change_chart_year.setOnClickListener {
@@ -106,34 +113,34 @@ class DashboardFragment : Fragment() {
         launches_chart.invalidate()
     }
 
-    private fun setCapsulesStatsDataToChart(data: List<PieEntry>, dataSetLabel: String = "") {
+    private fun setDataToPieChart(
+        data: List<PieEntry>,
+        chart: PieChart,
+        dataSetLabel: String = ""
+    ) {
         val dataSet = PieDataSet(data, dataSetLabel)
-        setupCapsulesStatusStatsDataSetStyle(dataSet)
+        setupPieStatsDataSetStyle(dataSet)
         val pieData = PieData(dataSet)
-        chart_capsules_status.data = pieData
-        chart_capsules_status.invalidate()
+        chart.data = pieData
+        chart.invalidate()
     }
 
-    private fun setupLaunchesStatsDataSetStyle(dataSet: LineDataSet) {
-        dataSet.apply {
-            color = ContextCompat.getColor(context!!, R.color.colorSecondary)
-            mode = LineDataSet.Mode.CUBIC_BEZIER
-            setDrawFilled(true)
-            fillColor = ContextCompat.getColor(context!!, R.color.colorSecondary)
-            setCircleColor(ContextCompat.getColor(context!!, R.color.colorSecondary))
-            valueTextColor = ContextCompat.getColor(context!!, R.color.colorOnBackground)
-            valueTextSize = 12f
-            valueFormatter = RoundNumbersValueFormatter()
-        }
+    private fun setupLaunchesStatsDataSetStyle(dataSet: LineDataSet) = dataSet.apply {
+        color = ContextCompat.getColor(context!!, R.color.colorSecondary)
+        mode = LineDataSet.Mode.CUBIC_BEZIER
+        setDrawFilled(true)
+        fillColor = ContextCompat.getColor(context!!, R.color.colorSecondary)
+        setCircleColor(ContextCompat.getColor(context!!, R.color.colorSecondary))
+        valueTextColor = ContextCompat.getColor(context!!, R.color.colorOnBackground)
+        valueTextSize = 12f
+        valueFormatter = RoundNumbersValueFormatter()
     }
 
-    private fun setupCapsulesStatusStatsDataSetStyle(dataSet: PieDataSet) {
-        dataSet.apply {
-            colors = getPieChartColorsPalette()
-            valueTextColor = ContextCompat.getColor(context!!, R.color.pie_chart_text_color)
-            valueTextSize = 16f
-            valueFormatter = RoundNumbersValueFormatter()
-        }
+    private fun setupPieStatsDataSetStyle(dataSet: PieDataSet) = dataSet.apply {
+        colors = getPieChartColorsPalette()
+        valueTextColor = ContextCompat.getColor(context!!, R.color.pie_chart_text_color)
+        valueTextSize = 16f
+        valueFormatter = RoundNumbersValueFormatter()
     }
 
     private fun styleLaunchesStatsChart() {
@@ -162,21 +169,27 @@ class DashboardFragment : Fragment() {
         launches_chart.invalidate()
     }
 
-    private fun styleCapsulesStatusStatsChart() {
-        chart_capsules_status.apply {
-            description.isEnabled = false
-            legend.isEnabled = false
-            isDrawHoleEnabled = false
-            setTouchEnabled(true)
-            isHighlightPerTapEnabled = false
-            setNoDataTextColor(ContextCompat.getColor(context!!, R.color.colorSecondary))
-            setEntryLabelColor(ContextCompat.getColor(context!!, R.color.pie_chart_text_color))
-            setHoleColor(ContextCompat.getColor(context!!, R.color.colorBackground))
-            setNoDataTextColor(ContextCompat.getColor(context!!, R.color.colorSecondary))
-            legend.textColor =
-                ContextCompat.getColor(context!!, R.color.colorOnBackground)
+    private fun styleStatusPieChart(chart: PieChart) = chart.apply {
+        setDrawEntryLabels(false)
+        description.isEnabled = false
+        legend.apply {
+            isEnabled = true
+            textSize = 14f
+            horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+            xEntrySpace = 15f
         }
-        launches_chart.invalidate()
+        isDrawHoleEnabled = true
+        setTouchEnabled(false)
+        isHighlightPerTapEnabled = false
+        setNoDataTextColor(ContextCompat.getColor(context!!, R.color.colorSecondary))
+        setEntryLabelColor(ContextCompat.getColor(context!!, R.color.pie_chart_text_color))
+        setHoleColor(ContextCompat.getColor(context!!, R.color.colorBackground))
+        setNoDataTextColor(ContextCompat.getColor(context!!, R.color.colorSecondary))
+        legend.textColor =
+            ContextCompat.getColor(context!!, R.color.colorOnBackground)
+        animateXY(500, 500, Easing.Linear)
+        // Refresh chart
+        invalidate()
     }
 
     private fun getMonthsList(): List<String> = listOf(
