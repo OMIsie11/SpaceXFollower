@@ -12,13 +12,20 @@ interface AllLaunchesDao {
 
     @Transaction
     suspend fun replaceUpcomingLaunches(launches: List<Launch>) {
-        deleteUpcomingLaunchesData()
+        deleteLaunchesData()
         insertLaunches(launches)
     }
 
     @Query("SELECT * FROM upcoming_launches_table")
     fun getAllLaunchesFlow(): Flow<List<Launch>>
 
+    @Query("SELECT COUNT(flight_number) FROM upcoming_launches_table")
+    fun getNumberOfLaunchesFlow(): Flow<Int>
+
+    @Query("SELECT * FROM upcoming_launches_table WHERE launch_date_unix " +
+                "BETWEEN :startDateUnix AND :endDateUnix")
+    fun getLaunchesBetweenDatesFlow(startDateUnix: Long, endDateUnix: Long): Flow<List<Launch>>
+
     @Query("DELETE FROM upcoming_launches_table")
-    suspend fun deleteUpcomingLaunchesData()
+    suspend fun deleteLaunchesData()
 }

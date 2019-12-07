@@ -111,4 +111,20 @@ class CapsulesDaoTest {
         latch.await()
         job.cancel()
     }
+
+    @Test
+    fun testInsertAndGetNumberOfCapsules() = runBlocking {
+        capsulesDao.insertCapsules(testCapsulesList)
+
+        val latch = CountDownLatch(1)
+        val job = launch(Dispatchers.IO) {
+            capsulesDao.getNumberOfCapsulesFlow().collect { numberOfCapsules ->
+                assertThat(numberOfCapsules, equalTo(testCapsulesList.size))
+                latch.countDown()
+            }
+        }
+
+        latch.await()
+        job.cancel()
+    }
 }

@@ -70,5 +70,17 @@
         "description": "LeakCanary is a memory leak detection library for Android.",
         "license": "Apache-2.0",
         "repositoryUrl": "https://square.github.io/leakcanary/"
+    },
+    {
+        "name": "MPAndroidChart",
+        "description": "A powerful Android chart view / graph view library.",
+        "license": "Apache-2.0",
+        "repositoryUrl": "https://github.com/PhilJay/MPAndroidChart"
+    },
+    {
+        "name": "ThreeTenABP",
+        "description": "An adaptation of the JSR-310 backport for Android.",
+        "license": "Apache-2.0",
+        "repositoryUrl": "https://github.com/JakeWharton/ThreeTenABP"
     }
 ]

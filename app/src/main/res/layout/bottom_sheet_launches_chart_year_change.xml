@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_choose_year_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/year_to_show_in_chart"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textColor="@color/colorOnSurface" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/horizontalDividerBackground" />
+
+    <RadioGroup
+        android:id="@+id/radio_group_launches_year"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radio_button_2020"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorSecondary"
+            android:text="2020"
+            android:textColor="@color/colorOnSurface"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/radio_button_2019"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorSecondary"
+            android:text="2019"
+            android:textColor="@color/colorOnSurface"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/radio_button_2018"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorSecondary"
+            android:text="2018"
+            android:textColor="@color/colorOnSurface"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/radio_button_2017"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorSecondary"
+            android:text="2017"
+            android:textColor="@color/colorOnSurface"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/radio_button_2016"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorSecondary"
+            android:text="2016"
+            android:textColor="@color/colorOnSurface"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/radio_button_2015"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorSecondary"
+            android:text="2015"
+            android:textColor="@color/colorOnSurface"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/radio_button_2014"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorSecondary"
+            android:text="2014"
+            android:textColor="@color/colorOnSurface"
+            tools:ignore="HardcodedText" />
+    </RadioGroup>
+
+</LinearLayout>

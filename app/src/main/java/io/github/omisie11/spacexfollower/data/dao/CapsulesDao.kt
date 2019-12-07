@@ -19,6 +19,9 @@ interface CapsulesDao {
     @Query("SELECT * FROM capsules_table")
     fun getAllCapsulesFlow(): Flow<List<Capsule>>
 
+    @Query("SELECT COUNT(_id) FROM capsules_table")
+    fun getNumberOfCapsulesFlow(): Flow<Int>
+
     @Query("DELETE FROM capsules_table")
     suspend fun deleteAllCapsules()
 }

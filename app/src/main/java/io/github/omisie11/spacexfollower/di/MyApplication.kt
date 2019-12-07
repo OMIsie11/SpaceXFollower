@@ -3,6 +3,7 @@ package io.github.omisie11.spacexfollower.di
 import android.app.Application
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
+import com.jakewharton.threetenabp.AndroidThreeTen
 import io.github.omisie11.spacexfollower.BuildConfig
 import io.github.omisie11.spacexfollower.util.CrashReportingTree
 import io.github.omisie11.spacexfollower.util.PREFS_KEY_DARK_MODE
@@ -17,6 +18,9 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        // Initialize ThreeTenABP
+        AndroidThreeTen.init(this)
 
         startKoin {
             // use AndroidLogger as Koin Logger - default Level.INFO
@@ -33,7 +37,7 @@ class MyApplication : Application() {
                 listOf(
                     appModule, remoteDataSourceModule, capsulesModule,
                     coresModule, companyModule, upcomingLaunchesModule,
-                    launchPadsModule, aboutModule
+                    launchPadsModule, dashboardModule, aboutModule
                 )
             )
         }

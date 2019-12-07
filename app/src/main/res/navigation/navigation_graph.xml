@@ -3,7 +3,7 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/navigation_graph"
-            app:startDestination="@id/launches_dest">
+            app:startDestination="@id/dashboard_dest">
 
     <fragment
             android:id="@+id/capsules_dest"
@@ -97,4 +97,9 @@
         android:id="@+id/launch_pads_dest"
         android:name="io.github.omisie11.spacexfollower.ui.launch_pads.LaunchPadsFragment"
         android:label="@string/label_launch_pads" />
+    <fragment
+        android:id="@+id/dashboard_dest"
+        android:name="io.github.omisie11.spacexfollower.ui.dashboard.DashboardFragment"
+        android:label="@string/label_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
 </navigation>

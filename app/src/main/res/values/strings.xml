@@ -11,6 +11,7 @@
     <string name="label_capsules">Capsules</string>
     <string name="label_cores">Cores</string>
     <string name="label_company">Company</string>
+    <string name="label_dashboard">Dashboard</string>
     <string name="label_settings">Settings</string>
     <string name="label_capsule_detail">Capsule Detail</string>
     <string name="label_core_detail">Core Detail</string>
@@ -137,5 +138,25 @@
     <string name="customers_payloads">Customers:</string>
     <string name="attribution_used_libraries">Click here to check out awesome libraries that helped with making this app.</string>
     <string name="show_headquarters_location_in_google_maps">Show headquarters location in Google Maps</string>
+    <string name="launches">Launches</string>
+    <string name="month_short_january">Jan.</string>
+    <string name="month_short_february">Feb.</string>
+    <string name="month_short_march">Mar.</string>
+    <string name="month_short_april">Apr.</string>
+    <string name="month_may">May</string>
+    <string name="month_short_june">Jun.</string>
+    <string name="month_short_july">Jul.</string>
+    <string name="month_short_august">Aug.</string>
+    <string name="month_short_september">Sep.</string>
+    <string name="month_short_october">Oct.</string>
+    <string name="month_short_november">Nov.</string>
+    <string name="month_short_december">Dec.</string>
+    <string name="Launches_in_2019">Launches in 2019</string>
+    <string name="actual_stats">Actual stats</string>
+    <string name="change_year">Change year</string>
+    <string name="year_to_show_in_chart">Year to show in chart</string>
+    <string name="launches_in_template">Launches in %d</string>
+    <string name="status_of_capsules">Status of capsules</string>
+    <string name="status_of_cores">Status of cores</string>
 
 </resources>
