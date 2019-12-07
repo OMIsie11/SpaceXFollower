@@ -35,7 +35,9 @@ class CompanyRepository(
     fun getCompanyInfoSnackbar(): MutableLiveData<String> = companyInfoSnackBar
 
     suspend fun refreshIfCompanyDataOld() {
-        val isCompanyRefreshNeeded = withContext(Dispatchers.IO) { checkIfRefreshIsNeeded(KEY_COMPANY_LAST_REFRESH) }
+        val isCompanyRefreshNeeded = withContext(Dispatchers.IO) {
+            checkIfRefreshIsNeeded(KEY_COMPANY_LAST_REFRESH)
+        }
         if (isCompanyRefreshNeeded) {
             Timber.d("refreshIfCompanyDataOld: Refreshing company info")
             refreshCompanyInfo()
@@ -84,7 +86,8 @@ class CompanyRepository(
         val lastRefreshTime = sharedPrefs.getLong(sharedPrefsKey, 0)
         Timber.d("Current time in millis $currentTimeMillis")
         // Get refresh interval set in app settings (in hours) and multiply to get value in ms
-        val refreshIntervalHours = sharedPrefs.getString(PREFS_KEY_REFRESH_INTERVAL, "3")?.toInt() ?: 3
+        val refreshIntervalHours =
+            sharedPrefs.getString(PREFS_KEY_REFRESH_INTERVAL, "3")?.toInt() ?: 3
         val refreshInterval = refreshIntervalHours * 3600000
         Timber.d("Refresh Interval from settings: $refreshInterval")
         // If last refresh was made longer than interval, return true

@@ -3,19 +3,15 @@ package io.github.omisie11.spacexfollower.ui.dashboard
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieEntry
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class DashboardViewModel(private val repository: DashboardRepository) : ViewModel() {
-
-    private val viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     // List of entries for chart with stats of launches by months
     private val launchesStats = MutableLiveData<List<Entry>>()
@@ -31,23 +27,23 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
     init {
         launchesChartYear.value = DashboardRepository.YearInterval.YEAR_2019
 
-        uiScope.launch(Dispatchers.Default) { fetchLaunchesStatsFromDb() }
+        viewModelScope.launch(Dispatchers.IO) { fetchLaunchesStatsFromDb() }
 
-        uiScope.launch(Dispatchers.Default) { fetchCapsulesStatusStatsFromDb() }
+        viewModelScope.launch(Dispatchers.IO) { fetchCapsulesStatusStatsFromDb() }
 
-        uiScope.launch(Dispatchers.Default) { fetchCoresStatusStatsFromDb() }
+        viewModelScope.launch(Dispatchers.IO) { fetchCoresStatusStatsFromDb() }
 
-        uiScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.getNumberOfLaunchesFlow().collect { numberOfLaunchesInDb ->
                 numberOfLaunches.postValue(numberOfLaunchesInDb)
             }
         }
-        uiScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.getNumberOfCapsulesFlow().collect { numberOfCapsulesInDb ->
                 numberOfCapsules.postValue(numberOfCapsulesInDb)
             }
         }
-        uiScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.getNumberOfCoresFlow().collect { numberOfCoresInDb ->
                 numberOfCores.postValue(numberOfCoresInDb)
             }
@@ -70,14 +66,15 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
 
     fun setLaunchesChartYear(yearToShowInChart: DashboardRepository.YearInterval) {
         launchesChartYear.value = yearToShowInChart
-        uiScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             fetchLaunchesStatsFromDb()
         }
     }
 
-    fun refreshData() = uiScope.launch { repository.refreshData() }
+    fun refreshData() = viewModelScope.launch(Dispatchers.IO) { repository.refreshData() }
 
-    fun refreshIfDataIsOld() = uiScope.launch { repository.refreshIfDataIsOld() }
+    fun refreshIfDataIsOld() =
+        viewModelScope.launch(Dispatchers.IO) { repository.refreshIfDataIsOld() }
 
     private suspend fun fetchLaunchesStatsFromDb() {
         repository.getEntriesLaunchesStatsFlow(
@@ -98,11 +95,5 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
         repository.getEntriesCoresStatusFlow().collect {
             coresStatusStats.postValue(it)
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        // Cancel running coroutines in repository
-        viewModelJob.cancel()
     }
 }

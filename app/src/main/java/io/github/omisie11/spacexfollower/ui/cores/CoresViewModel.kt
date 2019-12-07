@@ -3,14 +3,13 @@ package io.github.omisie11.spacexfollower.ui.cores
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import io.github.omisie11.spacexfollower.data.model.Core
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
-
-    private val viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val allCores: MutableLiveData<List<Core>> = MutableLiveData()
     private val _areCoresLoading: LiveData<Boolean> by lazy { repository.getCoresLoadingStatus() }
@@ -21,7 +20,7 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
     init {
         _sortingOrder.value = CoresSortingOrder.BY_SERIAL_NEWEST
 
-        uiScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.getAllCoresFlow()
                 .collect { cores -> sortAndSetCores(cores) }
         }
@@ -33,7 +32,7 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
 
     fun setCoresSortingOrder(sortingOrder: CoresSortingOrder) {
         _sortingOrder.value = sortingOrder
-        uiScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             if (allCores.value != null) sortAndSetCores(allCores.value!!)
         }
     }
@@ -41,12 +40,12 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
     fun getCoresLoadingStatus(): LiveData<Boolean> = _areCoresLoading
 
     // Wrapper for refreshing cores data
-    fun refreshCores() = uiScope.launch { repository.refreshCores() }
+    fun refreshCores() = viewModelScope.launch { repository.refreshCores() }
 
     // Wrapper for refreshing old data in onResume
-    fun refreshIfCoresDataOld() = uiScope.launch { repository.refreshIfCoresDataOld() }
+    fun refreshIfCoresDataOld() = viewModelScope.launch { repository.refreshIfCoresDataOld() }
 
-    fun deleteCoresData() = uiScope.launch { repository.deleteAllCores() }
+    fun deleteCoresData() = viewModelScope.launch { repository.deleteAllCores() }
 
     /**
      * Request a snackbar to display a string.
@@ -62,21 +61,15 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
     }
 
     private fun sortAndSetCores(cores: List<Core>) {
-        allCores.postValue(when {
-            _sortingOrder.value == CoresSortingOrder.BY_SERIAL_NEWEST -> {
+        allCores.postValue(when (_sortingOrder.value) {
+            CoresSortingOrder.BY_SERIAL_NEWEST -> {
                 cores.sortedByDescending { it._id }
             }
-            _sortingOrder.value == CoresSortingOrder.BY_SERIAL_OLDEST -> {
+            CoresSortingOrder.BY_SERIAL_OLDEST -> {
                 cores.sortedBy { it._id }
             }
             else -> cores.sortedByDescending { it._id }
         })
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        // Cancel running coroutines in repository
-        viewModelJob.cancel()
     }
 
     enum class CoresSortingOrder { BY_SERIAL_NEWEST, BY_SERIAL_OLDEST }

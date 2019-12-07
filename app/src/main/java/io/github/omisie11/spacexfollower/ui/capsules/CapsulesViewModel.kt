@@ -3,17 +3,13 @@ package io.github.omisie11.spacexfollower.ui.capsules
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import io.github.omisie11.spacexfollower.data.model.Capsule
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel() {
-
-    private val viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val allCapsules: MutableLiveData<List<Capsule>> = MutableLiveData()
     private val _areCapsulesLoading: LiveData<Boolean> = repository.getCapsulesLoadingStatus()
@@ -24,7 +20,7 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
     init {
         _sortingOrder.value = CapsulesSortingOrder.BY_SERIAL_NEWEST
 
-        uiScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.getAllCapsulesFlow()
                 .collect { capsules -> sortAndSetCapsules(capsules) }
         }
@@ -36,7 +32,7 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
 
     fun setCapsulesSortingOrder(sortingOrder: CapsulesSortingOrder) {
         _sortingOrder.value = sortingOrder
-        uiScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             if (allCapsules.value != null) sortAndSetCapsules(allCapsules.value!!)
         }
     }
@@ -44,12 +40,12 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
     fun getCapsulesLoadingStatus(): LiveData<Boolean> = _areCapsulesLoading
 
     // Wrapper for refreshing capsules data
-    fun refreshCapsules() = uiScope.launch { repository.refreshCapsules() }
+    fun refreshCapsules() = viewModelScope.launch { repository.refreshCapsules() }
 
     // Wrapper for refreshing old data in onResume
-    fun refreshIfCapsulesDataOld() = uiScope.launch { repository.refreshIfCapsulesDataOld() }
+    fun refreshIfCapsulesDataOld() = viewModelScope.launch { repository.refreshIfCapsulesDataOld() }
 
-    fun deleteCapsulesData() = uiScope.launch { repository.deleteAllCapsules() }
+    fun deleteCapsulesData() = viewModelScope.launch { repository.deleteAllCapsules() }
 
     /**
      * Request a snackbar to display a string.
@@ -65,21 +61,15 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
     }
 
     private fun sortAndSetCapsules(capsules: List<Capsule>) {
-        allCapsules.postValue(when {
-            _sortingOrder.value == CapsulesSortingOrder.BY_SERIAL_NEWEST -> {
+        allCapsules.postValue(when (_sortingOrder.value) {
+            CapsulesSortingOrder.BY_SERIAL_NEWEST -> {
                 capsules.sortedByDescending { it._id }
             }
-            _sortingOrder.value == CapsulesSortingOrder.BY_SERIAL_OLDEST -> {
+            CapsulesSortingOrder.BY_SERIAL_OLDEST -> {
                 capsules.sortedBy { it._id }
             }
             else -> capsules.sortedByDescending { it._id }
         })
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        // Cancel running coroutines in repository
-        viewModelJob.cancel()
     }
 
     // Class representing all possible sort orders of capsules
