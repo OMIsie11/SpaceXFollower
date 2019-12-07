@@ -25,11 +25,11 @@
     <color name="horizontalDividerBackground">#dadce0</color>
 
     <!-- Colors used as a pallette for pie chart -->
-    <color name="pie_chart_color_1">#ba68c8</color>
-    <color name="pie_chart_color_2">#4dd0e1</color>
-    <color name="pie_chart_color_3">#66bb6a</color>
-    <color name="pie_chart_color_4">#ffb74d</color>
-    <color name="pie_chart_color_5">#e57373</color>
+    <color name="pie_chart_color_1">#80ba68c8</color>
+    <color name="pie_chart_color_2">#804dd0e1</color>
+    <color name="pie_chart_color_3">#8066bb6a</color>
+    <color name="pie_chart_color_4">#80ffb74d</color>
+    <color name="pie_chart_color_5">#80e57373</color>
 
     <color name="pie_chart_text_color">#212121</color>
 
