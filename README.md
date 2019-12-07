@@ -1,6 +1,8 @@
 # SpaceXFollower
 Android app for tracking Space X data 🚀
 
+### Get latest app version from this repository [releases](https://github.com/OMIsie11/SpaceXFollower/releases) section 🎁
+
 Application is using open source [Space X REST API](https://github.com/r-spacex/SpaceX-API) for getting all data.
 
 **This application is not affiliated with, funded or in any other way associated with SpaceX company.**
