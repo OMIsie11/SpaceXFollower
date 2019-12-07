@@ -108,3 +108,6 @@
 
 ##--------------- Timber ----------
 -dontwarn org.jetbrains.annotations.**
+
+##--------------- MPAndroidChart -----
+-keep class com.github.mikephil.charting.** { *; }
