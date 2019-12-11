@@ -159,4 +159,7 @@
     <string name="status_of_capsules">Status of capsules</string>
     <string name="status_of_cores">Status of cores</string>
 
+    <string name="attempted_launches_with_number_template">Attempted launches: %d</string>
+    <string name="successful_launches_with_number_template">Successful launches: %d</string>
+
 </resources>

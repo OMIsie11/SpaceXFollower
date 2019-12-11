@@ -8,22 +8,24 @@
     android:focusable="true"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_launch_pad_id"
+    <ImageView
+        android:id="@+id/image_location_pin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:src="@drawable/ic_location_pin_24dp"
         android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        tools:text="vafb_slc_4e" />
+        android:layout_marginTop="16dp"/>
 
     <TextView
         android:id="@+id/text_launch_pad_location_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_launch_pad_id"
-        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@id/image_location_pin"
+        android:layout_marginStart="8dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         tools:text="Vandenberg Air Force Base" />
 
@@ -32,20 +34,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/text_launch_pad_location_name"
-        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/image_location_pin"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         tools:text="California" />
 
-    <TextView
-        android:id="@+id/text_launch_pad_status"
+    <ImageView
+        android:id="@+id/image_expand_collapse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/ic_expand_more_24dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@id/text_launch_pad_region"
-        android:layout_alignEnd="@id/text_launch_pad_region"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <LinearLayout
+        android:id="@+id/linear_expandable_part"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_launch_pad_region"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        tools:text="under construction" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_attempted_launches"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Attempted launches: 12"/>
+
+        <TextView
+            android:id="@+id/text_successful_launches"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            tools:text="Successful launches: 12"/>
+
+        <TextView
+            android:id="@+id/text_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Details about launch pad"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
 

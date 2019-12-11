@@ -88,7 +88,7 @@ class LaunchPadsFragment : Fragment(), LaunchPadsAdapter.OnItemClickListener {
         recyclerView.adapter = null
     }
 
-    override fun onItemClicked(launchPadCoordinates: Triple<Double, Double, String>) {
+    override fun onLocationClicked(launchPadCoordinates: Triple<Double, Double, String>) {
         // Google Maps expects name of location with spaces replaced with '+'
         val locationName = launchPadCoordinates.third.replace(" ", "+")
         val mapUri = Uri.parse(
