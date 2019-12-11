@@ -159,7 +159,9 @@
     <string name="status_of_capsules">Status of capsules</string>
     <string name="status_of_cores">Status of cores</string>
 
-    <string name="attempted_launches_with_number_template">Attempted launches: %d</string>
-    <string name="successful_launches_with_number_template">Successful launches: %d</string>
+    <string name="attempted_launches">Attempted launches</string>
+    <string name="successful_launches">Successful launches</string>
+    <string name="content_desc_image_expand_collapse">Icon indicating if location item is collapsed or expanded</string>
+    <string name="content_desc_image_location_pin">Image with location pin</string>
 
 </resources>

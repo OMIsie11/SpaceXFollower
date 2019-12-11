@@ -15,7 +15,6 @@ class LaunchPadsAdapter(private val itemClickListener: OnItemClickListener) :
 
     private var launchPadsList: List<LaunchPad> = emptyList()
     private var expandedPosition = -1
-    private var expandIconRotationAngle = 0f
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -30,30 +29,22 @@ class LaunchPadsAdapter(private val itemClickListener: OnItemClickListener) :
     override fun getItemCount(): Int = launchPadsList.size
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // private val launchPadId: TextView = itemView.text_launch_pad_id
         private val launchPadLocationName: TextView = itemView.text_launch_pad_location_name
         private val launchPadRegion: TextView = itemView.text_launch_pad_region
-        // private val launchPadStatus: TextView = itemView.text_launch_pad_status
+        private val launchPadStatus: TextView = itemView.text_launch_pad_status
         private val locationPin: ImageView = itemView.image_location_pin
         private val details: TextView = itemView.text_details
         private val attemptedLaunches: TextView = itemView.text_attempted_launches
         private val successfulLaunches: TextView = itemView.text_successful_launches
-        private val expandMoreImage: ImageView = itemView.image_expand_collapse
+        private val imageExpandIndicator: ImageView = itemView.image_expand
 
         fun bind(launchPad: LaunchPad, itemClickListener: OnItemClickListener) {
-            // launchPadId.text = launchPad.siteId
             launchPadLocationName.text = launchPad.location.name
             launchPadRegion.text = launchPad.location.region
-            // launchPadStatus.text = launchPad.status
+            launchPadStatus.text = launchPad.status
+            attemptedLaunches.text = launchPad.attemptedLaunches.toString()
+            successfulLaunches.text = launchPad.successfulLaunches.toString()
             details.text = launchPad.details
-            attemptedLaunches.text = itemView.resources.getString(
-                R.string.attempted_launches_with_number_template,
-                launchPad.attemptedLaunches
-            )
-            successfulLaunches.text = itemView.resources.getString(
-                R.string.successful_launches_with_number_template,
-                launchPad.successfulLaunches
-            )
 
             // Intent to Google Maps on location pin click
             locationPin.setOnClickListener {
@@ -68,12 +59,13 @@ class LaunchPadsAdapter(private val itemClickListener: OnItemClickListener) :
 
             // Handle expand / collapse item
             val isExpanded = adapterPosition == expandedPosition
-            itemView.linear_expandable_part.visibility =
-                if (isExpanded) View.VISIBLE else View.GONE
+            itemView.item_expandable_part.visibility = if (isExpanded) View.VISIBLE else View.GONE
             itemView.isActivated = isExpanded
             itemView.setOnClickListener {
-                expandIconRotationAngle = if (expandIconRotationAngle == 0f) 180f else 0f
-                expandMoreImage.animate().rotation(expandIconRotationAngle).setDuration(250).start()
+                imageExpandIndicator.setImageResource(
+                    if (isExpanded) R.drawable.ic_expand_less_24dp
+                    else R.drawable.ic_expand_more_24dp
+                )
                 expandedPosition = if (isExpanded) -1 else adapterPosition
                 notifyItemChanged(adapterPosition)
             }
