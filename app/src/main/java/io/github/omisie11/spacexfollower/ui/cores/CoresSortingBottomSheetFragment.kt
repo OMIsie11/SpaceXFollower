@@ -33,6 +33,8 @@ class CoresSortingBottomSheetFragment : BottomSheetDialogFragment() {
                 BY_SERIAL_OLDEST -> radio_group_sorting.check(radio_button_serial_oldest.id)
                 BY_BLOCK_ASCENDING -> radio_group_sorting.check(radio_button_block_asc.id)
                 BY_BLOCK_DESCENDING -> radio_group_sorting.check(radio_button_block_desc.id)
+                BY_STATUS_ACTIVE_FIRST -> radio_group_sorting.check(radio_button_status_asc.id)
+                BY_STATUS_ACTIVE_LAST -> radio_group_sorting.check(radio_button_status_desc.id)
             }
         })
 
@@ -50,6 +52,12 @@ class CoresSortingBottomSheetFragment : BottomSheetDialogFragment() {
                 }
                 radio_button_block_desc.id -> {
                     viewModel.setCoresSortingOrder(BY_BLOCK_DESCENDING)
+                }
+                radio_button_status_asc.id -> {
+                    viewModel.setCoresSortingOrder(BY_STATUS_ACTIVE_FIRST)
+                }
+                radio_button_status_desc.id -> {
+                    viewModel.setCoresSortingOrder(BY_STATUS_ACTIVE_LAST)
                 }
             }
             if (isVisible) dismiss()

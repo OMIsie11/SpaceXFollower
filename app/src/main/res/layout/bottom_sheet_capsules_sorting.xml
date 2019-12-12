@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorSecondary"
-            android:text="@string/capsule_serial_newest"
+            android:text="@string/serial_newest"
             android:textColor="@color/colorOnSurface" />
 
         <RadioButton
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorSecondary"
-            android:text="@string/capsule_serial_oldest"
+            android:text="@string/serial_oldest"
             android:textColor="@color/colorOnSurface" />
 
         <RadioButton
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorSecondary"
-            android:text="@string/capsule_status_active_first"
+            android:text="@string/status_active_first"
             android:textColor="@color/colorOnSurface" />
 
         <RadioButton
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorSecondary"
-            android:text="@string/capsule_status_active_last"
+            android:text="@string/status_active_last"
             android:textColor="@color/colorOnSurface" />
     </RadioGroup>
 

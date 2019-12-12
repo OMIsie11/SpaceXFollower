@@ -74,11 +74,18 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
             CoresSortingOrder.BY_BLOCK_DESCENDING -> {
                 cores.sortedByDescending { it.block }
             }
+            CoresSortingOrder.BY_STATUS_ACTIVE_FIRST -> {
+                cores.sortedBy { it.status }
+            }
+            CoresSortingOrder.BY_STATUS_ACTIVE_LAST -> {
+                cores.sortedByDescending { it.status }
+            }
             else -> cores.sortedByDescending { it._id }
         })
     }
 
     enum class CoresSortingOrder {
-        BY_SERIAL_NEWEST, BY_SERIAL_OLDEST, BY_BLOCK_ASCENDING, BY_BLOCK_DESCENDING
+        BY_SERIAL_NEWEST, BY_SERIAL_OLDEST, BY_BLOCK_ASCENDING, BY_BLOCK_DESCENDING,
+        BY_STATUS_ACTIVE_FIRST, BY_STATUS_ACTIVE_LAST
     }
 }

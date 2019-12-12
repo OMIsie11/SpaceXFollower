@@ -77,6 +77,8 @@ class CoresFragment : Fragment(), CoresAdapter.OnItemClickListener {
                 CoresSortingOrder.BY_SERIAL_OLDEST -> getString(R.string.serial_oldest)
                 CoresSortingOrder.BY_BLOCK_ASCENDING -> getString(R.string.block_ascending)
                 CoresSortingOrder.BY_BLOCK_DESCENDING -> getString(R.string.block_descending)
+                CoresSortingOrder.BY_STATUS_ACTIVE_FIRST -> getString(R.string.status_active_first)
+                CoresSortingOrder.BY_STATUS_ACTIVE_LAST -> getString(R.string.status_active_last)
                 else -> getString(R.string.serial_oldest)
             }
         })
