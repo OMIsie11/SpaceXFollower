@@ -75,6 +75,8 @@ class CapsulesFragment : Fragment(), CapsulesAdapter.OnItemClickListener {
             button_sorting.text = when (sortingOrder) {
                 CapsulesSortingOrder.BY_SERIAL_NEWEST -> getString(R.string.serial_newest)
                 CapsulesSortingOrder.BY_SERIAL_OLDEST -> getString(R.string.serial_oldest)
+                CapsulesSortingOrder.BY_STATUS_ACTIVE_FIRST -> "Status: active first"
+                CapsulesSortingOrder.BY_STATUS_ACTIVE_LAST -> "Status: active last"
                 else -> getString(R.string.serial_oldest)
             }
         })

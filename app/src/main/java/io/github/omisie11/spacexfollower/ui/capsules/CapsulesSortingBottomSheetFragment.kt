@@ -9,6 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.omisie11.spacexfollower.R
 import kotlinx.android.synthetic.main.bottom_sheet_capsules_sorting.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import io.github.omisie11.spacexfollower.ui.capsules.CapsulesViewModel.CapsulesSortingOrder.*
 
 class CapsulesSortingBottomSheetFragment : BottomSheetDialogFragment() {
 
@@ -28,12 +29,10 @@ class CapsulesSortingBottomSheetFragment : BottomSheetDialogFragment() {
             selectedSorting = sortingOrder
 
             when (selectedSorting) {
-                CapsulesViewModel.CapsulesSortingOrder.BY_SERIAL_NEWEST -> radio_group_sorting.check(
-                    radio_button_serial_newest.id
-                )
-                CapsulesViewModel.CapsulesSortingOrder.BY_SERIAL_OLDEST -> radio_group_sorting.check(
-                    radio_button_serial_oldest.id
-                )
+                BY_SERIAL_NEWEST -> radio_group_sorting.check(radio_button_serial_newest.id)
+                BY_SERIAL_OLDEST -> radio_group_sorting.check(radio_button_serial_oldest.id)
+                BY_STATUS_ACTIVE_FIRST -> radio_group_sorting.check(radio_button_status_asc.id)
+                BY_STATUS_ACTIVE_LAST -> radio_group_sorting.check(radio_button_status_desc.id)
             }
         })
 
@@ -41,16 +40,16 @@ class CapsulesSortingBottomSheetFragment : BottomSheetDialogFragment() {
         radio_group_sorting.setOnCheckedChangeListener { group, checkedId ->
             when (group.checkedRadioButtonId) {
                 radio_button_serial_newest.id -> {
-                    viewModel.setCapsulesSortingOrder(
-                        CapsulesViewModel
-                            .CapsulesSortingOrder.BY_SERIAL_NEWEST
-                    )
+                    viewModel.setCapsulesSortingOrder(BY_SERIAL_NEWEST)
                 }
                 radio_button_serial_oldest.id -> {
-                    viewModel.setCapsulesSortingOrder(
-                        CapsulesViewModel
-                            .CapsulesSortingOrder.BY_SERIAL_OLDEST
-                    )
+                    viewModel.setCapsulesSortingOrder(BY_SERIAL_OLDEST)
+                }
+                radio_button_status_asc.id -> {
+                    viewModel.setCapsulesSortingOrder(BY_STATUS_ACTIVE_FIRST)
+                }
+                radio_button_status_desc.id -> {
+                    viewModel.setCapsulesSortingOrder(BY_STATUS_ACTIVE_LAST)
                 }
             }
             if (isVisible) dismiss()

@@ -163,5 +163,7 @@
     <string name="successful_launches">Successful launches</string>
     <string name="content_desc_image_expand_collapse">Icon indicating if location item is collapsed or expanded</string>
     <string name="content_desc_image_location_pin">Image with location pin</string>
+    <string name="capsule_status_active_first">Capsule status: active first</string>
+    <string name="capsule_status_active_last">Capsule status: active last</string>
 
 </resources>

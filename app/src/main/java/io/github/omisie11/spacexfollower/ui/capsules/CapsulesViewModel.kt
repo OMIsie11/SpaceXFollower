@@ -68,10 +68,19 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
             CapsulesSortingOrder.BY_SERIAL_OLDEST -> {
                 capsules.sortedBy { it._id }
             }
+            CapsulesSortingOrder.BY_STATUS_ACTIVE_FIRST -> {
+                capsules.sortedBy { it.status }
+            }
+            CapsulesSortingOrder.BY_STATUS_ACTIVE_LAST -> {
+                capsules.sortedByDescending { it.status }
+            }
             else -> capsules.sortedByDescending { it._id }
         })
     }
 
     // Class representing all possible sort orders of capsules
-    enum class CapsulesSortingOrder { BY_SERIAL_NEWEST, BY_SERIAL_OLDEST }
+    enum class CapsulesSortingOrder {
+        BY_SERIAL_NEWEST, BY_SERIAL_OLDEST,
+        BY_STATUS_ACTIVE_FIRST, BY_STATUS_ACTIVE_LAST
+    }
 }
