@@ -9,6 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.omisie11.spacexfollower.R
 import kotlinx.android.synthetic.main.bottom_sheet_cores_sorting.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel.CoresSortingOrder.*
 
 class CoresSortingBottomSheetFragment : BottomSheetDialogFragment() {
 
@@ -28,12 +29,10 @@ class CoresSortingBottomSheetFragment : BottomSheetDialogFragment() {
             selectedSorting = sortingOrder
 
             when (selectedSorting) {
-                CoresViewModel.CoresSortingOrder.BY_SERIAL_NEWEST -> radio_group_sorting.check(
-                    radio_button_serial_newest.id
-                )
-                CoresViewModel.CoresSortingOrder.BY_SERIAL_OLDEST -> radio_group_sorting.check(
-                    radio_button_serial_oldest.id
-                )
+                BY_SERIAL_NEWEST -> radio_group_sorting.check(radio_button_serial_newest.id)
+                BY_SERIAL_OLDEST -> radio_group_sorting.check(radio_button_serial_oldest.id)
+                BY_BLOCK_ASCENDING -> radio_group_sorting.check(radio_button_block_asc.id)
+                BY_BLOCK_DESCENDING -> radio_group_sorting.check(radio_button_block_desc.id)
             }
         })
 
@@ -41,16 +40,16 @@ class CoresSortingBottomSheetFragment : BottomSheetDialogFragment() {
         radio_group_sorting.setOnCheckedChangeListener { group, checkedId ->
             when (group.checkedRadioButtonId) {
                 radio_button_serial_newest.id -> {
-                    viewModel.setCoresSortingOrder(
-                        CoresViewModel
-                            .CoresSortingOrder.BY_SERIAL_NEWEST
-                    )
+                    viewModel.setCoresSortingOrder(BY_SERIAL_NEWEST)
                 }
                 radio_button_serial_oldest.id -> {
-                    viewModel.setCoresSortingOrder(
-                        CoresViewModel
-                            .CoresSortingOrder.BY_SERIAL_OLDEST
-                    )
+                    viewModel.setCoresSortingOrder(BY_SERIAL_OLDEST)
+                }
+                radio_button_block_asc.id -> {
+                    viewModel.setCoresSortingOrder(BY_BLOCK_ASCENDING)
+                }
+                radio_button_block_desc.id -> {
+                    viewModel.setCoresSortingOrder(BY_BLOCK_DESCENDING)
                 }
             }
             if (isVisible) dismiss()

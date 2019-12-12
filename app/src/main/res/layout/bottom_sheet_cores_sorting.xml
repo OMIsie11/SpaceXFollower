@@ -49,6 +49,22 @@
             android:buttonTint="@color/colorSecondary"
             android:text="@string/core_serial_oldest"
             android:textColor="@color/colorOnSurface" />
+
+        <RadioButton
+            android:id="@+id/radio_button_block_asc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorSecondary"
+            android:text="@string/core_block_ascending"
+            android:textColor="@color/colorOnSurface" />
+
+        <RadioButton
+            android:id="@+id/radio_button_block_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorSecondary"
+            android:text="@string/core_block_descending"
+            android:textColor="@color/colorOnSurface" />
     </RadioGroup>
 
 </LinearLayout>

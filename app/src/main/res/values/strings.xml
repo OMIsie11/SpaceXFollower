@@ -165,5 +165,9 @@
     <string name="content_desc_image_location_pin">Image with location pin</string>
     <string name="capsule_status_active_first">Capsule status: active first</string>
     <string name="capsule_status_active_last">Capsule status: active last</string>
+    <string name="block_ascending">Block: ascending</string>
+    <string name="block_descending">Block: descending</string>
+    <string name="core_block_ascending">Core block: ascending</string>
+    <string name="core_block_descending">Core block: descending</string>
 
 </resources>
