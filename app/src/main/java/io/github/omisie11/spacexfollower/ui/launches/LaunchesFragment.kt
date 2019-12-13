@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
@@ -94,6 +95,21 @@ class LaunchesFragment : Fragment(), LaunchesAdapter.OnItemClickListener {
                 LaunchesSortingBottomSheetFragment.TAG
             )
         }
+
+        fab_scroll_to_top.setOnClickListener {
+            recyclerView.layoutManager?.smoothScrollToPosition(recyclerView, null, 0)
+        }
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy < 0 && fab_scroll_to_top.visibility == View.VISIBLE) {
+                    fab_scroll_to_top.hide()
+                } else if (dy > 0 && fab_scroll_to_top.visibility != View.VISIBLE) {
+                    fab_scroll_to_top.show()
+                }
+            }
+        })
     }
 
     override fun onResume() {
