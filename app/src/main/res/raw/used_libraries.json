@@ -84,9 +84,9 @@
         "repositoryUrl": "https://github.com/JakeWharton/ThreeTenABP"
     },
     {
-        "name": "Coil",
-        "description": "AImage loading for Android backed by Kotlin Coroutines.",
+        "name": "Picasso",
+        "description": "A powerful image downloading and caching library for Android",
         "license": "Apache-2.0",
-        "repositoryUrl": "https://coil-kt.github.io/coil/"
+        "repositoryUrl": "https://square.github.io/picasso"
     }
 ]

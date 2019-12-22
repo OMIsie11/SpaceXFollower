@@ -1,14 +1,12 @@
 package io.github.omisie11.spacexfollower.ui.launches
 
-import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
+import com.squareup.picasso.Picasso
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
@@ -45,18 +43,14 @@ class LaunchesAdapter(private val itemClickListener: OnItemClickListener) :
                 if (launch.launchDateUnix != null) getLocalTimeFromUnix(launch.launchDateUnix) else
                     itemView.context.getString(R.string.launch_date_null)
             missionNameTextView.text = launch.missionName
-            missionPatchImage.apply {
-                if (!launch.links.missionPatchSmall.isNullOrBlank()) {
-                    load(launch.links.missionPatchSmall) {
-                        placeholder(
-                            ColorDrawable(
-                                ContextCompat.getColor(
-                                    itemView.context, R.color.horizontalDividerBackground
-                                )
-                            )
-                        )
-                    }
-                }
+            if (!launch.links.missionPatchSmall.isNullOrBlank()) {
+                Picasso.get()
+                    .load(launch.links.missionPatchSmall)
+                    .placeholder(R.drawable.ic_circle_48dp)
+                    .fit()
+                    .centerInside()
+                    .tag(itemView.context)
+                    .into(missionPatchImage)
             }
 
             itemView.setOnClickListener {

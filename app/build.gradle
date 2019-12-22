@@ -15,10 +15,6 @@ android {
         versionName "1.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
     buildTypes {
         release {
             minifyEnabled true
@@ -28,11 +24,6 @@ android {
     }
     testOptions {
         unitTests.returnDefaultValues = true
-    }
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-        kotlinOptions {
-            jvmTarget = "1.8"
-        }
     }
 }
 
@@ -70,9 +61,9 @@ dependencies {
     //Lottie
     implementation "com.airbnb.android:lottie:$rootProject.lottie_version"
     // ThreeTenABP
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
-    // Coil
-    implementation "io.coil-kt:coil:$rootProject.coil_version"
+    implementation "com.jakewharton.threetenabp:threetenabp:$rootProject.threetenabp_version"
+    // Picasso
+    implementation "com.squareup.picasso:picasso:$rootProject.picasso_version"
     // Testing dependencies
     // Core library
     androidTestImplementation "androidx.test:core:$rootProject.test_core_version"
