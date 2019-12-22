@@ -12,7 +12,7 @@
 
     <color name="colorError">#cf6679</color>
     <color name="colorOnError">#000000</color>
-    <color name="colorSurface">#484848</color>
+    <color name="colorSurface">#121212</color>
     <color name="colorOnSurface">#ffffff</color>
     <color name="colorBackground">#212121</color>
     <color name="colorOnBackground">#ffffff</color>
