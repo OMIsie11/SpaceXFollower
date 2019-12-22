@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
+import com.squareup.picasso.Picasso
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
@@ -57,6 +58,18 @@ class LaunchesDetailFragment : Fragment() {
             .observe(viewLifecycleOwner, Observer<List<Launch>> { launches ->
                 if (launches != null) {
                     val launch = launches[selectedLaunchId]
+
+                    if (launch.links.missionPatchSmall.isNullOrBlank()) {
+                        image_mission_patch.visibility = View.GONE
+                    } else {
+                        Picasso.get()
+                            .load(launch.links.missionPatchSmall)
+                            .placeholder(R.drawable.ic_circle_48dp)
+                            .fit()
+                            .centerInside()
+                            .tag(this)
+                            .into(image_mission_patch)
+                    }
 
                     text_flight_number.text = launch.flightNumber.toString()
                     text_mission_name.text = launch.missionName
