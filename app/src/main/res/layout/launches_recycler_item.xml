@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_toStartOf="@id/image_mission_patch"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         tools:text="Flight number: 85" />
@@ -36,27 +37,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/text_mission_name"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         tools:text="2007-03-21T01:10:00.000Z" />
 
-    <TextView
-        android:id="@+id/textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/image_mission_patch"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/launch_site" />
-
-    <TextView
-        android:id="@+id/text_launch_site"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textview"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
-        android:maxWidth="100dp"
-        tools:text="CCAFS SLC 40" />
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/image_with_mission_patch" />
 
 </RelativeLayout>

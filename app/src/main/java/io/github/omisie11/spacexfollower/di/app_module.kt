@@ -94,7 +94,7 @@ val companyModule = module {
     viewModel { CompanyViewModel(get()) }
 }
 
-val upcomingLaunchesModule = module {
+val launchesModule = module {
 
     single { get<SpaceDatabase>().upcomingLaunchesDao() }
 

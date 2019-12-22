@@ -82,5 +82,11 @@
         "description": "An adaptation of the JSR-310 backport for Android.",
         "license": "Apache-2.0",
         "repositoryUrl": "https://github.com/JakeWharton/ThreeTenABP"
+    },
+    {
+        "name": "Coil",
+        "description": "AImage loading for Android backed by Kotlin Coroutines.",
+        "license": "Apache-2.0",
+        "repositoryUrl": "https://coil-kt.github.io/coil/"
     }
 ]

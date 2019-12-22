@@ -1,10 +1,14 @@
 package io.github.omisie11.spacexfollower.ui.launches
 
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
@@ -30,7 +34,7 @@ class LaunchesAdapter(private val itemClickListener: OnItemClickListener) :
         private val flightNumberTextView: TextView = itemView.text_flight_number
         private val launchDateTextView: TextView = itemView.text_launch_date
         private val missionNameTextView: TextView = itemView.text_mission_name
-        private val launchSiteTextView: TextView = itemView.text_launch_site
+        private val missionPatchImage: ImageView = itemView.image_mission_patch
 
         fun bind(launch: Launch, itemClickListener: OnItemClickListener) {
             flightNumberTextView.text = itemView.context.resources.getString(
@@ -41,7 +45,19 @@ class LaunchesAdapter(private val itemClickListener: OnItemClickListener) :
                 if (launch.launchDateUnix != null) getLocalTimeFromUnix(launch.launchDateUnix) else
                     itemView.context.getString(R.string.launch_date_null)
             missionNameTextView.text = launch.missionName
-            launchSiteTextView.text = launch.launch_site.siteName
+            missionPatchImage.apply {
+                if (!launch.links.missionPatchSmall.isNullOrBlank()) {
+                    load(launch.links.missionPatchSmall) {
+                        placeholder(
+                            ColorDrawable(
+                                ContextCompat.getColor(
+                                    itemView.context, R.color.horizontalDividerBackground
+                                )
+                            )
+                        )
+                    }
+                }
+            }
 
             itemView.setOnClickListener {
                 if (adapterPosition != -1) itemClickListener.onItemClicked(

@@ -20,7 +20,7 @@ class LaunchesViewModel(
     private val _sortingOrder = MutableLiveData<LaunchesSortingOrder>()
 
     init {
-        _sortingOrder.value = LaunchesSortingOrder.BY_FLIGHT_NUMBER_NEWEST
+        _sortingOrder.value = LaunchesSortingOrder.BY_FLIGHT_NUMBER_OLDEST
 
         viewModelScope.launch(Dispatchers.IO) {
             repository.getAllLaunchesFlow()
@@ -70,7 +70,7 @@ class LaunchesViewModel(
             LaunchesSortingOrder.BY_FLIGHT_NUMBER_OLDEST -> {
                 launches.sortedBy { it.flightNumber }
             }
-            else -> launches.sortedByDescending { it.flightNumber }
+            else -> launches.sortedBy { it.flightNumber }
         })
     }
 

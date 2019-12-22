@@ -5,7 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.github.omisie11.spacexfollower.data.model.launch.LaunchSite
 
-// Used for Next NextLaunch
+// Used for Launch
 class LaunchSiteConverter {
 
     private val gson = Gson()

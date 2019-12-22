@@ -11,12 +11,12 @@ import io.github.omisie11.spacexfollower.data.model.launch.Launch
 @Database(
     entities = [Capsule::class, Core::class, Company::class, Launch::class,
         LaunchPad::class],
-    version = 3
+    version = 4
 )
 @TypeConverters(
     value = [MissionsConverter::class, HeadquarterConverter::class,
         RocketConverter::class, LaunchSiteConverter::class, JsonArrayToStringConverter::class,
-        LaunchPadLocationConverter::class]
+        LaunchPadLocationConverter::class, LaunchLinksConverter::class]
 )
 abstract class SpaceDatabase : RoomDatabase() {
 

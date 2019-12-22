@@ -36,7 +36,7 @@ class MyApplication : Application() {
             modules(
                 listOf(
                     appModule, remoteDataSourceModule, capsulesModule,
-                    coresModule, companyModule, upcomingLaunchesModule,
+                    coresModule, companyModule, launchesModule,
                     launchPadsModule, dashboardModule, aboutModule
                 )
             )
