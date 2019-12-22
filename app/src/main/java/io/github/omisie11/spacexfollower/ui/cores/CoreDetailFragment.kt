@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.squareup.picasso.Picasso
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Core
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
@@ -60,12 +61,14 @@ class CoreDetailFragment : Fragment() {
         // Randomly set image from resources
         val imageId = Random.nextInt(0, 5)
         val imagesArray = resources.obtainTypedArray(R.array.detail_fragment_images)
-        image_core.setImageResource(
-            imagesArray.getResourceId(
-                imageId,
-                R.drawable.detail_fragment_image_capsule_dragon
+        Picasso.get()
+            .load(
+                imagesArray.getResourceId(
+                    imageId,
+                    R.drawable.detail_fragment_image_capsule_dragon
+                )
             )
-        )
+            .into(image_core)
         imagesArray.recycle()
 
         val attributionBottomSheetDialog = BottomSheetDialog(activity!!)
