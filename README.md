@@ -21,6 +21,7 @@ Application is using open source [Space X REST API](https://github.com/r-spacex/
 * [Timber](https://github.com/JakeWharton/timber)
 * [LeakCanary](https://square.github.io/leakcanary/)
 * [ThreeTenABP](https://github.com/JakeWharton/ThreeTenABP)
+* [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)
 * Navigation component
 * Room database
 * LiveData, ViewModel
