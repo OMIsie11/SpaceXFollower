@@ -95,7 +95,11 @@ val launch1 = Launch(
                 )
             )
         )
-    ), null
+    ), Launch.Links(
+        "", "", "", "",
+        "", "", "", "", "", ""
+    ),
+    "No details"
 )
 
 val launch2 = Launch(
@@ -129,6 +133,9 @@ val launch2 = Launch(
                 )
             )
         )
+    ), Launch.Links(
+        "", "", "", "",
+        "", "", "", "", "", ""
     ), "Demonstration mission to ISS for NASA with an uncrewed Dragon 2 capsule."
 )
 

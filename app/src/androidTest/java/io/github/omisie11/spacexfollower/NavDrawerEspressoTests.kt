@@ -26,7 +26,21 @@ class NavDrawerEspressoTests {
     val activityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun clickOnNavDrawerOpenUpcomingLaunchesFragment() {
+    fun clickOnNavDrawerOpenDashboardFragment() {
+        // Open drawer
+        onView(withId(R.id.drawer_layout))
+            .check(matches(isClosed(Gravity.START)))
+            .perform(DrawerActions.open())
+        // Start fragment
+        onView(withId(R.id.navigation_view))
+            .perform(NavigationViewActions.navigateTo(R.id.dashboard_dest))
+        // Check if title text view is present
+        onView(withId(R.id.text_launches_chart_title))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun clickOnNavDrawerOpenAllLaunchesFragment() {
         // Open drawer
         onView(withId(R.id.drawer_layout))
             .check(matches(isClosed(Gravity.START)))
@@ -35,7 +49,7 @@ class NavDrawerEspressoTests {
         onView(withId(R.id.navigation_view))
             .perform(NavigationViewActions.navigateTo(R.id.launches_dest))
         // Check if fragment appeared
-        onView(withId(R.id.recycler_root_view))
+        onView(withId(R.id.root_recycler_sorting))
             .check(matches(isDisplayed()))
     }
 
@@ -48,7 +62,7 @@ class NavDrawerEspressoTests {
         onView(withId(R.id.navigation_view))
             .perform(NavigationViewActions.navigateTo(R.id.capsules_dest))
 
-        onView(withId(R.id.capsules_list_root_view))
+        onView(withId(R.id.root_recycler_sorting))
             .check(matches(isDisplayed()))
     }
 
@@ -60,6 +74,19 @@ class NavDrawerEspressoTests {
 
         onView(withId(R.id.navigation_view))
             .perform(NavigationViewActions.navigateTo(R.id.cores_dest))
+
+        onView(withId(R.id.root_recycler_sorting))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun clickOnNavDrawerOpenLaunchPadsFragment() {
+        onView(withId(R.id.drawer_layout))
+            .check(matches(isClosed(Gravity.START)))
+            .perform(DrawerActions.open())
+
+        onView(withId(R.id.navigation_view))
+            .perform(NavigationViewActions.navigateTo(R.id.launch_pads_dest))
 
         onView(withId(R.id.recycler_root_view))
             .check(matches(isDisplayed()))
@@ -79,19 +106,6 @@ class NavDrawerEspressoTests {
     }
 
     @Test
-    fun clickOnNavDrawerOpenLaunchPadsFragment() {
-        onView(withId(R.id.drawer_layout))
-            .check(matches(isClosed(Gravity.START)))
-            .perform(DrawerActions.open())
-
-        onView(withId(R.id.navigation_view))
-            .perform(NavigationViewActions.navigateTo(R.id.launch_pads_dest))
-
-        onView(withId(R.id.recycler_root_view))
-            .check(matches(isDisplayed()))
-    }
-
-    @Test
     fun clickOnNavDrawerOpenSettingsFragment() {
         onView(withId(R.id.drawer_layout))
             .check(matches(isClosed(Gravity.START)))
@@ -101,7 +115,8 @@ class NavDrawerEspressoTests {
             .perform(NavigationViewActions.navigateTo(R.id.settings_dest))
 
         // Check if settings are present by trying to click on each one
-        // RecyclerView actions are used because normal approach is not working with preferences from support lib
+        // RecyclerView actions are used because normal approach is not
+        // working with preferences from support lib
         onView(withId(R.id.recycler_view))
             .perform(
                 RecyclerViewActions.actionOnItem<RecyclerView.ViewHolder>(
