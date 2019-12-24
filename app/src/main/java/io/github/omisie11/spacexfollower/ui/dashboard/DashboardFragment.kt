@@ -138,7 +138,7 @@ class DashboardFragment : Fragment() {
 
     private fun setupPieStatsDataSetStyle(dataSet: PieDataSet) = dataSet.apply {
         colors = getPieChartColorsPalette()
-        valueTextColor = ContextCompat.getColor(context!!, R.color.pie_chart_text_color)
+        valueTextColor = ContextCompat.getColor(context!!, R.color.pieChartTextColor)
         valueTextSize = 16f
         valueFormatter = RoundNumbersValueFormatter()
     }
@@ -182,7 +182,7 @@ class DashboardFragment : Fragment() {
         setTouchEnabled(false)
         isHighlightPerTapEnabled = false
         setNoDataTextColor(ContextCompat.getColor(context!!, R.color.colorSecondary))
-        setEntryLabelColor(ContextCompat.getColor(context!!, R.color.pie_chart_text_color))
+        setEntryLabelColor(ContextCompat.getColor(context!!, R.color.pieChartTextColor))
         setHoleColor(ContextCompat.getColor(context!!, R.color.colorBackground))
         setNoDataTextColor(ContextCompat.getColor(context!!, R.color.colorSecondary))
         legend.textColor =
@@ -202,10 +202,10 @@ class DashboardFragment : Fragment() {
     )
 
     private fun getPieChartColorsPalette(): List<Int> = listOf(
-        ContextCompat.getColor(context!!, R.color.pie_chart_color_1),
-        ContextCompat.getColor(context!!, R.color.pie_chart_color_2),
-        ContextCompat.getColor(context!!, R.color.pie_chart_color_3),
-        ContextCompat.getColor(context!!, R.color.pie_chart_color_4),
-        ContextCompat.getColor(context!!, R.color.pie_chart_color_5)
+        ContextCompat.getColor(context!!, R.color.pieChartColor1),
+        ContextCompat.getColor(context!!, R.color.pieChartColor2),
+        ContextCompat.getColor(context!!, R.color.pieChartColor3),
+        ContextCompat.getColor(context!!, R.color.pieChartColor4),
+        ContextCompat.getColor(context!!, R.color.pieChartColor5)
     )
 }

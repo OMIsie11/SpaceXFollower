@@ -6,8 +6,8 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorOnPrimary">#ffffff</color>
     <color name="colorSecondary">#ffccbc</color>
-    <color name="colorSecondaryLight">#ffddc1</color>
-    <color name="colorSecondaryDark">#c97b63</color>
+    <color name="colorSecondaryLight">#ffffee</color>
+    <color name="colorSecondaryDark">#cb9b8c</color>
     <color name="colorOnSecondary">#212121</color>
 
     <color name="colorError">#cf6679</color>
@@ -24,13 +24,17 @@
 
     <color name="horizontalDividerBackground">#5f6368</color>
 
+    <color name="navDrawerItemBg">#cb9b8c</color>
+    <color name="navDrawerTextOnSecondary">@color/colorOnSecondary</color>
+    <color name="navDrawerTextOnSurface">#87ffffff</color>
+
     <!-- Colors used as a palette for pie chart -->
-    <color name="pie_chart_color_1">#80b39ddb</color>
-    <color name="pie_chart_color_2">#8080deea</color>
-    <color name="pie_chart_color_3">#80a5d6a7</color>
-    <color name="pie_chart_color_4">#80ffcc80</color>
-    <color name="pie_chart_color_5">#80ef9a9a</color>
+    <color name="pieChartColor1">#80b39ddb</color>
+    <color name="pieChartColor2">#8080deea</color>
+    <color name="pieChartColor3">#80a5d6a7</color>
+    <color name="pieChartColor4">#80ffcc80</color>
+    <color name="pieChartColor5">#80ef9a9a</color>
     
-    <color name="pie_chart_text_color">#000000</color>
+    <color name="pieChartTextColor">#000000</color>
 
 </resources>
