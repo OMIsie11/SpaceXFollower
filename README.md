@@ -7,7 +7,7 @@ Application is using open source [Space X REST API](https://github.com/r-spacex/
 
 **This application is not affiliated with, funded or in any other way associated with SpaceX company.**
 
-![space_app_screenshots](https://user-images.githubusercontent.com/31706606/61631590-0e307880-ac8b-11e9-8be7-6be10d68334c.png)
+![space_app_screenshots](https://user-images.githubusercontent.com/31706606/71360355-e756d500-258f-11ea-944c-716adb5dd47b.png)
 
 ## App is using:
 * Kotlin 💎
@@ -16,6 +16,12 @@ Application is using open source [Space X REST API](https://github.com/r-spacex/
 * [Retrofit](https://square.github.io/retrofit/)
 * [Lottie](http://airbnb.io/lottie/#/)
 * [ktlint](https://ktlint.github.io)
+* [Picasso](https://square.github.io/picasso/)
+* [GSON](https://github.com/google/gson)
+* [Timber](https://github.com/JakeWharton/timber)
+* [LeakCanary](https://square.github.io/leakcanary/)
+* [ThreeTenABP](https://github.com/JakeWharton/ThreeTenABP)
+* [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)
 * Navigation component
 * Room database
 * LiveData, ViewModel
