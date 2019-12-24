@@ -4,7 +4,7 @@ import io.github.omisie11.spacexfollower.util.shortenNumberAddPrefix
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class NumbersUtilsTests {
+class NumbersUtilsTestsShortenNumbers {
 
     // Tests for shortenNumberAddPrefix function
     @Test

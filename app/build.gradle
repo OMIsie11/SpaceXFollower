@@ -88,4 +88,8 @@ dependencies {
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.coroutines_android_version"
     // Leak Canary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leak_canary_version"
+    // Use ThreeTen BP for unit testing
+    testImplementation ('org.threeten:threetenbp:1.3.2'){
+        exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
+    }
 }
