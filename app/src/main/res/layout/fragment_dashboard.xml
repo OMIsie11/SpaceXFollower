@@ -120,53 +120,82 @@
             app:layout_constraintTop_toBottomOf="@+id/textView31"
             tools:text="135" />
 
-        <TextView
-            android:id="@+id/textView29"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/status_of_capsules"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView33" />
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/chart_capsules_status"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_capsules_chart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:minHeight="250dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+            app:layout_constraintTop_toBottomOf="@+id/textView33">
 
-        <TextView
-            android:id="@+id/textView35"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/status_of_cores"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chart_capsules_status" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/chart_cores_status"
+                <TextView
+                    android:id="@+id/textView29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/status_of_capsules"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/chart_capsules_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:minHeight="250dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_cores_chart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            android:minHeight="250dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView35" />
+            app:layout_constraintTop_toBottomOf="@+id/card_capsules_chart">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/status_of_cores"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/chart_cores_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:minHeight="250dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
