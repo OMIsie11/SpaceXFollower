@@ -78,30 +78,39 @@
                     tools:text="135" />
 
                 <TextView
-                    android:id="@+id/textView25"
+                    android:id="@+id/text_label_capsules"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="4dp"
                     android:text="@string/label_capsules"
+                    android:textColor="@color/colorSecondary"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/text_number_of_capsules"
                     app:layout_constraintStart_toStartOf="@+id/text_number_of_capsules"
                     app:layout_constraintTop_toBottomOf="@+id/text_number_of_capsules" />
 
                 <TextView
-                    android:id="@+id/textView33"
+                    android:id="@+id/text_label_launches"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:padding="4dp"
                     android:text="@string/launches"
+                    android:textColor="@color/colorSecondary"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/text_number_of_launches"
                     app:layout_constraintStart_toStartOf="@+id/text_number_of_launches"
                     app:layout_constraintTop_toBottomOf="@+id/text_number_of_launches" />
 
                 <TextView
-                    android:id="@+id/textView27"
+                    android:id="@+id/text_label_cores"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="4dp"
                     android:text="@string/label_cores"
+                    android:textColor="@color/colorSecondary"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/text_number_of_cores"
                     app:layout_constraintStart_toStartOf="@+id/text_number_of_cores"
                     app:layout_constraintTop_toBottomOf="@+id/text_number_of_cores" />

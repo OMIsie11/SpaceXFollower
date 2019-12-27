@@ -5,6 +5,7 @@ import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -83,6 +84,21 @@ class DashboardFragment : Fragment() {
                 childFragmentManager,
                 LaunchesChartYearBottomSheetFragment.TAG
             )
+        }
+
+        text_label_capsules.setOnClickListener {
+            findNavController()
+                .navigate(DashboardFragmentDirections.actionDashboardDestToCapsulesDest())
+        }
+
+        text_label_launches.setOnClickListener {
+            findNavController()
+                .navigate(DashboardFragmentDirections.actionDashboardDestToLaunchesDest())
+        }
+
+        text_label_cores.setOnClickListener {
+            findNavController()
+                .navigate(DashboardFragmentDirections.actionDashboardDestToCoresDest())
         }
     }
 

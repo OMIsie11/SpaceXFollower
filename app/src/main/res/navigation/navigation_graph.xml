@@ -101,5 +101,15 @@
         android:id="@+id/dashboard_dest"
         android:name="io.github.omisie11.spacexfollower.ui.dashboard.DashboardFragment"
         android:label="@string/label_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboard_dest_to_launches_dest"
+            app:destination="@id/launches_dest" />
+        <action
+            android:id="@+id/action_dashboard_dest_to_cores_dest"
+            app:destination="@id/cores_dest" />
+        <action
+            android:id="@+id/action_dashboard_dest_to_capsules_dest"
+            app:destination="@id/capsules_dest" />
+    </fragment>
 </navigation>
