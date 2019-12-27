@@ -4,25 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.transition.AutoTransition
-import androidx.transition.TransitionManager
-import com.squareup.picasso.Picasso
+import com.xwray.groupie.ExpandableGroup
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Section
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
-import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
-import io.github.omisie11.spacexfollower.util.toggleVisibility
+import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.ExpandableHeaderItem
+import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.LaunchDetailHeaderItem
+import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.PayloadItem
 import kotlinx.android.synthetic.main.fragment_launches_detail.*
+import kotlinx.android.synthetic.main.fragment_recycler.*
 import kotlinx.android.synthetic.main.launch_cores.view.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class LaunchesDetailFragment : Fragment() {
 
-    private lateinit var payloadsRecyclerViewAdapter: PayloadsRecyclerAdapter
+    private lateinit var groupAdapter: GroupAdapter<GroupieViewHolder>
     private val viewModel by sharedViewModel<LaunchesViewModel>()
     // Variable used in animating expand/collapse icon
     private var coresIconRotationAngle = 0f
@@ -35,7 +36,7 @@ class LaunchesDetailFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(
-            R.layout.fragment_launches_detail, container,
+            R.layout.fragment_recycler, container,
             false
         )
     }
@@ -43,94 +44,55 @@ class LaunchesDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        groupAdapter = GroupAdapter()
+
+        // Setup recyclerView
+        recyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(activity)
+            adapter = groupAdapter
+        }
+
         val safeArgs = arguments?.let { LaunchesDetailFragmentArgs.fromBundle(it) }
         val selectedLaunchId: Int = safeArgs?.itemId ?: 0
 
-        payloadsRecyclerViewAdapter = PayloadsRecyclerAdapter()
-        payloads_recycler.apply {
-            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(activity)
-            adapter = payloadsRecyclerViewAdapter
-        }
+        viewModel.getAllLaunches().observe(viewLifecycleOwner, Observer<List<Launch>> { launches ->
+            if (launches != null) {
+                val launch = launches[selectedLaunchId]
 
-        viewModel.getAllLaunches()
-            .observe(viewLifecycleOwner, Observer<List<Launch>> { launches ->
-                if (launches != null) {
-                    val launch = launches[selectedLaunchId]
+                // Implement diff utils in future
+                groupAdapter.clear()
 
-                    if (launch.links.missionPatchSmall.isNullOrBlank()) {
-                        image_mission_patch.visibility = View.GONE
-                    } else {
-                        Picasso.get()
-                            .load(launch.links.missionPatchSmall)
-                            .placeholder(R.drawable.ic_circle_48dp)
-                            .fit()
-                            .centerInside()
-                            .tag(this)
-                            .into(image_mission_patch)
-                    }
+                // Card with main info about launch
+                groupAdapter.add(
+                    LaunchDetailHeaderItem(
+                        launch.flightNumber,
+                        launch.links.missionPatchSmall,
+                        launch.missionName,
+                        launch.launchDateUnix,
+                        launch.launch_site.siteName
+                    )
+                )
 
-                    text_flight_number.text = launch.flightNumber.toString()
-                    text_mission_name.text = launch.missionName
-                    text_launch_date.text = if (launch.launchDateUnix != null)
-                        getLocalTimeFromUnix(launch.launchDateUnix) else
-                        getString(R.string.launch_date_null)
-                    text_launch_site_name.text = launch.launch_site.siteName
-
-                    // Dynamically add views for Cores used in flight
-                    if (launch.rocket.first_stage.cores == null) {
-                        val noCoresTextView = TextView(activity).apply {
-                            text = context.getString(R.string.no_cores_used_in_launch)
-                        }
-                        frame_cores_list.addView(noCoresTextView)
-                    } else {
-                        for (core in launch.rocket.first_stage.cores) {
-                            if (core.core_serial.isNullOrEmpty() || core.block == null ||
-                                core.flight == null
-                            ) {
-                                val noDataTextView = TextView(activity).apply {
-                                    text = context.getString(R.string.no_precision_info)
-                                }
-                                frame_cores_list.addView(noDataTextView)
-                            } else {
-                                val coreLinearLayout = layoutInflater.inflate(
-                                    R.layout.launch_cores,
-                                    frame_cores_list, false
-                                )
-                                frame_cores_list.addView(coreLinearLayout)
-                                coreLinearLayout.text_lib_name.text = core.core_serial
-                                coreLinearLayout.text_core_block.text =
-                                    resources.getString(R.string.block_number_template, core.block)
-                                coreLinearLayout.text_core_flight.text =
-                                    resources.getString(
-                                        R.string.flight_number_template,
-                                        core.flight
-                                    )
-                            }
-                        }
-                    }
-                    payloadsRecyclerViewAdapter.setData(launch.rocket.second_stage.payloads)
+                // Section with payloads carried in launch
+                val payloadsExpandableHeaderItem = ExpandableHeaderItem("Payloads")
+                val payloadsGroup = ExpandableGroup(payloadsExpandableHeaderItem)
+                launch.rocket.second_stage.payloads?.forEach {
+                    payloadsGroup.add(
+                        PayloadItem(
+                            it.nationality
+                        )
+                    )
                 }
-            })
+                groupAdapter.add(payloadsGroup)
 
-        val expandCardTransition = AutoTransition().apply { duration = 200 }
-        card_cores_list.setOnClickListener {
-            TransitionManager.beginDelayedTransition(card_cores_list, expandCardTransition)
 
-            frame_cores_list.toggleVisibility()
-            coresIconRotationAngle = if (coresIconRotationAngle == 0f) 180f else 0f
-            image_cores_expand_arrow.animate().rotation(coresIconRotationAngle).setDuration(250)
-                .start()
-        }
+            }
+        })
+    }
 
-        card_payloads.setOnClickListener {
-            TransitionManager.beginDelayedTransition(card_payloads, expandCardTransition)
-
-            frame_payloads.toggleVisibility()
-            payloadsIconRotationAngle = if (payloadsIconRotationAngle == 0f) 180f else 0f
-            image_payloads_expand_arrow.animate().rotation(payloadsIconRotationAngle)
-                .setDuration(250).start()
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        recyclerView.adapter = null
     }
 }
