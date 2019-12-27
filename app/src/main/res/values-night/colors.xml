@@ -24,7 +24,7 @@
 
     <color name="horizontalDividerBackground">#5f6368</color>
 
-    <color name="navDrawerItemBg">#cb9b8c</color>
+    <color name="navDrawerItemBg">@color/colorSecondary</color>
     <color name="navDrawerTextOnSecondary">@color/colorOnSecondary</color>
     <color name="navDrawerTextOnSurface">#87ffffff</color>
 
