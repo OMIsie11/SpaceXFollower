@@ -1,5 +1,7 @@
 package io.github.omisie11.spacexfollower.ui.launches
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,13 +17,12 @@ import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.ExpandableHeaderItem
 import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.LaunchDetailHeaderItem
+import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.LinkItem
 import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.PayloadItem
-import kotlinx.android.synthetic.main.fragment_launches_detail.*
 import kotlinx.android.synthetic.main.fragment_recycler.*
-import kotlinx.android.synthetic.main.launch_cores.view.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class LaunchesDetailFragment : Fragment() {
+class LaunchesDetailFragment : Fragment(), LinkItem.OnLinkItemClickListener {
 
     private lateinit var groupAdapter: GroupAdapter<GroupieViewHolder>
     private val viewModel by sharedViewModel<LaunchesViewModel>()
@@ -76,8 +77,8 @@ class LaunchesDetailFragment : Fragment() {
                 )
 
                 // Section with payloads carried in launch
-                val payloadsExpandableHeaderItem = ExpandableHeaderItem("Payloads")
-                val payloadsGroup = ExpandableGroup(payloadsExpandableHeaderItem)
+                val payloadsHeaderItem = ExpandableHeaderItem("Payloads")
+                val payloadsGroup = ExpandableGroup(payloadsHeaderItem)
                 launch.rocket.second_stage.payloads?.forEach { payload ->
                     payloadsGroup.add(
                         PayloadItem(
@@ -93,6 +94,24 @@ class LaunchesDetailFragment : Fragment() {
                     )
                 }
                 groupAdapter.add(payloadsGroup)
+
+                // Section with links
+                val linksHeaderItem = ExpandableHeaderItem("Links")
+                val linksGroup = ExpandableGroup(linksHeaderItem)
+
+                val linksAndNamesList = launch.links.getLinksWithNamesAsList()
+                linksAndNamesList.forEach {
+                    if (it.second != null && it.second!!.isNotBlank()) {
+                        linksGroup.add(
+                            LinkItem(
+                                it.first,
+                                it.second!!,
+                                this
+                            )
+                        )
+                    }
+                }
+                groupAdapter.add(linksGroup)
             }
         })
     }
@@ -100,5 +119,18 @@ class LaunchesDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         recyclerView.adapter = null
+    }
+
+    override fun onLinkItemClicked(linkUrl: String) {
+        openWebUrl(linkUrl)
+    }
+
+    private fun openWebUrl(urlAddress: String) {
+        if (urlAddress.isNotEmpty()) startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(urlAddress)
+            )
+        )
     }
 }

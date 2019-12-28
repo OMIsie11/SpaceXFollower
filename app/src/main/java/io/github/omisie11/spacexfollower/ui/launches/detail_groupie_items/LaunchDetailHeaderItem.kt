@@ -5,7 +5,7 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
-import kotlinx.android.synthetic.main.launch_detail_header_item.view.*
+import kotlinx.android.synthetic.main.recycler_header_item.view.*
 
 open class LaunchDetailHeaderItem(
     private val flightNumber: Int,
@@ -15,7 +15,7 @@ open class LaunchDetailHeaderItem(
     private val siteName: String
 ) : Item() {
 
-    override fun getLayout(): Int = R.layout.launch_detail_header_item
+    override fun getLayout(): Int = R.layout.recycler_header_item
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.text_flight_number.text = flightNumber.toString()
