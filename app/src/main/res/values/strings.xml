@@ -164,5 +164,6 @@
     <string name="status_active_first">Status: active first</string>
     <string name="status_active_last">Status: active last</string>
     <string name="image_with_mission_patch">Image with mission patch</string>
+    <string name="no_info">No info</string>
 
 </resources>

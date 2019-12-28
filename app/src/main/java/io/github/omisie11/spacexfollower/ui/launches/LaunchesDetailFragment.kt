@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
@@ -49,6 +49,7 @@ class LaunchesDetailFragment : Fragment() {
         // Setup recyclerView
         recyclerView.apply {
             setHasFixedSize(true)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             layoutManager = LinearLayoutManager(activity)
             adapter = groupAdapter
         }
@@ -77,16 +78,21 @@ class LaunchesDetailFragment : Fragment() {
                 // Section with payloads carried in launch
                 val payloadsExpandableHeaderItem = ExpandableHeaderItem("Payloads")
                 val payloadsGroup = ExpandableGroup(payloadsExpandableHeaderItem)
-                launch.rocket.second_stage.payloads?.forEach {
+                launch.rocket.second_stage.payloads?.forEach { payload ->
                     payloadsGroup.add(
                         PayloadItem(
-                            it.nationality
+                            payload.payload_id,
+                            payload.nationality,
+                            payload.manufacturer,
+                            payload.payload_type,
+                            payload.payload_mass_kg,
+                            payload.orbit,
+                            payload.reused,
+                            payload.customers
                         )
                     )
                 }
                 groupAdapter.add(payloadsGroup)
-
-
             }
         })
     }
