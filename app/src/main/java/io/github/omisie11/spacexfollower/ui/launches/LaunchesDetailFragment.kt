@@ -15,10 +15,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
-import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.ExpandableHeaderItem
-import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.LaunchDetailHeaderItem
-import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.LinkItem
-import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.PayloadItem
+import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.*
 import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -26,9 +23,6 @@ class LaunchesDetailFragment : Fragment(), LinkItem.OnLinkItemClickListener {
 
     private lateinit var groupAdapter: GroupAdapter<GroupieViewHolder>
     private val viewModel by sharedViewModel<LaunchesViewModel>()
-    // Variable used in animating expand/collapse icon
-    private var coresIconRotationAngle = 0f
-    private var payloadsIconRotationAngle = 0f
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,6 +69,22 @@ class LaunchesDetailFragment : Fragment(), LinkItem.OnLinkItemClickListener {
                         launch.launch_site.siteName
                     )
                 )
+
+                // Section with cores carried in launch
+                val coresHeaderItem = ExpandableHeaderItem("Cores")
+                val coresGroup = ExpandableGroup(coresHeaderItem)
+                launch.rocket.first_stage.cores?.forEach { core ->
+                    coresGroup.add(
+                        CoreItem(
+                            core.core_serial,
+                            core.flight,
+                            core.block,
+                            core.reused,
+                            core.land_success
+                        )
+                    )
+                }
+                groupAdapter.add(coresGroup)
 
                 // Section with payloads carried in launch
                 val payloadsHeaderItem = ExpandableHeaderItem("Payloads")
