@@ -33,7 +33,7 @@
                 android:layout_marginEnd="8dp"/>
 
         <TextView
-                android:id="@+id/text_lib_name"
+                android:id="@+id/text_core_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/empty_content_sign"
@@ -50,7 +50,7 @@
                 android:text="@string/block"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/text_lib_name"
+                app:layout_constraintTop_toBottomOf="@+id/text_core_name"
                 app:layout_constraintStart_toStartOf="@+id/text_core_block"
                 app:layout_constraintEnd_toEndOf="@+id/text_core_block" android:layout_marginTop="8dp"/>
 

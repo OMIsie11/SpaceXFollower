@@ -40,7 +40,7 @@ class CoreDetailFragment : Fragment() {
         viewModel.getCores().observe(viewLifecycleOwner, Observer<List<Core>> { cores ->
             val core = cores[selectedCoreId]
 
-            text_lib_name.text = core.coreSerial
+            text_core_name.text = core.coreSerial
             text_core_block.text = if (core.block == null) "-" else core.block.toString()
             text_core_status.text = core.status
             text_lib_desc.text = if (core.originalLaunchUnix != null)
