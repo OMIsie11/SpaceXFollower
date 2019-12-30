@@ -164,5 +164,10 @@
     <string name="status_active_first">Status: active first</string>
     <string name="status_active_last">Status: active last</string>
     <string name="image_with_mission_patch">Image with mission patch</string>
-
+    <string name="no_info">No info</string>
+    <string name="flight">Flight</string>
+    <string name="landing">Landing</string>
+    <string name="unknown_core">Unknown Core</string>
+    <string name="payloads">Payloads</string>
+    <string name="links">Links</string>
 </resources>

@@ -64,6 +64,9 @@ dependencies {
     implementation "com.jakewharton.threetenabp:threetenabp:$rootProject.threetenabp_version"
     // Picasso
     implementation "com.squareup.picasso:picasso:$rootProject.picasso_version"
+    // Groupie
+    implementation "com.xwray:groupie:$rootProject.groupie_version"
+    implementation "com.xwray:groupie-kotlin-android-extensions:$rootProject.groupie_version"
     // Testing dependencies
     // Core library
     androidTestImplementation "androidx.test:core:$rootProject.test_core_version"

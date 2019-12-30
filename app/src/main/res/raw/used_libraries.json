@@ -88,5 +88,11 @@
         "description": "A powerful image downloading and caching library for Android",
         "license": "Apache-2.0",
         "repositoryUrl": "https://square.github.io/picasso"
+    },
+    {
+        "name": "Groupie",
+        "description": "Groupie helps you display and manage complex RecyclerView layouts",
+        "license": "MIT",
+        "repositoryUrl": "https://github.com/lisawray/groupie"
     }
 ]

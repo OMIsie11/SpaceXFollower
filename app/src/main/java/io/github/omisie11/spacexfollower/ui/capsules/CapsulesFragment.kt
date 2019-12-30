@@ -11,8 +11,8 @@ import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.Capsule
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesViewModel.CapsulesSortingOrder
-import kotlinx.android.synthetic.main.fragment_recycler.recyclerView
-import kotlinx.android.synthetic.main.fragment_recycler.swipeRefreshLayout
+import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.recyclerView
+import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.swipeRefreshLayout
 import kotlinx.android.synthetic.main.fragment_recycler_sorting.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.LaunchPad
-import kotlinx.android.synthetic.main.fragment_recycler.*
+import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
@@ -28,7 +28,7 @@ class LaunchPadsFragment : Fragment(), LaunchPadsAdapter.OnItemClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_recycler, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_recycler_swipe_refresh, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

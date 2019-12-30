@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
-import kotlinx.android.synthetic.main.fragment_recycler.recyclerView
-import kotlinx.android.synthetic.main.fragment_recycler.swipeRefreshLayout
+import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.recyclerView
+import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.swipeRefreshLayout
 import kotlinx.android.synthetic.main.fragment_recycler_sorting.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber

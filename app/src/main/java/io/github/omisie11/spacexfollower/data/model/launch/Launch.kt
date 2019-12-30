@@ -1,9 +1,6 @@
 package io.github.omisie11.spacexfollower.data.model.launch
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
+import androidx.room.*
 import com.google.gson.annotations.SerializedName
 import io.github.omisie11.spacexfollower.data.converters.JsonArrayToStringConverter
 import io.github.omisie11.spacexfollower.data.converters.LaunchLinksConverter
@@ -67,5 +64,18 @@ data class Launch(
         val wikipedia: String?,
         @SerializedName("video_link")
         val videoLink: String?
-    )
+    ) {
+
+        @Ignore
+        fun getLinksWithNamesAsList(): List<Pair<String, String?>> = listOf(
+            Pair("Reddit Campaign", redditCampaign),
+            Pair("Reddit Launch", redditLaunch),
+            Pair("Reddit Recovery", redditRecovery),
+            Pair("Reddit Media", redditMedia),
+            Pair("Presskit", presskit),
+            Pair("Article", articleLink),
+            Pair("Wikipedia", wikipedia),
+            Pair("Video", videoLink)
+        )
+    }
 }

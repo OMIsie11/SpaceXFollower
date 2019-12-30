@@ -29,7 +29,7 @@ class DetailDestinationsEspressoTests {
     val activityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun openUpcomingLaunchesDetailFragment() {
+    fun openLaunchesDetailFragment() {
         // Open drawer
         onView(withId(R.id.drawer_layout))
             .check(matches(isClosed(Gravity.START)))
@@ -38,7 +38,7 @@ class DetailDestinationsEspressoTests {
         onView(withId(R.id.navigation_view))
             .perform(NavigationViewActions.navigateTo(R.id.launches_dest))
         // Check if fragment appeared
-        onView(withId(R.id.recycler_root_view))
+        onView(withId(R.id.root_recycler_sorting))
             .check(matches(isDisplayed()))
         onView(withId(R.id.recyclerView))
             .perform(
@@ -62,7 +62,7 @@ class DetailDestinationsEspressoTests {
         onView(withId(R.id.navigation_view))
             .perform(NavigationViewActions.navigateTo(R.id.capsules_dest))
 
-        onView(withId(R.id.capsules_list_root_view))
+        onView(withId(R.id.root_recycler_sorting))
             .check(matches(isDisplayed()))
 
         onView(withId(R.id.recyclerView))
@@ -87,7 +87,7 @@ class DetailDestinationsEspressoTests {
         onView(withId(R.id.navigation_view))
             .perform(NavigationViewActions.navigateTo(R.id.cores_dest))
 
-        onView(withId(R.id.recycler_root_view))
+        onView(withId(R.id.root_recycler_sorting))
             .check(matches(isDisplayed()))
 
         onView(withId(R.id.recyclerView))
@@ -95,7 +95,7 @@ class DetailDestinationsEspressoTests {
                 RecyclerViewActions
                     .actionOnItemAtPosition<CoresAdapter.ViewHolder>(1, click())
             )
-        onView(withId(R.id.text_lib_name))
+        onView(withId(R.id.text_core_name))
             .check(matches(isDisplayed()))
         onView(withId(R.id.text_core_block))
             .check(matches(isDisplayed()))

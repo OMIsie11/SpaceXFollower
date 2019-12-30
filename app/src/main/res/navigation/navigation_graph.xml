@@ -20,7 +20,7 @@
             android:id="@+id/cores_dest"
             android:name="io.github.omisie11.spacexfollower.ui.cores.CoresFragment"
             android:label="@string/label_cores"
-            tools:layout="@layout/fragment_recycler">
+            tools:layout="@layout/fragment_recycler_swipe_refresh">
         <action
                 android:id="@+id/action_cores_dest_to_coresDetailFragment"
                 app:destination="@id/core_detail_dest"
@@ -65,7 +65,7 @@
             android:id="@+id/launches_dest"
             android:name="io.github.omisie11.spacexfollower.ui.launches.LaunchesFragment"
             android:label="@string/label_all_launches"
-            tools:layout="@layout/fragment_recycler">
+            tools:layout="@layout/fragment_recycler_swipe_refresh">
         <action android:id="@+id/action_upcoming_launches_dest_to_upcomingLaunchesDetailFragment"
                 app:destination="@id/launches_detail_dest"
                 app:enterAnim="@anim/nav_default_enter_anim"
