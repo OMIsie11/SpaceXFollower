@@ -3,7 +3,7 @@ package io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import io.github.omisie11.spacexfollower.R
-import kotlinx.android.synthetic.main.payload_recycler_item.view.*
+import kotlinx.android.synthetic.main.launch_payload_recycler_item.view.*
 
 open class PayloadItem(
     private val payloadId: String?,
@@ -16,7 +16,7 @@ open class PayloadItem(
     private val customers: List<String>
 ) : Item() {
 
-    override fun getLayout(): Int = R.layout.payload_recycler_item
+    override fun getLayout(): Int = R.layout.launch_payload_recycler_item
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         val noInfoString = viewHolder.itemView.context.getString(R.string.no_info)

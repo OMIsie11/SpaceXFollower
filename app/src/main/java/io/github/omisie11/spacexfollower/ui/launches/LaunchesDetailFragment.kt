@@ -16,7 +16,7 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.*
-import kotlinx.android.synthetic.main.fragment_recycler.*
+import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class LaunchesDetailFragment : Fragment(), LinkItem.OnLinkItemClickListener {
