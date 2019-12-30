@@ -15,7 +15,7 @@ class ExpandableHeaderItem(private val title: String) : Item(), ExpandableItem {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.text_title.text = title
-        viewHolder.itemView.image_icon.setImageResource(R.drawable.ic_expand_less_24dp)
+        viewHolder.itemView.image_icon.setImageResource(R.drawable.ic_expand_more_24dp)
 
         viewHolder.itemView.expandable_item_root.setOnClickListener {
             expandableGroup.onToggleExpanded()

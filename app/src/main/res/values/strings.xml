@@ -167,5 +167,5 @@
     <string name="no_info">No info</string>
     <string name="flight">Flight</string>
     <string name="landing">Landing</string>
-
+    <string name="unknown_core">Unknown Core</string>
 </resources>

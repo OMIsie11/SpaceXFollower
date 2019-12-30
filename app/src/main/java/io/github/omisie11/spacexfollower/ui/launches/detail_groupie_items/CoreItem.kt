@@ -18,7 +18,9 @@ class CoreItem(
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         val noInfoString = viewHolder.itemView.context.getString(R.string.no_info)
 
-        viewHolder.itemView.text_core_name.text = coreSerial
+        viewHolder.itemView.text_core_name.text = if (coreSerial.isNullOrEmpty()) {
+            viewHolder.itemView.context.getString(R.string.unknown_core)
+        } else coreSerial
         viewHolder.itemView.text_core_flight.text = flight?.toString() ?: noInfoString
         viewHolder.itemView.text_core_block.text = block?.toString() ?: noInfoString
         viewHolder.itemView.text_core_reused.text = if (reused == true) {
