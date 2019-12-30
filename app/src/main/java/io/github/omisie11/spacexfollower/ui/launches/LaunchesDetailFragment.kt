@@ -71,7 +71,7 @@ class LaunchesDetailFragment : Fragment(), LinkItem.OnLinkItemClickListener {
                 )
 
                 // Section with cores carried in launch
-                val coresHeaderItem = ExpandableHeaderItem("Cores")
+                val coresHeaderItem = ExpandableHeaderItem(getString(R.string.label_cores))
                 val coresGroup = ExpandableGroup(coresHeaderItem)
                 launch.rocket.first_stage.cores?.forEach { core ->
                     coresGroup.add(
@@ -87,7 +87,7 @@ class LaunchesDetailFragment : Fragment(), LinkItem.OnLinkItemClickListener {
                 groupAdapter.add(coresGroup)
 
                 // Section with payloads carried in launch
-                val payloadsHeaderItem = ExpandableHeaderItem("Payloads")
+                val payloadsHeaderItem = ExpandableHeaderItem(getString(R.string.payloads))
                 val payloadsGroup = ExpandableGroup(payloadsHeaderItem)
                 launch.rocket.second_stage.payloads?.forEach { payload ->
                     payloadsGroup.add(
@@ -106,7 +106,7 @@ class LaunchesDetailFragment : Fragment(), LinkItem.OnLinkItemClickListener {
                 groupAdapter.add(payloadsGroup)
 
                 // Section with links
-                val linksHeaderItem = ExpandableHeaderItem("Links")
+                val linksHeaderItem = ExpandableHeaderItem(getString(R.string.links))
                 val linksGroup = ExpandableGroup(linksHeaderItem)
 
                 val linksAndNamesList = launch.links.getLinksWithNamesAsList()

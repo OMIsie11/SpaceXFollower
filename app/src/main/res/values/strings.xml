@@ -168,4 +168,6 @@
     <string name="flight">Flight</string>
     <string name="landing">Landing</string>
     <string name="unknown_core">Unknown Core</string>
+    <string name="payloads">Payloads</string>
+    <string name="links">Links</string>
 </resources>
