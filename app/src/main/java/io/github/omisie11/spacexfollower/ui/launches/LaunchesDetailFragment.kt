@@ -15,6 +15,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
+import io.github.omisie11.spacexfollower.data.model.launch.Rocket
 import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.*
 import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -133,6 +134,82 @@ class LaunchesDetailFragment : Fragment(), LinkItem.OnLinkItemClickListener {
 
     override fun onLinkItemClicked(linkUrl: String) {
         openWebUrl(linkUrl)
+    }
+
+    private fun addLaunchDataToAdapter(launch: Launch) {
+        // Add card with main info about launch
+        groupAdapter.add(
+            LaunchDetailHeaderItem(
+                launch.flightNumber,
+                launch.links.missionPatchSmall,
+                launch.missionName,
+                launch.launchDateUnix,
+                launch.launch_site.siteName
+            )
+        )
+
+        // Screen section with cores carried in launch
+        addLaunchCoresToAdapter(launch.rocket.first_stage.cores)
+        // Screen section with payloads carried in launch
+        addLaunchPayloadsToAdapter(launch.rocket.second_stage.payloads)
+        // Screen section with links connected with launch
+        addLaunchLinksToAdapter(launch.links)
+    }
+
+    private fun addLaunchCoresToAdapter(launchCores: List<Rocket.Core>?) {
+        val coresHeaderItem = ExpandableHeaderItem(getString(R.string.label_cores))
+        val coresGroup = ExpandableGroup(coresHeaderItem)
+        launchCores?.forEach { core ->
+            coresGroup.add(
+                CoreItem(
+                    core.core_serial,
+                    core.flight,
+                    core.block,
+                    core.reused,
+                    core.land_success
+                )
+            )
+        }
+        groupAdapter.add(coresGroup)
+    }
+
+    private fun addLaunchPayloadsToAdapter(launchPayloads: List<Rocket.Payload>?) {
+        val payloadsHeaderItem = ExpandableHeaderItem(getString(R.string.payloads))
+        val payloadsGroup = ExpandableGroup(payloadsHeaderItem)
+        launchPayloads?.forEach { payload ->
+            payloadsGroup.add(
+                PayloadItem(
+                    payload.payload_id,
+                    payload.nationality,
+                    payload.manufacturer,
+                    payload.payload_type,
+                    payload.payload_mass_kg,
+                    payload.orbit,
+                    payload.reused,
+                    payload.customers
+                )
+            )
+        }
+        groupAdapter.add(payloadsGroup)
+    }
+
+    private fun addLaunchLinksToAdapter(launchLinks: Launch.Links) {
+        val linksHeaderItem = ExpandableHeaderItem(getString(R.string.links))
+        val linksGroup = ExpandableGroup(linksHeaderItem)
+
+        val linksAndNamesList = launchLinks.getLinksWithNamesAsList()
+        linksAndNamesList.forEach {
+            if (it.second != null && it.second!!.isNotBlank()) {
+                linksGroup.add(
+                    LinkItem(
+                        it.first,
+                        it.second!!,
+                        this
+                    )
+                )
+            }
+        }
+        groupAdapter.add(linksGroup)
     }
 
     private fun openWebUrl(urlAddress: String) {
