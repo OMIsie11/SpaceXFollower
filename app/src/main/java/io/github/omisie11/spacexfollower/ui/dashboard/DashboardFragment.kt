@@ -195,7 +195,8 @@ class DashboardFragment : Fragment() {
             xEntrySpace = 15f
         }
         isDrawHoleEnabled = true
-        setTouchEnabled(false)
+        setTouchEnabled(true)
+        isRotationEnabled = true
         isHighlightPerTapEnabled = false
         setNoDataTextColor(ContextCompat.getColor(context!!, R.color.colorSecondary))
         setEntryLabelColor(ContextCompat.getColor(context!!, R.color.pieChartTextColor))
