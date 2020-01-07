@@ -32,12 +32,15 @@ class LaunchesRepository(
     // Wrapper for getting all capsules from Db
     fun getAllLaunchesFlow(): Flow<List<Launch>> = allLaunchesDao.getAllLaunchesFlow()
 
-    suspend fun deleteAllUpcomingLaunches() =
+    suspend fun deleteAllLaunches() =
         withContext(Dispatchers.IO) { allLaunchesDao.deleteLaunchesData() }
 
     fun getLaunchesLoadingStatus(): LiveData<Boolean> = areLaunchesLoading
 
     fun getLaunchesSnackbar(): MutableLiveData<String> = launchesSnackBar
+
+    suspend fun getLaunchesLaterThanDate(startDateUnix: Long): List<Launch> =
+        allLaunchesDao.getLaunchesLaterThanDate(startDateUnix)
 
     suspend fun refreshIfLaunchesDataOld() {
         val isLaunchesRefreshNeeded = withContext(Dispatchers.IO) {
@@ -45,11 +48,11 @@ class LaunchesRepository(
         }
         if (isLaunchesRefreshNeeded) {
             Timber.d("refreshIfLaunchesDataOld: Refreshing Upcoming launches")
-            refreshUpcomingLaunches()
+            refreshLaunches()
         } else Timber.d("refreshIfLaunchesDataOld: No refresh needed")
     }
 
-    suspend fun refreshUpcomingLaunches() {
+    suspend fun refreshLaunches() {
         // Start loading process
         areLaunchesLoading.value = true
         Timber.d("refreshAllLaunches called")
@@ -92,7 +95,8 @@ class LaunchesRepository(
         val lastRefreshTime = sharedPrefs.getLong(sharedPrefsKey, 0)
         Timber.d("Current time in millis $currentTimeMillis")
         // Get refresh interval set in app settings (in hours) and multiply to get value in ms
-        val refreshIntervalHours = sharedPrefs.getString(PREFS_KEY_REFRESH_INTERVAL, "3")?.toInt() ?: 3
+        val refreshIntervalHours =
+            sharedPrefs.getString(PREFS_KEY_REFRESH_INTERVAL, "3")?.toInt() ?: 3
         val refreshInterval = refreshIntervalHours * 3600000
         Timber.d("Refresh Interval from settings: $refreshInterval")
         // If last refresh was made longer than interval, return true

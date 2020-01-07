@@ -26,6 +26,9 @@ interface AllLaunchesDao {
                 "BETWEEN :startDateUnix AND :endDateUnix")
     fun getLaunchesBetweenDatesFlow(startDateUnix: Long, endDateUnix: Long): Flow<List<Launch>>
 
+    @Query("SELECT * FROM upcoming_launches_table WHERE launch_date_unix > :startDateUnix")
+    suspend fun getLaunchesLaterThanDate(startDateUnix: Long): List<Launch>
+
     @Query("DELETE FROM upcoming_launches_table")
     suspend fun deleteLaunchesData()
 }

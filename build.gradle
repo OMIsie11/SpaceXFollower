@@ -47,6 +47,7 @@ ext {
     threetenabp_version = '1.2.1'
     picasso_version = '2.71828'
     groupie_version = '2.7.0'
+    work_manager_version = '2.2.0'
     lottie_version = '3.0.1'
     junit_version = '4.12'
     google_truth_version = '1.0'

@@ -25,6 +25,13 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 dependencies {
@@ -67,6 +74,8 @@ dependencies {
     // Groupie
     implementation "com.xwray:groupie:$rootProject.groupie_version"
     implementation "com.xwray:groupie-kotlin-android-extensions:$rootProject.groupie_version"
+    // WorkManager
+    implementation "androidx.work:work-runtime-ktx:$rootProject.work_manager_version"
     // Testing dependencies
     // Core library
     androidTestImplementation "androidx.test:core:$rootProject.test_core_version"

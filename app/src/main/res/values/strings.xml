@@ -170,4 +170,9 @@
     <string name="unknown_core">Unknown Core</string>
     <string name="payloads">Payloads</string>
     <string name="links">Links</string>
+
+    <string name="launches_channel_name">Upcoming Launches channel</string>
+    <string name="launches_channel_description">Notifications connected with upcoming launches</string>
+    <string name="flight_number_template_in_less_than_24h">Flight %d in less than 24h</string>
+    <string name="launch_notification_desc_template">"Mission %1$s will launch at %2$s"</string>
 </resources>

@@ -42,12 +42,12 @@ class LaunchesViewModel(
     fun getLaunchesLoadingStatus(): LiveData<Boolean> = _areLaunchesLoading
 
     // Wrapper for refreshing launches data
-    fun refreshAllLaunches() = viewModelScope.launch { repository.refreshUpcomingLaunches() }
+    fun refreshAllLaunches() = viewModelScope.launch { repository.refreshLaunches() }
 
     // Wrapper for refreshing old data in onResume
     fun refreshIfLaunchesDataOld() = viewModelScope.launch { repository.refreshIfLaunchesDataOld() }
 
-    fun deleteLaunchesData() = viewModelScope.launch { repository.deleteAllUpcomingLaunches() }
+    fun deleteLaunchesData() = viewModelScope.launch { repository.deleteAllLaunches() }
 
     /**
      * Request a snackbar to display a string.

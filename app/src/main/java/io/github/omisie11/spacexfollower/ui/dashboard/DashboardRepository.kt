@@ -43,7 +43,7 @@ class DashboardRepository(
         .map { cores -> mapCoresToStatusEntries(cores) }
 
     suspend fun refreshData() {
-        launchesRepository.refreshUpcomingLaunches()
+        launchesRepository.refreshLaunches()
         capsulesRepository.refreshCapsules()
         coresRepository.refreshCores()
     }
