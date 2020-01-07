@@ -142,4 +142,12 @@ class LaunchesDaoTest {
         latch.await()
         job.cancel()
     }
+
+    @Test
+    fun testInsertAndGetLaunchesLaterThanDate() = runBlocking {
+        launchesDao.insertLaunches(testLaunchesData)
+
+        val launches = launchesDao.getLaunchesLaterThanDate(1000000000)
+        assertThat(launches.size, equalTo(testLaunchesData.size))
+    }
 }
