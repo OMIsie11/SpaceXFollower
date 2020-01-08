@@ -18,6 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import timber.log.Timber
 
 class LaunchNotificationWorker(
     context: Context,
@@ -36,7 +37,7 @@ class LaunchNotificationWorker(
         if (launches.isNullOrEmpty()) Result.retry()
 
         val nextLaunch: Launch = launches[0]
-        val nextLaunchTime: Long = nextLaunch.launchDateUnix ?: 0
+        val nextLaunchTime: Long = nextLaunch.launchDateUnix ?: 0L
         val missionName: String = nextLaunch.missionName
         val flightNumber: Int = nextLaunch.flightNumber
 
@@ -44,6 +45,7 @@ class LaunchNotificationWorker(
 
         // check if next launch is in less than 24 hours
         if (nextLaunchTime - currentTime < NUMBER_OF_SECONDS_IN_24H) {
+            Timber.d("nextLaunchTime: $nextLaunchTime, current time: $currentTime")
             triggerNotification(flightNumber, nextLaunchTime, missionName)
         }
 

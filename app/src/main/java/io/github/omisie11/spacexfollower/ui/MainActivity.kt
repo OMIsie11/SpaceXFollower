@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
     // Check once a day if there is launch in less than 24h, if yes, show notification
     private fun scheduleLaunchNotificationWork() {
         val launchNotificationWork =
-            PeriodicWorkRequestBuilder<LaunchNotificationWorker>(20, TimeUnit.MINUTES)
+            PeriodicWorkRequestBuilder<LaunchNotificationWorker>(1, TimeUnit.DAYS)
                 .addTag(TAG_LAUNCH_NOTIFICATION_WORK)
                 .build()
 
