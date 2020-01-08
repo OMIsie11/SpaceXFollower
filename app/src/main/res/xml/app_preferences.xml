@@ -20,6 +20,13 @@
                 android:summaryOff="@string/settings_dark_mode_summary_off"
                 android:defaultValue="false"/>
 
+        <SwitchPreference
+            android:key="prefs_notifications_upcoming_launches"
+            android:title="@string/upcoming_launches_notifications"
+            android:summaryOn="@string/notifications_enabled"
+            android:summaryOff="@string/notifications_disabled"
+            android:defaultValue="false"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

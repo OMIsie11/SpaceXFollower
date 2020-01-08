@@ -43,8 +43,7 @@ class LaunchNotificationWorker(
         if (nextLaunchTime == 0L || missionName.isBlank()) Result.retry()
 
         // check if next launch is in less than 24 hours
-        // ToDo: change to 24 hours
-        if (nextLaunchTime - currentTime < 10000000) {
+        if (nextLaunchTime - currentTime < NUMBER_OF_SECONDS_IN_24H) {
             triggerNotification(flightNumber, nextLaunchTime, missionName)
         }
 
@@ -75,6 +74,7 @@ class LaunchNotificationWorker(
             )
             .setAutoCancel(true)
             .setContentText(contentText)
+            .setStyle(NotificationCompat.BigTextStyle())
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 

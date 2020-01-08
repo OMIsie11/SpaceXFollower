@@ -10,11 +10,17 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.google.android.material.navigation.NavigationView
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.util.PREFS_KEY_DARK_MODE
+import io.github.omisie11.spacexfollower.util.PREFS_KEY_NOTIFICATIONS_UPCOMING_LAUNCHES
+import io.github.omisie11.spacexfollower.workers.LaunchNotificationWorker
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
@@ -52,6 +58,13 @@ class MainActivity : AppCompatActivity() {
                         )
                     )
                 }
+                PREFS_KEY_NOTIFICATIONS_UPCOMING_LAUNCHES -> {
+                    val areNotificationsActive = sharedPrefs
+                        .getBoolean(PREFS_KEY_NOTIFICATIONS_UPCOMING_LAUNCHES, false)
+                    if (areNotificationsActive) {
+                        scheduleLaunchNotificationWork()
+                    } else disableLaunchNotificationWork()
+                }
             }
         }
 
@@ -84,6 +97,24 @@ class MainActivity : AppCompatActivity() {
         false -> AppCompatDelegate.MODE_NIGHT_NO
     }
 
+    // Check once a day if there is launch in less than 24h, if yes, show notification
+    private fun scheduleLaunchNotificationWork() {
+        val launchNotificationWork =
+            PeriodicWorkRequestBuilder<LaunchNotificationWorker>(20, TimeUnit.MINUTES)
+                .addTag(TAG_LAUNCH_NOTIFICATION_WORK)
+                .build()
+
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+            TAG_LAUNCH_NOTIFICATION_WORK,
+            ExistingPeriodicWorkPolicy.REPLACE,
+            launchNotificationWork
+        )
+    }
+
+    private fun disableLaunchNotificationWork() {
+        WorkManager.getInstance(this).cancelUniqueWork(TAG_LAUNCH_NOTIFICATION_WORK)
+    }
+
     companion object {
         private const val SHORTCUT_CAPSULES: String =
             "io.github.omisie11.spacexfollower.SHORTCUT_CAPSULES"
@@ -91,5 +122,6 @@ class MainActivity : AppCompatActivity() {
             "io.github.omisie11.spacexfollower.SHORTCUT_CORES"
         private const val SHORTCUT_COMPANY: String =
             "io.github.omisie11.spacexfollower.SHORTCUT_COMPANY"
+        private const val TAG_LAUNCH_NOTIFICATION_WORK = "launch_notification_work"
     }
 }

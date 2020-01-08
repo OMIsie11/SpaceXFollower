@@ -175,4 +175,7 @@
     <string name="launches_channel_description">Notifications connected with upcoming launches</string>
     <string name="flight_number_template_in_less_than_24h">Flight %d in less than 24h</string>
     <string name="launch_notification_desc_template">"Mission %1$s will launch at %2$s"</string>
+    <string name="notifications_enabled">Notifications enabled</string>
+    <string name="notifications_disabled">Notifications disabled</string>
+    <string name="upcoming_launches_notifications">Upcoming launches notifications</string>
 </resources>
