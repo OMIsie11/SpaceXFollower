@@ -39,9 +39,6 @@ class LaunchesRepository(
 
     fun getLaunchesSnackbar(): MutableLiveData<String> = launchesSnackBar
 
-    suspend fun getLaunchesLaterThanDate(startDateUnix: Long): List<Launch> =
-        allLaunchesDao.getLaunchesLaterThanDate(startDateUnix)
-
     suspend fun refreshIfLaunchesDataOld() {
         val isLaunchesRefreshNeeded = withContext(Dispatchers.IO) {
             checkIfRefreshIsNeeded(KEY_UPCOMING_LAUNCHES_LAST_REFRESH)

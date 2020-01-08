@@ -10,9 +10,9 @@ import androidx.navigation.NavDeepLinkBuilder
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import io.github.omisie11.spacexfollower.R
+import io.github.omisie11.spacexfollower.data.dao.AllLaunchesDao
 import io.github.omisie11.spacexfollower.data.model.launch.Launch
 import io.github.omisie11.spacexfollower.ui.MainActivity
-import io.github.omisie11.spacexfollower.ui.launches.LaunchesRepository
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -25,14 +25,12 @@ class LaunchNotificationWorker(
 ) :
     CoroutineWorker(context, params), KoinComponent {
 
-    private val launchesRepository: LaunchesRepository by inject()
+    private val launchesDao: AllLaunchesDao by inject()
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
 
-        launchesRepository.refreshLaunches()
-
         val currentTime = System.currentTimeMillis() / 1000
-        val launches = launchesRepository.getLaunchesLaterThanDate(currentTime)
+        val launches = launchesDao.getLaunchesLaterThanDate(currentTime)
             .sortedBy { it.launchDateUnix }
 
         if (launches.isNullOrEmpty()) Result.retry()
