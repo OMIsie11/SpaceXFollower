@@ -36,7 +36,7 @@
 
         <RadioButton
             android:id="@+id/radio_button_flight_number_newest"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorSecondary"
             android:text="@string/flight_number_newest"
@@ -44,7 +44,7 @@
 
         <RadioButton
             android:id="@+id/radio_button_flight_number_oldest"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorSecondary"
             android:text="@string/flight_number_oldest"

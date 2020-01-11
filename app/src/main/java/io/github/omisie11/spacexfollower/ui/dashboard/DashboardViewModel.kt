@@ -25,7 +25,7 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
     private val coresStatusStats = MutableLiveData<List<PieEntry>>()
 
     init {
-        launchesChartYear.value = DashboardRepository.YearInterval.YEAR_2019
+        launchesChartYear.value = DashboardRepository.YearInterval.YEAR_2020
 
         viewModelScope.launch(Dispatchers.IO) { fetchLaunchesStatsFromDb() }
 

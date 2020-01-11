@@ -37,7 +37,7 @@
 
         <RadioButton
             android:id="@+id/radio_button_2020"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorSecondary"
             android:text="2020"
@@ -46,7 +46,7 @@
 
         <RadioButton
             android:id="@+id/radio_button_2019"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorSecondary"
             android:text="2019"
@@ -55,7 +55,7 @@
 
         <RadioButton
             android:id="@+id/radio_button_2018"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorSecondary"
             android:text="2018"
@@ -64,7 +64,7 @@
 
         <RadioButton
             android:id="@+id/radio_button_2017"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorSecondary"
             android:text="2017"
@@ -73,7 +73,7 @@
 
         <RadioButton
             android:id="@+id/radio_button_2016"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorSecondary"
             android:text="2016"
@@ -82,7 +82,7 @@
 
         <RadioButton
             android:id="@+id/radio_button_2015"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorSecondary"
             android:text="2015"
@@ -91,7 +91,7 @@
 
         <RadioButton
             android:id="@+id/radio_button_2014"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorSecondary"
             android:text="2014"
