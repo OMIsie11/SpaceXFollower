@@ -178,4 +178,5 @@
     <string name="notifications_enabled">Notifications enabled</string>
     <string name="notifications_disabled">Notifications disabled</string>
     <string name="upcoming_launches_notifications">Upcoming launches notifications</string>
+    <string name="empty_recycler_pull_to_refresh">Looks like there is no data, pull down to refresh :)</string>
 </resources>

@@ -51,7 +51,17 @@ class CapsulesFragment : Fragment(), CapsulesAdapter.OnItemClickListener {
 
         // ViewModel setup
         viewModel.getCapsules().observe(viewLifecycleOwner, Observer<List<Capsule>> { capsules ->
-            if (capsules != null) viewAdapter.setData(capsules)
+            when {
+                capsules.isEmpty() -> {
+                    recyclerView.visibility = View.GONE
+                    empty_state.visibility = View.VISIBLE
+                }
+                capsules != null -> {
+                    recyclerView.visibility = View.VISIBLE
+                    empty_state.visibility = View.GONE
+                    viewAdapter.setData(capsules)
+                }
+            }
         })
 
         // Observe if data is refreshing and show/hide loading indicator

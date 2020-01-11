@@ -50,7 +50,17 @@ class LaunchesFragment : Fragment(), LaunchesAdapter.OnItemClickListener {
 
         // ViewModel setup
         viewModel.getAllLaunches().observe(viewLifecycleOwner, Observer<List<Launch>> { launches ->
-            if (launches != null) viewAdapter.setData(launches)
+            when {
+                launches.isEmpty() -> {
+                    recyclerView.visibility = View.GONE
+                    empty_state.visibility = View.VISIBLE
+                }
+                launches != null -> {
+                    recyclerView.visibility = View.VISIBLE
+                    empty_state.visibility = View.GONE
+                    viewAdapter.setData(launches)
+                }
+            }
         })
 
         // Observe if data is refreshing and show/hide loading indicator

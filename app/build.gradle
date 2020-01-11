@@ -65,7 +65,7 @@ dependencies {
     implementation "com.jakewharton.timber:timber:$rootProject.timber_version"
     // MPAndroidChart
     implementation "com.github.PhilJay:MPAndroidChart:$rootProject.mpandroidchart_version"
-    //Lottie
+    // Lottie
     implementation "com.airbnb.android:lottie:$rootProject.lottie_version"
     // ThreeTenABP
     implementation "com.jakewharton.threetenabp:threetenabp:$rootProject.threetenabp_version"
