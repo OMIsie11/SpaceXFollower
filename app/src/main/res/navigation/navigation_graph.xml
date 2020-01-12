@@ -1,115 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/navigation_graph"
-            app:startDestination="@id/dashboard_dest">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/dashboard_dest">
 
     <fragment
-            android:id="@+id/capsules_dest"
-            android:name="io.github.omisie11.spacexfollower.ui.capsules.CapsulesFragment"
-            android:label="@string/label_capsules">
+        android:id="@+id/capsules_dest"
+        android:name="io.github.omisie11.spacexfollower.ui.capsules.CapsulesFragment"
+        android:label="@string/label_capsules">
         <action
-                android:id="@+id/action_capsules_dest_to_capsule_detail_dest"
-                app:destination="@id/capsule_detail_dest"
-                app:enterAnim="@anim/nav_default_enter_anim"
-                app:exitAnim="@anim/nav_default_exit_anim"/>
+            android:id="@+id/action_capsules_dest_to_capsule_detail_dest"
+            app:destination="@id/capsule_detail_dest"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 
     <fragment
-            android:id="@+id/cores_dest"
-            android:name="io.github.omisie11.spacexfollower.ui.cores.CoresFragment"
-            android:label="@string/label_cores"
-            tools:layout="@layout/fragment_recycler_swipe_refresh">
+        android:id="@+id/cores_dest"
+        android:name="io.github.omisie11.spacexfollower.ui.cores.CoresFragment"
+        android:label="@string/label_cores"
+        tools:layout="@layout/fragment_recycler_swipe_refresh">
         <action
-                android:id="@+id/action_cores_dest_to_coresDetailFragment"
-                app:destination="@id/core_detail_dest"
-                app:enterAnim="@anim/nav_default_enter_anim"
-                app:exitAnim="@anim/nav_default_exit_anim"/>
+            android:id="@+id/action_cores_dest_to_coresDetailFragment"
+            app:destination="@id/core_detail_dest"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 
     <fragment
-            android:id="@+id/settings_dest"
-            android:name="io.github.omisie11.spacexfollower.ui.settings.SettingsFragment"
-            android:label="@string/label_settings"/>
+        android:id="@+id/settings_dest"
+        android:name="io.github.omisie11.spacexfollower.ui.settings.SettingsFragment"
+        android:label="@string/label_settings" />
 
     <fragment
-            android:id="@+id/company_dest"
-            android:name="io.github.omisie11.spacexfollower.ui.company.CompanyFragment"
-            android:label="@string/label_company"
-            tools:layout="@layout/fragment_company"/>
+        android:id="@+id/company_dest"
+        android:name="io.github.omisie11.spacexfollower.ui.company.CompanyFragment"
+        android:label="@string/label_company"
+        tools:layout="@layout/fragment_company" />
 
     <fragment
-            android:id="@+id/capsule_detail_dest"
-            android:name="io.github.omisie11.spacexfollower.ui.capsules.CapsuleDetailFragment"
-            android:label="@string/label_capsule_detail"
-            tools:layout="@layout/fragment_capsule_detail">
+        android:id="@+id/capsule_detail_dest"
+        android:name="io.github.omisie11.spacexfollower.ui.capsules.CapsuleDetailFragment"
+        android:label="@string/label_capsule_detail"
+        tools:layout="@layout/fragment_capsule_detail">
         <argument
-                android:name="itemId"
-                app:argType="integer"
-                android:defaultValue="0"/>
+            android:name="itemId"
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
 
     <fragment
-            android:id="@+id/core_detail_dest"
-            android:name="io.github.omisie11.spacexfollower.ui.cores.CoreDetailFragment"
-            android:label="@string/label_core_detail"
-            tools:layout="@layout/fragment_core_detail">
+        android:id="@+id/core_detail_dest"
+        android:name="io.github.omisie11.spacexfollower.ui.cores.CoreDetailFragment"
+        android:label="@string/label_core_detail"
+        tools:layout="@layout/fragment_core_detail">
         <argument
-                android:name="itemId"
-                app:argType="integer"
-                android:defaultValue="0"/>
+            android:name="itemId"
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
 
     <fragment
-            android:id="@+id/launches_dest"
-            android:name="io.github.omisie11.spacexfollower.ui.launches.LaunchesFragment"
-            android:label="@string/label_all_launches"
-            tools:layout="@layout/fragment_recycler_swipe_refresh">
-        <action android:id="@+id/action_upcoming_launches_dest_to_upcomingLaunchesDetailFragment"
-                app:destination="@id/launches_detail_dest"
-                app:enterAnim="@anim/nav_default_enter_anim"
-                app:exitAnim="@anim/nav_default_exit_anim"/>
+        android:id="@+id/launches_dest"
+        android:name="io.github.omisie11.spacexfollower.ui.launches.LaunchesFragment"
+        android:label="@string/label_all_launches"
+        tools:layout="@layout/fragment_recycler_swipe_refresh">
+        <action
+            android:id="@+id/action_upcoming_launches_dest_to_upcomingLaunchesDetailFragment"
+            app:destination="@id/launches_detail_dest"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 
     <fragment
-            android:id="@+id/launches_detail_dest"
-            android:name="io.github.omisie11.spacexfollower.ui.launches.LaunchesDetailFragment"
-            android:label="@string/label_upcoming_launches_detail"
-            tools:layout="@layout/fragment_launches_detail">
+        android:id="@+id/launches_detail_dest"
+        android:name="io.github.omisie11.spacexfollower.ui.launches.LaunchesDetailFragment"
+        android:label="@string/label_upcoming_launches_detail"
+        tools:layout="@layout/fragment_launches_detail">
         <argument
-                android:name="itemId"
-                app:argType="integer"
-                android:defaultValue="0"/>
+            android:name="itemId"
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
-    <fragment android:id="@+id/about_dest" android:name="io.github.omisie11.spacexfollower.ui.about.AboutFragment"
-              android:label="@string/label_about" tools:layout="@layout/fragment_about">
+
+    <fragment
+        android:id="@+id/about_dest"
+        android:name="io.github.omisie11.spacexfollower.ui.about.AboutFragment"
+        android:label="@string/label_about"
+        tools:layout="@layout/fragment_about">
         <action
             android:id="@+id/action_about_dest_to_usedLibrariesFragment"
+            app:enterAnim="@anim/slide_up"
             app:destination="@id/used_libs_dest" />
     </fragment>
+
     <fragment
         android:id="@+id/used_libs_dest"
         android:name="io.github.omisie11.spacexfollower.ui.about.used_libraries.UsedLibrariesFragment"
         android:label="@string/label_used_libs"
         tools:layout="@layout/fragment_used_libraries" />
+
     <fragment
         android:id="@+id/launch_pads_dest"
         android:name="io.github.omisie11.spacexfollower.ui.launch_pads.LaunchPadsFragment"
         android:label="@string/label_launch_pads" />
+
     <fragment
         android:id="@+id/dashboard_dest"
         android:name="io.github.omisie11.spacexfollower.ui.dashboard.DashboardFragment"
         android:label="@string/label_dashboard"
-        tools:layout="@layout/fragment_dashboard" >
+        tools:layout="@layout/fragment_dashboard">
         <action
             android:id="@+id/action_dashboard_dest_to_launches_dest"
+            app:enterAnim="@anim/slide_up"
             app:destination="@id/launches_dest" />
         <action
             android:id="@+id/action_dashboard_dest_to_cores_dest"
+            app:enterAnim="@anim/slide_up"
             app:destination="@id/cores_dest" />
         <action
             android:id="@+id/action_dashboard_dest_to_capsules_dest"
+            app:enterAnim="@anim/slide_up"
             app:destination="@id/capsules_dest" />
     </fragment>
 </navigation>
