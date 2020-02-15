@@ -22,8 +22,8 @@ class NumbersUtilsTestsShortenNumbers {
         assertEquals("999 million", shortenNumberAddPrefix(999000000))
 
         // Test not round numbers
-        assertEquals("37,5 million", shortenNumberAddPrefix(37500000))
-        assertEquals("37,99 million", shortenNumberAddPrefix(37990000))
+        assertEquals("37.5 million", shortenNumberAddPrefix(37500000))
+        assertEquals("37.99 million", shortenNumberAddPrefix(37990000))
         assertEquals("38 million", shortenNumberAddPrefix(37999000))
     }
 
@@ -35,8 +35,8 @@ class NumbersUtilsTestsShortenNumbers {
         assertEquals("999 billion", shortenNumberAddPrefix(999000000000))
 
         // Test not round numbers
-        assertEquals("37,5 billion", shortenNumberAddPrefix(37500000000))
-        assertEquals("37,99 billion", shortenNumberAddPrefix(37990000000))
+        assertEquals("37.5 billion", shortenNumberAddPrefix(37500000000))
+        assertEquals("37.99 billion", shortenNumberAddPrefix(37990000000))
         assertEquals("38 billion", shortenNumberAddPrefix(37999000000))
     }
 }

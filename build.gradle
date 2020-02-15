@@ -58,6 +58,7 @@ ext {
     test_ext_truth_version = '1.2.0'
     espresso_version = '3.1.1'
     leak_canary_version = '2.0'
+    roboelectric_version = '4.3.1'
 }
 
 task clean(type: Delete) {
