@@ -12,7 +12,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.concurrent.Executors
 
 @RunWith(AndroidJUnit4::class)
 class CompanyDaoTest {
@@ -26,11 +25,7 @@ class CompanyDaoTest {
     @Before
     fun createDb() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
-        database = Room
-            .inMemoryDatabaseBuilder(context, SpaceDatabase::class.java)
-            .allowMainThreadQueries()
-            .setTransactionExecutor(Executors.newSingleThreadExecutor())
-            .build()
+        database = Room.inMemoryDatabaseBuilder(context, SpaceDatabase::class.java).build()
         companyDao = database.companyDao()
 
         companyDao.insertCompanyInfo(testCompanyInfo)
