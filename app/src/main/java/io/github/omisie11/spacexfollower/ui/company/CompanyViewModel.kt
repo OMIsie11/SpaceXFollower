@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.github.omisie11.spacexfollower.data.model.Company
+import io.github.omisie11.spacexfollower.data.CompanyRepository
+import io.github.omisie11.spacexfollower.data.local.model.Company
 import kotlinx.coroutines.*
 
 class CompanyViewModel(private val repository: CompanyRepository) : ViewModel() {

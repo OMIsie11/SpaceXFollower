@@ -2,20 +2,20 @@ package io.github.omisie11.spacexfollower.di
 
 import androidx.preference.PreferenceManager
 import androidx.room.Room
-import io.github.omisie11.spacexfollower.data.SpaceDatabase
-import io.github.omisie11.spacexfollower.network.SpaceService
+import io.github.omisie11.spacexfollower.data.local.SpaceDatabase
+import io.github.omisie11.spacexfollower.data.remote.SpaceService
 import io.github.omisie11.spacexfollower.ui.about.used_libraries.UsedLibrariesViewModel
-import io.github.omisie11.spacexfollower.ui.capsules.CapsulesRepository
+import io.github.omisie11.spacexfollower.data.CapsulesRepository
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesViewModel
-import io.github.omisie11.spacexfollower.ui.company.CompanyRepository
+import io.github.omisie11.spacexfollower.data.CompanyRepository
 import io.github.omisie11.spacexfollower.ui.company.CompanyViewModel
-import io.github.omisie11.spacexfollower.ui.cores.CoresRepository
+import io.github.omisie11.spacexfollower.data.CoresRepository
 import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel
-import io.github.omisie11.spacexfollower.ui.dashboard.DashboardRepository
+import io.github.omisie11.spacexfollower.data.DashboardRepository
 import io.github.omisie11.spacexfollower.ui.dashboard.DashboardViewModel
-import io.github.omisie11.spacexfollower.ui.launch_pads.LaunchPadsRepository
+import io.github.omisie11.spacexfollower.data.LaunchPadsRepository
 import io.github.omisie11.spacexfollower.ui.launch_pads.LaunchPadsViewModel
-import io.github.omisie11.spacexfollower.ui.launches.LaunchesRepository
+import io.github.omisie11.spacexfollower.data.LaunchesRepository
 import io.github.omisie11.spacexfollower.ui.launches.LaunchesViewModel
 import io.github.omisie11.spacexfollower.util.SPACE_X_BASE_URL
 import org.koin.android.ext.koin.androidApplication
@@ -64,7 +64,13 @@ val capsulesModule = module {
     single { get<SpaceDatabase>().capsulesDao() }
 
     // Single instance of CapsulesRepository
-    single { CapsulesRepository(get(), get(), get()) }
+    single {
+        CapsulesRepository(
+            get(),
+            get(),
+            get()
+        )
+    }
 
     // ViewModel instance of CapsulesViewModel
     viewModel { CapsulesViewModel(get()) }
@@ -76,7 +82,13 @@ val coresModule = module {
     single { get<SpaceDatabase>().coresDao() }
 
     // Single instance of CoresRepository
-    single { CoresRepository(get(), get(), get()) }
+    single {
+        CoresRepository(
+            get(),
+            get(),
+            get()
+        )
+    }
 
     // ViewModel instance of CoresViewModel
     viewModel { CoresViewModel(get()) }
@@ -88,7 +100,13 @@ val companyModule = module {
     single { get<SpaceDatabase>().companyDao() }
 
     // Single instance of CompanyRepository
-    single { CompanyRepository(get(), get(), get()) }
+    single {
+        CompanyRepository(
+            get(),
+            get(),
+            get()
+        )
+    }
 
     // ViewModel instance for CompanyInfo
     viewModel { CompanyViewModel(get()) }
@@ -98,7 +116,13 @@ val launchesModule = module {
 
     single { get<SpaceDatabase>().upcomingLaunchesDao() }
 
-    single { LaunchesRepository(get(), get(), get()) }
+    single {
+        LaunchesRepository(
+            get(),
+            get(),
+            get()
+        )
+    }
 
     viewModel { LaunchesViewModel(get()) }
 }
@@ -107,14 +131,29 @@ val launchPadsModule = module {
 
     single { get<SpaceDatabase>().launchPadsDao() }
 
-    single { LaunchPadsRepository(get(), get(), get()) }
+    single {
+        LaunchPadsRepository(
+            get(),
+            get(),
+            get()
+        )
+    }
 
     viewModel { LaunchPadsViewModel(get()) }
 }
 
 val dashboardModule = module {
 
-    single { DashboardRepository(get(), get(), get(), get(), get(), get()) }
+    single {
+        DashboardRepository(
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
+    }
 
     viewModel { DashboardViewModel(get()) }
 }

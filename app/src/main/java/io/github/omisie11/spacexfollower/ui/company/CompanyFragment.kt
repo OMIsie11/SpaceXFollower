@@ -10,7 +10,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.model.Company
+import io.github.omisie11.spacexfollower.data.local.model.Company
 import io.github.omisie11.spacexfollower.util.shortenNumberAddPrefix
 import kotlinx.android.synthetic.main.bottom_sheet_attribution.view.*
 import kotlinx.android.synthetic.main.fragment_company.*

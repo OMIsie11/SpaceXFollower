@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.model.Core
+import io.github.omisie11.spacexfollower.data.local.model.Core
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.cores_recycler_item.view.*
 

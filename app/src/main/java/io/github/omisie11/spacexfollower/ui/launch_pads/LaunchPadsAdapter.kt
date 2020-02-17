@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.model.LaunchPad
+import io.github.omisie11.spacexfollower.data.local.model.LaunchPad
 import kotlinx.android.synthetic.main.launch_pads_recycler_item.view.*
 
 class LaunchPadsAdapter(private val itemClickListener: OnItemClickListener) :

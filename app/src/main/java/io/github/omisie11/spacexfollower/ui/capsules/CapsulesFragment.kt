@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.model.Capsule
+import io.github.omisie11.spacexfollower.data.local.model.Capsule
 import io.github.omisie11.spacexfollower.ui.capsules.CapsulesViewModel.CapsulesSortingOrder
 import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.recyclerView
 import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.swipeRefreshLayout

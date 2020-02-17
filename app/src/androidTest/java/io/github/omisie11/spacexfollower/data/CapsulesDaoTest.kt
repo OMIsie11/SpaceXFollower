@@ -7,7 +7,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import io.github.omisie11.spacexfollower.capsule1
 import io.github.omisie11.spacexfollower.capsule2
 import io.github.omisie11.spacexfollower.capsule3
-import io.github.omisie11.spacexfollower.data.dao.CapsulesDao
+import io.github.omisie11.spacexfollower.data.local.SpaceDatabase
+import io.github.omisie11.spacexfollower.data.local.dao.CapsulesDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect

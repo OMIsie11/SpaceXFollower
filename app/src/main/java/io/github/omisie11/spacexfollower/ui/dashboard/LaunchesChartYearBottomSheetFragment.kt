@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.omisie11.spacexfollower.R
+import io.github.omisie11.spacexfollower.data.DashboardRepository
 import kotlinx.android.synthetic.main.bottom_sheet_launches_chart_year_change.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 

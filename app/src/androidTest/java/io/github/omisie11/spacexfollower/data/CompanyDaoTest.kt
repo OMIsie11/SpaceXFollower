@@ -4,7 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import io.github.omisie11.spacexfollower.data.dao.CompanyDao
+import io.github.omisie11.spacexfollower.data.local.SpaceDatabase
+import io.github.omisie11.spacexfollower.data.local.dao.CompanyDao
 import io.github.omisie11.spacexfollower.testCompanyInfo
 import io.github.omisie11.spacexfollower.utilities.getValue
 import org.junit.After

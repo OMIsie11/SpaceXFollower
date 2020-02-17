@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.model.Capsule
+import io.github.omisie11.spacexfollower.data.local.model.Capsule
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.bottom_sheet_attribution.view.*
 import kotlinx.android.synthetic.main.fragment_capsule_detail.*

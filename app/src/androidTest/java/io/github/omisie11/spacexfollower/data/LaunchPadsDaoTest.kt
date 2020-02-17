@@ -4,7 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import io.github.omisie11.spacexfollower.data.dao.LaunchPadsDao
+import io.github.omisie11.spacexfollower.data.local.SpaceDatabase
+import io.github.omisie11.spacexfollower.data.local.dao.LaunchPadsDao
 import io.github.omisie11.spacexfollower.launchPad1
 import io.github.omisie11.spacexfollower.launchPad2
 import kotlinx.coroutines.Dispatchers

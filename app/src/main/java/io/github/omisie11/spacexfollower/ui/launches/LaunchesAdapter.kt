@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.model.launch.Launch
+import io.github.omisie11.spacexfollower.data.local.model.launch.Launch
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.android.synthetic.main.launches_recycler_item.view.*
 

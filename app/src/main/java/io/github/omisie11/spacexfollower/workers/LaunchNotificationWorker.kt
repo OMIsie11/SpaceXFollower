@@ -10,8 +10,8 @@ import androidx.navigation.NavDeepLinkBuilder
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import io.github.omisie11.spacexfollower.R
-import io.github.omisie11.spacexfollower.data.dao.AllLaunchesDao
-import io.github.omisie11.spacexfollower.data.model.launch.Launch
+import io.github.omisie11.spacexfollower.data.local.dao.AllLaunchesDao
+import io.github.omisie11.spacexfollower.data.local.model.launch.Launch
 import io.github.omisie11.spacexfollower.ui.MainActivity
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
 import kotlinx.coroutines.Dispatchers
