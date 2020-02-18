@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.github.omisie11.spacexfollower.data.CapsulesRepository
 import io.github.omisie11.spacexfollower.data.local.model.Capsule
+import io.github.omisie11.spacexfollower.data.repository.CapsulesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -41,10 +41,11 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
     fun getCapsulesLoadingStatus(): LiveData<Boolean> = _areCapsulesLoading
 
     // Wrapper for refreshing capsules data
-    fun refreshCapsules() = viewModelScope.launch { repository.refreshCapsules() }
+    fun refreshCapsules() = viewModelScope.launch { repository.refreshData(forceRefresh = true) }
 
     // Wrapper for refreshing old data in onResume
-    fun refreshIfCapsulesDataOld() = viewModelScope.launch { repository.refreshIfCapsulesDataOld() }
+    fun refreshIfCapsulesDataOld() =
+        viewModelScope.launch { repository.refreshData(forceRefresh = false) }
 
     fun deleteCapsulesData() = viewModelScope.launch { repository.deleteAllCapsules() }
 

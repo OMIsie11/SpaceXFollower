@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.github.omisie11.spacexfollower.data.CompanyRepository
 import io.github.omisie11.spacexfollower.data.local.model.Company
-import kotlinx.coroutines.*
+import io.github.omisie11.spacexfollower.data.repository.CompanyRepository
+import kotlinx.coroutines.launch
 
 class CompanyViewModel(private val repository: CompanyRepository) : ViewModel() {
 
@@ -18,9 +18,11 @@ class CompanyViewModel(private val repository: CompanyRepository) : ViewModel() 
 
     fun getCompanyInfoLoadingStatus() = _isCompanyInfoLoading
 
-    fun refreshCompanyInfo() = viewModelScope.launch { repository.refreshCompanyInfo() }
+    fun refreshCompanyInfo() =
+        viewModelScope.launch { repository.refreshData(forceRefresh = true) }
 
-    fun refreshIfCompanyDataOld() = viewModelScope.launch { repository.refreshIfCompanyDataOld() }
+    fun refreshIfCompanyDataOld() =
+        viewModelScope.launch { repository.refreshData(forceRefresh = false) }
 
     fun deleteCompanyInfo() = viewModelScope.launch { repository.deleteCompanyInfo() }
 

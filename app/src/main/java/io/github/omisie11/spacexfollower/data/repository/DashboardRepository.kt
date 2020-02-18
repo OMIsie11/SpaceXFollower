@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.data
+package io.github.omisie11.spacexfollower.data.repository
 
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieEntry
@@ -41,13 +41,13 @@ class DashboardRepository(
 
     suspend fun refreshData() {
         launchesRepository.refreshLaunches()
-        capsulesRepository.refreshCapsules()
+        capsulesRepository.refreshData(forceRefresh = true)
         coresRepository.refreshCores()
     }
 
     suspend fun refreshIfDataIsOld() {
         launchesRepository.refreshIfLaunchesDataOld()
-        capsulesRepository.refreshIfCapsulesDataOld()
+        capsulesRepository.refreshData()
         coresRepository.refreshIfCoresDataOld()
     }
 
