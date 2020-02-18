@@ -28,11 +28,11 @@ class LaunchPadsViewModel(private val repository: LaunchPadsRepository) : ViewMo
 
     fun getLaunchPadsLoadingStatus(): LiveData<Boolean> = _isDataLoading
 
-    fun refreshLaunchPads() = viewModelScope.launch { repository.refreshLaunchPads() }
+    fun refreshLaunchPads() = viewModelScope.launch { repository.refreshData(forceRefresh = true) }
 
     // Wrapper for refreshing old data in onResume
     fun refreshIfLaunchPadsDataOld() =
-        viewModelScope.launch { repository.refreshIfLaunchPadsDataOld() }
+        viewModelScope.launch { repository.refreshData(forceRefresh = false) }
 
     fun deleteLaunchPadsData() = viewModelScope.launch { repository.deleteLaunchPadsData() }
 

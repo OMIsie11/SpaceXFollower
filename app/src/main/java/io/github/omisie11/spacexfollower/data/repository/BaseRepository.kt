@@ -8,6 +8,10 @@ abstract class BaseRepository(
     private val sharedPrefs: SharedPreferences
 ) {
 
+    /**
+     * Represents key for particular repository data last refresh
+     * Example: Capsules -> KEY_CAPSULES_LAST_REFRESH
+     */
     abstract val lastRefreshDataKey: String
 
     /**
