@@ -16,9 +16,8 @@ class CompanyRepository(
     private val spaceService: SpaceService,
     private val companyDao: CompanyDao,
     sharedPrefs: SharedPreferences
-) : BaseRepository(
-    sharedPrefs
-) {
+) : BaseRepository(sharedPrefs) {
+
     override val lastRefreshDataKey: String = KEY_COMPANY_LAST_REFRESH
 
     private val isCompanyInfoLoading: MutableLiveData<Boolean> = MutableLiveData()

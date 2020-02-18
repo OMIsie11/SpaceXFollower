@@ -40,15 +40,15 @@ class DashboardRepository(
         .map { cores -> mapCoresToStatusEntries(cores) }
 
     suspend fun refreshData() {
-        launchesRepository.refreshLaunches()
+        launchesRepository.refreshData(forceRefresh = true)
         capsulesRepository.refreshData(forceRefresh = true)
-        coresRepository.refreshCores()
+        coresRepository.refreshData(forceRefresh = true)
     }
 
     suspend fun refreshIfDataIsOld() {
-        launchesRepository.refreshIfLaunchesDataOld()
+        launchesRepository.refreshData()
         capsulesRepository.refreshData()
-        coresRepository.refreshIfCoresDataOld()
+        coresRepository.refreshData()
     }
 
     // Map list of launches to list of Entries that shows number of launches in particular months

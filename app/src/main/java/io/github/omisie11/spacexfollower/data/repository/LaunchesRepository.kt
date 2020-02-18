@@ -6,8 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import io.github.omisie11.spacexfollower.data.local.dao.AllLaunchesDao
 import io.github.omisie11.spacexfollower.data.local.model.launch.Launch
 import io.github.omisie11.spacexfollower.data.remote.SpaceService
-import io.github.omisie11.spacexfollower.util.KEY_UPCOMING_LAUNCHES_LAST_REFRESH
-import io.github.omisie11.spacexfollower.util.PREFS_KEY_REFRESH_INTERVAL
+import io.github.omisie11.spacexfollower.util.KEY_LAUNCHES_LAST_REFRESH
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -17,8 +16,10 @@ import java.io.IOException
 class LaunchesRepository(
     private val allLaunchesDao: AllLaunchesDao,
     private val spaceService: SpaceService,
-    private val sharedPrefs: SharedPreferences
-) {
+    sharedPrefs: SharedPreferences
+) : BaseRepository(sharedPrefs) {
+
+    override val lastRefreshDataKey: String = KEY_LAUNCHES_LAST_REFRESH
 
     // Variables for showing/hiding loading indicators
     private val areLaunchesLoading: MutableLiveData<Boolean> = MutableLiveData()
@@ -39,17 +40,22 @@ class LaunchesRepository(
 
     fun getLaunchesSnackbar(): MutableLiveData<String> = launchesSnackBar
 
-    suspend fun refreshIfLaunchesDataOld() {
-        val isLaunchesRefreshNeeded = withContext(Dispatchers.IO) {
-            checkIfRefreshIsNeeded(KEY_UPCOMING_LAUNCHES_LAST_REFRESH)
+    suspend fun refreshData(forceRefresh: Boolean = false) {
+        if (!forceRefresh) {
+            // check if refresh is needed
+            val isRefreshNeeded = withContext(Dispatchers.IO) {
+                checkIfDataRefreshNeeded(lastRefreshDataKey)
+            }
+            if (!isRefreshNeeded) {
+                Timber.d("No data refresh needed")
+                return
+            }
         }
-        if (isLaunchesRefreshNeeded) {
-            Timber.d("refreshIfLaunchesDataOld: Refreshing Upcoming launches")
-            refreshLaunches()
-        } else Timber.d("refreshIfLaunchesDataOld: No refresh needed")
+        Timber.d("Refreshing data")
+        performDataRefresh()
     }
 
-    suspend fun refreshLaunches() {
+    private suspend fun performDataRefresh() {
         // Start loading process
         areLaunchesLoading.value = true
         Timber.d("refreshAllLaunches called")
@@ -57,7 +63,6 @@ class LaunchesRepository(
             try {
                 fetchLaunchesAndSaveToDb()
             } catch (exception: Exception) {
-                areLaunchesLoading.postValue(false)
                 when (exception) {
                     is IOException -> launchesSnackBar.postValue("Network problem occurred")
                     else -> {
@@ -66,6 +71,7 @@ class LaunchesRepository(
                     }
                 }
             }
+            areLaunchesLoading.postValue(false)
         }
     }
 
@@ -76,27 +82,7 @@ class LaunchesRepository(
             Timber.d("Response SUCCESSFUL")
             response.body()?.let { allLaunchesDao.replaceUpcomingLaunches(it) }
             // Save new launches last refresh time
-            with(sharedPrefs.edit()) {
-                putLong(KEY_UPCOMING_LAUNCHES_LAST_REFRESH, System.currentTimeMillis())
-                apply()
-            }
+            saveRefreshTime(lastRefreshDataKey)
         } else Timber.d("Error: ${response.errorBody()}")
-        // Launches no longer fetching, hide loading indicator
-        areLaunchesLoading.postValue(false)
-    }
-
-    // Check if data refresh is needed
-    private fun checkIfRefreshIsNeeded(sharedPrefsKey: String): Boolean {
-        // Get current time in milliseconds
-        val currentTimeMillis: Long = System.currentTimeMillis()
-        val lastRefreshTime = sharedPrefs.getLong(sharedPrefsKey, 0)
-        Timber.d("Current time in millis $currentTimeMillis")
-        // Get refresh interval set in app settings (in hours) and multiply to get value in ms
-        val refreshIntervalHours =
-            sharedPrefs.getString(PREFS_KEY_REFRESH_INTERVAL, "3")?.toInt() ?: 3
-        val refreshInterval = refreshIntervalHours * 3600000
-        Timber.d("Refresh Interval from settings: $refreshInterval")
-        // If last refresh was made longer than interval, return true
-        return currentTimeMillis - lastRefreshTime > refreshInterval
     }
 }

@@ -41,10 +41,11 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
     fun getCoresLoadingStatus(): LiveData<Boolean> = _areCoresLoading
 
     // Wrapper for refreshing cores data
-    fun refreshCores() = viewModelScope.launch { repository.refreshCores() }
+    fun refreshCores() = viewModelScope.launch { repository.refreshData(forceRefresh = true) }
 
     // Wrapper for refreshing old data in onResume
-    fun refreshIfCoresDataOld() = viewModelScope.launch { repository.refreshIfCoresDataOld() }
+    fun refreshIfCoresDataOld() =
+        viewModelScope.launch { repository.refreshData(forceRefresh = false) }
 
     fun deleteCoresData() = viewModelScope.launch { repository.deleteAllCores() }
 

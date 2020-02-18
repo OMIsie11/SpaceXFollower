@@ -7,7 +7,6 @@ import io.github.omisie11.spacexfollower.data.local.dao.CoresDao
 import io.github.omisie11.spacexfollower.data.local.model.Core
 import io.github.omisie11.spacexfollower.data.remote.SpaceService
 import io.github.omisie11.spacexfollower.util.KEY_CORES_LAST_REFRESH
-import io.github.omisie11.spacexfollower.util.PREFS_KEY_REFRESH_INTERVAL
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -17,8 +16,10 @@ import java.io.IOException
 class CoresRepository(
     private val spaceService: SpaceService,
     private val coresDao: CoresDao,
-    private val sharedPrefs: SharedPreferences
-) {
+    sharedPrefs: SharedPreferences
+) : BaseRepository(sharedPrefs) {
+
+    override val lastRefreshDataKey: String = KEY_CORES_LAST_REFRESH
 
     private val areCoresLoading: MutableLiveData<Boolean> = MutableLiveData()
     private val coresSnackBar = MutableLiveData<String>()
@@ -35,24 +36,28 @@ class CoresRepository(
 
     fun getCoresSnackbar(): MutableLiveData<String> = coresSnackBar
 
-    suspend fun refreshIfCoresDataOld() {
-        val isCoresRefreshNeeded =
-            withContext(Dispatchers.IO) { checkIfRefreshIsNeeded(KEY_CORES_LAST_REFRESH) }
-        if (isCoresRefreshNeeded) {
-            Timber.d("refreshIfCoresDataOld: Refreshing cores")
-            refreshCores()
-        } else Timber.d("refreshIfCoresDataOld: No refresh needed")
+    suspend fun refreshData(forceRefresh: Boolean = false) {
+        if (!forceRefresh) {
+            // check if refresh is needed
+            val isRefreshNeeded = withContext(Dispatchers.IO) {
+                checkIfDataRefreshNeeded(lastRefreshDataKey)
+            }
+            if (!isRefreshNeeded) {
+                Timber.d("No data refresh needed")
+                return
+            }
+        }
+        Timber.d("Refreshing data")
+        performDataRefresh()
     }
 
-    suspend fun refreshCores() {
+    private suspend fun performDataRefresh() {
         // Start loading process
         areCoresLoading.value = true
-        Timber.d("refreshCores called")
         withContext(Dispatchers.IO) {
             try {
                 fetchCoresAndSaveToDb()
             } catch (exception: Exception) {
-                areCoresLoading.postValue(false)
                 when (exception) {
                     is IOException -> coresSnackBar.postValue("Network problem occurred")
                     else -> {
@@ -61,6 +66,7 @@ class CoresRepository(
                     }
                 }
             }
+            areCoresLoading.postValue(false)
         }
     }
 
@@ -70,27 +76,7 @@ class CoresRepository(
             Timber.d("Response SUCCESSFUL")
             response.body()?.let { coresDao.replaceCoresData(it) }
             // Save new cores last refresh time
-            with(sharedPrefs.edit()) {
-                putLong(KEY_CORES_LAST_REFRESH, System.currentTimeMillis())
-                apply()
-            }
+            saveRefreshTime(lastRefreshDataKey)
         } else Timber.d("Error: ${response.errorBody()}")
-        // Cores no longer fetching, hide loading indicator
-        areCoresLoading.postValue(false)
-    }
-
-    // Check if data refresh is needed
-    private fun checkIfRefreshIsNeeded(sharedPrefsKey: String): Boolean {
-        // Get current time in milliseconds
-        val currentTimeMillis: Long = System.currentTimeMillis()
-        val lastRefreshTime = sharedPrefs.getLong(sharedPrefsKey, 0)
-        Timber.d("Current time in millis $currentTimeMillis")
-        // Get refresh interval set in app settings (in hours) and multiply to get value in ms
-        val refreshIntervalHours =
-            sharedPrefs.getString(PREFS_KEY_REFRESH_INTERVAL, "3")?.toInt() ?: 3
-        val refreshInterval = refreshIntervalHours * 3600000
-        Timber.d("Refresh Interval from settings: $refreshInterval")
-        // If last refresh was made longer than interval, return true
-        return currentTimeMillis - lastRefreshTime > refreshInterval
     }
 }

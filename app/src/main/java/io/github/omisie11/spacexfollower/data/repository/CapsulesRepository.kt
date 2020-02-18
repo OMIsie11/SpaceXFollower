@@ -17,9 +17,7 @@ class CapsulesRepository(
     private val capsulesDao: CapsulesDao,
     private val spaceService: SpaceService,
     sharedPrefs: SharedPreferences
-) : BaseRepository(
-    sharedPrefs
-) {
+) : BaseRepository(sharedPrefs) {
 
     override val lastRefreshDataKey: String = KEY_CAPSULES_LAST_REFRESH
 
@@ -32,8 +30,7 @@ class CapsulesRepository(
         areCapsulesLoading.value = false
     }
 
-    fun getAllCapsulesFlow(): Flow<List<Capsule>> =
-        capsulesDao.getAllCapsulesFlow()
+    fun getAllCapsulesFlow(): Flow<List<Capsule>> = capsulesDao.getAllCapsulesFlow()
 
     suspend fun deleteAllCapsules() =
         withContext(Dispatchers.IO) { capsulesDao.deleteAllCapsules() }
