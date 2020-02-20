@@ -56,7 +56,7 @@ class CompanyRepository(
         Timber.d("refreshCompanyInfo called")
         withContext(Dispatchers.IO) {
             try {
-                fetchCompanyInfoAndSaveToDb()
+                fetchCompanyInfo()
             } catch (exception: Exception) {
                 when (exception) {
                     is IOException -> companyInfoSnackBar.postValue("Network problem occurred")
@@ -70,16 +70,21 @@ class CompanyRepository(
         }
     }
 
-    private suspend fun fetchCompanyInfoAndSaveToDb() {
+    private suspend fun fetchCompanyInfo() {
         Timber.d("fetchCompanyInfoAndSaveToDb called")
         val response = spaceService.getCompanyInfo()
         if (response.isSuccessful) {
             Timber.d("Response SUCCESSFUL")
             response.body()?.let {
-                companyDao.insertCompanyInfo(it)
+                //companyDao.insertCompanyInfo(it)
+                saveCompanyInfo(it)
             }
             // Save company info last refresh time
             saveRefreshTime(lastRefreshDataKey)
         } else Timber.d("Error: ${response.errorBody()}")
+    }
+
+    private fun saveCompanyInfo(data: Company) {
+        companyDao.insertCompanyInfo(data)
     }
 }
