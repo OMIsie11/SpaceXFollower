@@ -21,12 +21,8 @@ class LaunchPadsRepository(
 
     override val lastRefreshDataKey: String = KEY_LAUNCH_PADS_LAST_REFRESH
 
-    private val areLaunchPadsLoading: MutableLiveData<Boolean> = MutableLiveData()
+    private val areLaunchPadsLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     private val launchPadsSnackBar = MutableLiveData<String>()
-
-    init {
-        areLaunchPadsLoading.value = false
-    }
 
     fun getLaunchPadsFlow(): Flow<List<LaunchPad>> = launchPadsDao.getLaunchPadsFlow()
 
@@ -54,7 +50,7 @@ class LaunchPadsRepository(
 
     private suspend fun performDataRefresh() {
         // Start loading process
-        areLaunchPadsLoading.value = true
+        areLaunchPadsLoading.postValue(true)
         Timber.d("refreshLaunchPads called")
         withContext(Dispatchers.IO) {
             try {

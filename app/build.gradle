@@ -24,6 +24,7 @@ android {
     }
     testOptions {
         unitTests.returnDefaultValues = true
+        animationsDisabled = true
     }
     compileOptions {
         sourceCompatibility = 1.8
