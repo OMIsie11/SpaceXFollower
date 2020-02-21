@@ -1,6 +1,5 @@
 package io.github.omisie11.spacexfollower.data.repository
 
-import android.content.Context
 import android.content.SharedPreferences
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
@@ -39,8 +38,6 @@ class CompanyRepositoryTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Mock
-    private lateinit var mockContext: Context
     @Mock
     private lateinit var spaceService: SpaceService
     @Mock

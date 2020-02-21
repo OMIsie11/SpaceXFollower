@@ -76,7 +76,6 @@ class CompanyRepository(
         if (response.isSuccessful) {
             Timber.d("Response SUCCESSFUL")
             response.body()?.let {
-                //companyDao.insertCompanyInfo(it)
                 saveCompanyInfo(it)
             }
             // Save company info last refresh time

@@ -22,13 +22,9 @@ class CapsulesRepository(
     override val lastRefreshDataKey: String = KEY_CAPSULES_LAST_REFRESH
 
     // Variables for showing/hiding loading indicators
-    private val areCapsulesLoading: MutableLiveData<Boolean> = MutableLiveData()
+    private val areCapsulesLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     // Set value to message to be shown in snackbar
     private val capsulesSnackBar = MutableLiveData<String>()
-
-    init {
-        areCapsulesLoading.value = false
-    }
 
     fun getAllCapsulesFlow(): Flow<List<Capsule>> = capsulesDao.getAllCapsulesFlow()
 
@@ -56,7 +52,7 @@ class CapsulesRepository(
 
     private suspend fun performDataRefresh() {
         // Start loading process
-        areCapsulesLoading.value = true
+        areCapsulesLoading.postValue(true)
         Timber.d("refreshCapsules called")
         withContext(Dispatchers.IO) {
             try {
