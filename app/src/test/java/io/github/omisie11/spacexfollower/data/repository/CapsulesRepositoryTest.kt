@@ -48,10 +48,10 @@ class CapsulesRepositoryTest {
 
     @Test
     fun getAllCapsulesFlowTest() = runBlocking {
-        val companyLiveData = flowOf(testCapsulesList)
+        val capsulesFlow = flowOf(testCapsulesList)
 
         Mockito.`when`(capsulesDao.getAllCapsulesFlow()).thenAnswer {
-            return@thenAnswer companyLiveData
+            return@thenAnswer capsulesFlow
         }
 
         var result = listOf<Capsule>()
