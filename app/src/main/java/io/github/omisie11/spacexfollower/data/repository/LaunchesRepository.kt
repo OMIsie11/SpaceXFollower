@@ -22,13 +22,9 @@ class LaunchesRepository(
     override val lastRefreshDataKey: String = KEY_LAUNCHES_LAST_REFRESH
 
     // Variables for showing/hiding loading indicators
-    private val areLaunchesLoading: MutableLiveData<Boolean> = MutableLiveData()
+    private val areLaunchesLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     // Set value to message to be shown in snackbar
     private val launchesSnackBar = MutableLiveData<String>()
-
-    init {
-        areLaunchesLoading.value = false
-    }
 
     // Wrapper for getting all capsules from Db
     fun getAllLaunchesFlow(): Flow<List<Launch>> = allLaunchesDao.getAllLaunchesFlow()
@@ -57,7 +53,7 @@ class LaunchesRepository(
 
     private suspend fun performDataRefresh() {
         // Start loading process
-        areLaunchesLoading.value = true
+        areLaunchesLoading.postValue(true)
         Timber.d("refreshAllLaunches called")
         withContext(Dispatchers.IO) {
             try {
@@ -77,10 +73,10 @@ class LaunchesRepository(
 
     private suspend fun fetchLaunchesAndSaveToDb() {
         Timber.d("fetchLaunchesAndSaveToDb called")
-        val response = spaceService.getUpcomingLaunches()
+        val response = spaceService.getAllLaunches()
         if (response.isSuccessful) {
             Timber.d("Response SUCCESSFUL")
-            response.body()?.let { allLaunchesDao.replaceUpcomingLaunches(it) }
+            response.body()?.let { allLaunchesDao.replaceAllLaunches(it) }
             // Save new launches last refresh time
             saveRefreshTime(lastRefreshDataKey)
         } else Timber.d("Error: ${response.errorBody()}")
