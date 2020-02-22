@@ -1,5 +1,6 @@
 package io.github.omisie11.spacexfollower.util
 
+import com.github.mikephil.charting.data.PieEntry
 import io.github.omisie11.spacexfollower.data.local.model.Capsule
 import io.github.omisie11.spacexfollower.data.local.model.Core
 
@@ -43,8 +44,9 @@ val testCore2 = Core(
     0,
     0,
     false,
-    "Successful first-stage burn and transition to second stage, maximal altitude 289 km. Harmonic" +
-            " oscillation at T+5 minutes Premature engine shutdown at T+7 min 30 s. Failed to reach orbit."
+    "Successful first-stage burn and transition to second stage, maximal altitude 289 km." +
+            " Harmonic oscillation at T+5 minutes Premature engine shutdown at T+7 min 30 s." +
+            " Failed to reach orbit."
 )
 val testCore3 = Core(
     3L,
@@ -66,4 +68,12 @@ val testCore3 = Core(
     0,
     false,
     "Residual stage-1 thrust led to collision between stage 1 and stage 2."
+)
+
+/**
+ * List of entries that will be constructed by DashboardRepository with use of
+ * testCore1, testCore2 and testCore3
+ */
+val testCoresPieEntriesList = listOf(
+    PieEntry(3f, "expended")
 )

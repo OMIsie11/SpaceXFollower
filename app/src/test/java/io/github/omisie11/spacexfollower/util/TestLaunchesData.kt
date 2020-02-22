@@ -1,5 +1,6 @@
 package io.github.omisie11.spacexfollower.util
 
+import com.github.mikephil.charting.data.Entry
 import io.github.omisie11.spacexfollower.data.local.model.launch.Launch
 import io.github.omisie11.spacexfollower.data.local.model.launch.LaunchSite
 import io.github.omisie11.spacexfollower.data.local.model.launch.Rocket
@@ -84,4 +85,23 @@ val testLaunch2 = Launch(
         "", "", "", "",
         "", "", "", "", "", ""
     ), "Demonstration mission to ISS for NASA with an uncrewed Dragon 2 capsule."
+)
+
+/**
+ * List of entries that will be constructed by DashboardRepository with use of
+ * testLaunch1 and testLaunch2
+ */
+val testLaunchEntriesList = listOf(
+    Entry(0f, 0f),
+    Entry(1f, 1f),
+    Entry(2f, 1f),
+    Entry(3f, 0f),
+    Entry(4f, 0f),
+    Entry(5f, 0f),
+    Entry(6f, 0f),
+    Entry(7f, 0f),
+    Entry(8f, 0f),
+    Entry(9f, 0f),
+    Entry(10f, 0f),
+    Entry(11f, 0f)
 )

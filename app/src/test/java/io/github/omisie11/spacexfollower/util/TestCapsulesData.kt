@@ -1,5 +1,6 @@
 package io.github.omisie11.spacexfollower.util
 
+import com.github.mikephil.charting.data.PieEntry
 import io.github.omisie11.spacexfollower.data.local.model.Capsule
 
 val testCapsule1 = Capsule(
@@ -36,4 +37,13 @@ val testCapsule3 = Capsule(
         )
     ), 1, "Dragon 1.0",
     "First of twenty missions flown under the CRS1 contract", 0
+)
+
+/**
+ * List of entries that will be constructed by DashboardRepository with use of
+ * testCapsule1, testCapsule2 and testCapsule3
+ */
+val testCapsulesPieEntriesList = listOf(
+    PieEntry(2f, "retired"),
+    PieEntry(1f, "unknown")
 )
