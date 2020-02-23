@@ -1,241 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.capsules.CapsuleDetailFragment">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.capsules.CapsuleDetailFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:id="@+id/shared_container_end_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <ImageView
-                android:id="@+id/image_core"
-                android:src="@drawable/detail_fragment_image_zuma"
-                android:contentDescription="@string/detail_fragment_image_content_desc"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:scaleType="centerCrop"/>
+            android:id="@+id/image_core"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:contentDescription="@string/detail_fragment_image_content_desc"
+            android:scaleType="centerCrop"
+            android:src="@drawable/detail_fragment_image_zuma"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-                android:id="@+id/textView13"
-                android:text="@string/core_serial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/image_core" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"/>
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/core_serial"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_core" />
 
         <TextView
-                android:id="@+id/text_core_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/empty_content_sign"
-                tools:text="Merlin1A"
-                android:layout_marginStart="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView13"/>
+            android:id="@+id/text_core_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/empty_content_sign"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView13"
+            tools:text="Merlin1A" />
 
         <TextView
-                android:id="@+id/textView10"
-                android:text="@string/block"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/text_core_name"
-                app:layout_constraintStart_toStartOf="@+id/text_core_block"
-                app:layout_constraintEnd_toEndOf="@+id/text_core_block" android:layout_marginTop="8dp"/>
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/block"
+            app:layout_constraintEnd_toEndOf="@+id/text_core_block"
+            app:layout_constraintStart_toStartOf="@+id/text_core_block"
+            app:layout_constraintTop_toBottomOf="@+id/text_core_name" />
 
         <TextView
-                android:id="@+id/text_core_block"
-                android:text="@string/empty_content_sign"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="1"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toStartOf="@+id/text_core_status"/>
+            android:id="@+id/text_core_block"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/empty_content_sign"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintEnd_toStartOf="@+id/text_core_status"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10"
+            tools:text="1" />
 
         <TextView
-                android:id="@+id/textView11"
-                android:text="@string/status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@+id/textView10"
-                app:layout_constraintBottom_toBottomOf="@+id/textView10"
-                app:layout_constraintStart_toStartOf="@+id/text_core_status"
-                app:layout_constraintEnd_toEndOf="@+id/text_core_status"/>
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/status"
+            app:layout_constraintBottom_toBottomOf="@+id/textView10"
+            app:layout_constraintEnd_toEndOf="@+id/text_core_status"
+            app:layout_constraintStart_toStartOf="@+id/text_core_status"
+            app:layout_constraintTop_toTopOf="@+id/textView10" />
 
         <TextView
-                android:id="@+id/text_core_status"
-                android:text="@string/empty_content_sign"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:textAllCaps="true"
-                tools:text="ACTIVE"
-                app:layout_constraintTop_toTopOf="@+id/text_core_block"
-                app:layout_constraintBottom_toBottomOf="@+id/text_core_block"
-                app:layout_constraintStart_toEndOf="@+id/text_core_block" app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintEnd_toEndOf="parent"/>
+            android:id="@+id/text_core_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_content_sign"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintBottom_toBottomOf="@+id/text_core_block"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/text_core_block"
+            app:layout_constraintTop_toTopOf="@+id/text_core_block"
+            tools:text="ACTIVE" />
 
         <TextView
-                android:id="@+id/textView14"
-                android:text="@string/original_launch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/text_core_block"/>
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/original_launch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_core_block" />
 
         <TextView
-                android:id="@+id/text_lib_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" tools:text="2016-02-19"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textView14"/>
+            android:id="@+id/text_lib_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView14"
+            tools:text="2016-02-19" />
 
         <TextView
-                android:id="@+id/textView12"
-                android:text="@string/details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/text_lib_desc"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_lib_desc" />
 
         <TextView
-                android:id="@+id/text_core_details"
-                android:text="@string/empty_content_sign"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                tools:text='"Rumored to be used for Inflight Abort Test after DM-1"'
-                app:layout_constraintHorizontal_bias="0.0"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textView12"/>
+            android:id="@+id/text_core_details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/empty_content_sign"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView12"
+            tools:text='"Rumored to be used for Inflight Abort Test after DM-1"' />
 
         <TextView
-                android:id="@+id/textView"
-                android:text="@string/rtls_attempts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/text_core_details"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintEnd_toStartOf="@+id/text_core_rtls_attempts"/>
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/rtls_attempts"
+            app:layout_constraintEnd_toStartOf="@+id/text_core_rtls_attempts"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_core_details" />
 
         <TextView
-                android:id="@+id/text_core_rtls_attempts"
-                tools:text="0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@+id/textView" app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:text="@string/empty_content_sign"
-                app:layout_constraintTop_toTopOf="@+id/textView"/>
+            android:id="@+id/text_core_rtls_attempts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_content_sign"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            tools:text="0" />
 
         <TextView
-                android:id="@+id/textView4"
-                android:text="@string/rtls_landings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/textView"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textView"/>
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/rtls_landings"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
-                android:id="@+id/text_core_rtls_landings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@+id/text_core_rtls_attempts"
-                tools:text="0" app:layout_constraintTop_toTopOf="@+id/textView4"
-                android:text="@string/empty_content_sign"/>
+            android:id="@+id/text_core_rtls_landings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_content_sign"
+            app:layout_constraintEnd_toEndOf="@+id/text_core_rtls_attempts"
+            app:layout_constraintTop_toTopOf="@+id/textView4"
+            tools:text="0" />
 
         <TextView
-                android:id="@+id/textView7"
-                android:text="@string/asds_attempts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
-                app:layout_constraintStart_toStartOf="@+id/textView4"/>
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/asds_attempts"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <TextView
-                android:id="@+id/text_core_asds_attempts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@+id/text_core_rtls_landings"
-                app:layout_constraintTop_toTopOf="@+id/textView7" tools:text="0"
-                android:text="@string/empty_content_sign"/>
+            android:id="@+id/text_core_asds_attempts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_content_sign"
+            app:layout_constraintEnd_toEndOf="@+id/text_core_rtls_landings"
+            app:layout_constraintTop_toTopOf="@+id/textView7"
+            tools:text="0" />
 
         <TextView
-                android:id="@+id/textView3"
-                android:text="@string/asds_landings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView7"
-                app:layout_constraintStart_toStartOf="@+id/textView7"/>
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/asds_landings"
+            app:layout_constraintStart_toStartOf="@+id/textView7"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <TextView
-                android:id="@+id/text_core_asds_landings"
-                android:text="@string/empty_content_sign"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@+id/textView3"
-                tools:text="0"
-                app:layout_constraintEnd_toEndOf="@+id/text_core_asds_attempts"/>
+            android:id="@+id/text_core_asds_landings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_content_sign"
+            app:layout_constraintEnd_toEndOf="@+id/text_core_asds_attempts"
+            app:layout_constraintTop_toTopOf="@+id/textView3"
+            tools:text="0" />
 
         <TextView
-                android:id="@+id/textView9"
-                android:text="@string/water_landing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/textView3"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"/>
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/water_landing"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
-                android:id="@+id/text_core_water_landing"
-                android:text="@string/empty_content_sign"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@+id/textView9"
-                app:layout_constraintEnd_toEndOf="@+id/text_core_asds_landings" tools:text="0"/>
+            android:id="@+id/text_core_water_landing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_content_sign"
+            app:layout_constraintEnd_toEndOf="@+id/text_core_asds_landings"
+            app:layout_constraintTop_toTopOf="@+id/textView9"
+            tools:text="0" />
 
         <TextView
-                android:id="@+id/textView5"
-                android:text="@string/reused"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView9"
-                app:layout_constraintStart_toStartOf="@+id/textView9" app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="8dp"/>
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/reused"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView9"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
         <TextView
-                android:id="@+id/text_core_reused"
-                android:text="@string/empty_content_sign"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="0"
-                app:layout_constraintEnd_toEndOf="@+id/text_core_asds_landings"
-                app:layout_constraintTop_toTopOf="@+id/textView5"/>
+            android:id="@+id/text_core_reused"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_content_sign"
+            app:layout_constraintEnd_toEndOf="@+id/text_core_asds_landings"
+            app:layout_constraintTop_toTopOf="@+id/textView5"
+            tools:text="0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

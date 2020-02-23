@@ -33,6 +33,9 @@ class CapsulesAdapter(private val itemClickListener: OnItemClickListener) :
         private val capsuleTypeTextView: TextView = itemView.text_capsule_type
 
         fun bind(capsule: Capsule, itemClickListener: OnItemClickListener) {
+            // set transition name for shared element container transition
+            itemView.transitionName = capsulesList.indexOf(capsule).toString()
+
             capsuleSerialTextView.text = capsule.capsuleSerial
             capsuleLaunchTextView.text = if (capsule.originalLaunchUnix != null)
                 getLocalTimeFromUnix(capsule.originalLaunchUnix) else
@@ -42,7 +45,8 @@ class CapsulesAdapter(private val itemClickListener: OnItemClickListener) :
 
             itemView.setOnClickListener {
                 if (adapterPosition != -1) itemClickListener.onItemClicked(
-                    capsulesList.indexOf(capsule)
+                    capsulesList.indexOf(capsule),
+                    itemView
                 )
             }
         }
@@ -54,6 +58,6 @@ class CapsulesAdapter(private val itemClickListener: OnItemClickListener) :
     }
 
     interface OnItemClickListener {
-        fun onItemClicked(capsuleIndex: Int)
+        fun onItemClicked(capsuleIndex: Int, itemView: View)
     }
 }

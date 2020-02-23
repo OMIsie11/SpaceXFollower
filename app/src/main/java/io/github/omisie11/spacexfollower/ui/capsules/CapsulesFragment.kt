@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -135,11 +136,13 @@ class CapsulesFragment : Fragment(), CapsulesAdapter.OnItemClickListener {
     }
 
     // Respond to user clicks on recyclerView items
-    override fun onItemClicked(capsuleIndex: Int) {
-        findNavController().navigate(
-            CapsulesFragmentDirections
-                .actionCapsulesDestToCapsuleDetailDest(capsuleIndex)
+    override fun onItemClicked(capsuleIndex: Int, itemView: View) {
+        val extras = FragmentNavigatorExtras(
+            itemView to capsuleIndex.toString()
         )
+        val action = CapsulesFragmentDirections
+            .actionCapsulesDestToCapsuleDetailDest(capsuleIndex)
+        findNavController().navigate(action, extras)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

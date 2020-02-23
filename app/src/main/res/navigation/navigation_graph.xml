@@ -11,9 +11,7 @@
         android:label="@string/label_capsules">
         <action
             android:id="@+id/action_capsules_dest_to_capsule_detail_dest"
-            app:destination="@id/capsule_detail_dest"
-            app:enterAnim="@anim/slide_up"
-            app:exitAnim="@anim/nav_default_exit_anim" />
+            app:destination="@id/capsule_detail_dest" />
     </fragment>
 
     <fragment
@@ -23,9 +21,7 @@
         tools:layout="@layout/fragment_recycler_swipe_refresh">
         <action
             android:id="@+id/action_cores_dest_to_coresDetailFragment"
-            app:destination="@id/core_detail_dest"
-            app:enterAnim="@anim/slide_up"
-            app:exitAnim="@anim/nav_default_exit_anim" />
+            app:destination="@id/core_detail_dest" />
     </fragment>
 
     <fragment
@@ -68,9 +64,7 @@
         tools:layout="@layout/fragment_recycler_swipe_refresh">
         <action
             android:id="@+id/action_upcoming_launches_dest_to_upcomingLaunchesDetailFragment"
-            app:destination="@id/launches_detail_dest"
-            app:enterAnim="@anim/slide_up"
-            app:exitAnim="@anim/nav_default_exit_anim" />
+            app:destination="@id/launches_detail_dest" />
     </fragment>
 
     <fragment

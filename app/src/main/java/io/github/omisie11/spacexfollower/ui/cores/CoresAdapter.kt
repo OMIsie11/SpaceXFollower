@@ -34,6 +34,9 @@ class CoresAdapter(private val itemClickListener: OnItemClickListener) :
         private val coreStatusTextView: TextView = itemView.text_core_status
 
         fun bind(core: Core, itemClickListener: OnItemClickListener) {
+            // set transition name for shared element container transition
+            itemView.transitionName = coresList.indexOf(core).toString()
+
             coreBlockTextView.text = if (core.block != null)
                 itemView.context.resources.getString(R.string.core_block, core.block) else
                 itemView.context.resources.getString(R.string.core_block_null)
@@ -45,7 +48,8 @@ class CoresAdapter(private val itemClickListener: OnItemClickListener) :
 
             itemView.setOnClickListener {
                 if (adapterPosition != -1) itemClickListener.onItemClicked(
-                    coresList.indexOf(core)
+                    coresList.indexOf(core),
+                    itemView
                 )
             }
         }
@@ -57,6 +61,6 @@ class CoresAdapter(private val itemClickListener: OnItemClickListener) :
     }
 
     interface OnItemClickListener {
-        fun onItemClicked(coreIndex: Int)
+        fun onItemClicked(coreIndex: Int, itemView: View)
     }
 }

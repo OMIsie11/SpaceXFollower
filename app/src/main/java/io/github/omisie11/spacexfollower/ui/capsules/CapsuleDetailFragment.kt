@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.transition.MaterialContainerTransform
 import com.squareup.picasso.Picasso
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.local.model.Capsule
@@ -22,6 +24,13 @@ class CapsuleDetailFragment : Fragment() {
 
     private val viewModel: CapsulesViewModel by sharedViewModel()
 
+    private val args: CapsuleDetailFragmentArgs by navArgs()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform(requireContext())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,8 +43,8 @@ class CapsuleDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val safeArgs = arguments?.let { CapsuleDetailFragmentArgs.fromBundle(it) }
-        val selectedCapsuleId: Int = safeArgs?.itemId ?: 0
+        shared_container_end_view.transitionName = args.itemId.toString()
+        val selectedCapsuleId: Int = args.itemId
 
         viewModel.getCapsules().observe(viewLifecycleOwner, Observer<List<Capsule>> { capsules ->
             val capsule = capsules[selectedCapsuleId]

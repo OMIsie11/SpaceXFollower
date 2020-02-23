@@ -35,6 +35,9 @@ class LaunchesAdapter(private val itemClickListener: OnItemClickListener) :
         private val missionPatchImage: ImageView = itemView.image_mission_patch
 
         fun bind(launch: Launch, itemClickListener: OnItemClickListener) {
+            // set transition name for shared element container transition
+            itemView.transitionName = launchesList.indexOf(launch).toString()
+
             flightNumberTextView.text = itemView.context.resources.getString(
                 R.string.flight_number_template,
                 launch.flightNumber
@@ -55,7 +58,8 @@ class LaunchesAdapter(private val itemClickListener: OnItemClickListener) :
 
             itemView.setOnClickListener {
                 if (adapterPosition != -1) itemClickListener.onItemClicked(
-                    launchesList.indexOf(launch)
+                    launchesList.indexOf(launch),
+                    itemView
                 )
             }
         }
@@ -67,6 +71,6 @@ class LaunchesAdapter(private val itemClickListener: OnItemClickListener) :
     }
 
     interface OnItemClickListener {
-        fun onItemClicked(launchIndex: Int)
+        fun onItemClicked(launchIndex: Int, itemView: View)
     }
 }

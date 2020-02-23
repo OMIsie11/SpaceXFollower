@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.transition.MaterialContainerTransform
 import com.squareup.picasso.Picasso
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.local.model.Core
@@ -22,6 +24,13 @@ class CoreDetailFragment : Fragment() {
 
     private val viewModel: CoresViewModel by sharedViewModel()
 
+    private val args: CoreDetailFragmentArgs by navArgs()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform(requireContext())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,8 +43,8 @@ class CoreDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val safeArgs = arguments?.let { CoreDetailFragmentArgs.fromBundle(it) }
-        val selectedCoreId: Int = safeArgs?.itemId ?: 0
+        shared_container_end_view.transitionName = args.itemId.toString()
+        val selectedCoreId: Int = args.itemId
 
         viewModel.getCores().observe(viewLifecycleOwner, Observer<List<Core>> { cores ->
             val core = cores[selectedCoreId]
