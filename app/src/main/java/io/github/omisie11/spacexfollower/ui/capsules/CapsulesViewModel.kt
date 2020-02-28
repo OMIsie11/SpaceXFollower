@@ -16,11 +16,10 @@ class CapsulesViewModel(private val repository: CapsulesRepository) : ViewModel(
     private val _areCapsulesLoading: LiveData<Boolean> = repository.getCapsulesLoadingStatus()
     private val _snackBar: MutableLiveData<String> = repository.getCapsulesSnackbar()
 
-    private val _sortingOrder = MutableLiveData<CapsulesSortingOrder>()
+    private val _sortingOrder: MutableLiveData<CapsulesSortingOrder> =
+        MutableLiveData(CapsulesSortingOrder.BY_SERIAL_NEWEST)
 
     init {
-        _sortingOrder.value = CapsulesSortingOrder.BY_SERIAL_NEWEST
-
         viewModelScope.launch(Dispatchers.IO) {
             repository.getAllCapsulesFlow()
                 .collect { capsules -> sortAndSetCapsules(capsules) }
