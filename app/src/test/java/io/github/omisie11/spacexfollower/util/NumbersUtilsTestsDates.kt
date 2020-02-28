@@ -1,7 +1,5 @@
-package io.github.omisie11.spacexfollower
+package io.github.omisie11.spacexfollower.util
 
-import io.github.omisie11.spacexfollower.util.getMonthValueFromUnixTime
-import io.github.omisie11.spacexfollower.util.getYearValueFromUnixTime
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

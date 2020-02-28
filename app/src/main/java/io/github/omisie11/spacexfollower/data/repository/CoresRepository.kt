@@ -21,12 +21,8 @@ class CoresRepository(
 
     override val lastRefreshDataKey: String = KEY_CORES_LAST_REFRESH
 
-    private val areCoresLoading: MutableLiveData<Boolean> = MutableLiveData()
+    private val areCoresLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     private val coresSnackBar = MutableLiveData<String>()
-
-    init {
-        areCoresLoading.value = false
-    }
 
     fun getAllCoresFlow(): Flow<List<Core>> = coresDao.getAllCoresFlow()
 
@@ -53,7 +49,7 @@ class CoresRepository(
 
     private suspend fun performDataRefresh() {
         // Start loading process
-        areCoresLoading.value = true
+        areCoresLoading.postValue(true)
         withContext(Dispatchers.IO) {
             try {
                 fetchCoresAndSaveToDb()

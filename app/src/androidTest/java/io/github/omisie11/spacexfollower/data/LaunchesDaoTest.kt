@@ -79,8 +79,8 @@ class LaunchesDaoTest {
     @Test
     fun testReplaceLaunchesData() = runBlocking {
         // Perform action double to check if data is properly erased and there is no duplicates
-        launchesDao.replaceUpcomingLaunches(testLaunchesData)
-        launchesDao.replaceUpcomingLaunches(testLaunchesData)
+        launchesDao.replaceAllLaunches(testLaunchesData)
+        launchesDao.replaceAllLaunches(testLaunchesData)
 
         val latch = CountDownLatch(1)
         val job = launch(Dispatchers.IO) {

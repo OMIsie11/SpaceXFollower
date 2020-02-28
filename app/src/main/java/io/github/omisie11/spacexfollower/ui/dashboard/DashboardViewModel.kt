@@ -72,10 +72,10 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
         }
     }
 
-    fun refreshData() = viewModelScope.launch { repository.refreshData() }
+    fun refreshData() = viewModelScope.launch { repository.refreshData(forceRefresh = true) }
 
     fun refreshIfDataIsOld() =
-        viewModelScope.launch { repository.refreshIfDataIsOld() }
+        viewModelScope.launch { repository.refreshData(forceRefresh = false) }
 
     private suspend fun fetchLaunchesStatsFromDb() {
         repository.getEntriesLaunchesStatsFlow(

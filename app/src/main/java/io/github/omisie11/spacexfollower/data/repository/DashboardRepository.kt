@@ -39,16 +39,16 @@ class DashboardRepository(
     fun getEntriesCoresStatusFlow(): Flow<List<PieEntry>> = coresDao.getAllCoresFlow()
         .map { cores -> mapCoresToStatusEntries(cores) }
 
-    suspend fun refreshData() {
-        launchesRepository.refreshData(forceRefresh = true)
-        capsulesRepository.refreshData(forceRefresh = true)
-        coresRepository.refreshData(forceRefresh = true)
-    }
-
-    suspend fun refreshIfDataIsOld() {
-        launchesRepository.refreshData()
-        capsulesRepository.refreshData()
-        coresRepository.refreshData()
+    suspend fun refreshData(forceRefresh: Boolean = false) {
+        if (forceRefresh) {
+            launchesRepository.refreshData(forceRefresh = true)
+            capsulesRepository.refreshData(forceRefresh = true)
+            coresRepository.refreshData(forceRefresh = true)
+        } else {
+            launchesRepository.refreshData()
+            capsulesRepository.refreshData()
+            coresRepository.refreshData()
+        }
     }
 
     // Map list of launches to list of Entries that shows number of launches in particular months

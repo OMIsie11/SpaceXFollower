@@ -94,5 +94,11 @@
         "description": "Groupie helps you display and manage complex RecyclerView layouts",
         "license": "MIT",
         "repositoryUrl": "https://github.com/lisawray/groupie"
+    },
+    {
+        "name": "Mockito-Kotlin",
+        "description": "A small library that provides helper functions to work with Mockito in Kotlin.",
+        "license": "MIT",
+        "repositoryUrl": "https://github.com/nhaarman/mockito-kotlin"
     }
 ]

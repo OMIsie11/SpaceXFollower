@@ -22,9 +22,9 @@ interface SpaceService {
     @GET("v3/info")
     suspend fun getCompanyInfo(): Response<Company>
 
-    // Upcoming Launches
+    // All Launches
     @GET("v3/launches")
-    suspend fun getUpcomingLaunches(): Response<List<Launch>>
+    suspend fun getAllLaunches(): Response<List<Launch>>
 
     @GET("v3/launchpads")
     suspend fun getLaunchPads(): Response<List<LaunchPad>>

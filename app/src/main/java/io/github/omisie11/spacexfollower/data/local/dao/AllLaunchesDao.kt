@@ -11,7 +11,7 @@ interface AllLaunchesDao {
     suspend fun insertLaunches(launches: List<Launch>)
 
     @Transaction
-    suspend fun replaceUpcomingLaunches(launches: List<Launch>) {
+    suspend fun replaceAllLaunches(launches: List<Launch>) {
         deleteLaunchesData()
         insertLaunches(launches)
     }

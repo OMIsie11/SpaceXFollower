@@ -24,6 +24,7 @@ android {
     }
     testOptions {
         unitTests.returnDefaultValues = true
+        animationsDisabled = true
     }
     compileOptions {
         sourceCompatibility = 1.8
@@ -76,7 +77,23 @@ dependencies {
     implementation "com.xwray:groupie-kotlin-android-extensions:$rootProject.groupie_version"
     // WorkManager
     implementation "androidx.work:work-runtime-ktx:$rootProject.work_manager_version"
+    // Leak Canary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leak_canary_version"
+
     // Testing dependencies
+
+    // Local Unit tests
+
+    testImplementation "junit:junit:$rootProject.junit_version"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$rootProject.mockito_kotlin_version"
+    testImplementation "androidx.arch.core:core-testing:$rootProject.lifecycle_version"
+    testImplementation "org.koin:koin-test:$rootProject.koin_version"
+    testImplementation ('org.threeten:threetenbp:1.3.2'){
+        exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
+    }
+
+    // Android tests
+
     // Core library
     androidTestImplementation "androidx.test:core:$rootProject.test_core_version"
     // AndroidJUnitRunner and JUnit Rules
@@ -93,17 +110,8 @@ dependencies {
     androidTestImplementation "androidx.room:room-testing:$rootProject.room_version"
     // Lifecycle
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.lifecycle_version"
-    // Koin
-    testImplementation "org.koin:koin-test:$rootProject.koin_version"
-    testImplementation "junit:junit:$rootProject.junit_version"
     // Coroutines test
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.coroutines_android_version"
-    // Leak Canary
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leak_canary_version"
     // WorkManager
     androidTestImplementation "androidx.work:work-testing:$rootProject.work_manager_version"
-    // Use ThreeTen BP for unit testing
-    testImplementation ('org.threeten:threetenbp:1.3.2'){
-        exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
-    }
 }
