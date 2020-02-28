@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.util
+package io.github.omisie11.spacexfollower.test_utils
 
 import androidx.lifecycle.LiveData
 import java.util.concurrent.CountDownLatch

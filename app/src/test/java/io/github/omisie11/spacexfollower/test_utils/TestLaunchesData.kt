@@ -1,4 +1,4 @@
-package io.github.omisie11.spacexfollower.util
+package io.github.omisie11.spacexfollower.test_utils
 
 import com.github.mikephil.charting.data.Entry
 import io.github.omisie11.spacexfollower.data.local.model.launch.Launch

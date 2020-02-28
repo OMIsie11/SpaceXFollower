@@ -7,7 +7,7 @@ import com.nhaarman.mockitokotlin2.verify
 import io.github.omisie11.spacexfollower.data.local.dao.AllLaunchesDao
 import io.github.omisie11.spacexfollower.data.local.dao.CapsulesDao
 import io.github.omisie11.spacexfollower.data.local.dao.CoresDao
-import io.github.omisie11.spacexfollower.util.*
+import io.github.omisie11.spacexfollower.test_utils.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
@@ -75,7 +75,10 @@ class DashboardRepositoryTest {
 
     @Test
     fun getNumberOfLaunchesFlowTest_VerifyCallsAndGettingData() = runBlocking {
-        val testLaunchesList = listOf(testLaunch1, testLaunch2)
+        val testLaunchesList = listOf(
+            testLaunch1,
+            testLaunch2
+        )
         val numberOfLaunchesFlow = flowOf(testLaunchesList.size)
 
         Mockito.`when`(launchesDao.getNumberOfLaunchesFlow()).thenAnswer {
@@ -93,7 +96,11 @@ class DashboardRepositoryTest {
 
     @Test
     fun getNumberOfCapsulesFlowTest_VerifyCallsAndGettingData() = runBlocking {
-        val testCapsulesList = listOf(testCapsule1, testCapsule2, testCapsule3)
+        val testCapsulesList = listOf(
+            testCapsule1,
+            testCapsule2,
+            testCapsule3
+        )
         val numberOfCapsulesFlow = flowOf(testCapsulesList.size)
 
         Mockito.`when`(capsulesDao.getNumberOfCapsulesFlow()).thenAnswer {
@@ -111,7 +118,11 @@ class DashboardRepositoryTest {
 
     @Test
     fun getNumberOfCoresFlowTest_VerifyCallsAndGettingData() = runBlocking {
-        val testCoresList = listOf(testCore2, testCore1, testCore3)
+        val testCoresList = listOf(
+            testCore2,
+            testCore1,
+            testCore3
+        )
         val numberOfCoresFlow = flowOf(testCoresList.size)
 
         Mockito.`when`(coresDao.getNumberOfCoresFlow()).thenAnswer {
@@ -129,11 +140,15 @@ class DashboardRepositoryTest {
 
     @Test
     fun getEntriesLaunchesStatsFlowTest() = runBlocking {
-        val testLaunchesList = listOf(testLaunch1, testLaunch2)
+        val testLaunchesList = listOf(
+            testLaunch1,
+            testLaunch2
+        )
         val launchesFlow = flowOf(testLaunchesList)
         val year2019 = DashboardRepository.YearInterval.YEAR_2019
 
-        val entriesList: List<Entry> = testLaunchEntriesList
+        val entriesList: List<Entry> =
+            testLaunchEntriesList
 
         Mockito.`when`(
             launchesDao.getLaunchesBetweenDatesFlow(
@@ -160,10 +175,15 @@ class DashboardRepositoryTest {
 
     @Test
     fun getEntriesCapsulesStatsFlowTest() = runBlocking {
-        val testCapsulesList = listOf(testCapsule2, testCapsule3, testCapsule1)
+        val testCapsulesList = listOf(
+            testCapsule2,
+            testCapsule3,
+            testCapsule1
+        )
         val capsulesFlow = flowOf(testCapsulesList)
 
-        val entriesList: List<PieEntry> = testCapsulesPieEntriesList
+        val entriesList: List<PieEntry> =
+            testCapsulesPieEntriesList
 
         Mockito.`when`(
             capsulesDao.getAllCapsulesFlow()
@@ -184,10 +204,15 @@ class DashboardRepositoryTest {
 
     @Test
     fun getEntriesCoresStatsFlowTest() = runBlocking {
-        val testCoresList = listOf(testCore2, testCore3, testCore1)
+        val testCoresList = listOf(
+            testCore2,
+            testCore3,
+            testCore1
+        )
         val coresFlow = flowOf(testCoresList)
 
-        val entriesList: List<PieEntry> = testCoresPieEntriesList
+        val entriesList: List<PieEntry> =
+            testCoresPieEntriesList
 
         Mockito.`when`(
             coresDao.getAllCoresFlow()

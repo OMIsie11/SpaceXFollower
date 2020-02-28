@@ -6,8 +6,8 @@ import com.nhaarman.mockitokotlin2.verify
 import io.github.omisie11.spacexfollower.data.local.dao.AllLaunchesDao
 import io.github.omisie11.spacexfollower.data.local.model.launch.Launch
 import io.github.omisie11.spacexfollower.data.remote.SpaceService
-import io.github.omisie11.spacexfollower.util.testLaunch1
-import io.github.omisie11.spacexfollower.util.testLaunch2
+import io.github.omisie11.spacexfollower.test_utils.testLaunch1
+import io.github.omisie11.spacexfollower.test_utils.testLaunch2
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
@@ -26,7 +26,10 @@ import retrofit2.Response
 @RunWith(JUnit4::class)
 class LaunchesRepositoryTest {
 
-    private val testLaunchesList = listOf(testLaunch1, testLaunch2)
+    private val testLaunchesList = listOf(
+        testLaunch1,
+        testLaunch2
+    )
 
     @Mock
     private lateinit var spaceService: SpaceService
@@ -94,5 +97,13 @@ class LaunchesRepositoryTest {
 
         verify(spaceService, times(1)).getAllLaunches()
         verify(launchesDao, times(0)).replaceAllLaunches(testLaunchesList)
+    }
+
+    @Test
+    fun deleteAllLaunchesTest_verifyCalls() = runBlocking {
+
+        launchesRepository.deleteAllLaunches()
+
+        verify(launchesDao, times(1)).deleteLaunchesData()
     }
 }

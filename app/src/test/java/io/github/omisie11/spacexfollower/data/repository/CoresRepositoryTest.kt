@@ -6,9 +6,9 @@ import com.nhaarman.mockitokotlin2.verify
 import io.github.omisie11.spacexfollower.data.local.dao.CoresDao
 import io.github.omisie11.spacexfollower.data.local.model.Core
 import io.github.omisie11.spacexfollower.data.remote.SpaceService
-import io.github.omisie11.spacexfollower.util.testCore1
-import io.github.omisie11.spacexfollower.util.testCore2
-import io.github.omisie11.spacexfollower.util.testCore3
+import io.github.omisie11.spacexfollower.test_utils.testCore1
+import io.github.omisie11.spacexfollower.test_utils.testCore2
+import io.github.omisie11.spacexfollower.test_utils.testCore3
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
@@ -27,7 +27,11 @@ import retrofit2.Response
 @RunWith(JUnit4::class)
 class CoresRepositoryTest {
 
-    private val testCoresList = listOf(testCore2, testCore1, testCore3)
+    private val testCoresList = listOf(
+        testCore2,
+        testCore1,
+        testCore3
+    )
 
     @Mock
     private lateinit var spaceService: SpaceService
@@ -95,5 +99,13 @@ class CoresRepositoryTest {
 
         verify(spaceService, times(1)).getAllCores()
         verify(coresDao, times(0)).replaceCoresData(testCoresList)
+    }
+
+    @Test
+    fun deleteAllCoresTest_verifyCalls() = runBlocking {
+
+        coresRepository.deleteAllCores()
+
+        verify(coresDao, times(1)).deleteAllCores()
     }
 }

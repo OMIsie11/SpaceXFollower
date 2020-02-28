@@ -8,7 +8,7 @@ import com.nhaarman.mockitokotlin2.verify
 import io.github.omisie11.spacexfollower.data.local.dao.CompanyDao
 import io.github.omisie11.spacexfollower.data.local.model.Company
 import io.github.omisie11.spacexfollower.data.remote.SpaceService
-import io.github.omisie11.spacexfollower.util.getValue
+import io.github.omisie11.spacexfollower.test_utils.getValue
 import kotlinx.coroutines.runBlocking
 import okhttp3.MediaType
 import okhttp3.ResponseBody
@@ -65,7 +65,9 @@ class CompanyRepositoryTest {
             return@thenAnswer companyLiveData
         }
 
-        val result = getValue(companyRepository.getCompanyInfo())
+        val result = getValue(
+            companyRepository.getCompanyInfo()
+        )
 
         assertEquals(result, testCompanyInfo)
     }
@@ -102,5 +104,13 @@ class CompanyRepositoryTest {
 
         verify(spaceService, times(1)).getCompanyInfo()
         verify(companyDao, times(0)).insertCompanyInfo(testCompanyInfo)
+    }
+
+    @Test
+    fun deleteCompanyInfoTest_verifyCalls() = runBlocking {
+
+        companyRepository.deleteCompanyInfo()
+
+        verify(companyDao, times(1)).deleteCompanyInfo()
     }
 }

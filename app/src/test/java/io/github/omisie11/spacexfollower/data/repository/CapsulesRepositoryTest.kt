@@ -6,9 +6,9 @@ import com.nhaarman.mockitokotlin2.verify
 import io.github.omisie11.spacexfollower.data.local.dao.CapsulesDao
 import io.github.omisie11.spacexfollower.data.local.model.Capsule
 import io.github.omisie11.spacexfollower.data.remote.SpaceService
-import io.github.omisie11.spacexfollower.util.testCapsule1
-import io.github.omisie11.spacexfollower.util.testCapsule2
-import io.github.omisie11.spacexfollower.util.testCapsule3
+import io.github.omisie11.spacexfollower.test_utils.testCapsule1
+import io.github.omisie11.spacexfollower.test_utils.testCapsule2
+import io.github.omisie11.spacexfollower.test_utils.testCapsule3
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
@@ -27,7 +27,11 @@ import retrofit2.Response
 @RunWith(JUnit4::class)
 class CapsulesRepositoryTest {
 
-    private val testCapsulesList = listOf(testCapsule2, testCapsule1, testCapsule3)
+    private val testCapsulesList = listOf(
+        testCapsule2,
+        testCapsule1,
+        testCapsule3
+    )
 
     @Mock
     private lateinit var spaceService: SpaceService
@@ -95,5 +99,13 @@ class CapsulesRepositoryTest {
 
         verify(spaceService, times(1)).getAllCapsules()
         verify(capsulesDao, times(0)).replaceCapsulesData(testCapsulesList)
+    }
+
+    @Test
+    fun deleteAllCapsulesTest_verifyCalls() = runBlocking {
+
+        capsulesRepository.deleteAllCapsules()
+
+        verify(capsulesDao, times(1)).deleteAllCapsules()
     }
 }

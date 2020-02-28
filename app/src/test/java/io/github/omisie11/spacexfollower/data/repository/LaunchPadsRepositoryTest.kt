@@ -6,8 +6,8 @@ import com.nhaarman.mockitokotlin2.verify
 import io.github.omisie11.spacexfollower.data.local.dao.LaunchPadsDao
 import io.github.omisie11.spacexfollower.data.local.model.LaunchPad
 import io.github.omisie11.spacexfollower.data.remote.SpaceService
-import io.github.omisie11.spacexfollower.util.testLaunchPad1
-import io.github.omisie11.spacexfollower.util.testLaunchPad2
+import io.github.omisie11.spacexfollower.test_utils.testLaunchPad1
+import io.github.omisie11.spacexfollower.test_utils.testLaunchPad2
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
@@ -26,7 +26,10 @@ import retrofit2.Response
 @RunWith(JUnit4::class)
 class LaunchPadsRepositoryTest {
 
-    private val testLaunchPadsList = listOf(testLaunchPad1, testLaunchPad2)
+    private val testLaunchPadsList = listOf(
+        testLaunchPad1,
+        testLaunchPad2
+    )
 
     @Mock
     private lateinit var spaceService: SpaceService
@@ -94,5 +97,13 @@ class LaunchPadsRepositoryTest {
 
         verify(spaceService, times(1)).getLaunchPads()
         verify(launchPadsDao, times(0)).replaceLaunchPads(testLaunchPadsList)
+    }
+
+    @Test
+    fun deleteLaunchPadsDataTest_verifyCalls() = runBlocking {
+
+        launchPadsRepository.deleteLaunchPadsData()
+
+        verify(launchPadsDao, times(1)).deleteLaunchPadsData()
     }
 }
