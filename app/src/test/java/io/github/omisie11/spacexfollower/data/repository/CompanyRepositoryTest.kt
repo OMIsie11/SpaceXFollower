@@ -9,6 +9,7 @@ import io.github.omisie11.spacexfollower.data.local.dao.CompanyDao
 import io.github.omisie11.spacexfollower.data.local.model.Company
 import io.github.omisie11.spacexfollower.data.remote.SpaceService
 import io.github.omisie11.spacexfollower.test_utils.getValue
+import io.github.omisie11.spacexfollower.test_utils.testCompanyInfo
 import kotlinx.coroutines.runBlocking
 import okhttp3.MediaType
 import okhttp3.ResponseBody
@@ -26,14 +27,7 @@ import retrofit2.Response
 @RunWith(JUnit4::class)
 class CompanyRepositoryTest {
 
-    private val testCompanyInfo = Company(
-        1, "SpaceX", "Elon Musk", 2002, 7000, 3,
-        3, 1, "Elon Musk", "Elon Musk", "Gwynne Shotwell",
-        "Tom Mueller", 15000000000, Company.Headquarters(
-            "Rocket Road", "Hawthorne", "California"
-        ),
-        "SpaceX designs, manufactures and launches..."
-    )
+    private val testCompanyData = testCompanyInfo
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -58,7 +52,7 @@ class CompanyRepositoryTest {
     @Test
     fun getCompanyInfoTest() {
         val companyLiveData = MutableLiveData<Company>().also {
-            it.value = testCompanyInfo
+            it.value = testCompanyData
         }
 
         Mockito.`when`(companyDao.getCompanyInfo()).thenAnswer {
@@ -69,12 +63,12 @@ class CompanyRepositoryTest {
             companyRepository.getCompanyInfo()
         )
 
-        assertEquals(result, testCompanyInfo)
+        assertEquals(result, testCompanyData)
     }
 
     @Test
     fun refreshDataTest_Force_ApiResponseSuccess_VerifyDataInsertedOnce() = runBlocking {
-        val responseSuccess: Response<Company> = Response.success(testCompanyInfo)
+        val responseSuccess: Response<Company> = Response.success(testCompanyData)
 
         Mockito.`when`(spaceService.getCompanyInfo()).thenAnswer {
             return@thenAnswer responseSuccess
@@ -83,7 +77,7 @@ class CompanyRepositoryTest {
         companyRepository.refreshData(forceRefresh = true)
 
         verify(spaceService, times(1)).getCompanyInfo()
-        verify(companyDao, times(1)).insertCompanyInfo(testCompanyInfo)
+        verify(companyDao, times(1)).insertCompanyInfo(testCompanyData)
     }
 
     @Test
@@ -103,7 +97,7 @@ class CompanyRepositoryTest {
         companyRepository.refreshData(forceRefresh = true)
 
         verify(spaceService, times(1)).getCompanyInfo()
-        verify(companyDao, times(0)).insertCompanyInfo(testCompanyInfo)
+        verify(companyDao, times(0)).insertCompanyInfo(testCompanyData)
     }
 
     @Test
