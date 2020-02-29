@@ -9,10 +9,8 @@ import io.github.omisie11.spacexfollower.test_utils.getValue
 import io.github.omisie11.spacexfollower.test_utils.testCapsule1
 import io.github.omisie11.spacexfollower.test_utils.testCapsule2
 import io.github.omisie11.spacexfollower.test_utils.testCapsule3
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.setMain
 import org.junit.Assert.assertEquals
@@ -64,77 +62,6 @@ class CapsulesViewModelTest {
         val result: List<Capsule>? = getValue(capsulesViewModel.getCapsules())
 
         assertEquals(testCapsulesList.sortedByDescending { it._id }, result)
-    }
-
-    @Test
-    fun getCapsulesTest_checkSortingSerialNewest() = runBlocking {
-        val capsulesFlow = flowOf(testCapsulesList)
-        Mockito.`when`(capsulesRepository.getAllCapsulesFlow()).thenAnswer {
-            return@thenAnswer capsulesFlow
-        }
-
-        capsulesViewModel = CapsulesViewModel(capsulesRepository)
-
-        capsulesViewModel.setCapsulesSortingOrder(
-            CapsulesViewModel.CapsulesSortingOrder.BY_SERIAL_NEWEST
-        )
-        val result: List<Capsule>? = getValue(capsulesViewModel.getCapsules())
-
-        assertEquals(testCapsulesList.sortedByDescending { it._id }, result)
-    }
-
-    @Test
-    fun getCapsulesTest_checkSortingBySerialOldest() = runBlocking {
-        val capsulesFlow = flowOf(testCapsulesList)
-        Mockito.`when`(capsulesRepository.getAllCapsulesFlow()).thenAnswer {
-            return@thenAnswer capsulesFlow
-        }
-
-        capsulesViewModel = CapsulesViewModel(capsulesRepository)
-
-        capsulesViewModel.setCapsulesSortingOrder(
-            CapsulesViewModel.CapsulesSortingOrder.BY_SERIAL_OLDEST
-        )
-
-        val result: List<Capsule>? = getValue(capsulesViewModel.getCapsules())
-
-        assertEquals(testCapsulesList.sortedBy { it._id }, result)
-    }
-
-    @Test
-    fun getCapsulesTest_checkSortingByStatusActiveFirst() = runBlocking {
-        val capsulesFlow = flowOf(testCapsulesList)
-        Mockito.`when`(capsulesRepository.getAllCapsulesFlow()).thenAnswer {
-            return@thenAnswer capsulesFlow
-        }
-
-        capsulesViewModel = CapsulesViewModel(capsulesRepository)
-
-        capsulesViewModel.setCapsulesSortingOrder(
-            CapsulesViewModel.CapsulesSortingOrder.BY_STATUS_ACTIVE_FIRST
-        )
-
-        val result: List<Capsule>? = getValue(capsulesViewModel.getCapsules())
-
-        assertEquals(testCapsulesList.sortedBy { it.status }, result)
-    }
-
-    @Test
-    fun getCapsulesTest_checkSortingByStatusActiveLast() = runBlocking {
-        val capsulesFlow = flowOf(testCapsulesList)
-        Mockito.`when`(capsulesRepository.getAllCapsulesFlow()).thenAnswer {
-            return@thenAnswer capsulesFlow
-        }
-
-        capsulesViewModel = CapsulesViewModel(capsulesRepository)
-
-        capsulesViewModel.setCapsulesSortingOrder(
-            CapsulesViewModel.CapsulesSortingOrder.BY_STATUS_ACTIVE_LAST
-        )
-
-        val result: List<Capsule>? = getValue(capsulesViewModel.getCapsules())
-
-        assertEquals(testCapsulesList.sortedByDescending { it.status }, result)
     }
 
     @Test
@@ -217,5 +144,19 @@ class CapsulesViewModelTest {
             CapsulesViewModel.CapsulesSortingOrder.BY_SERIAL_OLDEST,
             result4
         )
+    }
+
+    @Test
+    fun deleteCapsulesTest_verifyCalls() = runBlocking {
+        val capsulesFlow = flowOf(testCapsulesList)
+        Mockito.`when`(capsulesRepository.getAllCapsulesFlow()).thenAnswer {
+            return@thenAnswer capsulesFlow
+        }
+
+        capsulesViewModel = CapsulesViewModel(capsulesRepository)
+
+        capsulesViewModel.deleteCapsulesData()
+
+        verify(capsulesRepository, times(1)).deleteAllCapsules()
     }
 }
