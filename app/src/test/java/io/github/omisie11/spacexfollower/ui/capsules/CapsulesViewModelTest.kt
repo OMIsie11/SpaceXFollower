@@ -101,49 +101,13 @@ class CapsulesViewModelTest {
 
         capsulesViewModel = CapsulesViewModel(capsulesRepository)
 
-        // Check sorting order BY_STATUS_ACTIVE_LAST
-        capsulesViewModel.setCapsulesSortingOrder(
-            CapsulesViewModel.CapsulesSortingOrder.BY_STATUS_ACTIVE_LAST
-        )
-        val result = getValue(capsulesViewModel.getCapsulesSortingOrder())
+        CapsulesViewModel.CapsulesSortingOrder.values().forEach { sortingOrder ->
+            capsulesViewModel.setCapsulesSortingOrder(sortingOrder)
 
-        assertEquals(
-            CapsulesViewModel.CapsulesSortingOrder.BY_STATUS_ACTIVE_LAST,
-            result
-        )
+            val result = getValue(capsulesViewModel.getCapsulesSortingOrder())
 
-        // Check sorting order BY_STATUS_ACTIVE_FIRST
-        capsulesViewModel.setCapsulesSortingOrder(
-            CapsulesViewModel.CapsulesSortingOrder.BY_STATUS_ACTIVE_FIRST
-        )
-        val result2 = getValue(capsulesViewModel.getCapsulesSortingOrder())
-
-        assertEquals(
-            CapsulesViewModel.CapsulesSortingOrder.BY_STATUS_ACTIVE_FIRST,
-            result2
-        )
-
-        // Check sorting order BY_SERIAL_NEWEST
-        capsulesViewModel.setCapsulesSortingOrder(
-            CapsulesViewModel.CapsulesSortingOrder.BY_SERIAL_NEWEST
-        )
-        val result3 = getValue(capsulesViewModel.getCapsulesSortingOrder())
-
-        assertEquals(
-            CapsulesViewModel.CapsulesSortingOrder.BY_SERIAL_NEWEST,
-            result3
-        )
-
-        // Check sorting order BY_SERIAL_OLDEST
-        capsulesViewModel.setCapsulesSortingOrder(
-            CapsulesViewModel.CapsulesSortingOrder.BY_SERIAL_OLDEST
-        )
-        val result4 = getValue(capsulesViewModel.getCapsulesSortingOrder())
-
-        assertEquals(
-            CapsulesViewModel.CapsulesSortingOrder.BY_SERIAL_OLDEST,
-            result4
-        )
+            assertEquals(sortingOrder, result)
+        }
     }
 
     @Test

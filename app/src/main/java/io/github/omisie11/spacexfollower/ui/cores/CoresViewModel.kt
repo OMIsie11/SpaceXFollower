@@ -16,11 +16,10 @@ class CoresViewModel(private val repository: CoresRepository) : ViewModel() {
     private val _areCoresLoading: LiveData<Boolean> by lazy { repository.getCoresLoadingStatus() }
     private val _snackBar: MutableLiveData<String> = repository.getCoresSnackbar()
 
-    private val _sortingOrder = MutableLiveData<CoresSortingOrder>()
+    private val _sortingOrder =
+        MutableLiveData<CoresSortingOrder>(CoresSortingOrder.BY_SERIAL_NEWEST)
 
     init {
-        _sortingOrder.value = CoresSortingOrder.BY_SERIAL_NEWEST
-
         viewModelScope.launch(Dispatchers.IO) {
             repository.getAllCoresFlow()
                 .collect { cores -> sortAndSetCores(cores) }
