@@ -9,6 +9,7 @@ import io.github.omisie11.spacexfollower.data.repository.CompanyRepository
 import io.github.omisie11.spacexfollower.test_utils.getValue
 import io.github.omisie11.spacexfollower.test_utils.testCompanyInfo
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.setMain
@@ -22,6 +23,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
+@ExperimentalCoroutinesApi
 @RunWith(JUnit4::class)
 class CompanyViewModelTest {
 
