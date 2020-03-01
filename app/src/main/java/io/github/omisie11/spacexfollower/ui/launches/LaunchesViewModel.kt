@@ -18,11 +18,10 @@ class LaunchesViewModel(
     private val _areLaunchesLoading: LiveData<Boolean> = repository.getLaunchesLoadingStatus()
     private val _snackBar: MutableLiveData<String> = repository.getLaunchesSnackbar()
 
-    private val _sortingOrder = MutableLiveData<LaunchesSortingOrder>()
+    private val _sortingOrder =
+        MutableLiveData<LaunchesSortingOrder>(LaunchesSortingOrder.BY_FLIGHT_NUMBER_OLDEST)
 
     init {
-        _sortingOrder.value = LaunchesSortingOrder.BY_FLIGHT_NUMBER_OLDEST
-
         viewModelScope.launch(Dispatchers.IO) {
             repository.getAllLaunchesFlow()
                 .collect { launches -> sortAndSetLaunches(launches) }
