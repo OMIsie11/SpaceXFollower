@@ -10,10 +10,12 @@ import io.github.omisie11.spacexfollower.test_utils.getValue
 import io.github.omisie11.spacexfollower.test_utils.testCompanyInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
-import org.junit.Assert.*
+import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -46,6 +48,12 @@ class CompanyViewModelTest {
         Dispatchers.setMain(testDispatcher)
     }
 
+    @After
+    fun cleanup() {
+        Dispatchers.resetMain()
+        testDispatcher.cleanupTestCoroutines()
+    }
+
     @Test
     fun getCompanyInfoTest() {
         val companyData = MutableLiveData<Company>(testCompanyData)
@@ -62,7 +70,7 @@ class CompanyViewModelTest {
     }
 
     @Test
-    fun refreshCompanyDataTest_verifyCalls() = runBlocking {
+    fun refreshCompanyDataTest_verifyCalls() = runBlockingTest {
         val companyData = MutableLiveData<Company>(testCompanyData)
 
         Mockito.`when`(companyRepository.getCompanyInfo()).thenAnswer {
@@ -77,7 +85,7 @@ class CompanyViewModelTest {
     }
 
     @Test
-    fun refreshIfCompanyDataOldTest_verifyCalls() = runBlocking {
+    fun refreshIfCompanyDataOldTest_verifyCalls() = runBlockingTest {
         val companyData = MutableLiveData<Company>(testCompanyData)
 
         Mockito.`when`(companyRepository.getCompanyInfo()).thenAnswer {
@@ -92,7 +100,7 @@ class CompanyViewModelTest {
     }
 
     @Test
-    fun deleteCompanyInfosTest_verifyCalls() = runBlocking {
+    fun deleteCompanyInfoTest_verifyCalls() = runBlockingTest {
         val companyData = MutableLiveData<Company>(testCompanyData)
 
         Mockito.`when`(companyRepository.getCompanyInfo()).thenAnswer {

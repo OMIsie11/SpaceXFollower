@@ -16,7 +16,8 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
 
     // List of entries for chart with stats of launches by months
     private val launchesStats = MutableLiveData<List<Entry>>()
-    private var launchesChartYear = MutableLiveData<DashboardRepository.YearInterval>()
+    private var launchesChartYear =
+        MutableLiveData<DashboardRepository.YearInterval>(DashboardRepository.YearInterval.YEAR_2020)
 
     private val numberOfLaunches = MutableLiveData<Int>()
     private val numberOfCapsules = MutableLiveData<Int>()
@@ -26,8 +27,6 @@ class DashboardViewModel(private val repository: DashboardRepository) : ViewMode
     private val coresStatusStats = MutableLiveData<List<PieEntry>>()
 
     init {
-        launchesChartYear.value = DashboardRepository.YearInterval.YEAR_2020
-
         viewModelScope.launch(Dispatchers.IO) { fetchLaunchesStatsFromDb() }
 
         viewModelScope.launch(Dispatchers.IO) { fetchCapsulesStatusStatsFromDb() }

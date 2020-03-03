@@ -12,9 +12,11 @@ import io.github.omisie11.spacexfollower.test_utils.testCore3
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -52,6 +54,12 @@ class CoresViewModelTest {
         Dispatchers.setMain(testDispatcher)
     }
 
+    @After
+    fun cleanup() {
+        Dispatchers.resetMain()
+        testDispatcher.cleanupTestCoroutines()
+    }
+
     @Test
     fun getCoresTest() {
         val coresFlow = flowOf(testCoresList)
@@ -67,7 +75,7 @@ class CoresViewModelTest {
     }
 
     @Test
-    fun refreshCoresTest_verifyCalls() = runBlocking {
+    fun refreshCoresTest_verifyCalls() = runBlockingTest {
         val coresFlow = flowOf(testCoresList)
         Mockito.`when`(coresRepository.getAllCoresFlow()).thenAnswer {
             return@thenAnswer coresFlow
@@ -81,7 +89,7 @@ class CoresViewModelTest {
     }
 
     @Test
-    fun refreshIfCoresDataOldTest_verifyCalls() = runBlocking {
+    fun refreshIfCoresDataOldTest_verifyCalls() = runBlockingTest {
         val coresFlow = flowOf(testCoresList)
         Mockito.`when`(coresRepository.getAllCoresFlow()).thenAnswer {
             return@thenAnswer coresFlow
@@ -95,7 +103,7 @@ class CoresViewModelTest {
     }
 
     @Test
-    fun getCoresSortingOrderTest() = runBlocking {
+    fun getCoresSortingOrderTest() = runBlockingTest {
         val coresFlow = flowOf(testCoresList)
         Mockito.`when`(coresRepository.getAllCoresFlow()).thenAnswer {
             return@thenAnswer coresFlow
@@ -113,7 +121,7 @@ class CoresViewModelTest {
     }
 
     @Test
-    fun deleteCoresTest_verifyCalls() = runBlocking {
+    fun deleteCoresTest_verifyCalls() = runBlockingTest {
         val coresFlow = flowOf(testCoresList)
         Mockito.`when`(coresRepository.getAllCoresFlow()).thenAnswer {
             return@thenAnswer coresFlow

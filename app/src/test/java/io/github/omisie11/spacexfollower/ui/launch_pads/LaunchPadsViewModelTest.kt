@@ -11,9 +11,11 @@ import io.github.omisie11.spacexfollower.test_utils.testLaunchPad2
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -47,6 +49,12 @@ class LaunchPadsViewModelTest {
         Dispatchers.setMain(testDispatcher)
     }
 
+    @After
+    fun cleanup() {
+        Dispatchers.resetMain()
+        testDispatcher.cleanupTestCoroutines()
+    }
+
     @Test
     fun getLaunchPadsTest() {
         val launchPadsFlow = flowOf(testLaunchPadsList)
@@ -62,7 +70,7 @@ class LaunchPadsViewModelTest {
     }
 
     @Test
-    fun refreshLaunchPadsTest_verifyCalls() = runBlocking {
+    fun refreshLaunchPadsTest_verifyCalls() = runBlockingTest {
         val launchPadsFlow = flowOf(testLaunchPadsList)
         Mockito.`when`(launchPadsRepository.getLaunchPadsFlow()).thenAnswer {
             return@thenAnswer launchPadsFlow
@@ -76,7 +84,7 @@ class LaunchPadsViewModelTest {
     }
 
     @Test
-    fun refreshIfLaunchPadsDataOldTest_verifyCalls() = runBlocking {
+    fun refreshIfLaunchPadsDataOldTest_verifyCalls() = runBlockingTest {
         val launchPadsFlow = flowOf(testLaunchPadsList)
         Mockito.`when`(launchPadsRepository.getLaunchPadsFlow()).thenAnswer {
             return@thenAnswer launchPadsFlow

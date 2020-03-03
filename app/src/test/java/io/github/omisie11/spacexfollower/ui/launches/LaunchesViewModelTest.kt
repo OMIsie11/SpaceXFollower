@@ -11,9 +11,11 @@ import io.github.omisie11.spacexfollower.test_utils.testLaunch2
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -47,6 +49,12 @@ class LaunchesViewModelTest {
         Dispatchers.setMain(testDispatcher)
     }
 
+    @After
+    fun cleanup() {
+        Dispatchers.resetMain()
+        testDispatcher.cleanupTestCoroutines()
+    }
+
     @Test
     fun getLaunchesTest() {
         val launchesFlow = flowOf(testLaunchesList)
@@ -62,7 +70,7 @@ class LaunchesViewModelTest {
     }
 
     @Test
-    fun refreshLaunchesTest_verifyCalls() = runBlocking {
+    fun refreshLaunchesTest_verifyCalls() = runBlockingTest {
         val launchesFlow = flowOf(testLaunchesList)
         Mockito.`when`(launchesRepository.getAllLaunchesFlow()).thenAnswer {
             return@thenAnswer launchesFlow
@@ -76,7 +84,7 @@ class LaunchesViewModelTest {
     }
 
     @Test
-    fun refreshIfLaunchesDataOldTest_verifyCalls() = runBlocking {
+    fun refreshIfLaunchesDataOldTest_verifyCalls() = runBlockingTest {
         val launchesFlow = flowOf(testLaunchesList)
         Mockito.`when`(launchesRepository.getAllLaunchesFlow()).thenAnswer {
             return@thenAnswer launchesFlow
@@ -90,7 +98,7 @@ class LaunchesViewModelTest {
     }
 
     @Test
-    fun getLaunchesSortingOrderTest() = runBlocking {
+    fun getLaunchesSortingOrderTest() = runBlockingTest {
         val launchesFlow = flowOf(testLaunchesList)
         Mockito.`when`(launchesRepository.getAllLaunchesFlow()).thenAnswer {
             return@thenAnswer launchesFlow
@@ -108,7 +116,7 @@ class LaunchesViewModelTest {
     }
 
     @Test
-    fun deleteLaunchesTest_verifyCalls() = runBlocking {
+    fun deleteLaunchesTest_verifyCalls() = runBlockingTest {
         val launchesFlow = flowOf(testLaunchesList)
         Mockito.`when`(launchesRepository.getAllLaunchesFlow()).thenAnswer {
             return@thenAnswer launchesFlow

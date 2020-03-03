@@ -9,10 +9,14 @@ import io.github.omisie11.spacexfollower.test_utils.getValue
 import io.github.omisie11.spacexfollower.test_utils.testCapsule1
 import io.github.omisie11.spacexfollower.test_utils.testCapsule2
 import io.github.omisie11.spacexfollower.test_utils.testCapsule3
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -50,6 +54,12 @@ class CapsulesViewModelTest {
         Dispatchers.setMain(testDispatcher)
     }
 
+    @After
+    fun cleanup() {
+        Dispatchers.resetMain()
+        testDispatcher.cleanupTestCoroutines()
+    }
+
     @Test
     fun getCapsulesTest() {
         val capsulesFlow = flowOf(testCapsulesList)
@@ -65,7 +75,7 @@ class CapsulesViewModelTest {
     }
 
     @Test
-    fun refreshCapsulesTest_verifyCalls() = runBlocking {
+    fun refreshCapsulesTest_verifyCalls() = runBlockingTest {
         val capsulesFlow = flowOf(testCapsulesList)
         Mockito.`when`(capsulesRepository.getAllCapsulesFlow()).thenAnswer {
             return@thenAnswer capsulesFlow
@@ -79,7 +89,7 @@ class CapsulesViewModelTest {
     }
 
     @Test
-    fun refreshIfCapsulesDataOldTest_verifyCalls() = runBlocking {
+    fun refreshIfCapsulesDataOldTest_verifyCalls() = runBlockingTest {
         val capsulesFlow = flowOf(testCapsulesList)
         Mockito.`when`(capsulesRepository.getAllCapsulesFlow()).thenAnswer {
             return@thenAnswer capsulesFlow
@@ -93,7 +103,7 @@ class CapsulesViewModelTest {
     }
 
     @Test
-    fun getCapsulesSortingOrderTest() = runBlocking {
+    fun getCapsulesSortingOrderTest() = runBlockingTest {
         val capsulesFlow = flowOf(testCapsulesList)
         Mockito.`when`(capsulesRepository.getAllCapsulesFlow()).thenAnswer {
             return@thenAnswer capsulesFlow
@@ -111,7 +121,7 @@ class CapsulesViewModelTest {
     }
 
     @Test
-    fun deleteCapsulesTest_verifyCalls() = runBlocking {
+    fun deleteCapsulesTest_verifyCalls() = runBlockingTest {
         val capsulesFlow = flowOf(testCapsulesList)
         Mockito.`when`(capsulesRepository.getAllCapsulesFlow()).thenAnswer {
             return@thenAnswer capsulesFlow
