@@ -34,7 +34,7 @@ Application is using open source [Space X REST API](https://github.com/r-spacex/
 
 ## License
 ```
-Copyright [2019] Oskar Misiewicz
+Copyright [2020] Oskar Misiewicz
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
