@@ -86,7 +86,7 @@ dependencies {
 
     testImplementation "junit:junit:$rootProject.junit_version"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$rootProject.mockito_kotlin_version"
-    testImplementation "androidx.arch.core:core-testing:$rootProject.lifecycle_version"
+    testImplementation "androidx.arch.core:core-testing:$rootProject.arch_version"
     testImplementation "org.koin:koin-test:$rootProject.koin_version"
     testImplementation ('org.threeten:threetenbp:1.3.2'){
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
@@ -110,7 +110,7 @@ dependencies {
     // Room
     androidTestImplementation "androidx.room:room-testing:$rootProject.room_version"
     // Lifecycle
-    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.lifecycle_version"
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.arch_version"
     // Coroutines test
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.coroutines_android_version"
     // WorkManager
