@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
+import io.github.omisie11.spacexfollower.BuildConfig
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.local.model.Company
 import io.github.omisie11.spacexfollower.util.shortenNumberAddPrefix
@@ -119,6 +120,10 @@ class CompanyFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_action_bar, menu)
+        val deleteItem = menu.findItem(R.id.action_delete)
+        // Show option to delete data only in debug builds
+        deleteItem.isVisible = BuildConfig.DEBUG
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {

@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import io.github.omisie11.spacexfollower.BuildConfig
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.local.model.launch.Launch
 import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.recyclerView
@@ -71,7 +72,7 @@ class LaunchesFragment : Fragment(), LaunchesAdapter.OnItemClickListener {
             })
 
         // Show a snackbar whenever the [ViewModel.snackbar] is updated a non-null value
-        viewModel.snackbar.observe(this, Observer { text ->
+        viewModel.snackbar.observe(viewLifecycleOwner, Observer { text ->
             text?.let {
                 Snackbar.make(swipeRefreshLayout, text, Snackbar.LENGTH_LONG).setAction(
                     getString(R.string.snackbar_action_retry)
@@ -146,6 +147,10 @@ class LaunchesFragment : Fragment(), LaunchesAdapter.OnItemClickListener {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_action_bar, menu)
+        val deleteItem = menu.findItem(R.id.action_delete)
+        // Show option to delete data only in debug builds
+        deleteItem.isVisible = BuildConfig.DEBUG
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
