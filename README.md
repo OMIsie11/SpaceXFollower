@@ -15,7 +15,7 @@ Application is using open source [Space X REST API](https://github.com/r-spacex/
 * [KOIN](https://insert-koin.io)
 * [Retrofit](https://square.github.io/retrofit/)
 * [Lottie](http://airbnb.io/lottie/#/)
-* [ktlint](https://ktlint.github.io)
+* [ktlint](https://ktlint.github.io) and [ktlint gradle plugin](https://github.com/jlleitschuh/ktlint-gradle)
 * [Picasso](https://square.github.io/picasso/)
 * [GSON](https://github.com/google/gson)
 * [Timber](https://github.com/JakeWharton/timber)
