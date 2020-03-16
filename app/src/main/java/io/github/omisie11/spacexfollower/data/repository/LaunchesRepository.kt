@@ -7,11 +7,11 @@ import io.github.omisie11.spacexfollower.data.local.dao.AllLaunchesDao
 import io.github.omisie11.spacexfollower.data.local.model.launch.Launch
 import io.github.omisie11.spacexfollower.data.remote.SpaceService
 import io.github.omisie11.spacexfollower.util.KEY_LAUNCHES_LAST_REFRESH
+import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.io.IOException
 
 class LaunchesRepository(
     private val allLaunchesDao: AllLaunchesDao,

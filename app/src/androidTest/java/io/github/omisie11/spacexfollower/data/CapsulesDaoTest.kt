@@ -9,6 +9,8 @@ import io.github.omisie11.spacexfollower.capsule2
 import io.github.omisie11.spacexfollower.capsule3
 import io.github.omisie11.spacexfollower.data.local.SpaceDatabase
 import io.github.omisie11.spacexfollower.data.local.dao.CapsulesDao
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.Executors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -24,8 +26,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.Executors
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)

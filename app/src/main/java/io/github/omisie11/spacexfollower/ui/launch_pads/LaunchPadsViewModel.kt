@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.github.omisie11.spacexfollower.data.repository.LaunchPadsRepository
 import io.github.omisie11.spacexfollower.data.local.model.LaunchPad
+import io.github.omisie11.spacexfollower.data.repository.LaunchPadsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

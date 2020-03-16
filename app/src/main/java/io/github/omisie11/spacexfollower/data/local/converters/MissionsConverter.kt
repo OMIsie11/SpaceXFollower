@@ -4,7 +4,7 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.github.omisie11.spacexfollower.data.local.model.Capsule
-import java.util.*
+import java.util.Collections
 
 // Used to convert List of missions to json and back to be able to save it in Room
 class MissionsConverter {

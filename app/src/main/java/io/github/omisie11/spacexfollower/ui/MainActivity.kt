@@ -18,9 +18,9 @@ import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.util.PREFS_KEY_DARK_MODE
 import io.github.omisie11.spacexfollower.util.PREFS_KEY_NOTIFICATIONS_UPCOMING_LAUNCHES
 import io.github.omisie11.spacexfollower.workers.LaunchNotificationWorker
+import java.util.concurrent.TimeUnit
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
-import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 

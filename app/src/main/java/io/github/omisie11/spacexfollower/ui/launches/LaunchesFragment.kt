@@ -1,7 +1,12 @@
 package io.github.omisie11.spacexfollower.ui.launches
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -12,9 +17,9 @@ import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.BuildConfig
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.local.model.launch.Launch
+import kotlinx.android.synthetic.main.fragment_recycler_sorting.*
 import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.recyclerView
 import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.swipeRefreshLayout
-import kotlinx.android.synthetic.main.fragment_recycler_sorting.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 

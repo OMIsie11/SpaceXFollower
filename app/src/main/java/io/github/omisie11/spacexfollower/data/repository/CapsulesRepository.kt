@@ -7,11 +7,11 @@ import io.github.omisie11.spacexfollower.data.local.dao.CapsulesDao
 import io.github.omisie11.spacexfollower.data.local.model.Capsule
 import io.github.omisie11.spacexfollower.data.remote.SpaceService
 import io.github.omisie11.spacexfollower.util.KEY_CAPSULES_LAST_REFRESH
+import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.io.IOException
 
 class CapsulesRepository(
     private val capsulesDao: CapsulesDao,

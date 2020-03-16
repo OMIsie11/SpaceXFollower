@@ -1,6 +1,10 @@
 package io.github.omisie11.spacexfollower.data.local.model.launch
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 import io.github.omisie11.spacexfollower.data.local.converters.JsonArrayToStringConverter
 import io.github.omisie11.spacexfollower.data.local.converters.LaunchLinksConverter

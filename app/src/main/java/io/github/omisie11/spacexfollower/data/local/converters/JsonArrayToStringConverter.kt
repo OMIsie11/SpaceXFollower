@@ -3,7 +3,7 @@ package io.github.omisie11.spacexfollower.data.local.converters
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.util.*
+import java.util.Collections
 
 class JsonArrayToStringConverter {
 

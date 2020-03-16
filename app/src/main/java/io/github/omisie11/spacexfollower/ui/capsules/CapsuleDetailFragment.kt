@@ -15,10 +15,10 @@ import com.squareup.picasso.Picasso
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.local.model.Capsule
 import io.github.omisie11.spacexfollower.util.getLocalTimeFromUnix
+import kotlin.random.Random
 import kotlinx.android.synthetic.main.bottom_sheet_attribution.view.*
 import kotlinx.android.synthetic.main.fragment_capsule_detail.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import kotlin.random.Random
 
 class CapsuleDetailFragment : Fragment() {
 

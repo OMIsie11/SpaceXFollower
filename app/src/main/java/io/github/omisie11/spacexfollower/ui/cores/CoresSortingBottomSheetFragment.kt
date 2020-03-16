@@ -7,9 +7,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.omisie11.spacexfollower.R
+import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel.CoresSortingOrder.BY_BLOCK_ASCENDING
+import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel.CoresSortingOrder.BY_BLOCK_DESCENDING
+import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel.CoresSortingOrder.BY_SERIAL_NEWEST
+import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel.CoresSortingOrder.BY_SERIAL_OLDEST
+import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel.CoresSortingOrder.BY_STATUS_ACTIVE_FIRST
+import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel.CoresSortingOrder.BY_STATUS_ACTIVE_LAST
 import kotlinx.android.synthetic.main.bottom_sheet_cores_sorting.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel.CoresSortingOrder.*
 
 class CoresSortingBottomSheetFragment : BottomSheetDialogFragment() {
 

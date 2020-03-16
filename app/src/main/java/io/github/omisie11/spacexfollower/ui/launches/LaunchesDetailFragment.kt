@@ -18,7 +18,11 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.local.model.launch.Launch
 import io.github.omisie11.spacexfollower.data.local.model.launch.Rocket
-import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.*
+import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.CoreItem
+import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.ExpandableHeaderItem
+import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.LaunchDetailHeaderItem
+import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.LinkItem
+import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.PayloadItem
 import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 

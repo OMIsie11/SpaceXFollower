@@ -13,7 +13,11 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.github.omisie11.spacexfollower.R
 import kotlinx.android.synthetic.main.fragment_used_libraries.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UsedLibrariesFragment : Fragment(), UsedLibrariesAdapter.OnItemClickListener {

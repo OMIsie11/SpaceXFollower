@@ -1,12 +1,14 @@
 package io.github.omisie11.spacexfollower.util
 
-import org.threeten.bp.Instant
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.ZoneId
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+import org.threeten.bp.Instant
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZoneId
 
 // Used to convert SpaceX valuation, no need to support negative numbers
 fun shortenNumberAddPrefix(numberToFormat: Long): String {

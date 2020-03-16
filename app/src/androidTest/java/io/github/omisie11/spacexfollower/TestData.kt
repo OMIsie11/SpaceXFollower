@@ -4,9 +4,9 @@ import io.github.omisie11.spacexfollower.data.local.model.Capsule
 import io.github.omisie11.spacexfollower.data.local.model.Company
 import io.github.omisie11.spacexfollower.data.local.model.Core
 import io.github.omisie11.spacexfollower.data.local.model.LaunchPad
+import io.github.omisie11.spacexfollower.data.local.model.launch.Launch
 import io.github.omisie11.spacexfollower.data.local.model.launch.LaunchSite
 import io.github.omisie11.spacexfollower.data.local.model.launch.Rocket
-import io.github.omisie11.spacexfollower.data.local.model.launch.Launch
 
 val capsule1 = Capsule(
     1L, "C101", "dragon1", "retired",

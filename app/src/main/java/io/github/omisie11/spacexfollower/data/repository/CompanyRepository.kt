@@ -7,10 +7,10 @@ import io.github.omisie11.spacexfollower.data.local.dao.CompanyDao
 import io.github.omisie11.spacexfollower.data.local.model.Company
 import io.github.omisie11.spacexfollower.data.remote.SpaceService
 import io.github.omisie11.spacexfollower.util.KEY_COMPANY_LAST_REFRESH
+import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.io.IOException
 
 class CompanyRepository(
     private val spaceService: SpaceService,

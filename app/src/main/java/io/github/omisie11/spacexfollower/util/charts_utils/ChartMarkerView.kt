@@ -6,8 +6,8 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.utils.MPPointF
 import io.github.omisie11.spacexfollower.R
-import kotlinx.android.synthetic.main.marker_view.view.*
 import kotlin.math.roundToInt
+import kotlinx.android.synthetic.main.marker_view.view.*
 
 class ChartMarkerView(context: Context, layoutResource: Int) : MarkerView(context, layoutResource) {
 

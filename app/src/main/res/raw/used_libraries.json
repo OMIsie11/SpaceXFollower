@@ -100,5 +100,23 @@
         "description": "A small library that provides helper functions to work with Mockito in Kotlin.",
         "license": "MIT",
         "repositoryUrl": "https://github.com/nhaarman/mockito-kotlin"
+    },
+    {
+        "name": "Mockito-Kotlin",
+        "description": "A small library that provides helper functions to work with Mockito in Kotlin.",
+        "license": "MIT",
+        "repositoryUrl": "https://github.com/nhaarman/mockito-kotlin"
+    },
+    {
+        "name": "ktlint",
+        "description": "An anti-bikeshedding Kotlin linter with built-in formatter.",
+        "license": "MIT",
+        "repositoryUrl": "https://ktlint.github.io"
+    },
+    {
+        "name": "ktlint-gradle",
+        "description": "A a ktlint gradle plugin.",
+        "license": "MIT",
+        "repositoryUrl": "https://github.com/jlleitschuh/ktlint-gradle"
     }
 ]
