@@ -33,7 +33,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="@string/created_by"
-            android:textColor="@color/colorSecondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_planet" />
@@ -57,7 +56,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:text="@string/you_can_find_me_at"
-            android:textColor="@color/colorSecondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -84,19 +82,22 @@
                     android:id="@+id/chip_github"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/github" />
+                    android:text="@string/github"
+                    android:textColor="@color/colorSecondary"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_twitter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/twitter" />
+                    android:text="@string/twitter"
+                    android:textColor="@color/colorSecondary"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_website_omisie11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/website" />
+                    android:text="@string/website"
+                    android:textColor="@color/colorSecondary"/>
 
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
@@ -125,7 +126,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="@string/get_the_app_source_code_on_github"
-            android:textColor="@color/colorSecondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -137,6 +137,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:text="@string/source_code"
+            android:textColor="@color/colorSecondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
@@ -149,7 +150,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="@string/credits"
-            android:textColor="@color/colorSecondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chip_source_code" />
