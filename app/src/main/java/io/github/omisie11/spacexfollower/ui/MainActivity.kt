@@ -51,9 +51,9 @@ class MainActivity : AppCompatActivity() {
                 PREFS_KEY_DARK_MODE -> {
                     AppCompatDelegate.setDefaultNightMode(
                         translateValueToDayNightMode(
-                            sharedPrefs.getBoolean(
+                            sharedPrefs.getString(
                                 PREFS_KEY_DARK_MODE,
-                                false
+                                "0"
                             )
                         )
                     )
@@ -92,9 +92,10 @@ class MainActivity : AppCompatActivity() {
         sharedPrefs.unregisterOnSharedPreferenceChangeListener(sharedPrefsListener)
     }
 
-    private fun translateValueToDayNightMode(value: Boolean): Int = when (value) {
-        true -> AppCompatDelegate.MODE_NIGHT_YES
-        false -> AppCompatDelegate.MODE_NIGHT_NO
+    private fun translateValueToDayNightMode(value: String?): Int = when (value) {
+        "1" -> AppCompatDelegate.MODE_NIGHT_YES
+        "2" -> AppCompatDelegate.MODE_NIGHT_NO
+        else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
     }
 
     // Check once a day if there is launch in less than 24h, if yes, show notification
