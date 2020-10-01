@@ -13,5 +13,5 @@ const val KEY_LAUNCH_PADS_LAST_REFRESH = "key_launch_pads_last_refresh"
 
 // Shared prefs keys for items that are present on application settings screen
 const val PREFS_KEY_REFRESH_INTERVAL = "prefs_refresh_interval"
-const val PREFS_KEY_DARK_MODE = "prefs_dark_mode"
+const val PREFS_KEY_DARK_MODE = "prefs_dark_theme"
 const val PREFS_KEY_NOTIFICATIONS_UPCOMING_LAUNCHES = "prefs_notifications_upcoming_launches"

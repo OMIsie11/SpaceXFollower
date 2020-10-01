@@ -14,7 +14,7 @@
                 android:defaultValue="3"/>
 
         <ListPreference
-            android:key="prefs_dark_mode"
+            android:key="prefs_dark_theme"
             android:title="@string/settings_dark_mode_title"
             android:summary="%s"
             android:entries="@array/dark_mode_entries"
