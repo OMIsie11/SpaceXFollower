@@ -20,7 +20,7 @@ data class Core(
     @ColumnInfo(name = "block")
     val block: Int?,
     @SerializedName("status")
-    @ColumnInfo(name = "status")
+    @ColumnInfo(name = "status", defaultValue = "unknown")
     val status: String,
     @SerializedName("original_launch")
     @ColumnInfo(name = "original_launch")

@@ -24,7 +24,7 @@ import io.github.omisie11.spacexfollower.data.local.model.launch.Launch
 @Database(
     entities = [Capsule::class, Core::class, Company::class, Launch::class,
         LaunchPad::class],
-    version = 4
+    version = 5
 )
 @TypeConverters(
     value = [MissionsConverter::class, HeadquarterConverter::class,
