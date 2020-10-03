@@ -13,12 +13,14 @@
                 android:entryValues="@array/settings_refresh_interval_values"
                 android:defaultValue="3"/>
 
-        <SwitchPreference
-                android:key="prefs_dark_mode"
-                android:title="@string/settings_dark_mode_title"
-                android:summaryOn="@string/settings_dark_mode_summary_on"
-                android:summaryOff="@string/settings_dark_mode_summary_off"
-                android:defaultValue="false"/>
+        <ListPreference
+            android:key="prefs_dark_theme"
+            android:title="@string/settings_dark_mode_title"
+            android:summary="%s"
+            android:entries="@array/dark_mode_entries"
+            android:entryValues="@array/dark_mode_values"
+            android:defaultValue="0"
+            />
 
         <SwitchPreference
             android:key="prefs_notifications_upcoming_launches"
@@ -26,6 +28,9 @@
             android:summaryOn="@string/notifications_enabled"
             android:summaryOff="@string/notifications_disabled"
             android:defaultValue="false"/>
+
+
+
 
     </PreferenceCategory>
 

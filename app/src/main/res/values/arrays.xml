@@ -8,13 +8,26 @@
         <item name="6_hours">5 hours</item>
         <item name="8_hours">6 hours</item>
     </string-array>
+
     <string-array name="settings_refresh_interval_values">
         <item name="3_hours">3</item>
         <item name="4_hours">4</item>
         <item name="6_hours">6</item>
         <item name="8_hours">8</item>
     </string-array>
-    
+
+    <string-array name="dark_mode_entries">
+        <item name="follow_system">System Default</item>
+        <item name="dark">Dark</item>
+        <item name="light">Light</item>
+    </string-array>
+
+    <string-array name="dark_mode_values">
+        <item name="follow_system">0</item>
+        <item name="dark">1</item>
+        <item name="light">2</item>
+    </string-array>
+
     <!-- Array containing ids of images to show in detail screens (capsules, cores) -->
     <array name="detail_fragment_images">
         <item>@drawable/detail_fragment_image_capsule_dragon</item>
