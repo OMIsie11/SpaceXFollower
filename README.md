@@ -32,6 +32,18 @@ Application is using open source [Space X REST API](https://github.com/r-spacex/
 * Lottie animations originally made by Donghwa Kang, check her work at [lottiefiles.com/dongdona](https://lottiefiles.com/dongdona)
 * All photos come from [SpaceX Flickr](https://www.flickr.com/people/spacex/) profile
 
+## Contributors
+**Kudos** to all contributors😎
+<table>
+   <tr>
+      <td>
+         <img src="https://avatars3.githubusercontent.com/u/19224139?s=460&u=07aa1dcb46e85c39b45761262d5915f95fe6d315&v=4" width="100px;" alt=""/><br>
+         <a href="https://github.com/mrclsu">Marcell Schuh</a>
+      </td>
+   </tr>
+</table>
+
+
 ## License
 ```
 Copyright [2020] Oskar Misiewicz
