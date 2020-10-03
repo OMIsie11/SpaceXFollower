@@ -59,6 +59,18 @@
     <string name="settings_dark_mode_title">Dark mode</string>
     <string name="settings_refresh_interval_dialog_title">Set data auto refresh interval</string>
 
+
+    <!-- About screen -->
+    <string name="created_by">Created by</string>
+    <string name="omisie11" translatable="false">OMIsie11</string>
+    <string name="you_can_find_me_at">You can find me at:</string>
+    <string name="github" translatable="false">GitHub</string>
+    <string name="github_url_omisie11" translatable="false">https://github.com/OMIsie11</string>
+    <string name="twitter" translatable="false">Twitter</string>
+    <string name="twitter_url_omisie11" translatable="false">https://twitter.com/omisie11</string>
+    <string name="website_url_omisie11" translatable="false">https://omisie11.github.io</string>
+    <string name="source_code">Source code</string>
+    <string name="source_code_url" translatable="false">https://github.com/OMIsie11/SpaceXFollower</string>
     <string name="lottie_attribution_dongdona">Animation made by <b>Donghwa Kang</b>, check her work at
         <a href="https://lottiefiles.com/dongdona">
             <b>lottiefiles.com/dongdona</b>
@@ -76,19 +88,10 @@
         . Click here to visit site.
     </string>
     <string name="space_api_url" translatable="false">https://github.com/r-spacex/SpaceX-API</string>
+    <string name="attribution_devs">Marcell Schuh <a href="https://github.com/mrclsu">@mrclsu at GitHub</a></string>
+    <string name="url_github_mrclsu">https://github.com/mrclsu</string>
 
-    <!-- About screen -->
-    <string name="created_by">Created by</string>
-    <string name="omisie11" translatable="false">OMIsie11</string>
-    <string name="you_can_find_me_at">You can find me at:</string>
-    <string name="github" translatable="false">GitHub</string>
-    <string name="github_url_omisie11" translatable="false">https://github.com/OMIsie11</string>
-    <string name="twitter" translatable="false">Twitter</string>
-    <string name="twitter_url_omisie11" translatable="false">https://twitter.com/omisie11</string>
-    <string name="website_url_omisie11" translatable="false">https://omisie11.github.io</string>
-    <string name="source_code">Source code</string>
-    <string name="source_code_url" translatable="false">https://github.com/OMIsie11/SpaceXFollower</string>
-
+    <!-- Other -->
     <string name="detail_fragment_image_content_desc">Picture connected with SpaceX missions and operations</string>
     <string name="sort_by">Sort by:</string>
     <string name="serial_newest">Serial: newest</string>

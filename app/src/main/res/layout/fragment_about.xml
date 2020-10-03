@@ -251,7 +251,6 @@
             android:layout_marginBottom="16dp"
             android:minWidth="320dp"
             app:cardElevation="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card_attribution_spacex_photos">
@@ -268,6 +267,38 @@
                     android:maxWidth="300dp"
                     android:padding="8dp"
                     android:text="@string/attribution_used_libraries"
+                    android:textAlignment="center" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- If more Devs will contribute, this card should lead to new screen -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_attribution_devs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:minWidth="320dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_attribution_used_libraries">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/text_attribution_devs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="300dp"
+                    android:padding="8dp"
+                    android:text="@string/attribution_devs"
                     android:textAlignment="center" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

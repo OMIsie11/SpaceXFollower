@@ -54,6 +54,9 @@ class AboutFragment : Fragment() {
                 AboutFragmentDirections.actionAboutDestToUsedLibrariesFragment()
             )
         }
+        card_attribution_devs.setOnClickListener {
+            openWebUrl(getString(R.string.url_github_mrclsu))
+        }
     }
 
     private fun openWebUrl(urlAddress: String) {
