@@ -3,15 +3,12 @@ package io.github.omisie11.spacexfollower.ui.launch_pads
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.BuildConfig
 import io.github.omisie11.spacexfollower.R
@@ -20,7 +17,8 @@ import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
-class LaunchPadsFragment : Fragment(), LaunchPadsAdapter.OnItemClickListener {
+class LaunchPadsFragment : Fragment(R.layout.fragment_recycler_swipe_refresh),
+    LaunchPadsAdapter.OnItemClickListener {
 
     private lateinit var viewAdapter: LaunchPadsAdapter
     private val viewModel: LaunchPadsViewModel by sharedViewModel()
@@ -30,12 +28,6 @@ class LaunchPadsFragment : Fragment(), LaunchPadsAdapter.OnItemClickListener {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_recycler_swipe_refresh, container, false)
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -43,7 +35,6 @@ class LaunchPadsFragment : Fragment(), LaunchPadsAdapter.OnItemClickListener {
         viewAdapter = LaunchPadsAdapter(this)
         recyclerView.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(activity)
             adapter = viewAdapter
         }
 

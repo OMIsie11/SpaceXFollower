@@ -1,29 +1,25 @@
 package io.github.omisie11.spacexfollower.ui.launches
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import io.github.omisie11.spacexfollower.BuildConfig
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.local.model.launch.Launch
 import kotlinx.android.synthetic.main.fragment_recycler_sorting.*
-import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.recyclerView
-import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.swipeRefreshLayout
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
-class LaunchesFragment : Fragment(), LaunchesAdapter.OnItemClickListener {
+class LaunchesFragment : Fragment(R.layout.fragment_recycler_sorting),
+    LaunchesAdapter.OnItemClickListener {
 
     private lateinit var viewAdapter: LaunchesAdapter
     private val viewModel: LaunchesViewModel by sharedViewModel()
@@ -33,12 +29,6 @@ class LaunchesFragment : Fragment(), LaunchesAdapter.OnItemClickListener {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_recycler_sorting, container, false)
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -46,7 +36,6 @@ class LaunchesFragment : Fragment(), LaunchesAdapter.OnItemClickListener {
         viewAdapter = LaunchesAdapter(this)
         recyclerView.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(activity)
             adapter = viewAdapter
         }
 
