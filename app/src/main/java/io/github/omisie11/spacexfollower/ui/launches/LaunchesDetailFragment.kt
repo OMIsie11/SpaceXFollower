@@ -3,14 +3,11 @@ package io.github.omisie11.spacexfollower.ui.launches
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.transition.MaterialContainerTransform
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.GroupAdapter
@@ -18,15 +15,12 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.local.model.launch.Launch
 import io.github.omisie11.spacexfollower.data.local.model.launch.Rocket
-import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.CoreItem
-import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.ExpandableHeaderItem
-import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.LaunchDetailHeaderItem
-import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.LinkItem
-import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.PayloadItem
-import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.*
+import io.github.omisie11.spacexfollower.ui.launches.detail_groupie_items.*
+import kotlinx.android.synthetic.main.fragment_recycler.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class LaunchesDetailFragment : Fragment(), LinkItem.OnLinkItemClickListener {
+class LaunchesDetailFragment : Fragment(R.layout.fragment_recycler),
+    LinkItem.OnLinkItemClickListener {
 
     private lateinit var groupAdapter: GroupAdapter<GroupieViewHolder>
     private val viewModel by sharedViewModel<LaunchesViewModel>()
@@ -36,18 +30,6 @@ class LaunchesDetailFragment : Fragment(), LinkItem.OnLinkItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = MaterialContainerTransform(requireContext())
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(
-            R.layout.fragment_recycler, container,
-            false
-        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,7 +43,6 @@ class LaunchesDetailFragment : Fragment(), LinkItem.OnLinkItemClickListener {
         recyclerView.apply {
             setHasFixedSize(true)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-            layoutManager = LinearLayoutManager(activity)
             adapter = groupAdapter
         }
 
