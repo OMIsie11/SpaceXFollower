@@ -40,6 +40,10 @@ Application is using open source [Space X REST API](https://github.com/r-spacex/
          <img src="https://avatars3.githubusercontent.com/u/19224139?s=460&u=07aa1dcb46e85c39b45761262d5915f95fe6d315&v=4" width="100px;" alt=""/><br>
          <a href="https://github.com/mrclsu">Marcell Schuh</a>
       </td>
+      <td>
+         <img src="https://avatars1.githubusercontent.com/u/28199605?s=400&u=cd6f3a21f3d7357f413d819461f2532b226da95d&v=4" width="100px;" alt=""/><br>
+         <a href="https://github.com/GeorgCantor">Alexander Kirillov</a>
+      </td>
    </tr>
 </table>
 
