@@ -33,7 +33,8 @@ Application is using open source [Space X REST API](https://github.com/r-spacex/
 * All photos come from [SpaceX Flickr](https://www.flickr.com/people/spacex/) profile
 
 ## Contributors
-**Kudos** to all contributors😎
+**Kudos** to all contributors😎<br>
+Do You want to contribute? Nice! Just check quick [CONTRIBUTING](https://github.com/OMIsie11/SpaceXFollower/blob/master/CONTRIBUTING.md) guide.
 <table>
    <tr>
       <td>
