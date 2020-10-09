@@ -47,7 +47,7 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
             )
         }
         card_attribution_devs.setOnClickListener {
-            openWebUrl(getString(R.string.url_github_mrclsu))
+            openWebUrl(getString(R.string.url_github_contributors))
         }
     }
 

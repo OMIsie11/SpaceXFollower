@@ -88,8 +88,8 @@
         . Click here to visit site.
     </string>
     <string name="space_api_url" translatable="false">https://github.com/r-spacex/SpaceX-API</string>
-    <string name="attribution_devs">Marcell Schuh <a href="https://github.com/mrclsu">@mrclsu at GitHub</a></string>
-    <string name="url_github_mrclsu">https://github.com/mrclsu</string>
+    <string name="attribution_devs">Kudos to all <a href="https://github.com/OMIsie11/SpaceXFollower#contributors">amazing people</a> that contributed to this project</string>
+    <string name="url_github_contributors" translatable="false">https://github.com/OMIsie11/SpaceXFollower#contributors</string>
 
     <!-- Other -->
     <string name="detail_fragment_image_content_desc">Picture connected with SpaceX missions and operations</string>
