@@ -35,19 +35,7 @@ class LaunchesFragment : Fragment(R.layout.fragment_recycler_sorting),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enterTransition = MaterialContainerTransform().apply {
-            startView = requireActivity().findViewById(R.id.text_label_launches)
-            endView = root
-            duration = resources.getInteger(R.integer.core_motion_duration_large).toLong()
-            scrimColor = Color.TRANSPARENT
-            containerColor = requireContext().themeColor(R.attr.colorSurface)
-            startContainerColor = requireContext().themeColor(R.attr.colorSurface)
-            endContainerColor = requireContext().themeColor(R.attr.colorSurface)
-        }
-        returnTransition = Slide().apply {
-            duration = resources.getInteger(R.integer.core_motion_duration_medium).toLong()
-            addTarget(R.id.root)
-        }
+        enterAndReturnTransition()
         // Setup recyclerView
         viewAdapter = LaunchesAdapter(this)
         recyclerView.apply {
@@ -132,6 +120,22 @@ class LaunchesFragment : Fragment(R.layout.fragment_recycler_sorting),
                 }
             }
         })
+    }
+
+    private fun enterAndReturnTransition() {
+        enterTransition = MaterialContainerTransform().apply {
+            startView = requireActivity().findViewById(R.id.text_label_launches)
+            endView = root
+            duration = resources.getInteger(R.integer.core_motion_duration_large).toLong()
+            scrimColor = Color.TRANSPARENT
+            containerColor = requireContext().themeColor(R.attr.colorSurface)
+            startContainerColor = requireContext().themeColor(R.attr.colorSurface)
+            endContainerColor = requireContext().themeColor(R.attr.colorSurface)
+        }
+        returnTransition = Slide().apply {
+            duration = resources.getInteger(R.integer.core_motion_duration_medium).toLong()
+            addTarget(R.id.root)
+        }
     }
 
     override fun onResume() {
