@@ -1,5 +1,6 @@
 package io.github.omisie11.spacexfollower.ui.cores
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -13,11 +14,14 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.Slide
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.MaterialContainerTransform
 import io.github.omisie11.spacexfollower.BuildConfig
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.data.local.model.Core
 import io.github.omisie11.spacexfollower.ui.cores.CoresViewModel.CoresSortingOrder
+import io.github.omisie11.spacexfollower.util.themeColor
 import kotlinx.android.synthetic.main.fragment_recycler_sorting.*
 import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.recyclerView
 import kotlinx.android.synthetic.main.fragment_recycler_swipe_refresh.swipeRefreshLayout
@@ -42,7 +46,19 @@ class CoresFragment : Fragment(), CoresAdapter.OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        enterTransition = MaterialContainerTransform().apply {
+            startView = requireActivity().findViewById(R.id.text_label_cores)
+            endView = root
+            duration = resources.getInteger(R.integer.core_motion_duration_large).toLong()
+            scrimColor = Color.TRANSPARENT
+            containerColor = requireContext().themeColor(R.attr.colorSurface)
+            startContainerColor = requireContext().themeColor(R.attr.colorSurface)
+            endContainerColor = requireContext().themeColor(R.attr.colorSurface)
+        }
+        returnTransition = Slide().apply {
+            duration = resources.getInteger(R.integer.core_motion_duration_medium).toLong()
+            addTarget(R.id.root)
+        }
         // Setup recyclerView
         viewAdapter = CoresAdapter(this)
         recyclerView.apply {
