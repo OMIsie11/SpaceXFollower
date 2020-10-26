@@ -39,11 +39,15 @@ Do You want to contribute? Nice! Just check quick [CONTRIBUTING](https://github.
    <tr>
       <td>
          <img src="https://avatars3.githubusercontent.com/u/19224139?s=460&u=07aa1dcb46e85c39b45761262d5915f95fe6d315&v=4" width="100px;" alt=""/><br>
-         <a href="https://github.com/mrclsu">Marcell Schuh</a>
+         <a href="https://github.com/mrclsu">mrclsu</a>
       </td>
       <td>
          <img src="https://avatars1.githubusercontent.com/u/28199605?s=400&u=cd6f3a21f3d7357f413d819461f2532b226da95d&v=4" width="100px;" alt=""/><br>
-         <a href="https://github.com/GeorgCantor">Alexander Kirillov</a>
+         <a href="https://github.com/GeorgCantor">GeorgCantor</a>
+      </td>
+      <td>
+         <img src="https://avatars0.githubusercontent.com/u/5574608?s=400&u=282b95b22e299f716eb738b852432823bf46d441&v=4" width="100px;" alt=""/><br>
+         <a href="https://github.com/ELTEGANI">ELTEGANI</a>
       </td>
    </tr>
 </table>
