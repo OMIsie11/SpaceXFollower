@@ -19,6 +19,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.google.android.material.transition.MaterialElevationScale
 import io.github.omisie11.spacexfollower.R
 import io.github.omisie11.spacexfollower.util.animateNumber
 import io.github.omisie11.spacexfollower.util.charts_utils.ChartMarkerView
@@ -31,6 +32,12 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
     private val viewModel: DashboardViewModel by sharedViewModel()
+
+    private val currentNavigationFragment: Fragment?
+        get() = activity?.supportFragmentManager?.findFragmentById(R.id.nav_host_fragment)
+            ?.childFragmentManager
+            ?.fragments
+            ?.first()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,18 +93,32 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         }
 
         text_label_capsules.setOnClickListener {
+            exitAndReEnterTransition()
             findNavController()
                 .navigate(DashboardFragmentDirections.actionDashboardDestToCapsulesDest())
         }
 
         text_label_launches.setOnClickListener {
+            exitAndReEnterTransition()
             findNavController()
                 .navigate(DashboardFragmentDirections.actionDashboardDestToLaunchesDest())
         }
 
         text_label_cores.setOnClickListener {
+            exitAndReEnterTransition()
             findNavController()
                 .navigate(DashboardFragmentDirections.actionDashboardDestToCoresDest())
+        }
+    }
+
+    private fun exitAndReEnterTransition() {
+        currentNavigationFragment?.apply {
+            exitTransition = MaterialElevationScale(false).apply {
+                duration = resources.getInteger(R.integer.core_motion_duration_large).toLong()
+            }
+            reenterTransition = MaterialElevationScale(true).apply {
+                duration = resources.getInteger(R.integer.core_motion_duration_large).toLong()
+            }
         }
     }
 

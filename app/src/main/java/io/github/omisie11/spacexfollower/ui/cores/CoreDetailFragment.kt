@@ -28,7 +28,7 @@ class CoreDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = MaterialContainerTransform(requireContext())
+        sharedElementEnterTransition = MaterialContainerTransform()
     }
 
     override fun onCreateView(
