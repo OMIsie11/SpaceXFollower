@@ -160,5 +160,5 @@ val dashboardModule = module {
 
 val aboutModule = module {
 
-    viewModel { UsedLibrariesViewModel() }
+    viewModel { UsedLibrariesViewModel(androidApplication()) }
 }

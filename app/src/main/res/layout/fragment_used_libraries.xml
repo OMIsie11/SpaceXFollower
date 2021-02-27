@@ -8,12 +8,14 @@
     android:id="@+id/recycler_root_view"
     tools:context=".ui.MainActivity">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_libs"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_libs"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/used_libraries_recycler_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

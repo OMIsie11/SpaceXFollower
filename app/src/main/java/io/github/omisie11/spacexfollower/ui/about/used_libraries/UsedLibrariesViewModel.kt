@@ -1,16 +1,24 @@
 package io.github.omisie11.spacexfollower.ui.about.used_libraries
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import io.github.omisie11.spacexfollower.R
+import kotlinx.coroutines.launch
 
-class UsedLibrariesViewModel : ViewModel() {
+class UsedLibrariesViewModel(private val app: Application) : AndroidViewModel(app) {
 
     private val _usedLibrariesData = MutableLiveData<List<UsedLibrary>>()
 
     fun getUsedLibs(): LiveData<List<UsedLibrary>> = _usedLibrariesData
 
-    fun setUsedLibs(usedLibs: List<UsedLibrary>) {
-        _usedLibrariesData.value = usedLibs
+    init {
+        viewModelScope.launch {
+            val type = object : TypeToken<List<UsedLibrary>>() {}.type
+            val objectString = app.baseContext.resources.openRawResource(R.raw.used_libraries)
+                .bufferedReader().use { it.readText() }
+            _usedLibrariesData.postValue(Gson().fromJson(objectString, type))
+        }
     }
 }
