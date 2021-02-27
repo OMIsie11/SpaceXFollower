@@ -1,7 +1,10 @@
 package io.github.omisie11.spacexfollower.ui.about.used_libraries
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.github.omisie11.spacexfollower.R
